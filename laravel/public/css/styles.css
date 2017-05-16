@@ -1,6 +1,12 @@
-/*this is file store app common css*/
-/*first update by tran nham on 16.05.2017*/
-
+/*   
+ * Template Name: Developer - Responsive Website Template for Developers
+ * Version: 1.0
+ * Author: 3rd Wave Media
+ * Twitter: @3rdwave_themes
+ * License: Creative Commons Attribution 3.0 License
+ * Website: http://themes.3rdwavemedia.com/
+*/
+/* ======= Base ======= */
 body {
   font-family: 'Lato', arial, sans-serif;
   color: #434343;
@@ -19,8 +25,6 @@ h6 {
   font-weight: 700;
   color: #778492;
 }
-
-/*link-text style*/
 a {
   color: #3aaa64;
   -webkit-transition: all 0.4s ease-in-out;
@@ -33,9 +37,6 @@ a:hover {
   color: #5f6b77;
   color: #2d844e;
 }
-/*-----------end link text style-------------*/
-
-/*link-button-style*/
 .btn,
 a.btn {
   -webkit-transition: all 0.4s ease-in-out;
@@ -82,9 +83,6 @@ a.btn-cta-secondary:hover,
   border: 1px solid #3893bd;
   color: #fff;
 }
-/*------------end link button style------------*/
-
-/*text-title style*/
 .text-highlight {
   color: #32383e;
 }
@@ -92,8 +90,6 @@ a.btn-cta-secondary:hover,
   background: #3aaa64;
   font-size: 12px;
 }
-
-/*dotted-link style*/
 a.dotted-link {
   border-bottom: 1px dotted #778492;
   color: #778492;
@@ -102,8 +98,19 @@ a.dotted-link:hover {
   text-decoration: none;
   color: #49515a;
 }
-/*------------------------*/
+/*
+iframe {
 
+    .header {
+        padding: 0;
+    }
+}
+
+.iframe-wrapper {
+    overflow: auto;
+    -webkit-overflow-scrolling:touch;
+}
+*/
 /* ======= Header ======= */
 .header {
   padding: 30px 0;
@@ -154,18 +161,6 @@ a.dotted-link:hover {
   font-size: 20px;
   padding-top: 8px;
 }
-.content {
-  margin-left: 40px;
-  background: white;
-  width: 950px;
-  height: 1200px;
-}
-.sidebar {
-  margin-left: 30px;
-  background: blue;
-  width: 300px;
-  height: 1200px;
-}
 /* ======= Sections======= */
 .sections-wrapper {
   padding-top: 60px;
@@ -188,7 +183,6 @@ a.dotted-link:hover {
   margin-right: 5px;
   font-size: 14px;
 }
-
 /* About Section */
 /* Latest Section */
 .latest .item {
@@ -495,11 +489,9 @@ a.dotted-link:hover {
 }
 /* ======= Footer ======= */
 .footer {
-  background: #4e9969;
-  color: #364747;
-  margin-bottom: 2px;
+  background: #32383e;
+  color: #fff;
   padding: 10px 0;
-  height: 150px;
 }
 .footer .copyright {
   line-height: 1.6;
