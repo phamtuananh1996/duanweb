@@ -3,74 +3,115 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+        <div class=" col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
+            <form class="form-horizontal role="form" method="POST" action="{{ route('register') }}">
+                {{ csrf_field()}}
+                <h3 class="text-center"> Đăng Ký Thành Viên</h3>
+                <br>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-xs-12 col-sm-6 col-md-7">
+                            <div class="col-md-4">
+                                <div class="main-container__column">        
+                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-li">
+                                        <input type="text" name="user_name" id="user_name" class="form-control materail-input" placeholder="Tên đăng nhập">
+                                        <span class="materail-input-block__line"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-offset-1">
+                                <div class="main-container__column">        
+                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
+                                        <input type="email" name="email" id="email" class="form-control materail-input" placeholder="Email">
+                                        <span class="materail-input-block__line"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                    </div>
+                </div> {{--form container --}}
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-xs-12 col-sm-6 col-md-7">
+                            <div class="col-md-4">
+                                <div class="main-container__column">        
+                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-li">
+                                        <input type="password" name="password" id="password" class="form-control materail-input" placeholder="Mật khẩu">
+                                        <span class="materail-input-block__line"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-offset-1">
+                                <div class="main-container__column">        
+                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
+                                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control materail-input" placeholder="Nhập lại mật khẩu">
+                                        <span class="materail-input-block__line"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                    </div>
+                </div> {{--form container --}}
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-xs-12 col-sm-6 col-md-7">
+                            <div class="col-md-4">
+                                <div class="main-container__column">        
+                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-li">
+                                        <input type="text" name="name" id="name" class="form-control materail-input" placeholder="Họ và tên">
+                                        <span class="materail-input-block__line"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-offset-1">
+                                <div class="main-container__column">        
+                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
+                                        <input type="text" name="phone" id="phone" class="form-control materail-input" placeholder="Số điện thoại">
+                                        <span class="materail-input-block__line"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                    </div>
+                </div> {{--form container --}}
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-xs-12 col-sm-6 col-md-7">
+                            <div class="col-md-4" >
+                                <div class="main-container__column">        
+                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
+                                        <input type="text" name="class" id="class" class="form-control materail-input" placeholder="Lớp/Chuyên môn">
+                                        <span class="materail-input-block__line"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-offset-1">
+                                <div class="main-container__column">        
+                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
+                                        <input type="text" name="local" id="local" class="form-control materail-input" placeholder="Tỉnh/Thành phố">
+                                        <span class="materail-input-block__line"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                </div> {{--form container --}}
+                 <br><br>
+                <div class ="col-md-6 col-xs-offset-4">
+                    <div class="main-container__column material-checkbox-group material-checkbox-group_success">
+                        <input type="checkbox" id="accept_rule" name="accept_rule" class="material-checkbox">
+                        <label class="material-checkbox-group__label" for="accept_rule">Tôi đồng ý với các điều khoản</label>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+                <br><br><br>
+                <div class ="col-md-4 col-xs-offset-4">
+                    <div class="main-container__column">
+                        <button type="submit" class="btn material-btn material-btn_primary">Đăng Ký Ngay</button>
+                    </div>
+                </div>
+            </form>
+        </div>   
+    </div><!--//row-->
+</div><!--//masonry-->
 @endsection
