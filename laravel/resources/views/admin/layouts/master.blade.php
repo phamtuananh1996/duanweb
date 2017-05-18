@@ -12,6 +12,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- jvectormap -->
+
   <link rel="stylesheet" href='{{asset("template/plugins/jvectormap/jquery-jvectormap-1.2.2.css")}}'>
   <!-- Theme style -->
   <link rel="stylesheet" href='{{asset("template/dist/css/AdminLTE.min.css")}}'>
@@ -20,9 +21,7 @@
   <link rel="stylesheet" href='{{asset("template/dist/css/skins/_all-skins.min.css")}}'>
   
   <link rel="stylesheet" href='{{asset("template/plugins/datatables/dataTables.bootstrap.css")}}'>
-
-
-
+  
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
