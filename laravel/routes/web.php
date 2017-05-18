@@ -15,6 +15,16 @@ Route::get('/', function () {
     return view('/home');
 });
 
-Auth::routes();
+Route::get('login','Auth\LoginController@getLogin');
 
+Route::post('login','Auth\LoginController@postLogin')->name('login');
+Route::post('logout', 'Auth\LoginController@postLogout')->name('logout');
+Route::get('register', 'Auth\LoginController@getRegister');
+Route::post('register', 'Auth\RegisterController@postRegister')->name('register');
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['prefix' => 'ajax'], function() {
+    Route::post('checkemail', 'Auth\RegisterController@ajaxCheckEmail');
+    Route::post('checkusername', 'Auth\RegisterController@ajaxCheckUserName');
+});

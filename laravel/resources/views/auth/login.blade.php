@@ -8,6 +8,10 @@
                 {{ csrf_field()}}
                 <h3 class ="text-center"> Đăng Nhập</h3>
                 <br>
+                @if (session('errorr'))
+                   <h6 class="text-center" style="color: red">{{session('errorr')}}</h6>
+                @endif
+                
                 <br>
                 <div class="container">
                     <div class="row">
@@ -42,7 +46,7 @@
                 </div>
                 <br>
                  <div class ="col-md-6 col-xs-offset-4">
-                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                    <a class="btn btn-link" href="">
                         Forgot Your Password?
                     </a>
                 </div>

@@ -6,7 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Http\Request;
+use Auth;
 class RegisterController extends Controller
 {
     /*
@@ -34,10 +35,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('guest');
+    // }
 
     /**
      * Get a validator for an incoming registration request.
@@ -72,5 +73,47 @@ class RegisterController extends Controller
             'local' => $data['local'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function ajaxCheckEmail(Request $req)
+    {
+        $user=User::where(['email'=>$req->email,'status'=>1]);
+        if($user->count()>0)
+        {
+            return 'false';
+        }
+        else
+        {
+            return 'true';
+        }
+    }
+
+    public function ajaxCheckUserName(Request $req)
+    {
+         $user=User::where(['user_name'=>$req->username,'status'=>1]);
+        if($user->count()>0)
+        {
+            return 'false';
+        }
+        else
+        {
+            return 'true';
+        }
+    }
+
+    public function postRegister(Request $req)
+    {
+        
+       $user =new User;
+       $user->name=$req->name;
+       $user->user_name=$req->user_name;
+        $user->email=$req->email;
+        $user->password=bcrypt($req->password);
+        $user->local=$req->local;
+        $user->class=$req->class;
+        $user->phone=$req->phone;
+        $user->save();
+        Auth::login($user);
+        return redirect('home');
     }
 }
