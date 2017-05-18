@@ -18,7 +18,6 @@ Route::get('category/show/{category}',array('as'=>'showCategory','uses'=>'Catego
 Route::post('category/show/{category}',array('as'=>'updateCategory','uses'=>'CategoryController@update'));
 Route::get('category/{id}',array('as'=>'destroyCategory','uses'=>'CategoryController@destroy'));
 
-
 Route::get('/', function () {
     return view('/home');
 });
