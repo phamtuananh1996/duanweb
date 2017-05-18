@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Auth;
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -32,8 +33,65 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    // public function __construct()
+    // {
+    //     $this->middleware('guest')->except('logout');
+    // }
+
+    public function getLogin()
     {
-        $this->middleware('guest')->except('logout');
+        if(Auth::check())
+        {
+            return redirect('home');
+        }
+        else
+        {
+            return view('auth.login');
+        }
     }
+
+    public function postLogin(Request $req)
+    {
+        
+        $remember=false;
+
+        if($req->accept_rule=='on')
+        {
+             $remember=true;
+        }
+        if(Auth::attempt(['email' => $req->email, 'password' => $req->password],$remember) or Auth::attempt(['user_name' => $req->email, 'password' => $req->password],$remember))
+        {
+            return redirect('home');
+        }
+        else
+        {
+            return redirect('login')->with(['errorr'=>'Tài Khoản mật khẩu không chính xác']);
+        }
+    }
+
+    public function postLogout()
+    {
+        Auth::logout();
+        return redirect('login');
+    }
+
+
+    public function getRegister()
+    {
+        if(Auth::check())
+        {
+            return redirect('home');
+        }
+        else
+        {
+            return view('auth.register');
+        }
+    }
+
+    public function postRegister(Request $req)
+    {
+        
+    }
+
+
 }
