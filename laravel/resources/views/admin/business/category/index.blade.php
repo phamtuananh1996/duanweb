@@ -47,8 +47,8 @@
               <td>{{$cate->updated_at}}</td>
               <td>
                 <div class="btn-group">
-                  <a href="{{ url('category/show',$cate->id) }}"><i class="fa fa-fw fa-cog"></i></a>
-                  <a href="{{ url('category',$cate->id) }}"><i class="fa fa-fw fa-remove"></i></a>
+                  <a href="{{ url('admin/category/show',$cate->id) }}"><i class="fa fa-fw fa-cog"></i></a>
+                  <a href="{{ url('admin/category',$cate->id) }}"><i class="fa fa-fw fa-remove"></i></a>
                 </div>
               </td>
             </tr>
