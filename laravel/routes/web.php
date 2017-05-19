@@ -31,6 +31,7 @@ Route::post('login','Auth\LoginController@postLogin')->name('login');
 Route::post('logout', 'Auth\LoginController@postLogout')->name('logout');
 Route::get('register', 'Auth\LoginController@getRegister');
 Route::post('register', 'Auth\RegisterController@postRegister')->name('register');
+Route::get('register/comfirm', 'Auth\RegisterController@registerComfirm');
 Route::get('/home', 'HomeController@index')->name('home');
 
 

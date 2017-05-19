@@ -59,7 +59,7 @@ class LoginController extends Controller
         {
              $remember=true;
         }
-        if(Auth::attempt(['email' => $req->email, 'password' => $req->password],$remember) or Auth::attempt(['user_name' => $req->email, 'password' => $req->password],$remember))
+        if(Auth::attempt(['email' => $req->email, 'password' => $req->password,'status'=>1],$remember) or Auth::attempt(['user_name' => $req->email, 'password' => $req->password,'status'=>1],$remember))
         {
             return redirect('home');
         }
