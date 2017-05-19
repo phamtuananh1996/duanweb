@@ -3202,7 +3202,7 @@ tbody.collapse.show {
 .dropdown-item:focus, .dropdown-item:hover {
   color: #1d1e1f;
   text-decoration: none;
-  background-color: #f7f7f9;
+  background-color: #00C851;
 }
 
 .dropdown-item.active, .dropdown-item:active {

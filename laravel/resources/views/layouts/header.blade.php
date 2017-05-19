@@ -22,8 +22,8 @@
                 <li class="nav-item dropdown btn-group">
                     <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Khác</a>
                     <div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
-                        <a class="dropdown-item">Tài Liệu</a>
-                        <a class="dropdown-item">Bài Giảng</a>
+                        <a class="dropdown-item ">Tài Liệu</a>
+                        <a class="dropdown-item ">Bài Giảng</a>
                         <a class="dropdown-item">Gia sư online</a>
                     </div>
                 </li>
@@ -36,7 +36,7 @@
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown" aria-labelledby="logoutDropMenu" role="menu">
-                                <a class ="material-navbar__link" href="{{ route('logout') }}"
+                                <a class ="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     Đăng xuất
@@ -44,6 +44,9 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
+                                <a class ="dropdown-item" href="{{ url('users/info/'.Auth::user()->id) }}">
+                                   Trang cá nhân
+                                </a>
                             </div>
                         </ul>
                         </li>

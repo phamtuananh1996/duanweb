@@ -1,3 +1,4 @@
+{{-- created by tran.nham on 19.05.2017 --}}
 @extends('layouts.app')
 
 @section('extend_header')
@@ -35,6 +36,14 @@
 							</a>
 							<a href="#" class="list-group-item list-group-item-action">
 								<h5 class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</h5>
+								<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action">
+								<h5 class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12 Đề Thi học kỳ 1 năm 2017 môn toán lớp 12 Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</h5>
+								<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action">
+								<h5 class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12 Đề Thi học kỳ 1 năm 2017 môn toán lớp 12 Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</h5>
 								<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
 							</a>
 							<a href="#" class="list-group-item list-group-item-action">
@@ -138,6 +147,7 @@
 			// Scrollbar position outside card with buttons
 			$("#quick-log-scroll").mCustomScrollbar({
 				scrollButtons:{enable:true},
+				axis:"y",
 				theme:"dark-thick",
 				scrollbarPosition:"outside"
 			});

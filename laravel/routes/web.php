@@ -40,8 +40,10 @@ Route::group(['prefix' => 'ajax'], function() {
 	Route::post('checkusername', 'Auth\RegisterController@ajaxCheckUserName');
 });
 
+Route::group(['prefix' => 'users'],function(){
+	Route::get('info/{id}','UserController@info');
+});
 //tests route
-
 Route::group(['prefix' => 'tests'], function(){
 	Route::get('/','TestController@index');
 	Route::get('create','TestController@create');

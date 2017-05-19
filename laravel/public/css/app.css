@@ -22,10 +22,10 @@ a {
   -ms-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
 }
-a:hover {
+a .list-group-item:hover {
   text-decoration: underline;
   color: #5f6b77;
-  color: #2d844e;
+  background: green;
 }
 /*-----------end link text style-------------*/
 .slider-header {
@@ -61,7 +61,62 @@ a:hover {
   float:left;
   font-size: 13px;
 }
+.user-info-section {
+  width: 100%;
+  height: 250px;
+  background: #e8f5e9;
+  margin-top: 25px;
+  box-shadow: 2px 2px 2px 1px #e0e0e0 ;
+}
+.btn-social{
+  color: white;
+  opacity:0.9;
+}
+.btn-social:hover {
+  color: white;
+    opacity:1;
+}
+.btn-facebook {
+background-color: #3b5998;
+opacity:0.9;
+}
+.btn-google {
+  background-color: #c32f10;
+  opacity: 0.9;
+}
 
+.bs-callout {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #eee;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px 1px 1px 5px;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    margin-right: 13px;
+    padding: 20px;
+    box-shadow: 2px 2px 2px 1px #e0e0e0 ;
+    background: white;
+}
+.bs-callout:last-child {
+    margin-bottom: 0px;
+}
+.bs-callout h4 {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.bs-callout-danger {
+    border-left-color: #007E33;
+}
+
+.bs-callout-danger h4{
+    color: #d9534f;
+}
 /* ======= Footer ======= */
 .footer {
   background:#68c368;
