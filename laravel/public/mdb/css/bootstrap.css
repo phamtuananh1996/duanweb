@@ -5123,16 +5123,17 @@ a.badge:focus, a.badge:hover {
   width: 100%;
   color: #464a4c;
   text-align: inherit;
+  border: solid 1px;
 }
 
 .list-group-item-action .list-group-item-heading {
-  color: #292b2c;
+  color: #00695c;
 }
 
 .list-group-item-action:focus, .list-group-item-action:hover {
   color: #464a4c;
   text-decoration: none;
-  background-color: #f7f7f9;
+  background-color: #3F729B;
 }
 
 .list-group-item-action:active {

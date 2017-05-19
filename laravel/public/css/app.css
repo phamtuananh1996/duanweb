@@ -3,23 +3,7 @@
 
 /*common css*/
 body {
-  font-family: 'Lato', arial, sans-serif;
-  color: #434343;
-  background: white;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding-top: 100px;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  color: #778492;
+  background: transparent;
 }
 textarea:hover, 
 input:hover, 
@@ -44,6 +28,39 @@ a:hover {
   color: #2d844e;
 }
 /*-----------end link text style-------------*/
+.slider-header {
+  background: #2BBBAD;
+  margin-top: 60px;
+  height:250px;
+}
+.main-content {
+  background:white;
+  margin-top: 30px;
+}
+
+.section-title {
+  background: #f1f8e9;
+  width:50%;
+  margin-top: 40px;
+  }
+.hoc2h-list-heading {
+  width: 100%;
+  color: green;
+}
+.hoc2h-list-subtext{
+  color: #3F729B;
+}
+.hoc2h-list-sub-body {
+  width: 100%;
+}
+.hoc2h-list-subtext-right{
+  float: right;
+  font-size: 12px;
+}
+.hoc2h-list-subtext-left{
+  float:left;
+  font-size: 13px;
+}
 
 /* ======= Footer ======= */
 .footer {

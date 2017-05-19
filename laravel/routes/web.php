@@ -39,3 +39,11 @@ Route::group(['prefix' => 'ajax'], function() {
 	Route::post('checkemail', 'Auth\RegisterController@ajaxCheckEmail');
 	Route::post('checkusername', 'Auth\RegisterController@ajaxCheckUserName');
 });
+
+//tests route
+
+Route::group(['prefix' => 'tests'], function(){
+	Route::get('/','TestController@index');
+	Route::get('create','TestController@create');
+	Route::post('create','TestController@store');
+});

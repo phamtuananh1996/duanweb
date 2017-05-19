@@ -14,7 +14,7 @@
                     <a class="nav-link">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Đề Thi</a>
+                    <a class="nav-link" href="{{url('/tests')}}">Đề Thi</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link">Hỏi Đáp</a>
