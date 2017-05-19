@@ -17,62 +17,64 @@
                 <div class="row">
                     <div class="col-md-5">
                         <div class="md-form form-sm">
-                            <input type="text" id="user_name" name="user_name" class="form-control">
+                            <input type="text" id="user_name" name="user_name" class="form-control"/>
                             <label for="user_name" class="">Tên đăng nhập</label>
                         </div>
                     </div>
                     <div class="col-md-6 offset-md-1">
                         <div class="md-form form-sm">
-                            <input type="email" id="email" name="email" class="form-control">
+                            <input type="email" id="email" name="email" class="form-control"/>
+
                             <label for="email" class="">Email</label>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="md-form form-sm">
-                            <input type="password" id="password" name="password" class="form-control">
+                            <input type="password" id="password" name="password" class="form-control"/>
                             <label for="password" class="">Mật khẩu</label>
                         </div>
                     </div>
                      <div class="col-md-6 offset-md-1">
                         <div class="md-form form-sm">
-                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"/>
                             <label for="password_confirmation" class="">Nhập lại mật khẩu</label>
                         </div>
                     </div>
                      <div class="col-md-5">
                         <div class="md-form form-sm">
-                            <input type="text" id="name" name="name" class="form-control">
+                            <input type="text" id="name" name="name" class="form-control"/>
+
                             <label for="name" class="">Họ và tên</label>
                         </div>
                     </div>
                     <div class="col-md-6 offset-md-1"> 
                         <div class="md-form form-sm">
-                            <input type="number" id="phone" name="phone" class="form-control">
+                            <input type="number" id="phone" name="phone" class="form-control"/>
                             <label for="phone" class="">Số điện thoại</label>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="md-form form-sm">
-                            <input type="text" id="class" name="class" class="form-control">
+                            <input type="text" id="class" name="class" class="form-control"/>
                             <label for="class" class="">Lớp/Chuyên ngành</label>
                         </div>
                     </div>
                     <div class="col-md-6 offset-md-1"> 
                         <div class="md-form form-sm">
-                            <input type="text" id="local" name="local" class="form-control">
+                            <input type="text" id="local" name="local" class="form-control"/>
                             <label for="local" class="">Tỉnh/Thành Phố</label>
                         </div>
                     </div>
                     <div class="col-sm-8 offset-md-4" style="padding-top: 20px;">
                         <div class="main-container__column material-checkbox-group material-checkbox-group_success">
-                            <input type="checkbox" id="accept_rule" name="accept_rule" class="material-checkbox">
+                            <input type="checkbox" id="accept_rule" name="accept_rule" class="material-checkbox"/>
                             <label class="material-checkbox-group__label" for="accept_rule">Tôi đồng ý với các <a href="#">điều khoản</a></label>
-                            <label id="accept-rule-error" class="error"  for="accept_rule"></label>
+                            <label id="accept-rule-error" style="color: red" class="error"  for="accept_rule"></label>
                         </div>
                     </div>
                 </div>
                 <div class ="col-md-8 offset-md-4">
-                    <button type="submit" id="submit_form" class="btn btn-success">Đăng Ký Ngay</button>
+                    <a id="submit_form" class="btn btn-success">Đăng Ký Ngay</a>
                 </div>
                 </div>
             </form>
@@ -161,16 +163,8 @@
                     number:true,
                 },
 
-                 class:{
-                    required:true,
-                    maxlength:191,
-                   
-                },
+                
 
-                local:{
-                    required:true,
-                    maxlength:191,
-                },   
             },
 
              messages: {
@@ -212,14 +206,7 @@
                     number:"Không phải sô điện thoại !",
                 },
 
-                class:{
-                    required:"Lớp/chuyên môn Không được để trống!",
-                },
-
-                local:{
-                    required:"Tỉnh thành phố không được để trống!",
-                    
-                },
+               
 
                 
             }

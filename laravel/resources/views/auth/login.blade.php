@@ -7,7 +7,15 @@
                 <div class="col-sm-10 offset-md-1">
                    <form style="margin-top:30px;" class="form-horizontal role="form" method="POST" action="{{ route('login') }}">
                     {{ csrf_field()}}
-                        <h3 style="padding-top:50px;">Đăng Nhập</h3><hr style="border: 2px solid  #00C851;"><br>
+                        <h3 style="padding-top:50px;">Đăng Nhập</h3>
+
+                         @if (session('errorr'))
+                                <h6 style="color: red">{{session('errorr')}}</h6>
+                        @endif
+                       
+
+                        <hr style="border: 2px solid  #00C851;"><br>
+                           
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="md-form form-sm">
