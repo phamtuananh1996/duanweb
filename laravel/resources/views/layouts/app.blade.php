@@ -1,34 +1,35 @@
 <!doctype html>
 <html lang="{{ config('app.locale') }}">
     <head>
-         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
-        <script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
-        <!-- Global CSS -->
-        <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}"> 
-        <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap-material-design.css') }}">    
-        <!-- Plugins CSS -->
-        <link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.css') }}">
-        <!-- Theme CSS -->  
-        <link rel="stylesheet" href="{{asset('css/validate/screen.css')}}">
-        <link id="theme-style" rel="stylesheet" href="{{asset('css/styles.css')}}">
+        <!-- Material Design Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- Bootstrap Material Design -->
+        <link rel="stylesheet" type="text/css" href="{{asset('mdb/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('mdb/css/mdb.css')}}">
+         <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap-material-design.css') }}">    
+        <link rel="stylesheet" type="text/css" href="{{asset('mdb/css/style.css')}}">
         <!--App CSS -->
-
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{asset('css/validate/screen.css')}}">
         <title>Hoc2H</title>
-        
     </head>
     <body>
         @include('layouts.header')
         @yield('content')
-        {{-- @include('layouts.footer')   --}}
+        @include('layouts.footer')
+        <!--Script-->
+        <script type="text/javascript" src="{{asset('mdb/js/jquery-3.1.1.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('mdb/js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('/mdb/js/mdb.js')}}"></script>
+        <script type="text/javascript" src="{{asset('/mdb/js/tether.js')}}"></script>
+        
     </body>
 </html>
-
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {

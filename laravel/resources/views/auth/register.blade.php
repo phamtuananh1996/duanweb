@@ -8,126 +8,77 @@
         font-size: 12px;
     }
 </style>
-<div class="container">
-    <div class="row">
-        <div class=" col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
-            <form class="form-horizontal" id="form_register" method="POST" action="{{ route('register') }}">
+<div class="container" style="margin-top: 30px;">
+        <div class="row ">
+        <div class="col-md-6 offset-md-3"> 
+            <form style="margin-top:30px;" class="form-horizontal role="form" method="POST" action="{{ route('register') }}">
                 {{ csrf_field()}}
-                <h3 class="text-center"> Đăng Ký Thành Viên</h3>
-                <br>
-                <br>
-                <div class="container">
-                    <div class="row">
-                        <div class=" col-xs-12 col-sm-6 col-md-7">
-                            <div class="col-md-4">
-                                <div class="main-container__column">        
-                                    <div class="form-group materail-input-block materail-input-block_success materail-input_slide-li">
-                                        <input type="text" required minlength="3" maxlength="100" name="user_name" id="user_name" class="form-control materail-input" placeholder="Tên đăng nhập"/>
-                                        <span class="materail-input-block__line"></span>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-xs-offset-1">
-                                <div class="main-container__column">        
-                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
-                                        <input type="email" name="email" id="email" class="form-control materail-input" required placeholder="Email">
-                                        <span class="materail-input-block__line"></span>
-                                    </div>
-                                </div>
-                            </div>
+                <h3 style="padding-top:50px;">Đăng Ký Thành Viên</h3><hr style="border: 2px solid  #00C851;"><br>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="md-form form-sm">
+                            <input type="text" id="user_name" name="user_name" class="form-control">
+                            <label for="user_name" class="">Tên đăng nhập</label>
                         </div>
                     </div>
-                </div> {{--form container --}}
-                <div class="container">
-                    <div class="row">
-                        <div class=" col-xs-12 col-sm-6 col-md-7">
-                            <div class="col-md-4">
-                                <div class="main-container__column">        
-                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-li">
-                                        <input type="password" required name="password" id="password" class="form-control materail-input" placeholder="Mật khẩu">
-                                        <span class="materail-input-block__line"></span>
-                                       
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-xs-offset-1">
-                                <div class="main-container__column">        
-                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
-                                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control materail-input" placeholder="Nhập lại mật khẩu">
-                                        <span class="materail-input-block__line"></span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-md-6 offset-md-1">
+                        <div class="md-form form-sm">
+                            <input type="email" id="email" name="email" class="form-control">
+                            <label for="email" class="">Email</label>
                         </div>
                     </div>
-                </div> {{--form container --}}
-                <div class="container">
-                    <div class="row">
-                        <div class=" col-xs-12 col-sm-6 col-md-7">
-                            <div class="col-md-4">
-                                <div class="main-container__column">        
-                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-li">
-                                        <input type="text" name="name" id="name" class="form-control materail-input" placeholder="Họ và tên">
-                                        <span class="materail-input-block__line"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-xs-offset-1">
-                                <div class="main-container__column">        
-                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
-                                        <input type="text" name="phone" id="phone" class="form-control materail-input" placeholder="Số điện thoại">
-                                        <span class="materail-input-block__line"></span>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-md-5">
+                        <div class="md-form form-sm">
+                            <input type="password" id="password" name="password" class="form-control">
+                            <label for="password" class="">Mật khẩu</label>
                         </div>
                     </div>
-                </div> {{--form container --}}
-                <div class="container">
-                    <div class="row">
-                        <div class=" col-xs-12 col-sm-6 col-md-7">
-                            <div class="col-md-4" >
-                                <div class="main-container__column">        
-                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
-                                        <input type="text" name="class" id="class" class="form-control materail-input" placeholder="Lớp/Chuyên môn">
-                                        <span class="materail-input-block__line"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-xs-offset-1">
-                                <div class="main-container__column">        
-                                    <div class="form-group  materail-input-block materail-input-block_success materail-input_slide-line">
-                                        <input type="text" name="local" id="local" class="form-control materail-input" placeholder="Tỉnh/Thành phố">
-                                        <span class="materail-input-block__line"></span>
-                                    </div>
-                                </div>
-                            </div>
+                     <div class="col-md-6 offset-md-1">
+                        <div class="md-form form-sm">
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                            <label for="password_confirmation" class="">Nhập lại mật khẩu</label>
                         </div>
                     </div>
-                </div> {{--form container --}}
-                 <br><br>
-                <div class ="col-md-6 col-xs-offset-4">
-                    <div class="main-container__column material-checkbox-group material-checkbox-group_success">
-                        <input type="checkbox" id="accept_rule" name="accept_rule" class="material-checkbox">
-                        <label class="material-checkbox-group__label" for="accept_rule">Tôi đồng ý với các điều khoản</label>
-                        <label id="accept-rule-error" class="error"  for="accept_rule"></label>
+                     <div class="col-md-5">
+                        <div class="md-form form-sm">
+                            <input type="text" id="name" name="name" class="form-control">
+                            <label for="name" class="">Họ và tên</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 offset-md-1"> 
+                        <div class="md-form form-sm">
+                            <input type="number" id="phone" name="phone" class="form-control">
+                            <label for="phone" class="">Số điện thoại</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="md-form form-sm">
+                            <input type="text" id="class" name="class" class="form-control">
+                            <label for="class" class="">Lớp/Chuyên ngành</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 offset-md-1"> 
+                        <div class="md-form form-sm">
+                            <input type="text" id="local" name="local" class="form-control">
+                            <label for="local" class="">Tỉnh/Thành Phố</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 offset-md-4" style="padding-top: 20px;">
+                        <div class="main-container__column material-checkbox-group material-checkbox-group_success">
+                            <input type="checkbox" id="accept_rule" name="accept_rule" class="material-checkbox">
+                            <label class="material-checkbox-group__label" for="accept_rule">Tôi đồng ý với các <a href="#">điều khoản</a></label>
+                            <label id="accept-rule-error" class="error"  for="accept_rule"></label>
+                        </div>
                     </div>
                 </div>
-                <br><br><br>
-                <div class ="col-md-4 col-xs-offset-4">
-                    <div class="main-container__column">
-                        <a id="submit_form" class="btn material-btn material-btn_primary">Đăng Ký Ngay</a>
-                    </div>
+                <div class ="col-md-8 offset-md-4">
+                    <button type="submit" id="submit_form" class="btn btn-success">Đăng Ký Ngay</button>
+                </div>
                 </div>
             </form>
-
         </div>   
-    </div><!--//row-->
-</div><!--//masonry-->
-
-
+    </div>
+</div>
 
 <script type="text/javascript">
    $(document).ready(function() {
@@ -142,7 +93,6 @@
             }
         });
          
-
         $('#submit_form').click(function(event) {
            if ($('#accept_rule').is(":checked"))
             {
@@ -155,8 +105,6 @@
            
          
         });
-
-
 
        $('form').validate(
         {
@@ -176,7 +124,7 @@
                              }
                     }
                 },
-                
+
                 email: {
                     required: true,
                     email: true,
@@ -222,10 +170,7 @@
                 local:{
                     required:true,
                     maxlength:191,
-                },
-               
-               
-                
+                },   
             },
 
              messages: {
@@ -283,5 +228,4 @@
         });
    });
 </script>
-
 @endsection
