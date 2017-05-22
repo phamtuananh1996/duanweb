@@ -42,6 +42,7 @@ Route::group(['prefix' => 'ajax'], function() {
 
 Route::group(['prefix' => 'users'],function(){
 	Route::get('info/{id}','UserController@info');
+	Route::post('edit_user','UserController@editUser');
 });
 //tests route
 Route::group(['prefix' => 'tests'], function(){
