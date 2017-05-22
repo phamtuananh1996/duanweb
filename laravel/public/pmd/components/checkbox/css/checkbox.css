@@ -15,14 +15,14 @@
 
 /* checkbox aspect */
 .pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:before,
-.pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before { content: ''; position: absolute; left:0; top: 1px; width: 18px; height: 18px; border-width:2px; border-style:solid;  border-radius: 2px; border-color: rgba(0, 0, 0, 0.54);}
+.pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before { content: ''; position: absolute; left:0; top: 1px; width: 18px; height: 18px; border-width:2px; border-style:solid;  border-radius: 2px; border-color: #ddd);}
 
 /* checked mark aspect */
 .pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:after,
 .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:after { color: #fff; border-image: none; border-style: none solid solid none; border-width: 0 2px 2px 0; content: "";  display: table; height: 12px; left: 6px; position: absolute; top: 2px; width: 6px; transition: all .2s;}
 
 /* themes */
-.pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before{ background-color:rgba(0, 0, 0, 0.87);}
+.pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before{ background-color:#259b24;}
 
 /* checked mark aspect changes */
 .pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:after { opacity: 0; transform: rotate(45deg); -webkit-transform:  rotate(45deg); -moz-transform:  rotate(45deg); -o-transform:  rotate(45deg);	-ms-transform:  rotate(45deg);}
@@ -44,4 +44,4 @@
 .pmd-card-inverse .pmd-checkbox [type="checkbox"]:not(:checked) + .pmd-checkbox-label:before,
 .pmd-card-inverse .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label:before {border-color: rgba(255, 255, 255, 0.54);}
 .pmd-card-inverse .checkbox.disabled label.pmd-checkbox, fieldset[disabled] .checkbox label.pmd-checkbox { color:rgba(255, 255, 255, 0.54);}
-.pmd-card-inverse .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label::before{ background-color:#000; border-color: rgba(0, 0, 0, 0.54);}
+.pmd-card-inverse .pmd-checkbox [type="checkbox"]:checked + .pmd-checkbox-label::before{ background-color:#fff; border-color: rgba(0, 0, 0, 0.54);}

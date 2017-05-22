@@ -3,7 +3,7 @@
 
 /*common css*/
 body {
-  background: transparent;
+  background:#e8f5e9;
 }
 textarea:hover, 
 input:hover, 
@@ -22,10 +22,8 @@ a {
   -ms-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
 }
-a .list-group-item:hover {
-  text-decoration: underline;
-  color: #5f6b77;
-  background: green;
+..navbar-inverse .navbar-nav>li>a {
+  color: #fff;
 }
 /*-----------end link text style-------------*/
 .slider-header {
@@ -43,6 +41,9 @@ a .list-group-item:hover {
   width:50%;
   margin-top: 40px;
   }
+.hoc2h-navbar {
+  background: #0d47a1;
+}
 .hoc2h-list-heading {
   width: 100%;
   color: green;
