@@ -9,7 +9,7 @@
 .pmd-textfield-focused{ transition-duration: 0.2s; -ms-transition-duration: 0.2s; -webkit-transition-duration: 0.2s; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); -ms-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);}
 
 /*input focus bar*/
-.pmd-textfield-focused{ width: 100%; height:2px; display:block; top:-1px;  background-color:#4285f4; transform:scaleX(0); -ms-transform: scaleX(0); -webkit-transform: scaleX(0); position:relative; z-index:2;}
+.pmd-textfield-focused{ width: 100%; height:2px; display:block; top:-1px;  background-color:#388e3c; transform:scaleX(0); -ms-transform: scaleX(0); -webkit-transform: scaleX(0); position:relative; z-index:2;}
 .pmd-textfield.pmd-textfield-floating-label-active .pmd-textfield-focused { transform: scaleX(1); -ms-transform: scaleX(1); -webkit-transform: scaleX(1);}
 
 /*paper input*/

@@ -41,7 +41,8 @@ Route::group(['prefix' => 'ajax'], function() {
 });
 
 Route::group(['prefix' => 'users'],function(){
-	Route::get('info/{id}','UserController@info');
+	Route::get('infodetail/{id}','UserController@info');
+	Route::get('infoEdit/{id}','UserController@infoEdit');
 });
 //tests route
 Route::group(['prefix' => 'tests'], function(){

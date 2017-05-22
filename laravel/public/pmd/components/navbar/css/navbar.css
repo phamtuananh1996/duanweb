@@ -67,7 +67,7 @@
 .pmd-navbar-sidebar .navbar-nav{ display:inline-block; width:100%;}
 
 /* -- sidebar inverse ------------------------------- */
-.navbar-inverse .pmd-navbar-sidebar{ background-color:#222;}
+.navbar-inverse .pmd-navbar-sidebar{ background-color:#007E33;}
 .navbar-inverse .pmd-navbar-sidebar .dropdown-menu > li > a{ color: #9d9d9d;}
 .navbar-inverse .pmd-navbar-sidebar .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{ background-color:transparent; color:#fff;}
 .navbar-inverse .pmd-navbar-sidebar .pmd-user-info .dropdown-menu{border-color: #080808;}
