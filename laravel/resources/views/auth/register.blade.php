@@ -10,70 +10,74 @@
 @section('content')
 <script src="{{ asset('plugins/jquery.validate.js') }}"></script>
 <style type="text/css">
-    form label {
-        font-size: 14px;
-       
+   .error{
+        font-size: 13px !important;
+        color: red !important;
     }
-    form text
-    {
-         font-size: 13px;
-         color: red;
-    }
-
+    
 </style>
 <div class="container" style="margin-top: 100px;">
     <div class="row ">
         <div class="col-md-6 col-md-offset-3" style="margin-top: 30px; border: solid 1px #c8e6c9; background: white;"> 
-            <form style="padding-bottom:30px;" class="form-horizontal role="form" method="POST" action="{{ route('register') }}">
+            <form style="padding-bottom:30px;" class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                 {{ csrf_field()}}
                 <h3 style="padding-top:10px;">Đăng Ký Thành Viên</h3><hr style="border: 2px solid  #00C851;"><br>
+                
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="form-group pmd-textfield">
                             <label for="user_name" class="control-label">Tên đăng nhập</label>
                             <input type="text" id="user_name" name="user_name" class="form-control">
+
                         </div>
+
                     </div>
-                    <div class="col-md-5 col-md-offset-2">
+                    <div class="col-md-6">
                         <div class="form-group pmd-textfield">
                             <label for="email" class="control-label">Email</label>
                             <input type="email" id="email" name="email" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-5">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group pmd-textfield">
                             <label for="password" class="control-label">Mật khẩu</label>
                             <input type="password" id="password" name="password" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-5 col-md-offset-2">
+                    <div class="col-md-6">
                         <div class="form-group pmd-textfield">
                             <label for="password_confirmation" class="control-label">Nhập lại mật khẩu</label>
                             <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-5">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group pmd-textfield">
                         <label for="name" class="control-label">Họ và Tên</label>
                         <input type="text" id="name" name="name" class="form-control" type="password">
                         </div>
                     </div>
-                    <div class="col-md-5 col-md-offset-2">
+                    <div class="col-md-6">
                         <div class="form-group pmd-textfield">
                             <label for="phone" class="control-label">Số điện thoại</label>
                             <input type="text" id="phone" name="phone" class="form-control" type="password">
                         </div>
                     </div>
-                    <div class="col-md-5">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <div class="form-group pmd-textfield">
                         <label for="class" class="control-label">Lớp/Chuyên ngành</label>
                         <input type="text" id="class" name="class" class="form-control" type="password">
                         </div>
                     </div>
-                    <div class="col-md-5 col-md-offset-2">
+                    <div class="col-md-6">
                         <div class="form-group pmd-textfield pmd-textfield-floating-label">       
                             <label>Tỉnh/Thành Phố</label>
-                            <select class="select-simple form-control pmd-select2">
+                            <select class="select-simple form-control pmd-select2" name="local">
                                 <option>Hà Nội</option>
                                 <option>Hải Phòng</option>
                                 <option>TP Hồ Chí Minh</option>
@@ -102,54 +106,36 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-sm-8 col-md-offset-4" style="padding-top: 20px;">
                     <div class="checkbox pmd-default-theme">
                         <label class="pmd-checkbox pmd-checkbox-ripple-effect">
-                            <input type="checkbox" value="" id="accept_rule" checked>
+                            <input type="checkbox" id="accept_rule" name="accept_rule" checked="" />
                             <span>Tôi đồng ý với điều khoản</span>
                         </label>
-                        <p><text id="accept-rule-error" class="error"></text></p>
-                        
                     </div>
                 </div>
                 <div class ="col-md-8 col-md-offset-4" style="margin-top: 20px; margin-bottom: 20px;">
-                    <button type="submit" id="submit_form" class="btn btn-success"> Đăng Ký Ngay </button >
+                    <button type="submit" id="submit_form" class="btn btn-success"> Đăng Ký Ngay </button>
                 </div>
+             </form>
             </div>
             
         </div>
-    </form>
+
+   
 </div>   
-</div>
-</div>
+
 <!-- Propeller textfield js -->
 
 <script type="text/javascript">
  $(document).ready(function() {
-    $("#accept_rule").change(function(event) {
-        if ($('#accept_rule').is(":checked"))
-        {
-           $('#accept-rule-error').html("");
-       }
-       else
-       {
-           $('#accept-rule-error').html("Bạn chưa đồng ý với các điều khoản");
-       }
-   });
+    
 
-    $('#submit_form').click(function(event) {
-     if ($('#accept_rule').is(":checked"))
-     {  
-       $('form').submit();
-    }
-   else
-   {
+    jQuery.validator.addMethod("special_character", function(value, element) {
+        return  /[a-zA-Z0-9]+$/.test(value);
+    });
 
-        $('#accept-rule-error').html("Bạn chưa đồng ý với các điều khoản");
-    }
-
-
-});
 
     $('form').validate(
     {
@@ -167,7 +153,8 @@
                          return $( "#user_name" ).val();
                      }
                  }
-             }
+             },
+             special_character:true
          },
 
          email: {
@@ -205,7 +192,7 @@
         maxlength:11,
         number:true,
     },
-
+    accept_rule:"required"
 
 
 },
@@ -215,7 +202,8 @@ messages: {
         required: "Tên đăng nhập không được để trống!",
         maxlength: "Tên đăng nhập không được quá 100 kí tự!",
         minlength: "Tên đăng nhập phải trên 3 kí tự!",
-        remote:"Tên đăng nhập này đã được sử dụng ! "
+        remote:"Tên đăng nhập này đã được sử dụng ! ",
+        special_character:"Không được chứ kí tự đặc biệt",
     },
 
     email: {
@@ -248,6 +236,11 @@ messages: {
         maxlength:"Không phải sô điện thoại !",
         number:"Không phải sô điện thoại !",
     },
+
+    accept_rule:{
+         required:"Bạn phải đồng ý với điều khoản!",
+    }
+
 
 
 }

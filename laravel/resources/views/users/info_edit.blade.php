@@ -3,17 +3,27 @@
 @extends('users.info')
 
 @section('info_content')
-<form class="form-horizontal role="form" method="POST" action="#" style="padding:30px; border:solid 1px green; margin-right: 30px; margin-top: 30px; background: white;">
+<script src="{{ asset('plugins/jquery.validate.js') }}"></script>
+<style type="text/css">
+   .error{
+        font-size: 13px !important;
+        color: red !important;
+    }
+    
+</style>
+<form class="form-horizontal role="form" method="POST" action="infoEdit" enctype="multipart/form-data" id="form_edit" style="padding:30px; border:solid 1px green; margin-right: 30px; margin-top: 30px; background: white;">
+	{{csrf_field()}}
 	<div class="row">
-		<div class="col-md-5">
+		
+		<div class="col-md-6">
 			<div class="form-group pmd-textfield">
 				<label for="first-name" class="control-label">
-					Ten dang nhap
+					Tên đăng nhập
 				</label>
 				<input type="text" disabled="" value="{{$user->user_name}}" id="disabled" class="mat-input form-control">
 			</div>
 		</div>
-		<div class="col-md-5 col-md-offset-1">
+		<div class="col-md-6">
 			<div class="form-group pmd-textfield">
 				<label for="first-name" class="control-label">
 					Email
@@ -21,16 +31,19 @@
 				<input type="text" disabled="" value="{{$user->email}}" id="disabled" class="mat-input form-control">
 			</div>
 		</div>
-		<div class="col-md-5">
+		
+
+		<div class="col-md-6">
 			<div class="form-group pmd-textfield">
-				<label for="Small">Ho va ten</label>
-				<input type="text" id="Small" class="form-control" value="{{$user->name}}">
+				<label for="Small">Họ và Tên</label>
+				<input type="text" id="Small" name="name" required minlength="2" maxlength="50" class="form-control" value="{{$user->name}}">
 			</div>
 		</div>
-		<div class="col-md-5 col-md-offset-1">
+		<div class="col-md-6">
 			<div class="form-group pmd-textfield pmd-textfield-floating-label" >       
 				<label>Tỉnh/Thành Phố </label>
-				<select class="select-simple form-control pmd-select2">
+				<select class="select-simple form-control pmd-select2" name="local">
+					<option>{{$user->local}}</option>
 					<option>Hà Nội</option>
 					<option>Hải Phòng</option>
 					<option>TP Hồ Chí Minh</option>
@@ -58,16 +71,16 @@
 				</select>
 			</div>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<div class="form-group pmd-textfield">
 				<label for="Small">Lớp/Chuyên ngành</label>
-				<input type="text" id="Small" class="form-control" value="{{$user->class}}">
+				<input type="text" id="Small" class="form-control" name="class" value="{{$user->class}}">
 			</div>	
 		</div>
-		<div class="col-md-5 col-md-offset-1">
+		<div class="col-md-6">
 			<div class="form-group pmd-textfield pmd-textfield-floating-label">       
 				<label>Năm sinh</label>
-				<select class="select-simple form-control pmd-select2">
+				<select class="select-simple form-control pmd-select2" name="birthday">
 					<option>1970</option>
 					<option>1971</option>
 					<option>1972</option>
@@ -83,34 +96,37 @@
 				</select>
 			</div>
 		</div>
-		<div class="col-md-5 ">
+		<div class="col-md-6 ">
 			<div class="form-group pmd-textfield">
 				<label for="Small">Số điện thoại</label>
-				<input type="text" id="Small" class="form-control" value="{{$user->phone}}">
+				<input type="text" id="Small" name="phone" class="form-control" value="{{$user->phone}}">
 			</div>	
 		</div>
-		<div class="col-md-5 col-md-offset-1">
+		<div class="col-md-6">
 			<div class="form-group pmd-textfield">
 				<label for="Small">ảnh đại diện</label>
-				<input type="file" name="avatar" id="avatar" >
+				<input type="file" accept="image/*" max="" name="avatar" id="avatar" >
 			</div>	
 		</div>
 
 		<div class="col-md-12">
 			<div class="form-group pmd-textfield">
 			  	<label class="control-label">Giới thiệu bản thân</label>
-			  	<textarea required class="form-control" value"{{$user->desciption}}"></textarea>
+			  	<textarea  class="form-control" id="description" name="description" >{{$user->description}}</textarea>
+			  	<script>
+    				CKEDITOR.replace( 'description' );
+				</script>
 			</div>
 		</div>
 		<div class="col-md-5" style="margin-top: 15px;">
 			<div class="form-group pmd-textfield">
 				<label style="color:#4B515D; margin-top: 15px; margin-right: 20px;" for="Small">Giới tính</label>
 				<label class="radio-inline pmd-radio pmd-radio-ripple-effect">
-					<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+					<input type="radio" checked name="gender" id="inlineRadio1" value="1">
 					<span for="inlineRadio1">Nam</span>
 				</label>
 				<label class="radio-inline pmd-radio pmd-radio-ripple-effect">
-					<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+					<input type="radio" name="gender" id="inlineRadio2" value="0">
 					<span for="inlineRadio2">Nữ</span>
 				</label>
 			</div>
@@ -120,4 +136,32 @@
                 </div>
 	</div>
 </form>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$.validator.addMethod('filesize', function(value, element, param) {
+    
+    		return this.optional(element) || (element.files[0].size <= param) 
+		});
+
+		$('#form_edit').validate({
+			rules:{
+				avatar:
+				{
+					filesize:2097152 
+				}
+			},
+			messages:{
+				name:{
+					required:'Không được để trống trường này!',
+				},
+				avatar:{
+					filesize:'Kích thước ảnh phải nhỏ hơn 2MB!',
+				}
+			}
+			});
+		
+	});
+</script>
 @endsection

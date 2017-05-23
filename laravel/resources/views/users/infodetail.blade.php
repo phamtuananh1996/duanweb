@@ -2,10 +2,8 @@
 @section('info_content')
 	<div class="bs-callout bs-callout-danger">
 		<h4>Giới thiệu về bản thân</h4>
-		<p>{{$user->discription}}</p>
-		<p>Là một người thế này</p>
-		<p>Mô tả chi tiết</p>
-		<p>get description vào đây</p>
+		<p>{!!$user->description!!}</p>
+		
 	</div>
 	<div class="bs-callout bs-callout-danger">
 		<h4>Trình độ</h4>
