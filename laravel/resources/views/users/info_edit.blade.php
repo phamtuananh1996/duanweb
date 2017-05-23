@@ -11,10 +11,9 @@
     }
     
 </style>
-<form class="form-horizontal role="form" method="POST" action="infoEdit" enctype="multipart/form-data" id="form_edit" style="padding:30px; border:solid 1px green; margin-right: 30px; margin-top: 30px; background: white;">
+<form class="form-horizontal role="form" method="POST" action="{{url('/users/infoEdit')}}" enctype="multipart/form-data" id="form_edit" style="padding:30px; border:solid 1px #bdbdbd; margin-right: 15px; margin-top: 30px; background: white;">
 	{{csrf_field()}}
 	<div class="row">
-		
 		<div class="col-md-6">
 			<div class="form-group pmd-textfield">
 				<label for="first-name" class="control-label">
@@ -79,7 +78,7 @@
 		</div>
 		<div class="col-md-6">
 			<div class="form-group pmd-textfield pmd-textfield-floating-label">       
-				<label>Năm sinh</label>
+				<label">Năm sinh</label>
 				<select class="select-simple form-control pmd-select2" name="birthday">
 					@if ($user->birthday)
 						<option>{{$user->birthday}}</option>
@@ -96,6 +95,29 @@
 					<option>1979</option>
 					<option>1980</option>
 					<option>1981</option>
+					<option>1982</option>
+					<option>1983</option>
+					<option>1984</option>
+					<option>1985</option>
+					<option>1986</option>
+					<option>1987</option>
+					<option>1988</option>
+					<option>1989</option>
+					<option>1990</option>
+					<option>1991</option>
+					<option>1992</option>
+					<option>1993</option>
+					<option>1994</option>
+					<option>1995</option>
+					<option>1996</option>
+					<option>1997</option>
+					<option>1998</option>
+					<option>1999</option>
+					<option>2000</option>
+					<option>2001</option>
+					<option>2002</option>
+					<option>2003</option>
+					<option>2004</option>
 				</select>
 			</div>
 		</div>
@@ -111,7 +133,19 @@
 				<input type="file" accept="image/*" max="" name="avatar" id="avatar" >
 			</div>	
 		</div>
-
+		<div class="col-md-12" style="margin-top: 15px;">
+			<div class="form-group pmd-textfield">
+				<label style="color:#4B515D; margin-top: 15px; margin-right: 20px;" for="Small">Giới tính</label>
+				<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 13px;">
+					<input type="radio" checked name="gender" id="inlineRadio1" value="1">
+					<span for="inlineRadio1">Nam</span>
+				</label>
+				<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 13px;">
+					<input type="radio" name="gender" id="inlineRadio2" value="0">
+					<span for="inlineRadio2">Nữ</span>
+				</label>
+			</div>
+		</div>
 		<div class="col-md-12">
 			<div class="form-group pmd-textfield">
 			  	<label class="control-label">Giới thiệu bản thân</label>
@@ -121,20 +155,8 @@
 				</script>
 			</div>
 		</div>
-		<div class="col-md-5" style="margin-top: 15px;">
-			<div class="form-group pmd-textfield">
-				<label style="color:#4B515D; margin-top: 15px; margin-right: 20px;" for="Small">Giới tính</label>
-				<label class="radio-inline pmd-radio pmd-radio-ripple-effect">
-					<input type="radio" checked name="gender" id="inlineRadio1" value="1">
-					<span for="inlineRadio1">Nam</span>
-				</label>
-				<label class="radio-inline pmd-radio pmd-radio-ripple-effect">
-					<input type="radio" name="gender" id="inlineRadio2" value="0">
-					<span for="inlineRadio2">Nữ</span>
-				</label>
-			</div>
-		</div>
-		<div class ="col-md-8 col-md-offset-4" style="margin-top: 20px; margin-bottom: 20px;align:center;">
+		
+		<div class ="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
                     <button type="submit" id="submit_form" class="btn btn-success">Lưu Lại</button >
                 </div>
 	</div>
