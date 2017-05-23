@@ -15,7 +15,12 @@
                     @if(Auth::check())
                         <a href="javascript:void(0);" class="btn-user dropdown-toggle media" data-toggle="dropdown" data-sidebar="true" aria-expanded="false">
                             <div class="media-left">
-                                <img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar">
+                                @if (Auth::user()->avatar)
+                                    <img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar">
+                                @else
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2-dYlakPdqfKcuptmGaAsh1ynwhzFDohsAioI4Ek_Cb7ecw_s" width="40" height="40" alt="avatar">
+                                @endif
+                                
                             </div>
                             <div class="media-body media-middle">
                                 {{Auth::user()->user_name}}
