@@ -48,6 +48,6 @@ Route::group(['prefix' => 'users'],function(){
 //tests route
 Route::group(['prefix' => 'tests'], function(){
 	Route::get('/','TestController@index');
-	Route::get('create','TestController@create');
-	Route::post('create','TestController@store');
+	Route::get('createst1','TestController@create');
+	Route::post('createst1','TestController@store');
 });

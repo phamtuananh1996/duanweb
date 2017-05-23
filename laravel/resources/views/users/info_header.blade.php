@@ -7,7 +7,7 @@
 	@endif
 		
 	</div>
-	<div class="col-md-7" style="text-align: left; margin-top: 10px; color: green;">
+	<div class="col-md-6" style="text-align: left; margin-top: 10px; color: green;">
 		<p style="font-size: 20px;"><STRONG>{{$user->name}}</STRONG></p>
 		<p>Nick name: {{$user->user_name}}</p>
 		<p>Lớp/Chuyên ngành: {{$user->class}}</p>

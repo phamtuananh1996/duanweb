@@ -10,4 +10,15 @@ class TestController extends Controller
     {
     	return view('tests.index');
     }
+
+    public function create()
+    {
+    	return view('tests.create_st1');
+    }
+
+    public function store()
+    {
+        //demo with test type is writing test
+    	return view ('tests.create_st2_writing');
+    }
 }

@@ -48,7 +48,17 @@
             </div> 
           <ul class="nav navbar-nav">
             <li><a style="color:white;" class="pmd-ripple-effect" href="javascript:void(0);">Home <span class="sr-only">(current)</span></a></li>
-            <li><a style="color:white;" class="pmd-ripple-effect" href="{{url('/tests')}}">Đề Thi</a></li>
+            <li class="dropdown pmd-dropdown">
+                <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">Đề Thi <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
+                        <li><a class="pmd-ripple-effect" href="{{url('/tests')}}">Index</a></li>
+                        <li><a class="pmd-ripple-effect" href="{{url('/tests/createst1')}}">Tạo Đề Thi</a></li>
+                    @else
+                        <li><a class="pmd-ripple-effect" href="#">Đề thi đã làm</a></li>
+                    @endif
+                </ul>
+            </li>
             <li><a style="color:white;" class="pmd-ripple-effect" href="#">Hỏi Đáp</a></li>
             <li class="dropdown pmd-dropdown">
                 <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">More <span class="caret"></span></a>
