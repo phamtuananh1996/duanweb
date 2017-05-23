@@ -51,10 +51,12 @@
             <li class="dropdown pmd-dropdown">
                 <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">Đề Thi <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
-                        <li><a class="pmd-ripple-effect" href="{{url('/tests')}}">Index</a></li>
-                        <li><a class="pmd-ripple-effect" href="{{url('/tests/createst1')}}">Tạo Đề Thi</a></li>
-                    @else
+                    @if(Auth::check())
+                        @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
+                            <li><a class="pmd-ripple-effect" href="{{url('/tests')}}">Index</a></li>
+                            <li><a class="pmd-ripple-effect" href="{{url('/tests/createst1')}}">Tạo Đề Thi</a></li>
+                        @endif
+                     @else
                         <li><a class="pmd-ripple-effect" href="#">Đề thi đã làm</a></li>
                     @endif
                 </ul>
