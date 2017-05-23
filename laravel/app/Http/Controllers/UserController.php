@@ -34,12 +34,12 @@ class UserController extends Controller
     	$user=User::find(Auth::user()->id);
 
     	$user->name=trim($req->name);
-    	$user->phone=$req->phone;
-    	$user->class=$req->class;
+    	$user->phone=trim($req->phone);
+    	$user->class=trim($req->class);
     	$user->gender=$req->gender;
     	$user->birthday=$req->birthday;
-    	$user->local=$req->local;
-    	$user->description=$req->description;
+    	$user->local=trim($req->local);
+    	$user->description=trim($req->description);
 
     	//upload avatar
 

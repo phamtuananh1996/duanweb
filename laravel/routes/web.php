@@ -46,8 +46,9 @@ Route::group(['prefix' => 'users'],function(){
 	Route::post('infoEdit','UserController@editUser');
 });
 //tests route
-Route::group(['prefix' => 'tests'], function(){
+Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::get('/','TestController@index');
 	Route::get('createst1','TestController@create');
 	Route::post('createst1','TestController@store');
+	Route::post('savetest', 'TestController@saveTest')->name('save_write_test');
 });
