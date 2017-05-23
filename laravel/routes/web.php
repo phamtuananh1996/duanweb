@@ -31,10 +31,23 @@ Route::post('login','Auth\LoginController@postLogin')->name('login');
 Route::post('logout', 'Auth\LoginController@postLogout')->name('logout');
 Route::get('register', 'Auth\LoginController@getRegister');
 Route::post('register', 'Auth\RegisterController@postRegister')->name('register');
+Route::get('register/comfirm', 'Auth\RegisterController@registerComfirm');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['prefix' => 'ajax'], function() {
 	Route::post('checkemail', 'Auth\RegisterController@ajaxCheckEmail');
 	Route::post('checkusername', 'Auth\RegisterController@ajaxCheckUserName');
+});
+
+Route::group(['prefix' => 'users'],function(){
+	Route::get('infodetail/{id}','UserController@info');
+	Route::get('infoEdit','UserController@infoEdit');
+	Route::post('infoEdit','UserController@editUser');
+});
+//tests route
+Route::group(['prefix' => 'tests'], function(){
+	Route::get('/','TestController@index');
+	Route::get('createst1','TestController@create');
+	Route::post('createst1','TestController@store');
 });
