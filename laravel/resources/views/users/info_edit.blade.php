@@ -80,6 +80,9 @@
 			<div class="form-group pmd-textfield pmd-textfield-floating-label">       
 				<label">Năm sinh</label>
 				<select class="select-simple form-control pmd-select2" name="birthday">
+					@if ($user->birthday)
+						<option>{{$user->birthday}}</option>
+					@endif
 					<option>1970</option>
 					<option>1971</option>
 					<option>1972</option>
