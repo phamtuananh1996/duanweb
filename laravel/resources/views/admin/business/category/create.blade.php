@@ -26,7 +26,7 @@
           <label class="control-label col-lg-2">Parent Category ID *</label>
              <div class="col-lg-8">
                 <select name="super_category_id" class="form-control">
-                  <option value="" selected="selected">Parent Category ID</option>
+                  <option value="0" selected="selected">Parent Category ID</option>
                   @foreach($category as $cate)
                   <option value="{{$cate->id}}" @if(old('super_category_id')==$cate->id) selected="selected" @endif >{{$cate->title}}</option>
                   @endforeach

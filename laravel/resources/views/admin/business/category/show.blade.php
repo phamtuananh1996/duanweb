@@ -26,12 +26,10 @@
           <label class="control-label col-lg-2">Parent Category ID *</label>
             <div class="col-lg-8">
               <select class=" form-control" name="super_category_id">
+              <option value="0">super_category_id</option>
                 @foreach($categoryall as $cateall)
                 <option 
-                @if($category->id == $cateall->id)
-                {{"selected"}}
-                @endif
-                value="{{$cateall->id}}">{{$cateall->title}}</option>
+                @if($category->super_category_id == $cateall->id) {{"selected"}} @endif value="{{$cateall->id}}">{{$cateall->title}}</option>
                 @endforeach
               </select>
               @if($errors->has('super_category_id'))<p style="color: red;">{{$errors->first('super_category_id')}}</p>@endif
