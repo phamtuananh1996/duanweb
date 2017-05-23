@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Auth;
+use Mail;
 class RegisterController extends Controller
 {
     /*
@@ -77,26 +78,38 @@ class RegisterController extends Controller
 
     public function ajaxCheckEmail(Request $req)
     {
-        $user=User::where(['email'=>$req->email,'status'=>1]);
-        if($user->count()>0)
-        {
-            return 'false';
-        }
-        else
-        {
+        try{
+            $user=User::where(['email'=>$req->email,'status'=>1]);
+
+             if($user->count()>0)
+            {
+             return 'false';
+             }
+            else
+             {
+                return 'true';
+             }
+            } 
+        catch(\Exception $e){
             return 'true';
         }
+        
     }
 
     public function ajaxCheckUserName(Request $req)
     {
-         $user=User::where(['user_name'=>$req->username,'status'=>1]);
-        if($user->count()>0)
-        {
-            return 'false';
-        }
-        else
-        {
+         try{
+                $user=User::where(['user_name'=>$req->username,'status'=>1]);
+                if($user->count()>0)
+                {
+                    return 'false';
+                }
+                 else
+                {
+                     return 'true';
+                }
+            } 
+        catch(\Exception $e){
             return 'true';
         }
     }
@@ -104,16 +117,58 @@ class RegisterController extends Controller
     public function postRegister(Request $req)
     {
         
-       $user =new User;
-       $user->name=$req->name;
-       $user->user_name=$req->user_name;
+       
+        $user =new User;
+        $user->name=$req->name;
+        $user->user_name=$req->user_name;
         $user->email=$req->email;
         $user->password=bcrypt($req->password);
         $user->local=$req->local;
         $user->class=$req->class;
         $user->phone=$req->phone;
+        $user->status=0;
+        $user->code=base64_encode(base64_encode(time()));
         $user->save();
-        Auth::login($user);
-        return redirect('home');
+
+        //gửi mail
+
+        $data=$req->toArray();
+        $data['link']=$_SERVER['REDIRECT_URL'].'/comfirm?code='. $user->code.'&email='.$req->email;
+        Mail::send('email.register_comfirm',$data, function ($message) use ($data){
+            $message->from('phamtuananh1110@gmail.com', 'Hoc2H');
+          
+            $message->to($data['email'],$data['name']);
+
+            $message->replyTo('phamtuananh1110@gmail.com', 'Hoc2H');
+        
+            $message->subject('kích hoạt tai khoản');
+        });
+
+        return 'kiem tra mail';
+    }
+
+
+    public function registerComfirm(Request $req)
+    {
+        $user=User::where(['email'=>$req->email,'code'=>$req->code])->first();
+
+       
+        if($user->count()>0)
+        {
+            $user->status=1;
+            $user->code='';
+            $user->save();
+
+            //xóa user chưa kích hoạt
+
+            $users=User::where(['email'=>$req->email,'status'=>0]);
+            $users->delete();
+
+            return redirect('login')->with(['sucsecc'=>'Xác nhận thành công hãy đăng nhập']);
+        }
+        else
+        {
+            return redirect('404');
+        }
     }
 }
