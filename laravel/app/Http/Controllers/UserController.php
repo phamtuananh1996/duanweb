@@ -33,7 +33,7 @@ class UserController extends Controller
     	if (Auth::check()) {
     	$user=User::find(Auth::user()->id);
 
-    	$user->name=$req->name;
+    	$user->name=trim($req->name);
     	$user->phone=$req->phone;
     	$user->class=$req->class;
     	$user->gender=$req->gender;
@@ -45,7 +45,7 @@ class UserController extends Controller
 
     	 if($req->avatar)
             {
-                try{
+               
                 $nameImage=time().".".$req->avatar->getClientOriginalExtension();
                 $req->avatar->move('images/users', $nameImage);
                 //nếu ảnh đã tồn tại thì xóa ảnh cũ thay bằng ảnh mới
@@ -55,10 +55,8 @@ class UserController extends Controller
                 }
 
                 $user->avatar=$nameImage;
-                }
-                catch(\Exception $e){
-                    return redirect("users/infoEdit")->with(['error'=>'Kích thước ảnh quá lớn']);
-                }
+                
+               
              }
 
            $user->save();
