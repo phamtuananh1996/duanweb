@@ -12,7 +12,7 @@
 	</style>
 
 	<div class="col-md-8 col-md-offset-2 main-content">
-		<h1 class="text-center" style="color:green;">Tạo Đề Thi</h1>
+		<h1 class="text-center" style="color:green;">Soạn Đề Thi</h1>
 		<hr style="border: solid 1px #9e9e9e;">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1" style="background:white; border: solid 1px #e0e0e0 ; margin-bottom: 100px;">

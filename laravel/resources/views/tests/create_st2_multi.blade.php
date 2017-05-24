@@ -1,7 +1,7 @@
 @extends('tests.layout')
 
 @section('test_content')
-	<div class="col-md-8 col-md-offset-2 main-content">
+	<div class="col-md-8 col-md-offset-2 main-content" style="border: solid 1px green;">
 		<h1 class="text-center" style="color:green;">Tạo Đề Thi</h1>
 		<hr style="border: solid 1px #9e9e9e;">
 		<h4><strong>Tiêu đề:</strong> {{$test->title}}</h4>

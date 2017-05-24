@@ -10,8 +10,8 @@
     	}
     
 	</style>
-	<div class="col-md-8 col-md-offset-2 main-content">
-		<h1 class="text-center" style="color:green;">Tạo Đề Thi</h1>
+	<div class="col-md-8 col-md-offset-2 main-content" style="border-top: none;border: solid 1px green;">
+		<h1 class="text-center" style="color:green;">Soạn Đề Thi</h1>
 		<hr style="border: solid 1px #9e9e9e;">
 		<h4><strong>Tiêu đề:</strong> {{$test->title}}</h4>
 		<h4><strong>Danh mục/Thể loại:</strong> {{$test->category->title}}</h4>
@@ -27,8 +27,8 @@
 		<form method="POST" action="{{ route('save_write_test') }}" id="form_test2" >
 		{{csrf_field()}}
 		<input type="hidden" name="test_id" value="{{$test->id}}">
-			<h3 style="margin-top: 20px;">Soạn Đề</h3>
 			<div class="col-md-12" style="margin-top: 20px;">
+			<h3 style="margin-top: 20px;">Đề bài</h3>
 				<div class="form-group pmd-textfield">
 				   <label id="question-error"  style="display: none" class="error" for="Small"></label>
 				  	<textarea class="form-control" name="question" id="question"></textarea>
@@ -37,8 +37,9 @@
     				CKEDITOR.replace('question');
 				</script>
 			</div>
-			<h3 style="margin-top: 20px;">Đáp án/Hướng dẫn giải</h3>
+			
 			<div class="col-md-12" style="margin-top: 20px;">
+			<h3 style="margin-top: 20px;">Đáp án/Hướng dẫn giải</h3>
 				<div class="form-group pmd-textfield">
 				 <label id="answer-error" style="display: none" class="error" for="Small"></label>
 				  	<textarea class="form-control" id="answer" name="answer"></textarea>
@@ -48,9 +49,9 @@
     				CKEDITOR.replace('answer');
 				</script>
 			</div>
-			<div class="col-md-4 col-md-offset-5" style="margin-top: 20px; margin-bottom: 50px;">
+			<div class="col-md-4 col-md-offset-4" style="margin-top: 20px; margin-bottom: 50px;">
 				<button type="submit" id="button" class="btn pmd-ripple-effect btn-success"> Đăng </button >
-
+				<button style="margin-left: 10px;" type="button" id="button" class="btn pmd-ripple-effect btn-danger"> Huỷ </button >
 			</div>
 		</form>
 		
