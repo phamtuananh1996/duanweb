@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User_Options extends Model
+class UserNotifications extends Model
 {
     //
 }

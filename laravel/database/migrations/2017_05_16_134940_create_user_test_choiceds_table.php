@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnswerCommentsTable extends Migration
+class CreateUserTestChoicedsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateAnswerCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('answer_comments', function (Blueprint $table) {
+        Schema::create('user_test_choiceds', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('answer_id');
-            $table->text('content');
-            $table->integer('vote_count')->default(0);
+            $table->integer('user_test_id');
+            $table->integer('multi-choice_test_id');
+            $table->integer('user_test_choiced')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateAnswerCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answer__comments');
+        Schema::dropIfExists('user_test_choiceds');
     }
 }

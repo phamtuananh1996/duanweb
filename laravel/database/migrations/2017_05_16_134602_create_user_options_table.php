@@ -31,6 +31,6 @@ class CreateUserOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user__options');
+        Schema::dropIfExists('user_options');
     }
 }

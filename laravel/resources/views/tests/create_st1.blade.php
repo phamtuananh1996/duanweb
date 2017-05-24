@@ -106,9 +106,6 @@
         	return value!='Chọn Thể Loại';
    			});
 
-
-
-
 		$('#form_test1').validate(
 			{
 				rules:{
@@ -142,9 +139,7 @@
 				}
 
 			});
-
-
-		
+	
 	});
 </script>
 @endsection

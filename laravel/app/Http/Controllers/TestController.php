@@ -6,14 +6,20 @@ use Illuminate\Http\Request;
 use App\Test;
 use App\categories;
 use Auth;
-use App\writing_test;
+use App\WritingTest;
 class TestController extends Controller
 {
     public function index()
     {
-    	return view('tests.index');
+        $tests = Test::all();
+    	return view('tests.index',compact('tests'));
     }
 
+    public function show($id)
+    {
+        $test = Test::find($id);
+        return view('tests.show',compact('test'));
+    }
     public function create()
     {
         $categories=categories::all();
@@ -32,13 +38,16 @@ class TestController extends Controller
         $test->test_type=$req->test_type;
         $test->level=$req->level;
         $test->save();
-        //demo with test type is writing test
-    	return view('tests.create_st2_writing',compact('test'));
+        if ($test->test_type == 0) {
+            return view('tests.create_st2_multi',compact('test'));
+        } else {
+            return view('tests.create_st2_writing',compact('test'));
+        }	
     }
 
     public function saveTest(Request $req)
     {
-       $write_test=new writing_test;
+       $write_test=new WritingTest;
        $write_test->test_id=$req->test_id;
        $write_test->content=$req->question;
        $write_test->explan=$req->answer;

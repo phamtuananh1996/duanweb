@@ -29,6 +29,6 @@ class CreateTestCommentRepliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test__comment__replies');
+        Schema::dropIfExists('test_comment_replies');
     }
 }

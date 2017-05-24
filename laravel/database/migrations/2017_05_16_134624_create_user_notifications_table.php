@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMultiChoiceTestsTable extends Migration
+class CreateUserNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateMultiChoiceTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('multi-choice_tests', function (Blueprint $table) {
+        Schema::create('user_notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('test_id');
-            $table->string('title');
-            $table->float('max_point')->nullable();
-            $table->float('question_time');
-            $table->text('explan')->nullable();
+            $table->integer('user_id');
+            $table->string('noti_action')->nullable();
+            $table->text('noti_content');
+            $table->string('noti_icon')->nullable();
+            $table->boolean('is_readed')->default(false);
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateMultiChoiceTestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('multi-choice__tests');
+        Schema::dropIfExists('user_notifications');
     }
 }

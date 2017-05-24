@@ -51,4 +51,6 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::get('createst1','TestController@create');
 	Route::post('createst1','TestController@store');
 	Route::post('savetest', 'TestController@saveTest')->name('save_write_test');
+	Route::get('show/{id}','TestController@show');
+	Route::post('multi/savetest','MultiChoiceTestController@store');
 });

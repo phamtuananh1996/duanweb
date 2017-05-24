@@ -27,7 +27,6 @@
 		<form method="POST" action="{{ route('save_write_test') }}" id="form_test2" >
 		{{csrf_field()}}
 		<input type="hidden" name="test_id" value="{{$test->id}}">
-
 			<h3 style="margin-top: 20px;">Soạn Đề</h3>
 			<div class="col-md-12" style="margin-top: 20px;">
 				<div class="form-group pmd-textfield">
@@ -77,8 +76,6 @@
 					return true;
 				}
 			});
-
-
 		});
 	</script>
 @endsection
