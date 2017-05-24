@@ -1,4 +1,4 @@
-	<div class="col-md-3"> {{-- sidebar --}}
+	<div class="col-md-3" style=" margin-left: 12px;"> {{-- sidebar --}}
 		<nav class="navbar navbar-light section-title" style="margin-top: 30px; height:50px;">
 			<h3>Danh Mục Đề Thi</h3>
 		</nav>

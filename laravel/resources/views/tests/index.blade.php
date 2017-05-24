@@ -1,7 +1,6 @@
 {{-- created by tran.nham on 19.05.2017 --}}
 @extends('tests.layout')
 
-
 @section('test_content')
 <div class="col-md-7 col-md-offset-1 main-content">
 	<nav class="navbar navbar-light teal lighten-5 section-title">
@@ -12,26 +11,12 @@
 			<div class="pmd-card-body"> 
 				<div id="hot-test-scroll" class="pmd-scrollbar">
 					<div class="list-group" style="margin-top: 10px;">
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12 Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
+						@foreach($tests as $test)
+							<a href="{{url('/tests/show/'.$test->id)}}" class="list-group-item list-group-item-action">
+								<p class="hoc2h-list-heading">{{$test->title}}</p>
+								<p class="hoc2h-list-subtext">Đăng bởi {{$test->user->name}}  | {{$test->category->title}} | 2 giờ trước</p>
+							</a>
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -45,22 +30,12 @@
 			<div class="pmd-card-body"> 
 				<div id="new-test-scroll" class="pmd-scrollbar">
 					<div class="list-group" style="margin-top: 10px;">
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
-						<a href="#" class="list-group-item list-group-item-action">
-							<p class="hoc2h-list-heading">Đề Thi học kỳ 1 năm 2017 môn toán lớp 12</p>
-							<p class="hoc2h-list-subtext">Đăng bởi Aries | Toán 12 | 2 giờ trước</p>
-						</a>
+						@foreach($tests as $test)
+							<a href="#" class="list-group-item list-group-item-action">
+								<p class="hoc2h-list-heading">{{$test->title}}</p>
+								<p class="hoc2h-list-subtext">Đăng bởi {{$test->user->name}}  | {{$test->category->title}} | 2 giờ trước</p>
+							</a>
+						@endforeach
 					</div>
 				</div>
 			</div>

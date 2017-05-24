@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserFollowsTable extends Migration
+class CreateMultiChoiceTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateUserFollowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_follows', function (Blueprint $table) {
+        Schema::create('multi_choice_tests', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('user_follow_id');
+            $table->integer('test_id');
+            $table->string('title');
+            $table->float('max_point')->nullable();
+            $table->float('question_time');
+            $table->text('explan')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateUserFollowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user__follows');
+        Schema::dropIfExists('multi_choice_tests');
     }
 }
