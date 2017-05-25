@@ -7,6 +7,11 @@ use App\MultiChoiceTest;
 use App\Test;
 class MultiChoiceTestController extends Controller
 {
+    public function index($test_id)
+    {
+        $test = Test::find($test_id);
+        return view('tests.create_st2_multi',compact('test'));
+    }
     public function store(Request $req)
     {
     	$multiChoiceTest = new MultiChoiceTest;
@@ -18,5 +23,15 @@ class MultiChoiceTestController extends Controller
     	$multiChoiceTest->save();
         $test = Test::find($req->test_id);
     	return view('tests.create_st2_multi', compact('test'));
+    }
+
+    public function updateState(Request $rq) {
+
+        $question = MultiChoiceTest::find($rq->multi_choice_test_id);
+        $question->state = 1;
+        $question->save();
+
+        $test = Test::find($question->test_id);
+        return redirect('tests/createst2/multi/index/'.$test->id);
     }
 }

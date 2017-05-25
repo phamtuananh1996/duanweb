@@ -5,6 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 class Test extends Model
 {
+    public function allQuestionNotReady()
+    {
+        $listAll = $this->hasMany('App\MultiChoiceTest','test_id','id');
+        return $listAll->where('state',0);
+    }
+
     public function category()
     {
     	return $this->belongsTo('App\categories','category_id','id');

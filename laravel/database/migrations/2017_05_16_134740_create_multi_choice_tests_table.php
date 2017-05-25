@@ -20,6 +20,8 @@ class CreateMultiChoiceTestsTable extends Migration
             $table->float('max_point')->nullable();
             $table->float('question_time');
             $table->text('explan')->nullable();
+            $table->integer('state')->default(0);//this is attribute to check question creating state 
+            //if = 0 is not ready, = 1 is ready for next question
             $table->timestamps();
         });
     }
