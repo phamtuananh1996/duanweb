@@ -50,8 +50,10 @@
 				</script>
 			</div>
 			<div class="col-md-4 col-md-offset-4" style="margin-top: 20px; margin-bottom: 50px;">
+				<a href="cancel/{{$test->id}}" style="margin-left: 10px;" type="button"  class="btn pmd-ripple-effect btn-danger"> Huỷ </a>
+
 				<button type="submit" id="button" class="btn pmd-ripple-effect btn-success"> Đăng </button >
-				<button style="margin-left: 10px;" type="button" id="button" class="btn pmd-ripple-effect btn-danger"> Huỷ </button >
+				
 			</div>
 		</form>
 		

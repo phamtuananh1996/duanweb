@@ -54,4 +54,15 @@ class TestController extends Controller
        $write_test->save();
        return redirect('tests');
     }
+
+    public function deleteTest($id)
+    {
+        $test=Test::find($id);
+        if($test)
+        {
+            $test->delete();
+            
+        }
+       return redirect('tests/createst1');
+    }
 }

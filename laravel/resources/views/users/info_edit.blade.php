@@ -137,11 +137,15 @@
 			<div class="form-group pmd-textfield">
 				<label style="color:#4B515D; margin-top: 15px; margin-right: 20px;" for="Small">Giới tính</label>
 				<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 13px;">
-					<input type="radio" checked name="gender" id="inlineRadio1" value="1">
+					<input type="radio" @if ($user->gender==1)
+						checked 
+					@endif name="gender" id="inlineRadio1" value="1">
 					<span for="inlineRadio1">Nam</span>
 				</label>
 				<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 13px;">
-					<input type="radio" name="gender" id="inlineRadio2" value="0">
+					<input type="radio" @if ($user->gender==0)
+						checked 
+					@endif name="gender" id="inlineRadio2" value="0">
 					<span for="inlineRadio2">Nữ</span>
 				</label>
 			</div>

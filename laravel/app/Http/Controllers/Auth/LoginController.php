@@ -53,7 +53,7 @@ class LoginController extends Controller
     public function postLogin(Request $req)
     {
         
-        $remember=false;
+        $remember=false;   
 
         if($req->accept_rule=='on')
         {
