@@ -23,7 +23,9 @@ class CreateTestsTable extends Migration
             $table->integer('test_type');
             $table->string('level')->nulable();
             $table->integer('user_test_count')->default(0);
-            $table->string('test_vote')->nullable();
+            $table->integer('test_vote')->default(0);
+            $table->integer('state')->default(0);//this is attribute to check question creating state 
+            //if = 0 is not ready, = 1 is ready and you could be attend this test.
             $table->timestamps();
         });
     }
