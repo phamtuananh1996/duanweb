@@ -59,3 +59,12 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	    return view('test');
 	});
 });
+
+//question-answer 
+
+Route::group(['prefix' => 'qa'],function(){
+	Route::get('/','QuestionController@index');
+	Route::get('/create','QuestionController@create');
+	Route::post('/create','QuestionController@store');
+	Route::get('/show/{id}','QuestionController@show');
+});

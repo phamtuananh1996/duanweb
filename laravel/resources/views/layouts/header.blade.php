@@ -61,7 +61,19 @@
                     @endif
                 </ul>
             </li>
-            <li><a style="color:white;" class="pmd-ripple-effect" href="#">Hỏi Đáp</a></li>
+            <li class="dropdown pmd-dropdown">
+                <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">Hỏi Đáp <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    @if(Auth::check())
+                        @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
+                            <li><a class="pmd-ripple-effect" href="{{url('/qa')}}">Index</a></li>
+                            <li><a class="pmd-ripple-effect" href="{{url('/qa/create')}}">Tạo câu hỏi</a></li>
+                        @endif
+                     @else
+                        <li><a class="pmd-ripple-effect" href="{{url('/qa')}}">Index</a></li>
+                    @endif
+                </ul>
+            </li>
             <li class="dropdown pmd-dropdown">
                 <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">More <span class="caret"></span></a>
                 <ul class="dropdown-menu">

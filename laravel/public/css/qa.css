@@ -1,0 +1,13 @@
+.qa-card {
+  margin-top: 20px;
+  box-shadow: none;
+  border-top: solid 1px #81c784;
+  border-bottom: solid 1px #81c784;
+}
+.qa-card:hover {
+  background: #fafafa;
+}
+.post-header {
+	margin:10px 0px 10px 20px;
+}
+
