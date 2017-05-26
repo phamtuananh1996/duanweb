@@ -38,6 +38,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'ajax'], function() {
 	Route::post('checkemail', 'Auth\RegisterController@ajaxCheckEmail');
 	Route::post('checkusername', 'Auth\RegisterController@ajaxCheckUserName');
+	Route::post('savetest','MultiChoiceTestController@ajaxSaveTest');
 });
 
 Route::group(['prefix' => 'users'],function(){
@@ -58,8 +59,8 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::get('test', function() {
 	    return view('test');
 	});
+	Route::post('ajax/savetests','MultiChoiceTestController@ajaxSaveTest');
 });
-
 //question-answer 
 
 Route::group(['prefix' => 'qa'],function(){

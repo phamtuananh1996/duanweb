@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MultiChoiceTest;
 use App\Test;
+use App\MultiChoiceTestChoice;
 class MultiChoiceTestController extends Controller
 {
     public function index($test_id)
@@ -33,5 +34,36 @@ class MultiChoiceTestController extends Controller
 
         $test = Test::find($question->test_id);
         return redirect('tests/createst2/multi/index/'.$test->id);
+    }
+
+    public function ajaxSaveTest(Request $req)
+    {
+        
+       $multiChoiceTest = new MultiChoiceTest;
+       $multiChoiceTest->test_id = $req->test_id;
+       $multiChoiceTest->title = $req->title;
+       $multiChoiceTest->max_point = $req->max_point;
+       $multiChoiceTest->save();
+
+
+       foreach ($req->answer as $key => $value) {
+
+           $MultiChoiceTestChoice=new MultiChoiceTestChoice;
+           $MultiChoiceTestChoice->multi_choice_test_id=$multiChoiceTest->id;
+            $MultiChoiceTestChoice->title=$value;
+            if($req->is_correct==$key)
+            {
+                 $MultiChoiceTestChoice->is_answer=1;
+            }
+            else
+            {
+                $MultiChoiceTestChoice->is_answer=0;
+            }
+
+            $MultiChoiceTestChoice->save();
+
+       }
+       
+
     }
 }
