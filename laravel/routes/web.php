@@ -54,4 +54,8 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::get('show/{id}','TestController@show');
 	Route::post('multi/savetest','MultiChoiceTestController@store');
 	Route::get('cancel/{id}','TestController@deleteTest');
+
+	Route::get('test', function() {
+	    return view('test');
+	});
 });
