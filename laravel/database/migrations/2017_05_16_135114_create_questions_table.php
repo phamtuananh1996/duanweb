@@ -17,8 +17,8 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('categories_id');
-            $table->string('question_title')->nullable();
-            $table->text('question_content');
+            $table->string('question_title');
+            $table->text('question_content')->nullable();
             $table->boolean('is_resolved')->default(false);
             $table->integer('vote_count')->default(0);
             $table->boolean('as_anonymously')->default(false);
