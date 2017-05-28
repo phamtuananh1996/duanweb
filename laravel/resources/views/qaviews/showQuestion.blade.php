@@ -41,7 +41,7 @@
 												</div>
 											</div>
 										</div>
-									
+
 								</div>
 							@endif
 						@endif
@@ -106,7 +106,14 @@
 				            <hr style="border-bottom: solid 1px #bdbdbd ;">
 				            <p>{!!$answer->content!!}</p>
 				            <p style="margin-bottom: 20px; color:#00695c;">{{$answer->vote_count}} vote | 12 bình luận </p>
-				             <button style="float:right;" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info">Bình luận</button>
+				            <div class="commentfield" style="display: none;">
+				            	<form method="POST" action="#" class="form-group">
+									<label class="control-label"></label>
+				  					<textarea name="content" required class="form-control"></textarea>
+				  					<button type="button" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" style="margin-top:10px; margin-bottom: 30px;">Gửi</button>
+								</form>	
+				            </div>
+				             <button onclick = "showComment()" style="float:right;" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info" >Bình luận</button>
 				             <button style="float:right;" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success">Vote</button>
 				        </div>
 					</li>
@@ -124,8 +131,10 @@
 			theme: "bootstrap"
 		});
 
-		 jQuery.validator.addMethod("check_type", function(value, element) {
+		jQuery.validator.addMethod("check_type", function(value, element) {
         	return value!='Chọn Thể Loại';
    			});
+	}
+
 </script>
 @endsection

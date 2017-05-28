@@ -3,7 +3,7 @@
 
 @section('qa_content')	
 	<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-	<div class="col-md-8 col-md-offset-1" style="background: #fff;height: 500px;">	<!--main content-->
+	<div class="col-md-8 col-md-offset-1" style="background: #fff;">	<!--main content-->
 		@include('qaviews.content_header')
 		@foreach ($questions as $question)
 			@include('qaviews.card')
