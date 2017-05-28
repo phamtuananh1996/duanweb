@@ -5,7 +5,7 @@
  * Licensed under MIT (http://propeller.in/LICENSE)
 */
 
-.btn { display: inline-block; padding: 6px 12px; margin-bottom: 0; text-align: center; white-space: nowrap; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent; border-radius: 4px; font-size: 14px; font-weight: 400; line-height: 1.1; letter-spacing: inherit; color: rgba(255, 255, 255, 0.87);}
+.btn { display: inline-block; padding: 6px 12px; margin-bottom: 0; text-align: center; white-space: nowrap;text-transform:none; vertical-align: middle; -ms-touch-action: manipulation; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; background-image: none; border: 1px solid transparent; border-radius: 4px; font-size: 14px; font-weight: 400; line-height: 1.1; letter-spacing: inherit; color: rgba(255, 255, 255, 0.87);}
 .btn-default, .btn-link { color: rgba(0, 0, 0, 0.87);}
 
 /* -- Buttons style ------------------------------------ */

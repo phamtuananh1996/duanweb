@@ -8,6 +8,7 @@
 	<link href="{{asset('pmd/components/select2/css/select2-bootstrap.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/select2/css/pmd-select2.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/radio/css/radio.css')}}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('pmd/components/badge/css/badge.css') }}" type="text/css" rel="stylesheet">
 @endsection
 
 @section('content')
