@@ -23,6 +23,7 @@
 						<div class="form-group pmd-textfield pmd-textfield-floating-label">
 							<label>Chọn Mục/Thể Loại</label>
 							<select class="select-with-search form-control pmd-select2" name="category">
+							<option>Chọn thể loại</option>
 								@foreach ($categories as $cat)
 									<option value="{{$cat->id}}">{{$cat->title}}</option>
 								@endforeach

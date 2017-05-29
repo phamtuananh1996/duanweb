@@ -100,12 +100,9 @@
 
 		
 			$('#form_test2').on('click', '#button_question', function(event) {
-				if(CKEDITOR.instances.answer.getData()==''||CKEDITOR.instances.question.getData()=='')
+				if(CKEDITOR.instances.question.getData()=='')
 				{
-					if(CKEDITOR.instances.answer.getData()==''){
-						$('#answer-error').show();
-						$('#answer-error').html('Câu trả lời không được để trống ! ');
-					}
+				
 					if(CKEDITOR.instances.question.getData()==''){
 						$('#question-error').show();
 						$('#question-error').html('Câu hỏi không được để trống !');
@@ -119,12 +116,9 @@
 			});
 
 			$('#form_test2').on('click', '#button', function(event) {
-				if(CKEDITOR.instances.answer.getData()==''||$('#document').val()=='')
+				if($('#document').val()=='')
 				{
-					if(CKEDITOR.instances.answer.getData()==''){
-						$('#answer-error').show();
-						$('#answer-error').html('Câu trả lời không được để trống ! ');
-					}
+					
 					if($('#document').val()==''){
 						$('#documents-error').show();
 						$('#documents-error').html('Chưa có tệp nào được tải lên !');
