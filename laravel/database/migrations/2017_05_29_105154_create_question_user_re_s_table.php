@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateQuestionUserReSTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('question_user_re_s', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('super_category_id')->default(0);
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->integer('oder_display')->nullable();
+            $table->integer('user_id');
+            $table->integer('question_id');
+             //re = 0 have no relation ,re = 1 following, re = 2 voted, re = 3 voted and following
+            $table->integer('relation')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('question_user_re_s');
     }
 }
