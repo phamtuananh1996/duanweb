@@ -47,7 +47,7 @@
                 @endif
             </div> 
           <ul class="nav navbar-nav">
-            <li><a style="color:white;" class="pmd-ripple-effect" href="javascript:void(0);">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="{{ url('/') }}" style="color:white;" class="pmd-ripple-effect" href="javascript:void(0);">Home <span class="sr-only">(current)</span></a></li>
             <li class="dropdown pmd-dropdown">
                 <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">Đề Thi <span class="caret"></span></a>
                 <ul class="dropdown-menu">

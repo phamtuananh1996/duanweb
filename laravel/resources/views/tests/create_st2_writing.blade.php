@@ -24,18 +24,33 @@
 		</h4>
 		<h4><strong>Thời Gian:</strong> {{$test->total_time}} phút</h4>
 		<hr style="border-bottom: solid 1px #9e9e9e;">
-		<form method="POST" action="{{ route('save_write_test') }}" id="form_test2" >
+		<form method="POST" action="{{ route('save_write_test') }}" id="form_test2" novalidate enctype="multipart/form-data">
 		{{csrf_field()}}
-		<input type="hidden" name="test_id" value="{{$test->id}}">
+		<input type="hidden" name="test_id" value="{{$test->id}}" >
+			
+
 			<div class="col-md-12" style="margin-top: 20px;">
-			<h3 style="margin-top: 20px;">Đề bài</h3>
-				<div class="form-group pmd-textfield">
+				<div class="row"> 
+				<h3 class="col-md-2" style="margin-top: 20px;">Đề bài</h3> 
+					<a class="col-md-2 btn pmd-ripple-effect btn-success" id="upload"> Tải đề lên </a>
+				</div>
+
+				<div class="col-md-6" id="documents">
+					<div class="form-group pmd-textfield">
+						<label for="Small">Tải đề lên</label>
+						<input type="file" accept=".docx,.doc,.pdf" id="document" required name="document" >
+						 <label id="documents-error" style="display: none" class="error" for="Small"></label>
+					</div>	
+				</div>
+
+				<div class="form-group pmd-textfield" id="qt">
 				   <label id="question-error"  style="display: none" class="error" for="Small"></label>
 				  	<textarea class="form-control" name="question" id="question"></textarea>
+				  	<script>
+    					CKEDITOR.replace('question');
+					</script>
 				</div>
-				<script>
-    				CKEDITOR.replace('question');
-				</script>
+				
 			</div>
 			
 			<div class="col-md-12" style="margin-top: 20px;">
@@ -52,7 +67,7 @@
 			<div class="col-md-4 col-md-offset-4" style="margin-top: 20px; margin-bottom: 50px;">
 				<a href="cancel/{{$test->id}}" style="margin-left: 10px;" type="button"  class="btn pmd-ripple-effect btn-danger"> Huỷ </a>
 
-				<button type="submit" id="button" class="btn pmd-ripple-effect btn-success"> Đăng </button >
+				<button type="submit" id="button_question" class="btn pmd-ripple-effect btn-success"> Đăng </button >
 				
 			</div>
 		</form>
@@ -60,8 +75,31 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$('#documents').hide();
 
-			$('#button').click(function(event) {
+			$('#form_test2').on('click', '#upload', function(event) {
+				$('#qt').hide();
+				$('#documents').show();
+				$(this).html('Soạn đề');
+				$(this).attr('id', 'upload_question');
+				$('#button_question').attr('id','button');
+				$('#question').removeAttr('name');
+				$('#document').attr('name','document');
+			});
+
+
+			$('#form_test2').on('click', '#upload_question', function(event) {
+				$('#button').attr('id','button_question');
+				$('#documents').hide();
+				$('#qt').show();
+				$(this).html('Tải đề lên');
+				$(this).attr('id', 'upload');
+				$('#document').removeAttr('name');
+				$('#question').attr('name','question');
+			});
+
+		
+			$('#form_test2').on('click', '#button_question', function(event) {
 				if(CKEDITOR.instances.answer.getData()==''||CKEDITOR.instances.question.getData()=='')
 				{
 					if(CKEDITOR.instances.answer.getData()==''){
@@ -79,6 +117,28 @@
 					return true;
 				}
 			});
+
+			$('#form_test2').on('click', '#button', function(event) {
+				if(CKEDITOR.instances.answer.getData()==''||$('#document').val()=='')
+				{
+					if(CKEDITOR.instances.answer.getData()==''){
+						$('#answer-error').show();
+						$('#answer-error').html('Câu trả lời không được để trống ! ');
+					}
+					if($('#document').val()==''){
+						$('#documents-error').show();
+						$('#documents-error').html('Chưa có tệp nào được tải lên !');
+					}
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			});
 		});
+
+
+
 	</script>
 @endsection

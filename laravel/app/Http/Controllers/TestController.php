@@ -47,9 +47,22 @@ class TestController extends Controller
 
     public function saveTest(Request $req)
     {
+        
        $write_test=new WritingTest;
        $write_test->test_id=$req->test_id;
-       $write_test->content=$req->question;
+        if(!$req->hasFile('document'))
+        {
+            $write_test->content=$req->question;
+        }
+        else
+        {
+             $nameDoc=time().".".$req->document->getClientOriginalExtension();
+
+            $req->document->move('document/test/', $nameDoc);
+
+            $write_test->content=$nameDoc;
+            $write_test->is_document=1;
+        }
        $write_test->explan=$req->answer;
        $write_test->save();
        return redirect('tests');
