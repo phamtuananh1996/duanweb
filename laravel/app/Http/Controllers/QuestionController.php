@@ -36,7 +36,9 @@ class QuestionController extends Controller
         //     $question->as_anonymously = false;
         // }
         $question->save();
-        return back();
+
+        $categories =Categories::all();
+        return view('qaviews.showQuestion',compact('question','categories'));
     }
 
     public function show($id) {
@@ -55,4 +57,11 @@ class QuestionController extends Controller
         return back();
     }
     
+    public function edit(Request $rq)
+    {
+        // dd($rq);
+        Question::where('id',$rq->question_id)
+         ->update(['question_title' => $rq->edit_title,'question_content' =>  $rq->edit_content,'is_resolved'=>false ]);
+        return back();
+    }
 }

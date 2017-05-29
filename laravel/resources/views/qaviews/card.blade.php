@@ -1,9 +1,11 @@
 <div class="pmd-card pmd-card-media-inline pmd-card-default pmd-z-depth qa-card">
 	<div class="post-header">
 		<div class="media-left">
-			<a class="avatar-list-img avatar-list-img-custom" href="javascript:void(0);">
-				<img data-holder-rendered="true" src="http://propeller.in/components/list/img/40x40.png" class="img-responsive" data-src="holder.js/40x40" alt="40x40">
-			</a>
+			@if ($question->user->avatar)
+               	<img src="{{ asset('') }}/images/users/{{$question->user->avatar}}" width="40" height="40" alt="avatar">
+            @else
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2-dYlakPdqfKcuptmGaAsh1ynwhzFDohsAioI4Ek_Cb7ecw_s" width="40" height="40" alt="avatar">
+            @endif
 		</div>
 		<div class="media-body media-middle">
 		<h3 class="list-group-item-heading">{{$question->user->user_name}}</h3>

@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('user_name');
             $table->string('email')->unique();
             $table->integer('role_id')->default(4);
-            $table->integer('phone');
-            $table->string('class');
+            $table->integer('phone')->nullable();
+            $table->string('class')->nullable();
             $table->integer('gender')->nullable();
             $table->string('birthday')->nullable();
             $table->string('avatar')->nullable();
@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->integer('status')->default(1);
             $table->text('description')->nullable();
             $table->string('password');
+            $table->string('code');
             $table->rememberToken();
             $table->timestamps();
         });
