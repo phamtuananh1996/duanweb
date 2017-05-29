@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Answer;
 use App\Question;
+use App\Categories;
 use Auth;
 class AnswerController extends Controller
 {
@@ -15,6 +16,6 @@ class AnswerController extends Controller
     	$answer->question_id = $rq->question_id;
     	$answer->content = $rq->content;
     	$answer->save();
-    	return back();
+        return redirect('qa/show/'.$rq->question_id);
     }
 }

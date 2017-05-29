@@ -42,9 +42,7 @@ class QuestionController extends Controller
     }
 
     public function show($id) {
-         $question = Question::find($id);
-        // $question->view_count ++;
-        // $question->save();
+        $question = Question::find($id);
         $categories =Categories::all();
         return view('qaviews.showQuestion',compact('question','categories'));
     }

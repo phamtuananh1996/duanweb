@@ -34,7 +34,7 @@
 		<!--Question body-->
 		<div class="pmd-card-media" style="background: #fff;" id ="qes-body">
 			<div class="media-body">
-				<h2 class="pmd-card-title-text" style="color: green;">{{$question->question_title}}</h2>
+				<h2 class="pmd-card-title-text" style="color: green; margin-bottom: 20px;margin-top: 20px;">{{$question->question_title}}</h2>
 				<span class="pmd-card-subtitle-text">{!!$question->question_content!!}<br>
 					<p style="color:#00695c; font-size: 13px;">{{$question->answers->count()}} trả lời | {{$question->vote_count}} vote  |  {{$question->view_count}} lượt xem
 						@if($question->is_resolved == true)
@@ -153,11 +153,11 @@
 		</div><!--question body-->
 	</div><!--question detail-->
 	<!--Answers list-->
-	<div class="answer-list">
-		<ul class="list-group pmd-z-depth pmd-list pmd-card-list" style="box-shadow: none;padding-left: 30px;">
+	<div class="answer-list" style="background: #f5f5f5;">
+		<ul class="list-group pmd-z-depth pmd-list pmd-card-list" style="box-shadow: none;padding-left: 30px;background: #f5f5f5;">
 			@if($question->answers->count())
 			@foreach ($question->answers as $answer)
-			<li class="list-group-item" >
+			<li class="list-group-item" style="background: #f5f5f5;">
 				<div class="media-left">
 					@if ($answer->user->avatar)
                         <img src="{{ asset('') }}/images/users/{{$answer->user->avatar}}" width="40" height="40" alt="avatar">
@@ -167,25 +167,23 @@
 				</div>
 				<div class="media-body">
 					<h3 class="list-group-item-heading">{{$answer->user->user_name}}</h3>
-					<span class="list-group-item-text" style="font-size: 12px;">trả lời 2 phút trước</span>	
+					<span class="list-group-item-text" style="font-size: 12px;"><i><strong>{{$answer->user->class}}</strong> đã trả lời 2 phút trước</i></span>	
 					<hr style="border-bottom: solid 1px #bdbdbd ;">
 					<p>{!!$answer->content!!}</p>
-					<p style="margin-bottom: 20px; color:#00695c; font-size: 13px;">{{$answer->vote_count}} vote | {{$answer->comments->count()}} bình luận </p>
-					<div id="commentfield" style="display: none;">
+					<p style="color:#00695c; font-size: 13px;"><a href="#">{{$answer->vote_count}} vote </a>| {{$answer->comments->count()}} bình luận </p>
+					<div id="commentfield">
 						<form method="POST" action="{{url('/qa/answer/comment')}}" class="form-group" id="addCommentForm">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<input type="hidden" name="answer_id" value="{{ $answer->id}}">
 							<div class="form-group pmd-textfield"> 
 								<label class="control-label">Viết bình luận</label> 
-								<textarea name="comment_content" required class="form-control"></textarea>
+								<textarea style="background: #fff;" rows="2" name="comment_content" required class="form-control"></textarea>
 							</div>
-							<button type="submit" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" style="margin-top:10px; margin-bottom: 20px;">Gửi</button>
+							<button type="submit" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Gửi</button>
 						</form>
 					</div>
-					<button onclick="showCommentField()" style="float:right;" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info" >Bình luận</button>
-					<button id="vote" style="float:right;" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success">Vote</button>
 				</div>
-				<hr style="border-bottom: solid 1px #bdbdbd;">
+				
 				@foreach($answer->comments as $comment)
 					<div class="comment-list" style="margin-left:50px;">
 						<div class="media-left">
@@ -200,7 +198,7 @@
 							<span class="list-group-item-text" style="font-size: 12px;">Bình luận 2 phút trước</span>	
 							<p>{{$comment->content}}</p>
 						</div>
-						<hr style="border-bottom: solid 1px #f5f5f5;">
+						<hr style="border-bottom: solid 1px #e0e0e0">
 					</div>
 
 				@endforeach
@@ -224,15 +222,22 @@
 				jQuery.validator.addMethod("check_type", function(value, element) {
 					return value!='Chọn Thể Loại';
 				});	
+				$('#addCommentForm').keydown(function() {
+					var key = e.which;
+					if (key == 13) {
+				// As ASCII code for ENTER key is "13"
+				$('#addCommentForm').submit(); // Submit form code
+				}
+				});
 		});
 
-		function showCommentField() {
-			var commentfield = document.getElementById('commentfield');
-			if(commentfield.style.display == "none") {
-				commentfield.style.display = "block";
-			} else {
-				commentfield.style.display = "none";
-			}
-		}
+		// function showCommentField() {
+		// 	var commentfield = document.getElementById('commentfield');
+		// 	if(commentfield.style.display == "none") {
+		// 		commentfield.style.display = "block";
+		// 	} else {
+		// 		commentfield.style.display = "none";
+		// 	}
+		// }
 	</script>
 @endsection
