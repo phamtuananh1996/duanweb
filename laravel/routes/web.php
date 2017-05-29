@@ -68,5 +68,8 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::get('/create','QuestionController@create');
 	Route::post('/create','QuestionController@store');
 	Route::get('/show/{id}','QuestionController@show');
+	Route::post('/edit','QuestionController@edit');
+	Route::post('/answer','AnswerController@store');
+	Route::post('/answer/comment','AnswerCommentController@store');
 });
 

@@ -1,6 +1,6 @@
 @if(Route::has('login'))
 			@if(Auth::check())
-				<div class="col-md-12" style="background: #00C851; margin-top: 20px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: solid 1px #81c784; padding-top:10px;">
+				<div class="col-md-12" style="background:#c8e6c9; margin-top: 20px; margin-bottom: 20px; padding-bottom: 10px; padding-top:10px;">
 					<div class="media-left" style="margin-top: 10px;">
 						@if (Auth::user()->avatar)
 							<img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="30" height="30" alt="avatar">
