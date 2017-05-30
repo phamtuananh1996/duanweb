@@ -36,7 +36,7 @@
 			<div class="media-body">
 				<h2 class="pmd-card-title-text" style="color: green; margin-bottom: 20px;margin-top: 20px;">{{$question->question_title}}</h2>
 				<span class="pmd-card-subtitle-text">{!!$question->question_content!!}<br>
-					<p style="color:#00695c; font-size: 13px;">{{$question->answers->count()}} trả lời | {{$question->vote_count}} vote  |  {{$question->view_count}} lượt xem
+					<p style="color:#00695c; font-size: 13px;">{{$question->answers->count()}} trả lời | <span id="vote_count">{{$question->voteQuestion->count()}}</span> vote  |  {{$question->view_count}} lượt xem
 						@if($question->is_resolved == true)
 							<button class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-success" type="button"><i class="material-icons pmd-sm">check</i></button>
 						@else
@@ -63,7 +63,7 @@
 				</span>
 			</div>
 			<!--question actions-->
-			<div class="pmd-card-actions">
+			<div class="pmd-card-actions" id="qa">
 				<!-- answer alert-->
 				<button data-target="#answer-dialog" data-toggle="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-info" type="button">Viết trả lời</button>
 				<div tabindex="-1" class="modal fade" id="answer-dialog" style="display: none;" aria-hidden="true">
@@ -106,8 +106,23 @@
 					</div>
 				</div><!--answer alert-->
 				<!--actions button-->
-				<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success"> Vote </button >
-				<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger"> Theo dõi </button >
+
+				@if (Auth::user()->voteQuestion->where('question_id',$question->id)->count())
+					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success" id="dis_vote">Bỏ vote </button >	
+				@else
+					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success" id="vote"> Vote </button >
+				@endif
+
+
+				@if (Auth::user()->followQuestion->where('question_id',$question->id)->count())
+					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger" id="dis_follows">Bỏ theo dõi </button >
+				@else
+						
+					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger" id="follows"> Theo dõi </button >
+				@endif
+
+				<input type="hidden" id="question_id" value="{{$question->id}}">
+				
 				@if(Auth::user()->id == $question->user_id)
 					<div class="pull-right" style="margin-bottom: 20px;">
 						<span class="dropdown pmd-dropdown dropup clearfix">
@@ -213,6 +228,55 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+
+			//ấn vote
+			$('#qa').on('click', '#vote', function(event) {
+				var vote_count=parseInt($('#vote_count').html());
+				var question_id=$('#question_id').val();
+				$.post('{{url('qa/ajax/vote')}}', {question_id: question_id}, function(data, textStatus, xhr) {
+					sucsecc:{
+						$('#vote_count').html(vote_count+1);
+						$('#vote').html('Bỏ vote').attr('id', 'dis_vote');;
+					}
+				});
+			});
+
+			//ấn bỏ vote
+			$('#qa').on('click', '#dis_vote', function(event) {
+				var vote_count=parseInt($('#vote_count').html());
+				var question_id=$('#question_id').val();
+				$.post('{{url('qa/ajax/dis_vote')}}', {question_id: question_id}, function(data, textStatus, xhr) {
+					sucsecc:{
+						$('#vote_count').html(vote_count-1);
+						$('#dis_vote').html('vote').attr('id', 'vote');;
+					}
+				});
+			});
+
+
+
+			//ấn follows
+			$('#qa').on('click', '#follows', function(event) {
+				var question_id=$('#question_id').val();
+				
+				$.post('{{url('qa/ajax/follows')}}', {question_id: question_id}, function(data, textStatus, xhr) {
+					sucsecc:{
+						$('#follows').html('Bỏ Theo Dõi').attr('id', 'dis_follows');;
+					}
+				});
+			});
+			//ấn bỏ theo dõi
+			$('#qa').on('click', '#dis_follows', function(event) {
+				var question_id=$('#question_id').val();
+				
+				$.post('{{url('qa/ajax/dis_follows')}}', {question_id: question_id}, function(data, textStatus, xhr) {
+					sucsecc:{
+						$('#dis_follows').html('Theo dõi').attr('id', 'follows');;
+					}
+				});
+			});
+
 
 			<!-- Selectbox with search -->
 				$(".select-with-search").select2({

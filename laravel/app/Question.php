@@ -20,4 +20,9 @@ class Question extends Model
     {
     	return $this->belongsTo('App\Categories','categories_id','id');
     }
+
+    public function voteQuestion()
+    {
+         return $this->hasMany('App\VoteQuestion','question_id','id');
+    }
 }

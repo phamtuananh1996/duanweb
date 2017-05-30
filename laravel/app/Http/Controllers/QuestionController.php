@@ -62,4 +62,6 @@ class QuestionController extends Controller
          ->update(['question_title' => $rq->edit_title,'question_content' =>  $rq->edit_content,'is_resolved'=>false ]);
         return back();
     }
+
+    
 }

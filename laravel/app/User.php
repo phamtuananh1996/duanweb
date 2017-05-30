@@ -36,4 +36,14 @@ class User extends Authenticatable
         return $this->hasMany(UserTest::class);
     }
 
+   public function followQuestion()
+   {
+      return $this->hasMany('App\FollowQuestion','user_id','id');
+   }
+
+    public function voteQuestion()
+   {
+      return $this->hasMany('App\VoteQuestion','user_id','id');
+   }
+
 }
