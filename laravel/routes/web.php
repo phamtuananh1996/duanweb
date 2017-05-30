@@ -75,7 +75,6 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::group(['prefix' => 'ajax'],function(){
 		Route::post('follows','FollowQuestionController@ajaxFollow');
 		Route::post('dis_follows','FollowQuestionController@ajaxDisFollow');
-
 		Route::post('vote','VoteQuestionController@ajaxVote');
 		Route::post('dis_vote','VoteQuestionController@ajaxDisVote');
 	});

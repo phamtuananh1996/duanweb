@@ -4,7 +4,7 @@
 
 <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <script src="{{ asset('plugins/jquery.validate.js') }}"></script>
-<div class="col-md-8 col-md-offset-1" style="margin-bottom: 50px;">	<!--main content-->
+<div class="col-md-8 col-md-offset-1" style="margin-bottom: 50px;background: white;">	<!--main content-->
 
 	@include('qaviews.content_header')
 	<!--tags-->
@@ -182,7 +182,7 @@
 				</div>
 				<div class="media-body">
 					<h3 class="list-group-item-heading">{{$answer->user->user_name}}</h3>
-					<span class="list-group-item-text" style="font-size: 12px;"><i><strong>{{$answer->user->class}}</strong> đã trả lời 2 phút trước</i></span>	
+					<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$answer->user->class}}</strong> đã trả lời 2 phút trước</i></span>	
 					<hr style="border-bottom: solid 1px #bdbdbd ;">
 					<p>{!!$answer->content!!}</p>
 					<p style="color:#00695c; font-size: 13px;"><a href="#">{{$answer->vote_count}} vote </a>| {{$answer->comments->count()}} bình luận </p>
@@ -210,7 +210,7 @@
 						</div>
 						<div class="media-body">
 							<h3 class="list-group-item-heading">{{$comment->user->user_name}}</h3>
-							<span class="list-group-item-text" style="font-size: 12px;">Bình luận 2 phút trước</span>	
+							<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$comment->user->class}}</strong> đã bình luận 2 phút trước</i></span>	
 							<p>{{$comment->content}}</p>
 						</div>
 						<hr style="border-bottom: solid 1px #e0e0e0">
@@ -286,22 +286,6 @@
 				jQuery.validator.addMethod("check_type", function(value, element) {
 					return value!='Chọn Thể Loại';
 				});	
-				$('#addCommentForm').keydown(function() {
-					var key = e.which;
-					if (key == 13) {
-				// As ASCII code for ENTER key is "13"
-				$('#addCommentForm').submit(); // Submit form code
-				}
-				});
 		});
-
-		// function showCommentField() {
-		// 	var commentfield = document.getElementById('commentfield');
-		// 	if(commentfield.style.display == "none") {
-		// 		commentfield.style.display = "block";
-		// 	} else {
-		// 		commentfield.style.display = "none";
-		// 	}
-		// }
 	</script>
 @endsection
