@@ -47,6 +47,7 @@ a {
   background: #00C851;
   color: #fafafa;
   width:100%;
+  border-radius: 0px;
   }
 .section-title >h3 {
   margin-left: 30px;

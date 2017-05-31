@@ -56,7 +56,7 @@ class TestController extends Controller
         }
         else
         {
-             $nameDoc=time().".".$req->document->getClientOriginalExtension();
+            $nameDoc=time().".".$req->document->getClientOriginalExtension();
 
             $req->document->move('document/test/', $nameDoc);
 
@@ -65,6 +65,10 @@ class TestController extends Controller
         }
        $write_test->explan=$req->answer;
        $write_test->save();
+       //nham: edit on 31/05/2017 -- update test state to enable show on index page
+       $test = Test::find($req->test_id);
+       $test->state = 1;
+       $test->save();
        return redirect('tests');
     }
 

@@ -1,7 +1,7 @@
 <div class="row user-info-section" style="padding: 10px;">
 	<div class="col-md-4" style="margin-top: 20px;">
 	@if ($user->avatar)
-		<figure><img class="img-rounded img-responsive" alt="" src="{{ asset('') }}/images/users/{{$user->avatar}}" width="200" ></figure>
+		<figure><img class="img-rounded img-responsive" alt="" src="{{ asset('') }}/images/users/{{$user->avatar}}" width="200" height="300" ></figure>
 	@else
 	 	<figure><img class="img-rounded img-responsive" alt="" src="http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png" ></figure>
 	@endif

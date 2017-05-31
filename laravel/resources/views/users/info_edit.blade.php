@@ -178,7 +178,7 @@
 			rules:{
 				avatar:
 				{
-					filesize:2097152 
+					filesize:4097152 
 				}
 			},
 			messages:{

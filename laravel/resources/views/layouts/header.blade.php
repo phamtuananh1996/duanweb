@@ -55,6 +55,7 @@
                         @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
                             <li><a class="pmd-ripple-effect" href="{{url('/tests')}}">Index</a></li>
                             <li><a class="pmd-ripple-effect" href="{{url('/tests/createst1')}}">Tạo Đề Thi</a></li>
+                            <li><a class="pmd-ripple-effect" href="{{url('/tests/user/created')}}">Đề Thi Đã Tạo</a></li>
                         @endif
                      @else
                         <li><a class="pmd-ripple-effect" href="#">Đề thi đã làm</a></li>

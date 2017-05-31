@@ -1,5 +1,5 @@
 <?php
-
+use App\Test;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +62,10 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	});
 	Route::post('ajax/savetests','MultiChoiceTestController@ajaxSaveTest');
 	Route::get('usertest','UserTestController@store');
+	Route::get('user/created',function(){
+		$listTests = Test::where('user_id',Auth::user()->id)->get();
+		return view('tests.user_created_list',compact('listTests'));
+	});
 });
 //question-answer 
 

@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function tests()
     {
-        return $this->hasMany(Test::class);
+        return $this->hasMany('App\Test','user_id','id');
     }
 
     public function userTest() {
