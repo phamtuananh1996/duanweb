@@ -55,11 +55,13 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::get('show/{id}','TestController@show');
 	Route::post('multi/savetest','MultiChoiceTestController@store');
 	Route::get('cancel/{id}','TestController@deleteTest');
-
+	Route::post('usertest','TestController@userTest');
+	Route::post('usertest/submit','UserTestController@store');
 	Route::get('test', function() {
 	    return view('test');
 	});
 	Route::post('ajax/savetests','MultiChoiceTestController@ajaxSaveTest');
+	Route::get('usertest','UserTestController@store');
 });
 //question-answer 
 

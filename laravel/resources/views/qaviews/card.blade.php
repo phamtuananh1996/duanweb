@@ -9,7 +9,7 @@
 		</div>
 		<div class="media-body media-middle">
 		<h3 class="list-group-item-heading">{{$question->user->user_name}}</h3>
-			<span class="list-group-item-text">Dang luc .... tai {{$question->category->title}}</span>
+			<span class="list-group-item-text">{{$question->created_at->toDateTimeString()}} .... tai {{$question->category->title}}</span>
 		</div>
 	</div>
 	<div class="pmd-card-media">

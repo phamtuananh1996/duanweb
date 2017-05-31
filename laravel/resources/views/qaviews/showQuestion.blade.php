@@ -28,7 +28,7 @@
 			</div>
 			<div class="media-body media-middle">
 				<h3 class="list-group-item-heading">{{$question->user->user_name}}</h3>
-				<span class="list-group-item-text">Dang luc .... tai {{$question->category->title}}</span>
+				<span class="list-group-item-text">{{$question->created_at->toDateTimeString()}} .... tai {{$question->category->title}}</span>
 			</div>
 		</div><!--Question header-->
 		<!--Question body-->
@@ -182,7 +182,7 @@
 				</div>
 				<div class="media-body">
 					<h3 class="list-group-item-heading">{{$answer->user->user_name}}</h3>
-					<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$answer->user->class}}</strong> đã trả lời 2 phút trước</i></span>	
+					<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$answer->user->class}}</strong> đã trả lời {{$answer->created_at->toDateTimeString()}}</i></span>	
 					<hr style="border-bottom: solid 1px #bdbdbd ;">
 					<p>{!!$answer->content!!}</p>
 					<p style="color:#00695c; font-size: 13px;"><a href="#">{{$answer->vote_count}} vote </a>| {{$answer->comments->count()}} bình luận </p>
@@ -210,7 +210,7 @@
 						</div>
 						<div class="media-body">
 							<h3 class="list-group-item-heading">{{$comment->user->user_name}}</h3>
-							<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$comment->user->class}}</strong> đã bình luận 2 phút trước</i></span>	
+							<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$comment->user->class}}</strong> đã bình luận {{$comment->created_at->toDateTimeString()}}</i></span>	
 							<p>{{$comment->content}}</p>
 						</div>
 						<hr style="border-bottom: solid 1px #e0e0e0">

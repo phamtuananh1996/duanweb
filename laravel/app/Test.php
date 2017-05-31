@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon;
 class Test extends Model
 {
     public function allQuestionNotReady()
@@ -21,7 +22,7 @@ class Test extends Model
     }
 
     public function writingTest(){
-        return $this->belongsTo('App\WritingTest','test_id','id');
+        return $this->hasOne('App\WritingTest','test_id','id');
     }
 
     public function user()

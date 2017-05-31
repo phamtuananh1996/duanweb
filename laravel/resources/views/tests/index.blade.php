@@ -35,7 +35,7 @@
 						@foreach($tests as $test)
 							<a href="{{url('/tests/show/'.$test->id)}}" class="list-group-item list-group-item-action">
 								<p class="hoc2h-list-heading">{{$test->title}}</p>
-								<p class="hoc2h-list-subtext">Đăng bởi {{$test->user->name}}  | {{$test->category->title}} | 2 giờ trước</p>
+								<p class="hoc2h-list-subtext">Đăng bởi {{$test->user->name}}  | {{$test->category->title}} | {{$test->created_at->toDateTimeString()}}</p>
 							</a>
 						@endforeach
 					</div>

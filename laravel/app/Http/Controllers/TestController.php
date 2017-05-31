@@ -68,6 +68,12 @@ class TestController extends Controller
        return redirect('tests');
     }
 
+    public function userTest(Request $rq) {
+        $is_time_count = $rq->is_time_count;
+        $test = Test::find($rq->test_id);
+        return view('tests.user_test',compact('test','is_time_count'));
+    }
+
     public function deleteTest($id)
     {
         $test=Test::find($id);
@@ -78,4 +84,6 @@ class TestController extends Controller
         }
        return redirect('tests/createst1');
     }
+
+
 }
