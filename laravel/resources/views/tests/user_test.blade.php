@@ -26,7 +26,7 @@
 				<p><strong>Số lần đã làm: </strong>{{$test->user_test_count}}</p>
 			</div>
 			@if($test->test_type == 1)
-				<div class="col-md-12" style="background: #fff; border-left: solid 2px green; margin-top: 20px; padding-bottom: 20px;">
+				<div class="col-md-12" style="background: #fff; border:solid 2px green; margin-top: 20px; padding: 40px;">
 					<h2 style=" background: #00C851; padding: 10px 0px 10px 10px; width: 8%;"><strong>Đề bài</strong></h2>
 					@if($test->writingTest->is_document)
 					@else
@@ -38,7 +38,7 @@
 					<div class="text-center" id="time-count" style="position: fixed; bottom:500px; right: 50px; width:100px; height: 40px; border: solid 3px green;background: #ffab91; font-size:20px;">
 					</div>
 				@endif
-				<h2 style=" background: #00C851; padding: 10px 0px 10px 10px; width: 14%;""><strong>Soạn đáp án</strong></h2>
+				<h2 style=" background: #00C851; padding: 10px 0px 10px 10px; width: 14%;"><strong>Soạn đáp án</strong></h2>
 				<form method="POST" action="{{url('/tests/usertest/submit')}}">
 					{{csrf_field()}}
 					<input type="hidden" name="test_id" value="{{$test->id}}">
@@ -77,22 +77,26 @@
 			</div>
 			@else
 				@if($is_time_count == 1)
-					<div class="text-center" id="time-count" style="position: fixed; bottom:500px; right: 50px; width:100px; height: 40px; border: solid 3px green;background: #ffab91; font-size:20px;">
+					<div class="text-center" id="time-count" style="position: fixed; bottom:500px; right: 30px; width:100px; height: 40px; border: solid 3px green;background: #ffab91; font-size:20px;">
 					</div>
 				@endif
-				<div class="col-md-12" style="background: #fff; border-left: solid 2px green; margin:20px 0px; padding-left: 30px;">
+				<div class="col-md-12" style="background: #fff; border: solid 2px green; margin:20px 0px; padding-left: 30px;">
 					<h2 style="padding:10px; margin-bottom: 20px; background: #00C851; width: 10%;">Đề Thi</h2>
 					@foreach($test->multiChoiceTests as $question)
-					<div class="question-content">
-						<p style="color:green; font-size: 18px; ">{{$question->title}}</p>
-						@foreach($question->answers as $answer)
-						<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 10px;">
-							<input type="radio" name="test_type" id="inlineRadio1" value="0">
-							<span for="inlineRadio1">{{$answer->title}}</span>
-						</label>
-						@endforeach
-					</div>
-					<hr style="border-top:solid 1px #e0e0e0;">
+						<div class="row">
+							<div class="col-md-12">
+								<p style="color:green; font-size: 18px; ">{{$question->title}}</p>
+							</div>
+							@foreach($question->answers as $answer)
+								<div class="col-md-12" style="margin-left: 20px;">
+									<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 10px;">
+										<input type="radio" name="test_type" id="inlineRadio1" value="0">
+										<span for="inlineRadio1">{{$answer->title}}</span>
+									</label>
+								</div>
+							@endforeach
+						</div>
+						<hr style="border-top:solid 1px #e0e0e0;">
 					@endforeach
 				</div>
 			@endif

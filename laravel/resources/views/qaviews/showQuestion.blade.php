@@ -188,9 +188,9 @@
 					<span id="count_vote_answer">{{$answer->voteAnswer->count()}}</span> 
 					vote | <span id="answer_comment_count">{{$answer->comments->count()}}</span> Trả lời 
 					@if (Auth::user()->voteAnswer->where('answer_id',$answer->id)->count()==0)
-						<button class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" type="button" id="vote_answer" style="margin-left: 10px;">Vote</button>
+						<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-left: 10px;">Vote</button>
 					@else
-						<button class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" type="button" id="un_vote_answer" style="margin-left: 10px;">Bỏ vote</button>
+						<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="un_vote_answer" style="margin-left: 10px;">Bỏ vote</button>
 					@endif
 					</p>
 
@@ -198,24 +198,24 @@
 				
 
 				<div id="group_answer">
-				@foreach($answer->comments as $comment)
-					<div class="comment-list" style="margin-left:50px;">
-						<div class="media-left">
-								@if ($comment->user->avatar)
-                                    <img src="{{ asset('') }}/images/users/{{$comment->user->avatar}}" width="40" height="40" alt="avatar">
-                           		 @else
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2-dYlakPdqfKcuptmGaAsh1ynwhzFDohsAioI4Ek_Cb7ecw_s" width="40" height="40" alt="avatar">
-                                @endif
+					@foreach($answer->comments as $comment)
+						<div class="comment-list" style="margin-left:50px;">
+							<div class="media-left">
+									@if ($comment->user->avatar)
+	                                    <img src="{{ asset('') }}/images/users/{{$comment->user->avatar}}" width="40" height="40" alt="avatar">
+	                           		 @else
+	                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2-dYlakPdqfKcuptmGaAsh1ynwhzFDohsAioI4Ek_Cb7ecw_s" width="40" height="40" alt="avatar">
+	                                @endif
+							</div>
+							<div class="media-body">
+								<h3 class="list-group-item-heading">{{$comment->user->user_name}}</h3>
+								<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$comment->user->class}}</strong> đã bình luận {{$comment->created_at->toDateTimeString()}}</i></span>	
+								<p>{{$comment->content}}</p>
+								<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="" style="margin-left: 10px;">thích {{$comment->vote_count}}</button>
+							</div>
+							<hr style="border-bottom: solid 1px #e0e0e0">
 						</div>
-						<div class="media-body">
-							<h3 class="list-group-item-heading">{{$comment->user->user_name}}</h3>
-							<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$comment->user->class}}</strong> đã bình luận {{$comment->created_at->toDateTimeString()}}</i></span>	
-							<p>{{$comment->content}}</p>
-						</div>
-						<hr style="border-bottom: solid 1px #e0e0e0">
-						
-					</div>
-				@endforeach
+					@endforeach
 				</div>
 					<div id="commentfield">
 						<form method="POST" action="{{url('/qa/answer/comment')}}" class="form-group" id="addCommentForm">
