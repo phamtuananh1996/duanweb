@@ -4,7 +4,7 @@
 	<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
 	<div class="col-md-10 col-md-offset-1 main-content">
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1" style="border:dotted 1px #007E33; padding: 20px;background: #fafafa;">
+			<div class="col-md-12 " style="border:dotted 1px #007E33; padding: 20px;background: #fafafa;">
 				<h1 style="color:green;">{{$test->title}}</h1>
 				<hr style=" border-bottom: solid 1px #007E33;">
 				<p><strong>Thể loại/Danh mục: </strong>{{$test->category->title}}</p>
@@ -33,8 +33,7 @@
 						<p>{!!$test->writingTest->content!!}</p>
 					@endif
 				</div>
-			@endif
-			<dir id="test_content" class="col-md-12" style="background:#fff; margin-bottom: 50px;">
+				<div id="test_content" class="col-md-12" style="background:#fff; margin-bottom: 50px;">
 				@if($is_time_count == 1)
 					<div class="text-center" id="time-count" style="position: fixed; bottom:500px; right: 50px; width:100px; height: 40px; border: solid 3px green;background: #ffab91; font-size:20px;">
 					</div>
@@ -75,7 +74,28 @@
 						</div>
 					</div>
 				</form>
-			</dir>
+			</div>
+			@else
+				@if($is_time_count == 1)
+					<div class="text-center" id="time-count" style="position: fixed; bottom:500px; right: 50px; width:100px; height: 40px; border: solid 3px green;background: #ffab91; font-size:20px;">
+					</div>
+				@endif
+				<div class="col-md-12" style="background: #fff; border-left: solid 2px green; margin:20px 0px; padding-left: 30px;">
+					<h2 style="padding:10px; margin-bottom: 20px; background: #00C851; width: 10%;">Đề Thi</h2>
+					@foreach($test->multiChoiceTests as $question)
+					<div class="question-content">
+						<p style="color:green; font-size: 18px; ">{{$question->title}}</p>
+						@foreach($question->answers as $answer)
+						<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 10px;">
+							<input type="radio" name="test_type" id="inlineRadio1" value="0">
+							<span for="inlineRadio1">{{$answer->title}}</span>
+						</label>
+						@endforeach
+					</div>
+					<hr style="border-top:solid 1px #e0e0e0;">
+					@endforeach
+				</div>
+			@endif
 		</div>		
 	</div>
 	<script type="text/javascript">
