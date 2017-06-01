@@ -1,5 +1,6 @@
 <?php
 use App\Test;
+use App\Categories;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +52,8 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::get('/','TestController@index');
 	Route::get('createst1','TestController@create');
 	Route::post('createst1','TestController@store');
+	Route::post('/edit','TestController@edit');
+	Route::get('createst2/{test_id}','TestController@showCreateStep2');
 	Route::post('savetest', 'TestController@saveTest')->name('save_write_test');
 	Route::get('show/{id}','TestController@show');
 	Route::post('multi/savetest','MultiChoiceTestController@store');
@@ -65,6 +68,11 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::get('user/created',function(){
 		$listTests = Test::where('user_id',Auth::user()->id)->get();
 		return view('tests.user_created_list',compact('listTests'));
+	});
+	Route::get('user/created/show/{test_id}',function($test_id) {
+		$test = Test::find($test_id);
+		$categories = Categories::all();
+		return view('tests.user_created_show',compact('test','categories'));
 	});
 });
 //question-answer 

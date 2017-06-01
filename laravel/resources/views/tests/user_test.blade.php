@@ -4,7 +4,7 @@
 	<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
 	<div class="col-md-10 col-md-offset-1 main-content">
 		<div class="row">
-			<div class="col-md-12" style="border:dotted 1px #007E33; padding: 20px;background: #fafafa;">
+			<div class="col-md-10 col-md-offset-1" style="border:dotted 1px #007E33; padding: 20px;background: #fafafa;">
 				<h1 style="color:green;">{{$test->title}}</h1>
 				<hr style=" border-bottom: solid 1px #007E33;">
 				<p><strong>Thể loại/Danh mục: </strong>{{$test->category->title}}</p>
@@ -15,19 +15,19 @@
 				@endif
 				<p><strong>Thời gian: </strong>{{$test->total_time}} phút</p>
 				@if($test->level == 1)
-					<p><strong>Độ khó: </strong>Dễ</p>
+					<p><strong>Trình độ: </strong>Dễ</p>
 				@else
 					@if($test->level == 2)
-						<p><strong>Độ khó: </strong>Trung bình</p>
+						<p><strong>Trình độ: </strong>Trung bình</p>
 					@else
-						<p><strong>Độ khó: </strong>Khó</p>
+						<p><strong>Trình độ: </strong>Khó</p>
 					@endif
 				@endif
-				<p><strong>Số người đã làm: </strong>{{$test->user_test_count}}</p>
+				<p><strong>Số lần đã làm: </strong>{{$test->user_test_count}}</p>
 			</div>
 			@if($test->test_type == 1)
-				<div class="col-md-12" style="background: #fff; border-left: solid 2px green;border-bottom: solid 2px green; margin-top: 20px;">
-					<h2 style="color:green;"><strong><u>Đề bài</u></strong></h2>
+				<div class="col-md-12" style="background: #fff; border-left: solid 2px green; margin-top: 20px; padding-bottom: 20px;">
+					<h2 style=" background: #00C851; padding: 10px 0px 10px 10px; width: 8%;"><strong>Đề bài</strong></h2>
 					@if($test->writingTest->is_document)
 					@else
 						<p>{!!$test->writingTest->content!!}</p>
@@ -39,7 +39,7 @@
 					<div class="text-center" id="time-count" style="position: fixed; bottom:500px; right: 50px; width:100px; height: 40px; border: solid 3px green;background: #ffab91; font-size:20px;">
 					</div>
 				@endif
-				<h2 style="color:green;"><strong><u>Soạn đáp án</u></strong></h2>
+				<h2 style=" background: #00C851; padding: 10px 0px 10px 10px; width: 14%;""><strong>Soạn đáp án</strong></h2>
 				<form method="POST" action="{{url('/tests/usertest/submit')}}">
 					{{csrf_field()}}
 					<input type="hidden" name="test_id" value="{{$test->id}}">

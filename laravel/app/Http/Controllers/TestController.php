@@ -45,6 +45,28 @@ class TestController extends Controller
         }	
     }
 
+    public function edit(Request $rq)
+    {
+        $test = Test::find($rq->test_id);
+        $test->title=$rq->title;
+        $test->number_of_questions=$rq->number_of_questions;
+        $test->total_time=$rq->total_time;
+        $test->category_id=$rq->category;
+        $test->test_type=$rq->test_type;
+        $test->level=$rq->level;
+        $test->save();
+        return redirect('tests/user/created/show/'.$test->id);
+    }
+
+    public function showCreateStep2($test_id) {
+        $test = Test::find($test_id);
+        if ($test->test_type == 0) {
+            return view('tests.create_st2_multi',compact('test'));
+        } else {
+            return view('tests.create_st2_writing',compact('test'));
+       }   
+    }
+
     public function saveTest(Request $req)
     {
         

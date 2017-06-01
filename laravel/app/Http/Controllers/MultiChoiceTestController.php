@@ -13,28 +13,6 @@ class MultiChoiceTestController extends Controller
         $test = Test::find($test_id);
         return view('tests.create_st2_multi',compact('test'));
     }
-    public function store(Request $req)
-    {
-    	$multiChoiceTest = new MultiChoiceTest;
-    	$multiChoiceTest->test_id = $req->test_id;
-    	$multiChoiceTest->title = $req->title;
-    	$multiChoiceTest->max_point = $req->max_point;
-    	$multiChoiceTest->question_time = $req->question_time;
-    	$multiChoiceTest->explan = $req->explan;
-    	$multiChoiceTest->save();
-        $test = Test::find($req->test_id);
-    	return view('tests.create_st2_multi', compact('test'));
-    }
-
-    public function updateState(Request $rq) {
-
-        $question = MultiChoiceTest::find($rq->multi_choice_test_id);
-        $question->state = 1;
-        $question->save();
-
-        $test = Test::find($question->test_id);
-        return redirect('tests/createst2/multi/index/'.$test->id);
-    }
 
     public function ajaxSaveTest(Request $req)
     {
@@ -44,7 +22,6 @@ class MultiChoiceTestController extends Controller
        $multiChoiceTest->title = $req->title;
        $multiChoiceTest->max_point = $req->max_point;
        $multiChoiceTest->save();
-
 
        foreach ($req->answer as $key => $value) {
 
@@ -63,7 +40,9 @@ class MultiChoiceTestController extends Controller
             $MultiChoiceTestChoice->save();
 
        }
-       
-
+       //added by nham on 1.06.2017 -- update test state to release this test on index page
+       $test = Test::find($req->test_id);
+       $test->state = 1;
+       $test->save();
     }
 }

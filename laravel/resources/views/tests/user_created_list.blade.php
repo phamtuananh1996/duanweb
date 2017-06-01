@@ -9,18 +9,19 @@
 		@if($listTests)
 			<ul class="list-group pmd-z-depth pmd-list pmd-card-list" style="box-shadow: none;">
 				@foreach ($listTests as $test)
-				<li class="list-group-item">
-					<a href="{{url('/tests/show/'.$test->id)}}" class="list-group-item list-group-item-action">
+				<li class="list-group-item" style="padding-bottom: 0px; padding-top: 0px;">
+					<a href="{{url('tests/user/created/show/'.$test->id)}}" class="list-group-item list-group-item-action">
 						<p class="hoc2h-list-heading">{{$test->title}}</p>
 						<p class="hoc2h-list-subtext">{{$test->created_at->toDateTimeString()}} | Đăng tại <strong>{{$test->category->title}}</strong> | 
 						 	@if($test->state == 1)
-								Đã đăng lên
+								<span style="color:#00C851;">Đã xuất bản</span>
 							@else
-								Chưa đăng lên
+								<span style="color:#ff4444;">Chưa xuất bản</span>
 							@endif
 						</p>
 					</a>
 				</li>
+				
 				@endforeach
 			</ul>
 		@endif
