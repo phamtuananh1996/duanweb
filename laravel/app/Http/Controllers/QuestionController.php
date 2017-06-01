@@ -11,7 +11,7 @@ class QuestionController extends Controller
     public function index()
     {
         $categories = Categories::all();
-    	$questions = Question::all();
+    	$questions = Question::all()->sortByDesc('id');
     	return view('qaviews.index',compact('questions','categories'));
     }
 
@@ -38,7 +38,7 @@ class QuestionController extends Controller
         $question->save();
 
         $categories =Categories::all();
-        return view('qaviews.showQuestion',compact('question','categories'));
+        return redirect('qa/show/'.$question->id);
     }
 
     public function show($id) {

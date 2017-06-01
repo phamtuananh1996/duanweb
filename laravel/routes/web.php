@@ -86,6 +86,9 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::post('/answer','AnswerController@store');
 	Route::post('/answer/comment','AnswerCommentController@store');
 
+	Route::post('/voteanswer','VoteAnswerController@voteAnswer');
+	Route::post('/unvoteanswer','VoteAnswerController@disVoteAnswer');
+
 	Route::group(['prefix' => 'ajax'],function(){
 		Route::post('follows','FollowQuestionController@ajaxFollow');
 		Route::post('dis_follows','FollowQuestionController@ajaxDisFollow');

@@ -16,6 +16,6 @@ class AnswerController extends Controller
     	$answer->question_id = $rq->question_id;
     	$answer->content = $rq->content;
     	$answer->save();
-        return redirect('qa/show/'.$rq->question_id);
+        return response()->json($answer);
     }
 }

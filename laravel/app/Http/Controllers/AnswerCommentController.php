@@ -14,6 +14,6 @@ class AnswerCommentController extends Controller
     	$comment->answer_id = $rq->answer_id;
     	$comment->content = $rq->comment_content;
     	$comment->save();
-    	return back();
+    	return response()->json($comment);
     }
 }
