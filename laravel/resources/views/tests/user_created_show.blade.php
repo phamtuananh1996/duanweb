@@ -24,12 +24,12 @@
 						<p><strong>Trình độ: </strong>Khó</p>
 					@endif
 				@endif
-				<p><strong>Số lần đã làm: </strong>{{$test->user_test_count}}</p>
+				<p><strong>Số lần đã làm: </strong>{{$test->userTests->count()}}</p>
 				@if($test->state == 0)
 					<p style="color:#ff4444; font-size: 18px;"> Đề thi này chưa có nội dung...<a href="{{url('tests/createst2/'.$test->id)}}"><u>bổ sung</u></a></p>
 					@endif
 				<div class="pull-left" >
-					<button style="text-align: left;" data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-ripple-effect btn-link"> Sửa </button >
+					<button style="text-align: left;" data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa </button >
 					<div tabindex="-1" class="modal fade" id="edit-dialog" style="display: none;" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -111,8 +111,8 @@
 							</div>
 						</div>
 					</div>
-					@if($test->user_test_count == 0)
-						<button data-target="#delete-dialog" data-toggle="modal" style="text-align: left; type="button" class="btn pmd-ripple-effect btn-link"> Xoá </button >
+					@if($test->userTests->count() == 0)
+						<button data-target="#delete-dialog" data-toggle="modal" style="text-align: left;" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger"><span class="glyphicon glyphicon-remove"></span> Xoá </button >
 						<div tabindex="-1" class="modal fade" id="delete-dialog" style="display: none;" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -123,8 +123,10 @@
 										<p style="color:#ff4444;">Lưu ý rằng khi bạn chọn xoá đề thi, toàn bộ các nội dung liên quan cũng sẽ bị xoá bỏ...!</p>
 									</div>
 									<div class="pmd-modal-action pmd-modal-bordered text-right">
-										<button data-dismiss="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Vẫn xoá</button>
-										<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Xem lại</button>
+										<form method="GET" action="{{url('tests/cancel/'.$test->id)}}">
+											<button  class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="submit">Vẫn xoá</button>
+											<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Xem lại</button>
+										</form>		
 									</div>
 								</div>
 							</div>
@@ -134,78 +136,87 @@
 			</div>
 			@if($test->state == 1)
 				@if($test->test_type == 1)
-					<div class="col-md-12" style="background: #fff; border-left: solid 2px green;  border-right: solid 2px green;margin-top: 20px; padding-bottom: 20px;">
+					<div id="content" class="col-md-12" style="background: #fff; border-left: solid 2px green;  border-right: solid 2px green;margin-top: 20px; padding-bottom: 20px;">
 						<h2 style="color:green;"><strong><u>Đề bài</u></strong></h2>
 						@if($test->writingTest->is_document)
 						@else
+							<div id = "test-content">
 							<p>{!!$test->writingTest->content!!}</p>
+							</div>
 						@endif
-						<button data-target="#edit-content-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"> Sửa đề bài</button >
+						<button data-target="#edit-content-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa đề bài</button >
 						<div tabindex="-1" class="modal fade" id="edit-content-dialog" style="display: none;" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
-									<div class="modal-header pmd-modal-bordered">
-										<button aria-hidden="true" data-dismiss="modal" class="close" type="button">x</button>
-										<h2 class="pmd-card-title-text text-center">Sửa Nội Dung</h2>
+									<div class="modal-header">
+										<h2 class="pmd-card-title-text text-center">Sửa Đề Bài</h2>
+										<hr style="border-top: solid 1px #bdbdbd;">
 									</div>
-									<div class="modal-body">
-										<form class="form-horizontal">
+									{{-- <form method="POST" action="{{url('tests/writingTest/edit')}}"> --}}
+										<div class="modal-body">
 											{{csrf_field()}}
+											<input type="hidden" id="wtest_id" value="{{$test->writingTest->id}}">
 											<h3 style="margin-top: 20px;">Đề bài</h3>
 											<div class="form-group pmd-textfield">
-												 <label id="answer-error" style="display: none" class="error" for="Small"></label>
-												  <textarea class="form-control" id="content" name="content">{!!$test->writingTest->content!!}</textarea>
+												<label id="answer-error" style="display: none" class="error" for="Small"></label>
+												<textarea class="form-control" id="content_field">{!!$test->writingTest->content!!}</textarea>
 											</div>
 											<script>
-								    				CKEDITOR.replace('content');
+												CKEDITOR.replace('content_field');
 											</script>
-											<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Lưu lại</button>
-											<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Huỷ bỏ</button>
-										</form>
-									</div>
+										</div>
+										<div class="pmd-modal-action pmd-modal-bordered text-right">
+											<button id="content-submit" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Lưu thay đổi</button>
+											<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Huỷ bỏ</button>
+										</div>
+									{{-- </form> --}}
 								</div>
 							</div>
 						</div>
-						<button data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"> Tải lên</button >
+						<button data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"><span class="glyphicon glyphicon-open"></span> Tải lên</button >
 					</div>
-					<div class="col-md-12" style="background: #fff; border-left: solid 2px green;border-right: solid 2px green;margin-top: 20px; padding-bottom: 20px;">
+					<div id = "explan" class="col-md-12" style="background: #fff; border-left: solid 2px green;border-right: solid 2px green;margin-top: 20px; padding-bottom: 20px;">
 						<h2 style="color:green;"><strong><u>Gợi ý/Đáp án</u></strong></h2>
 						@if($test->writingTest->is_document)
 						@else
 							@if($test->writingTest->explan)
-							<p>{!!$test->writingTest->explan!!}</p>
-							<button data-target="#edit-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"> Sửa</button >
+								<div id="explan-content">
+									<p>{!!$test->writingTest->explan!!}</p>
+								</div>
+								<button data-target="#edit-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa đáp án</button >
 							@else
 								<p>chưa có gợi ý và đáp án...!</p>
 								<button data-target="#edit-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary">Bổ sung</button >
 							@endif
 							<div tabindex="-1" class="modal fade" id="edit-explan-dialog" style="display: none;" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header pmd-modal-bordered">
-											<button aria-hidden="true" data-dismiss="modal" class="close" type="button">x</button>
-											<h2 class="pmd-card-title-text text-center">Sửa Nội Dung</h2>
-										</div>
-										<div class="modal-body">
-											<form class="form-horizontal">
-												{{csrf_field()}}
-												<h3 style="margin-top: 20px;">Gợi ý/Đáp án</h3>
-												<div class="form-group pmd-textfield">
-													<label id="answer-error" style="display: none" class="error" for="Small"></label>
-													<textarea class="form-control" id="explan" name="explan">{!!$test->writingTest->explan!!}</textarea>
-												</div>
-												<script>
-													CKEDITOR.replace('explan');
-												</script>
-												<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Lưu lại</button>
-												<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Huỷ bỏ</button>
-											</form>
-										</div>
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h2 class="pmd-card-title-text text-center">Sửa gợi ý/Đáp án</h2>
+										<hr style="border-top: solid 1px #bdbdbd;">
 									</div>
+									{{-- <form method="POST" action="{{url('tests/writingTest/edit/explan')}}"> --}}
+										<div class="modal-body">
+											{{csrf_field()}}
+											<div class="form-group pmd-textfield">
+												<label id="answer-error" style="display: none" class="error" for="Small"></label>
+												<textarea class="form-control" id="explan_field" >{!!$test->writingTest->explan!!}</textarea>
+											</div>
+											<script>
+												CKEDITOR.replace('explan_field');
+											</script>
+										</div>
+										<div class="pmd-modal-action pmd-modal-bordered text-right">
+											<button id="explan-submit"  class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Lưu thay đổi</button>
+											<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Huỷ bỏ</button>
+										</div>
+									{{-- </form> --}}
 								</div>
 							</div>
+						</div>
 						@endif
-						<button data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"> Tải lên</button >
+						<button data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"> <span class="glyphicon glyphicon-open"></span> Tải lên</button >
+						<input type="hidden" id="wtest_id" value="{{$test->writingTest->id}}">
 					</div>
 				@else 
 					<div class="col-md-12" style="background: #fff; border-left: solid 2px green; margin:20px 0px;">
@@ -232,8 +243,50 @@
 		</div>		
 	</div>
 	<script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function(event) {
 
+		//update content
+		$('#content').on('click','#content-submit',function(event){
+
+			var wtest_id = $('#wtest_id').val();
+			var content = CKEDITOR.instances.content_field.getData();
+			if (content == "") {
+				//return false
+			} else {
+				$.post('{{url('tests/writingTest/edit')}}',{wtest_id:wtest_id,content:content},function(data,textStatus,xhr) {
+					sucsecc:{
+						$('#edit-content-dialog').modal('hide');
+						$('#test-content').replaceWith('<p>'+(data.content)+'</p>')
+						$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+					}
+				});
+			}
+		});
+		//update explan
+		$('#explan').on('click','#explan-submit',function(event){
+
+			var wtest_id = $('#wtest_id').val();
+			var explan = CKEDITOR.instances.explan_field.getData();
+			if (explan == "") {
+				//return false
+			} else {
+				$.post('{{url('tests/writingTest/edit/explan')}}',{wtest_id:wtest_id,explan:explan},function(data,textStatus,xhr) {
+					sucsecc:{
+						$('#edit-explan-dialog').modal('hide');
+						$('#explan-content').replaceWith('<p>'+(data.explan)+'</p>')
+						$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+					}
+				});
+			}
+		});
 	});
+	function escapeHtml(unsafe) {
+    	return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+    }
 </script>
 @endsection

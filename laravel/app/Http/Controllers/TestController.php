@@ -67,33 +67,6 @@ class TestController extends Controller
        }   
     }
 
-    public function saveTest(Request $req)
-    {
-        
-       $write_test=new WritingTest;
-       $write_test->test_id=$req->test_id;
-        if(!$req->hasFile('document'))
-        {
-            $write_test->content=$req->question;
-        }
-        else
-        {
-            $nameDoc=time().".".$req->document->getClientOriginalExtension();
-
-            $req->document->move('document/test/', $nameDoc);
-
-            $write_test->content=$nameDoc;
-            $write_test->is_document=1;
-        }
-       $write_test->explan=$req->answer;
-       $write_test->save();
-       //nham: edit on 31/05/2017 -- update test state to enable show on index page
-       $test = Test::find($req->test_id);
-       $test->state = 1;
-       $test->save();
-       return redirect('tests');
-    }
-
     public function userTest(Request $rq) {
         $is_time_count = $rq->is_time_count;
         $test = Test::find($rq->test_id);
@@ -108,7 +81,7 @@ class TestController extends Controller
             $test->delete();
             
         }
-       return redirect('tests/createst1');
+       return redirect('tests/user/created');
     }
 
 

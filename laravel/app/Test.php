@@ -35,6 +35,6 @@ class Test extends Model
     }
 
     public function userTests() {
-    	return $this->hasMany(UserTest::class);
+    	return $this->hasMany('App\UserTest','test_id','id');
     }
 }

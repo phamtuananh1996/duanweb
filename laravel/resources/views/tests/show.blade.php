@@ -23,7 +23,7 @@
 						<p><strong>Độ khó: </strong>Khó</p>
 					@endif
 				@endif
-				<p><strong>Số người đã làm: </strong>{{$test->user_test_count}}</p>
+				<p><strong>Số người đã làm: </strong>{{$test->userTests->count()}}</p>
 			</div>
 			<div class="col-md-2 col-md-offset-5" style="margin-top: 30px; margin-bottom: 30px;">
 				<button data-target="#list-test-options-dialog" data-toggle="modal" type="button" class="btn btn-primary"> Vào làm bài </button >

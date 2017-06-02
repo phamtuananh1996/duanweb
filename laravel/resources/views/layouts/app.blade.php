@@ -26,6 +26,7 @@
         {{-- <link rel="stylesheet" type="text/css" href="{{asset('css/validate/screen.css')}}"> --}}
         <!--App CSS -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/material_icon.css') }}" rel="stylesheet">
          <!-- Jquery js -->
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         

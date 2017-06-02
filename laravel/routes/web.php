@@ -49,34 +49,41 @@ Route::group(['prefix' => 'users'],function(){
 });
 //tests route
 Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
+
 	Route::get('/','TestController@index');
-	Route::get('createst1','TestController@create');
-	Route::post('createst1','TestController@store');
-	Route::post('/edit','TestController@edit');
-	Route::get('createst2/{test_id}','TestController@showCreateStep2');
-	Route::post('savetest', 'TestController@saveTest')->name('save_write_test');
-	Route::get('show/{id}','TestController@show');
-	Route::post('multi/savetest','MultiChoiceTestController@store');
-	Route::get('cancel/{id}','TestController@deleteTest');
-	Route::post('usertest','TestController@userTest');
-	Route::post('usertest/submit','UserTestController@store');
 	Route::get('test', function() {
 	    return view('test');
 	});
+	Route::get('createst1','TestController@create');
+	Route::post('createst1','TestController@store');
+	Route::post('/edit','TestController@edit');
+	Route::get('show/{id}','TestController@show');
+	Route::get('cancel/{id}','TestController@deleteTest');
+	Route::post('usertest','TestController@userTest');
+
+	Route::post('multi/savetest','MultiChoiceTestController@store');
 	Route::post('ajax/savetests','MultiChoiceTestController@ajaxSaveTest');
-	Route::get('usertest','UserTestController@store');
+	
+	Route::post('savetest', 'WritingTestController@store')->name('save_write_test');
+	Route::post('writingTest/edit','WritingTestController@update');
+	Route::post('writingTest/edit/explan','WritingTestController@updateExplan');
+	
 	Route::get('user/created',function(){
 		$listTests = Test::where('user_id',Auth::user()->id)->get();
 		return view('tests.user_created_list',compact('listTests'));
 	});
+	Route::get('createst2/{test_id}','TestController@showCreateStep2');
 	Route::get('user/created/show/{test_id}',function($test_id) {
 		$test = Test::find($test_id);
 		$categories = Categories::all();
 		return view('tests.user_created_show',compact('test','categories'));
 	});
-});
-//question-answer 
+	Route::post('usertest/submit','UserTestController@store');
+	Route::get('usertest','UserTestController@store');
 
+});
+
+//question-answer 
 Route::group(['prefix' => 'qa'],function(){
 	Route::get('/','QuestionController@index');
 	Route::get('/create','QuestionController@create');

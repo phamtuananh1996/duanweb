@@ -65,7 +65,7 @@
 			<!--question actions-->
 			<div class="pmd-card-actions" id="qa">
 				<!-- answer alert-->
-				<button data-target="#answer-dialog" data-toggle="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-info" type="button">Viết trả lời</button>
+				<button data-target="#answer-dialog" data-toggle="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-info" type="button"><span class="glyphicon glyphicon-pencil"></span> Viết trả lời</button>
 				<div tabindex="-1" class="modal fade" id="answer-dialog" style="display: none;" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -108,17 +108,17 @@
 				<!--actions button-->
 
 				@if (Auth::user()->voteQuestion->where('question_id',$question->id)->count())
-					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success" id="dis_vote">Bỏ vote </button >	
+					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success" id="dis_vote"><span class="glyphicon glyphicon-thumbs-down"></span> Bỏ vote </button >	
 				@else
-					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success" id="vote"> Vote </button >
+					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success" id="vote"><span class="glyphicon glyphicon-thumbs-up"></span> Vote </button >
 				@endif
 
 
 				@if (Auth::user()->followQuestion->where('question_id',$question->id)->count())
-					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger" id="dis_follows">Bỏ theo dõi </button >
+					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger" id="dis_follows"><span class="glyphicon glyphicon-eye-close"></span> Bỏ theo dõi </button >
 				@else
 						
-					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger" id="follows"> Theo dõi </button >
+					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger" id="follows"><span class="glyphicon glyphicon-eye-open"></span> Theo dõi </button >
 				@endif
 
 				<input type="hidden" id="question_id" value="{{$question->id}}">
@@ -188,15 +188,14 @@
 					<span id="count_vote_answer">{{$answer->voteAnswer->count()}}</span> 
 					vote | <span id="answer_comment_count">{{$answer->comments->count()}}</span> Trả lời 
 					@if (Auth::user()->voteAnswer->where('answer_id',$answer->id)->count()==0)
-						<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-left: 10px;">Vote</button>
+						<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-up"></span> Vote</button>
 					@else
-						<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="un_vote_answer" style="margin-left: 10px;">Bỏ vote</button>
+						<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="un_vote_answer" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-down"></span> Bỏ vote</button>
 					@endif
 					</p>
 
 					<hr style="border-bottom: solid 1px #bdbdbd ;">
 				
-
 				<div id="group_answer">
 					@foreach($answer->comments as $comment)
 						<div class="comment-list" style="margin-left:50px;">
@@ -249,7 +248,7 @@
 				$.post('{{url('qa/ajax/vote')}}', {question_id: question_id}, function(data, textStatus, xhr) {
 					sucsecc:{
 						$('#vote_count').html(vote_count+1);
-						$('#vote').html('Bỏ vote').attr('id', 'dis_vote');;
+						$('#vote').html('<span class="glyphicon glyphicon-thumbs-down"></span> Bỏ vote').attr('id', 'dis_vote');;
 					}
 				});
 			});
@@ -261,7 +260,7 @@
 				$.post('{{url('qa/ajax/dis_vote')}}', {question_id: question_id}, function(data, textStatus, xhr) {
 					sucsecc:{
 						$('#vote_count').html(vote_count-1);
-						$('#dis_vote').html('vote').attr('id', 'vote');;
+						$('#dis_vote').html('<span class="glyphicon glyphicon-thumbs-up"></span> Vote').attr('id', 'vote');;
 					}
 				});
 			});
@@ -274,7 +273,7 @@
 				
 				$.post('{{url('qa/ajax/follows')}}', {question_id: question_id}, function(data, textStatus, xhr) {
 					sucsecc:{
-						$('#follows').html('Bỏ Theo Dõi').attr('id', 'dis_follows');;
+						$('#follows').html('<span class="glyphicon glyphicon-eye-close"></span> Bỏ theo dõi ').attr('id', 'dis_follows');;
 					}
 				});
 			});
@@ -284,7 +283,7 @@
 				
 				$.post('{{url('qa/ajax/dis_follows')}}', {question_id: question_id}, function(data, textStatus, xhr) {
 					sucsecc:{
-						$('#dis_follows').html('Theo dõi').attr('id', 'follows');;
+						$('#dis_follows').html('<span class="glyphicon glyphicon-eye-open"></span> Theo dõi ').attr('id', 'follows');;
 					}
 				});
 			});
@@ -355,7 +354,7 @@
 				var count_vote_answer=$(this).parent().find('#count_vote_answer');
 
 				$(this).attr('id', 'un_vote_answer');
-				$(this).html('Bỏ vote');
+				$(this).html('<span class="glyphicon glyphicon-thumbs-down"></span> Bỏ vote');
 				$.post('{{url('qa/voteanswer')}}', {answer_id: answer_id}, function(data, textStatus, xhr) {
 
 					success:
@@ -375,7 +374,7 @@
 				var count_vote_answer=$(this).parent().find('#count_vote_answer');
 
 				$(this).attr('id', 'vote_answer');
-				$(this).html('Vote');
+				$(this).html('<span class="glyphicon glyphicon-thumbs-up"></span> Vote');
 				$.post('{{url('qa/unvoteanswer')}}', {answer_id: answer_id}, function(data, textStatus, xhr) {
 
 					success:

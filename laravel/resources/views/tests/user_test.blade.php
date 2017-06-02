@@ -49,19 +49,19 @@
 	    					CKEDITOR.replace('user_test_answer');
 						</script>
 					</div>
-					<button data-target="#submit-dialog" data-toggle="modal" style="margin-bottom: 20px" type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success">Nộp bài</button>
+					<button data-target="#submit-dialog" data-toggle="modal" style="margin-bottom: 20px" type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success"><span class="glyphicon glyphicon-send"></span> Nộp bài</button>
 					<div tabindex="-1" class="modal fade" id="submit-dialog" style="display: none;" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-body">Bạn thật sự muốn nộp bài!</div>
 								<div class="pmd-modal-action text-right">
-									<button class="btn pmd-ripple-effect btn-primary pmd-btn-flat" type="submit">Nộp bài</button>
-									<button data-dismiss="modal"  class="btn pmd-ripple-effect btn-default pmd-btn-flat" type="button">Xem lại</button>
+									<button class="btn pmd-ripple-effect btn-primary pmd-btn-flat" type="submit"><span class="glyphicon glyphicon-send"></span> Nộp bài</button>
+									<button data-dismiss="modal"  class="btn pmd-ripple-effect btn-default pmd-btn-flat" type="button"><span class="glyphicon glyphicon-pencil"></span> Xem lại</button>
 								</div>
 							</div>
 						</div>
 					</div>
-					<button style="margin-bottom:20px; margin-left: 20px;" type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-warning" data-target="#cancel-dialog" data-toggle="modal"> Hủy bỏ </button >
+					<button style="margin-bottom:20px; margin-left: 20px;" type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-warning" data-target="#cancel-dialog" data-toggle="modal"><span class="glyphicon glyphicon-remove-circle"></span> Hủy bỏ </button >
 					<div tabindex="-1" class="modal fade" id="cancel-dialog" style="display: none;" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -113,7 +113,7 @@
 		        minutes = minutes < 10 ? "0" + minutes : minutes;
 		        seconds = seconds < 10 ? "0" + seconds : seconds;
 
-		        display.textContent = minutes + ":" + seconds;
+		        display.textContent =minutes + ":" + seconds;
 
 		        if (--timer < 0) {
 		            timer = duration;
