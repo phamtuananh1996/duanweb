@@ -210,7 +210,20 @@
 								<h3 class="list-group-item-heading">{{$comment->user->user_name}}</h3>
 								<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$comment->user->class}}</strong> đã bình luận {{$comment->created_at->toDateTimeString()}}</i></span>	
 								<p>{{$comment->content}}</p>
-								<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="" style="margin-left: 10px;">thích {{$comment->vote_count}}</button>
+
+
+								<p style="color:#00695c; font-size: 13px;">
+									<span id="count_like">{{$comment->likeAnswerComment->count()}}</span> 
+									Like 
+									@if (Auth::user()->likeAnswerComment->where('answer_comment_id',$comment->id)->count()==0)
+									<button data-answer_comment_id={{$comment->id}} class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button>
+									@else
+									<button data-answer_comment_id={{$comment->id}} class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="dislike" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-down"></span> Bỏ like</button>
+									@endif
+								</p>
+
+
+
 							</div>
 							<hr style="border-bottom: solid 1px #e0e0e0">
 						</div>
@@ -336,7 +349,7 @@
 						success:{
 
 							add_answer_comment_count.html(answer_comment_count+1);
-							add_answer.append('<div class="comment-list" style="margin-left:50px;"> <div class="media-left"><img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading">{{Auth::user()->name}}</h3> <span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{Auth::user()->class}}</strong> đã bình luận '+data.created_at+'</i></span> <p>'+escapeHtml(data.content)+'</p> </div> <hr style="border-bottom: solid 1px #e0e0e0"> </div>');
+							add_answer.append('<div class="comment-list" style="margin-left:50px;"> <div class="media-left"><img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading">{{Auth::user()->name}}</h3> <span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{Auth::user()->class}}</strong> đã bình luận '+data.created_at+'</i></span> <p>'+escapeHtml(data.content)+'</p><p style="color:#00695c; font-size: 13px;"> <span id="count_like">0</span> Like <button data-answer_comment_id='+data.id+' class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button> </p> </div> <hr style="border-bottom: solid 1px #e0e0e0"> </div>');
 
 							comment_content.val("");
 						}
@@ -387,6 +400,46 @@
 
 
 			});
+
+			//ấn like
+
+			$('#group_answer').on('click', '#like', function(event) {
+				var count_like=parseInt($(this).parent().find('#count_like').html());
+				var answer_comment_id=$(this).data('answer_comment_id');
+				var count=$(this).parent().find('#count_like');
+				$(this).attr('id', 'dislike');
+				$(this).html('<span class="glyphicon glyphicon-thumbs-down"></span> Bỏ like');
+				$.post('{{url('qa/ajax/like')}}', {answer_comment_id:answer_comment_id}, function(data, textStatus, xhr) {
+					success:
+					{
+						count.html(count_like+1);
+
+					}
+				});
+
+			});
+
+
+			//ấn dislike
+
+			$('#group_answer').on('click', '#dislike', function(event) {
+				var count_like=parseInt($(this).parent().find('#count_like').html());
+				var answer_comment_id=$(this).data('answer_comment_id');
+				var count=$(this).parent().find('#count_like');
+				$(this).attr('id', 'like');
+				$(this).html('<span class="glyphicon glyphicon-thumbs-up"></span> Like');
+				$.post('{{url('qa/ajax/dislike')}}', {answer_comment_id:answer_comment_id}, function(data, textStatus, xhr) {
+					success:
+					{
+						count.html(count_like-1);
+
+					}
+				});
+
+			});
+
+
+
 
 			<!-- Selectbox with search -->
 				$(".select-with-search").select2({

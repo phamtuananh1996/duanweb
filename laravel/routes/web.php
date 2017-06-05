@@ -101,5 +101,7 @@ Route::group(['prefix' => 'qa'],function(){
 		Route::post('dis_follows','FollowQuestionController@ajaxDisFollow');
 		Route::post('vote','VoteQuestionController@ajaxVote');
 		Route::post('dis_vote','VoteQuestionController@ajaxDisVote');
+		Route::post('like','LikeAnswerCommentController@like');
+		Route::post('dislike','LikeAnswerCommentController@dislike');
 	});
 });

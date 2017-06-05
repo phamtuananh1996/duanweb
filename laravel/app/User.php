@@ -50,4 +50,9 @@ class User extends Authenticatable
    {
       return $this->hasMany('App\voteAnswer','user_id','id');
    }
+
+   public function likeAnswerComment()
+   {
+       return $this->hasMany('App\LikeAnswerComment','user_id','id');
+   }
 }
