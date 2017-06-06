@@ -39,9 +39,9 @@
                             <li><a href="{{ url('users/infodetail/'.Auth::user()->id) }}">Thông tin chi tiết</a></li>
                         </ul>
                     @else
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a style="color:white; class="pmd-ripple-effect" href="{{url('/login')}}">Đăng nhập</a></li>
-                            <li><a style="color:white; class="pmd-ripple-effect" href="{{ url('/register') }}">Đăng ký</a></li>
+                        <ul class="nav navbar-nav navbar-right" style="margin-right:10px;">
+                            <li><a style="color:white;" class="pmd-ripple-effect" href="{{url('/login')}}">Đăng nhập</a></li>
+                            <li><a style="color:white;" class="pmd-ripple-effect" href="{{ url('/register') }}">Đăng ký</a></li>
                         </ul>
                     @endif
                 @endif
@@ -56,9 +56,12 @@
                             <li><a class="pmd-ripple-effect" href="{{url('/tests')}}">Index</a></li>
                             <li><a class="pmd-ripple-effect" href="{{url('/tests/createst1')}}">Tạo Đề Thi</a></li>
                             <li><a class="pmd-ripple-effect" href="{{url('/tests/user/created')}}">Đề Thi Đã Tạo</a></li>
+                        @else
+                            <li><a class="pmd-ripple-effect" href="{{url('/tests')}}">Index</a></li>
+                            <li><a class="pmd-ripple-effect" href="#">Đề thi đã làm</a></li>
                         @endif
                      @else
-                        <li><a class="pmd-ripple-effect" href="#">Đề thi đã làm</a></li>
+                         <li><a class="pmd-ripple-effect" href="{{url('/tests')}}">Index</a></li>
                     @endif
                 </ul>
             </li>

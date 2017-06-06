@@ -256,7 +256,7 @@
 				$.post('{{url('tests/writingTest/edit')}}',{wtest_id:wtest_id,content:content},function(data,textStatus,xhr) {
 					sucsecc:{
 						$('#edit-content-dialog').modal('hide');
-						$('#test-content').replaceWith('<p>'+(data.content)+'</p>')
+						$('#test-content').html('<p>'+(data.content)+'</p>')
 						$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 					}
 				});
@@ -273,7 +273,7 @@
 				$.post('{{url('tests/writingTest/edit/explan')}}',{wtest_id:wtest_id,explan:explan},function(data,textStatus,xhr) {
 					sucsecc:{
 						$('#edit-explan-dialog').modal('hide');
-						$('#explan-content').replaceWith('<p>'+(data.explan)+'</p>')
+						$('#explan-content').html('<p>'+(data.explan)+'</p>')
 						$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 					}
 				});

@@ -14,11 +14,14 @@
 	</div>
 	<div class="pmd-card-media">
 		<div class="media-body">
-			<h2 class="pmd-card-title-text" style="color: green;"><a href="{{ url('/qa/show/'.$question->id) }}">{{$question->question_title}}</a></h2>
-			<p>{{$question->answers->count()}} trả lời | {{$question->voteQuestion->count()}} vote | {{$question->view_count}} lượt xem
+			<h2 class="pmd-card-title-text" style="color: green;"><a href="{{ url('/qa/show/'.$question->id) }}">{{$question->question_title}}</a>
 				@if($question->is_resolved == true)
-					<button class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-success" type="button"><i class="material-icons pmd-sm">check</i></button>
+					<span class="glyphicon glyphicon-ok-sign"></span>
+				@else
+					<span style="color: red;" class="glyphicon glyphicon-question-sign"></span>
 				@endif
+			</h2>
+			<p>{{$question->answers->count()}} trả lời | {{$question->voteQuestion->count()}} vote | {{$question->view_count}} lượt xem
 			</p>
 		</div>
 	</div>

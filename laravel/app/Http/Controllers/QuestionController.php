@@ -47,20 +47,26 @@ class QuestionController extends Controller
         return view('qaviews.showQuestion',compact('question','categories'));
     }
 
-    public function resolved(Request $rq)
+    public function resolve(Request $rq)
     {
         $question = Question::find($rq->question_id);
-        $question->is_resolved = true;
+
+        if ( $question->is_resolved == true) {
+            $question->is_resolved = false;
+        } else {
+            $question->is_resolved = true;
+        }
         $question->save();
-        return back();
+        return response()->json($question);
     }
     
     public function edit(Request $rq)
     {
-        // dd($rq);
-        Question::where('id',$rq->question_id)
-         ->update(['question_title' => $rq->edit_title,'question_content' =>  $rq->edit_content,'is_resolved'=>false ]);
-        return back();
+       $question = Question::find($rq->question_id);
+       $question->question_title = $rq->title;
+       $question->question_content = $rq->content;
+       $question->save();
+       return response()->json($question);
     }
 
     

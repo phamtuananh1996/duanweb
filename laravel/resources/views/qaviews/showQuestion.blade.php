@@ -34,36 +34,18 @@
 		<!--Question body-->
 		<div class="pmd-card-media" style="background: #fff;" id ="qes-body">
 			<div class="media-body">
-				<h2 class="pmd-card-title-text" style="color: green; margin-bottom: 20px;margin-top: 20px;">{{$question->question_title}}</h2>
-				<span class="pmd-card-subtitle-text">{!!$question->question_content!!}<br>
-					<p style="color:#00695c; font-size: 13px;"><span id="answer_count">{{$question->answers->count()}}</span> trả lời | <span id="vote_count">{{$question->voteQuestion->count()}}</span> vote  |  {{$question->view_count}} lượt xem
-						@if($question->is_resolved == true)
-							<button class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-success" type="button"><i class="material-icons pmd-sm">check</i></button>
-						@else
-							@if(Auth::user()->id == $question->user_id)
-								<button data-target="#done-dialog" data-toggle="modal" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" type="button" style="margin-left: 10px;">xong</button>
-								<div tabindex="-1" class="modal fade" id="done-dialog" style="display: none;" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-body"> Câu hỏi của bạn đã được trả lời? </div>
-											<div class="pmd-modal-action text-right">
-												<form method = "POST" action = "{{ url('/qa/resolved') }}">
-													<input type="hidden" name="_token" value="{{ csrf_token() }}">
-													<input type="hidden" name="question_id" value="{{ $question->id }}">
-													<button   class="btn pmd-ripple-effect btn-primary pmd-btn-flat" type="submit">OK</button>
-													<button data-dismiss="modal"  class="btn pmd-ripple-effect btn-default pmd-btn-flat" type="button">Huỷ</button>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							@endif
-						@endif
-					</p>
-				</span>
+				<h2 id="question-title" class="pmd-card-title-text" style="color: green; margin-bottom: 20px;margin-top: 20px;">{{$question->question_title}}
+					@if($question->is_resolved == true)
+						<span class="glyphicon glyphicon-ok-sign"></span>
+					@else
+						<span style="color: red;" class="glyphicon glyphicon-question-sign"></span>
+					@endif
+				</h2>
+				<span id="question_content" class="pmd-card-subtitle-text">{!!$question->question_content!!}</span>
+				<p style="color:#00695c; font-size: 13px;"><span id="answer_count">{{$question->answers->count()}}</span> trả lời | <span id="vote_count">{{$question->voteQuestion->count()}}</span> vote  |  {{$question->view_count}} lượt xem</p>
 			</div>
 			<!--question actions-->
-			<div class="pmd-card-actions" id="qa">
+			<div class="pmd-card-actions" id="qa" style="margin-left: -10px;">
 				<!-- answer alert-->
 				<button data-target="#answer-dialog" data-toggle="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-info" type="button"><span class="glyphicon glyphicon-pencil"></span> Viết trả lời</button>
 				<div tabindex="-1" class="modal fade" id="answer-dialog" style="display: none;" aria-hidden="true">
@@ -106,7 +88,6 @@
 					</div>
 				</div><!--answer alert-->
 				<!--actions button-->
-
 				@if (Auth::user()->voteQuestion->where('question_id',$question->id)->count())
 					<button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-success" id="dis_vote"><span class="glyphicon glyphicon-thumbs-down"></span> Bỏ vote </button >	
 				@else
@@ -122,19 +103,26 @@
 				@endif
 
 				<input type="hidden" id="question_id" value="{{$question->id}}">
-				
+				<!--user option-->
 				@if(Auth::user()->id == $question->user_id)
-					<div class="pull-right" style="margin-bottom: 20px;">
+					<div id="user-option" class="pull-right" style="margin-bottom: 20px;">
+						<input type="hidden" id="question_id" value="{{$question->id}}">
 						<span class="dropdown pmd-dropdown dropup clearfix">
 							<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="dropdownMenuTopLeft" data-toggle="dropdown" aria-expanded="true"><i class="material-icons pmd-sm">more_vert</i></button>
 							<ul aria-labelledby="dropdownMenu3" role="menu" class="dropdown-menu pmd-dropdown-menu-top-left">
 								<li role="presentation"><button  data-target="#move-dialog" data-toggle="modal" type="button" class="btn pmd-ripple-effect btn-link">Di chuyển chủ đề </button ></li>
-								<li role="presentation"><button  data-target="#delete-dialog" data-toggle="modal" type="button" class="btn pmd-ripple-effect btn-link"> Xoá câu hỏi </button ></li>
+								<li role="presentation"><button  data-target="#question-delete-dialog" data-toggle="modal" type="button" class="btn pmd-ripple-effect btn-link"> Xoá câu hỏi </button ></li>
 								<li role="presentation"><button data-target="#question-edit-dialog" data-toggle="modal" class="btn pmd-ripple-effect btn-link" type="button" >Sửa câu hỏi</button></li>
+								@if($question->is_resolved == true)
+									<li role="presentation"><button id="resolve" type="button" class="btn pmd-ripple-effect btn-link">Chưa được trả lời</button ></li>
+								@else 
+									<li role="presentation"><button id="resolve" type="button" class="btn pmd-ripple-effect btn-link">Đã được trả lời</button ></li>
+								@endif
 							</ul>
 						</span>
 					</div>
-				@endif
+				@endif<!--user options-->
+				<!--model edit-->
 				<div tabindex="-1" class="modal fade" id="question-edit-dialog" style="display: none;" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -142,37 +130,50 @@
 							<h2 class="pmd-card-title-text">Sửa câu hỏi</h2>
 							</div>
 							<div class="modal-body">
-								<form class="form-horizontal" method ="POST" action="{{url('/qa/edit')}}">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<input type="hidden" name="question_id" value="{{$question->id}}">
-									<div class="form-group pmd-textfield pmd-textfield-floating-label">
-										<label for="edit_title">Tiêu đề</label>
-										<input type="text" class="mat-input form-control" id="edit_title" name="edit_title" value="{{$question->question_title}}">
-										<span class="help-text" style="color:red;">Bắt buộc!</span> 
-									</div>
-									<p>Nội dung</p>
-									<textarea id="content-edit-field" name="edit_content" required class="form-control">{{$question->question_content}}</textarea>
-									<script>
-										CKEDITOR.replace( 'content-edit-field' );
-									</script>	
-									<div class="pmd-modal-action pmd-modal-bordered text-right">
-										<button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="submit">Lưu lại</button>
-										<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary">huỷ bỏ</button>
-									</div>
-								</form>
+								<input type="hidden" name="question_id" value="{{$question->id}}">
+								<div class="form-group pmd-textfield pmd-textfield-floating-label">
+									<label for="edit_title">Tiêu đề</label>
+									<input type="text" class="mat-input form-control" id="question_title_edit" value="{{$question->question_title}}">
+									<span class="help-text" style="color:red;">Bắt buộc!</span> 
+								</div>
+								<p>Nội dung</p>
+								<textarea id="question_content_edit"  required class="form-control">{{$question->question_content}}</textarea>
+								<script>
+									CKEDITOR.replace( 'question_content_edit' );
+								</script>	
+								<div class="pmd-modal-action pmd-modal-bordered text-right">
+									<button id="edit-question" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Lưu lại</button>
+									<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Huỷ bỏ</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> <!--end modal edit-->
+				<!--modal delete-->
+				<div tabindex="-1" class="modal fade" id="question-delete-dialog" style="display: none;" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2 class="pmd-card-title-text"><i class="material-icons md-dark pmd-md" style="color: red;">warning</i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu hỏi này!</span></h2>
+							</div>
+							<div class="modal-body">
+							<p style="color:red;"> Lưu ý rằng khi bạn xoá câu hỏi, các câu trả lời và bình luận liên quan cũng sẽ bị xoá.</p>
+							</div>	
+							<div class="pmd-modal-action pmd-modal-bordered text-right">
+								<button id="edit-question" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Vẫn xoá</button>
+								<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Thôi</button>
+							</div>
+						</div>
+					</div>
+				</div> <!--end modal delete-->
 			</div><!--question actions-->
 		</div><!--question body-->
 	</div><!--question detail-->
 	<!--Answers list-->
-	<div class="answer-list" style="background: #f5f5f5;">
+	<div class="answer-list" style="background: #fafafa;">
 		<ul class="list-group pmd-z-depth pmd-list pmd-card-list" id="list_cmt" style="box-shadow: none;padding-left: 30px;background: #f5f5f5;">
 			@if($question->answers->count())
 			@foreach ($question->answers as $answer)
-
 			<li class="list-group-item" style="background: #f5f5f5;">
 				<div class="media-left">
 					@if ($answer->user->avatar)
@@ -184,7 +185,7 @@
 				<div class="media-body">
 					<h3 class="list-group-item-heading">{{$answer->user->user_name}}</h3>
 					<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$answer->user->class}}</strong> đã trả lời {{$answer->created_at->toDateTimeString()}}</i></span><p>{!!$answer->content!!}</p>
-					<p style="color:#00695c; font-size: 13px;">
+					<p style="color:#00695c; font-size: 13px; margin-top: -10px;">
 					<span id="count_vote_answer">{{$answer->voteAnswer->count()}}</span> 
 					vote | <span id="answer_comment_count">{{$answer->comments->count()}}</span> Trả lời 
 					@if (Auth::user()->voteAnswer->where('answer_id',$answer->id)->count()==0)
@@ -193,12 +194,12 @@
 						<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="un_vote_answer" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-down"></span> Bỏ vote</button>
 					@endif
 					</p>
-
-					<hr style="border-bottom: solid 1px #bdbdbd ;">
+					
+					<hr style="border-bottom: solid 1px #bdbdbd; margin-top: -10px;">
 				
 				<div id="group_answer">
 					@foreach($answer->comments as $comment)
-						<div class="comment-list" style="margin-left:50px;">
+						<div class="comment-list">
 							<div class="media-left">
 									@if ($comment->user->avatar)
 	                                    <img src="{{ asset('') }}/images/users/{{$comment->user->avatar}}" width="40" height="40" alt="avatar">
@@ -206,13 +207,11 @@
 	                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2-dYlakPdqfKcuptmGaAsh1ynwhzFDohsAioI4Ek_Cb7ecw_s" width="40" height="40" alt="avatar">
 	                                @endif
 							</div>
-							<div class="media-body">
+							<div class="media-body" style="margin-top:10px;">
 								<h3 class="list-group-item-heading">{{$comment->user->user_name}}</h3>
 								<span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{$comment->user->class}}</strong> đã bình luận {{$comment->created_at->toDateTimeString()}}</i></span>	
-								<p>{{$comment->content}}</p>
-
-
-								<p style="color:#00695c; font-size: 13px;">
+								<p style="margin-top: 5px;">{{$comment->content}}</p>
+								<p style="color:#00695c; font-size: 13px; margin-top: -10px;">
 									<span id="count_like">{{$comment->likeAnswerComment->count()}}</span> 
 									Like 
 									@if (Auth::user()->likeAnswerComment->where('answer_comment_id',$comment->id)->count()==0)
@@ -221,11 +220,8 @@
 									<button data-answer_comment_id={{$comment->id}} class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="dislike" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-down"></span> Bỏ like</button>
 									@endif
 								</p>
-
-
-
 							</div>
-							<hr style="border-bottom: solid 1px #e0e0e0">
+							<hr style="border-bottom: solid 1px #e0e0e0; margin-top: -10px;">
 						</div>
 					@endforeach
 				</div>
@@ -317,7 +313,7 @@
 						{
 							CKEDITOR.instances.answer_field.setData('');
 							$('#answer_count').html(answer_count+1);
-							$('#list_cmt').append('<li class="list-group-item" style="background: #f5f5f5;"> <div class="media-left"> <img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body"> <h3 class="list-group-item-heading">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{Auth::user()->class}}</strong> đã trả lời '+data.created_at+'</i></span><p>'+data.content+'</p> <p style="color:#00695c; font-size: 13px;"> <span id="count_vote_answer">0</span> vote | <span id="answer_comment_count">0</span> Trả lời <button class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" type="button" id="vote_answer" style="margin-left: 10px;">Vote</button> </p> <hr style="border-bottom: solid 1px #bdbdbd ;"> <div id="group_answer"> </div> <div id="commentfield"> <form method="POST" action="{{url('/qa/answer/comment')}}" class="form-group" id="addCommentForm"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Viết Trả lời</label> <textarea style="background: #fff;" rows="2" name="comment_content" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </form> </div> </div> </li>');
+							$('#list_cmt').append('<li class="list-group-item" style="background: #f5f5f5;"> <div class="media-left"> <img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body"> <h3 class="list-group-item-heading">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{Auth::user()->class}}</strong> đã trả lời '+data.created_at+'</i></span><p>'+data.content+'</p> <p style="color:#00695c; font-size: 13px;"> <span id="count_vote_answer">0</span> vote | <span id="answer_comment_count">0</span> Trả lời <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-up"></span> Vote</button> </p> <hr style="border-bottom: solid 1px #bdbdbd ;"> <div id="group_answer"> </div> <div id="commentfield"> <form method="POST" action="{{url('/qa/answer/comment')}}" class="form-group" id="addCommentForm"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Viết Trả lời</label> <textarea style="background: #fff;" rows="2" name="comment_content" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </form> </div> </div> </li>');
 
 							$('#answer-dialog').modal('hide');
 							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
@@ -349,7 +345,7 @@
 						success:{
 
 							add_answer_comment_count.html(answer_comment_count+1);
-							add_answer.append('<div class="comment-list" style="margin-left:50px;"> <div class="media-left"><img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading">{{Auth::user()->name}}</h3> <span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{Auth::user()->class}}</strong> đã bình luận '+data.created_at+'</i></span> <p>'+escapeHtml(data.content)+'</p><p style="color:#00695c; font-size: 13px;"> <span id="count_like">0</span> Like <button data-answer_comment_id='+data.id+' class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button> </p> </div> <hr style="border-bottom: solid 1px #e0e0e0"> </div>');
+							add_answer.append('<div class="comment-list"> <div class="media-left"><img src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading">{{Auth::user()->name}}</h3> <span class="list-group-item-text" style="font-size: 12px;"><i><strong>Học {{Auth::user()->class}}</strong> đã bình luận '+data.created_at+'</i></span> <p style="margin-top:5px;">'+escapeHtml(data.content)+'</p><p style="color:#00695c; font-size: 13px; margin-top:-10px;"> <span id="count_like">0</span> Like <button data-answer_comment_id='+data.id+' class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-left: 10px;"><span class="glyphicon glyphicon-thumbs-up"></span> Like</button> </p> </div> <hr style="border-bottom: solid 1px #e0e0e0; margin-top:-10px;"> </div>');
 
 							comment_content.val("");
 						}
@@ -359,7 +355,6 @@
 			});
 
 			//ấn vote comment
-
 			$('#list_cmt').on('click', '#vote_answer', function(event) {
 				var answer_id=$(this).parent().parent().find('#answer_id').val();
 				var count_vote=parseInt($(this).parent().find('#count_vote_answer').html());
@@ -402,7 +397,6 @@
 			});
 
 			//ấn like
-
 			$('#group_answer').on('click', '#like', function(event) {
 				var count_like=parseInt($(this).parent().find('#count_like').html());
 				var answer_comment_id=$(this).data('answer_comment_id');
@@ -438,8 +432,41 @@
 
 			});
 
+			$('#edit-question').on('click',function(event) {
+				var question_id = $('#question_id').val();
+				var title = $('#question_title_edit').val();
+				var content = CKEDITOR.instances.question_content_edit.getData();
 
+				$.post('{{url('qa/ajax/edit')}}',{question_id:question_id,title:title,content:content},function(data,textStatus,xhr) {
+					success: {
+						$('#question-edit-dialog').modal('hide');
+						if (data.is_resolved == true) {
+							$('#resolve').html('Chưa được trả lời');
+							$('#question-title').html(data.question_title +' <span class="glyphicon glyphicon-ok-sign"></span>');
+						} else {
+							$('#resolve').html('Đã được trả lời');
+							$('#question-title').html(data.question_title +' <span style="color: red;" class="glyphicon glyphicon-question-sign"></span>');
+						}
+						$('#question_content').html(data.question_content);
+					}
+				});
+			});
 
+			//change question resolve state
+			$('#user-option').on('click','#resolve',function(event){
+				var question_id = $('#question_id').val();
+				$.post('{{url('qa/ajax/resolve')}}',{question_id:question_id},function(data,textStatus,xhr){
+					success:{
+						if (data.is_resolved == true) {
+							$('#resolve').html('Chưa được trả lời');
+							$('#question-title').html(data.question_title +' <span class="glyphicon glyphicon-ok-sign"></span>');
+						} else {
+							$('#resolve').html('Đã được trả lời');
+							$('#question-title').html(data.question_title +' <span style="color: red;" class="glyphicon glyphicon-question-sign"></span>');
+						}
+					}
+				});
+			});
 
 			<!-- Selectbox with search -->
 				$(".select-with-search").select2({

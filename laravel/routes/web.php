@@ -89,7 +89,6 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::get('/create','QuestionController@create');
 	Route::post('/create','QuestionController@store');
 	Route::get('/show/{id}','QuestionController@show');
-	Route::post('/edit','QuestionController@edit');
 	Route::post('/answer','AnswerController@store');
 	Route::post('/answer/comment','AnswerCommentController@store');
 
@@ -97,6 +96,8 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::post('/unvoteanswer','VoteAnswerController@disVoteAnswer');
 
 	Route::group(['prefix' => 'ajax'],function(){
+		Route::post('edit','QuestionController@edit');
+		Route::post('resolve','QuestionController@resolve');
 		Route::post('follows','FollowQuestionController@ajaxFollow');
 		Route::post('dis_follows','FollowQuestionController@ajaxDisFollow');
 		Route::post('vote','VoteQuestionController@ajaxVote');
