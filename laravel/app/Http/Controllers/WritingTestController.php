@@ -13,6 +13,20 @@ class WritingTestController extends Controller
         
        $write_test=new WritingTest;
        $write_test->test_id=$req->test_id;
+       if(!$req->hasFile('document_answer'))
+        {
+          $write_test->explan=$req->answer;
+        }
+      else
+        { 
+            $nameDoc=time().".".$req->document_answer->getClientOriginalExtension();
+
+            $req->document_answer->move('document/test/', $nameDoc);
+
+            $write_test->explan=$nameDoc;
+            $write_test->is_document_answer=1;
+        }
+
         if(!$req->hasFile('document'))
         {
             $write_test->content=$req->question;
@@ -26,7 +40,7 @@ class WritingTestController extends Controller
             $write_test->content=$nameDoc;
             $write_test->is_document=1;
         }
-       $write_test->explan=$req->answer;
+       
        $write_test->save();
        //nham: edit on 31/05/2017 -- update test state to enable show on index page
        $test = Test::find($req->test_id);

@@ -31,8 +31,8 @@
 
 			<div class="col-md-12" style="margin-top: 20px;">
 				<div class="row"> 
-				<h3 class="col-md-2" style="margin-top: 20px;">Đề bài</h3> 
-					<a class="col-md-2 btn pmd-ripple-effect btn-success" id="upload"> Tải đề lên </a>
+				<h3 class="col-md-4" style="margin-top: 20px;">Đề bài</h3> 
+					<a class="col-md-2 btn pmd-ripple-effect btn-success" id="upload"> Tải tệp lên </a>
 				</div>
 
 				<div class="col-md-6" id="documents">
@@ -54,8 +54,19 @@
 			</div>
 			
 			<div class="col-md-12" style="margin-top: 20px;">
-			<h3 style="margin-top: 20px;">Đáp án/Hướng dẫn giải</h3>
-				<div class="form-group pmd-textfield">
+			<div class="row"> 
+				<h3 class="col-md-4" style="margin-top: 20px;">Đáp án/Hướng dẫn giải</h3>
+				<a class="col-md-2 btn pmd-ripple-effect btn-success" id="upload_answer"> Tải tệp lên </a>
+			</div>
+			<div class="col-md-6" id="documents_answer">
+					<div class="form-group pmd-textfield">
+						<label for="Small">Tải đáp án lên</label>
+						<input type="file" accept=".docx,.doc,.pdf" id="document_answer" required name="document_answer" >
+						 <label id="documents_answer-error" style="display: none" class="error" for="Small"></label>
+					</div>	
+				</div>
+
+				<div class="form-group pmd-textfield" id="as">
 				 <label id="answer-error" style="display: none" class="error" for="Small"></label>
 				  	<textarea class="form-control" id="answer" name="answer"></textarea>
 
@@ -76,7 +87,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#documents').hide();
-
+			$('#documents_answer').hide();
 			$('#form_test2').on('click', '#upload', function(event) {
 				$('#qt').hide();
 				$('#documents').show();
@@ -98,6 +109,24 @@
 				$('#question').attr('name','question');
 			});
 
+
+			$('#form_test2').on('click', '#upload_answer', function(event) {
+				$('#as').hide();
+				$('#documents_answer').show();
+				$(this).html('Soạn đáp án');
+				$(this).attr('id', 'answer');
+				$('#answer').removeAttr('name');
+				$('#document_answer').attr('name','document_answer');
+			});
+
+			$('#form_test2').on('click', '#answer', function(event) {	
+				$('#documents_answer').hide();
+				$('#as').show();
+				$(this).html('Tải đáp án lên');
+				$(this).attr('id', 'upload_answer');
+				$('#document').removeAttr('name');
+				$('#question').attr('name','answer');
+			});
 		
 			$('#form_test2').on('click', '#button_question', function(event) {
 				if(CKEDITOR.instances.question.getData()=='')
