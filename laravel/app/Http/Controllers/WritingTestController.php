@@ -53,7 +53,17 @@ class WritingTestController extends Controller
   	{
   		
   		$write_test= WritingTest::find($rq->wtest_id);
-  		$write_test->content = $rq->content;
+      if ($write_test->is_document) {
+       $write_test->is_document = 0;
+       //delete document
+
+         if(file_exists('document/test/'.$write_test->content))
+            {
+              unlink('document/test/'.$write_test->content);
+            }
+
+      }
+      $write_test->content = $rq->content;
   		$write_test->save();
       return response()->json($write_test);
   		// return redirect('tests/user/created/show/'.$write_test->test_id);
@@ -62,9 +72,50 @@ class WritingTestController extends Controller
   	public function updateExplan(Request $rq)
   	{
   		$write_test= WritingTest::find($rq->wtest_id);
+      if ($write_test->is_document_answer) {
+        if(file_exists('document/test/'.$write_test->explan))
+            {
+              unlink('document/test/'.$write_test->explan);
+            }
+      }
   		$write_test->explan = $rq->explan;
+      $write_test->is_document_answer = 0;
   		$write_test->save();
       return response()->json($write_test);
   		// return redirect('tests/user/created/show/'.$write_test->test_id);
   	}
+
+    public function updateUpload(Request $req)
+    {
+      $write_test= WritingTest::find($req->wt_id);
+      if ($write_test->is_document) {
+        if(file_exists('document/test/'.$write_test->content))
+            {
+              unlink('document/test/'.$write_test->content);
+            }
+      }
+      $nameDoc=time().".".$req->document_qt->getClientOriginalExtension();
+      $req->document_qt->move('document/test/', $nameDoc);
+      $write_test->content=$nameDoc;
+      $write_test->is_document=1;
+      $write_test->save();
+      return $write_test;
+    }
+
+    public function updateUploadExplan(Request $req)
+    {
+       $write_test= WritingTest::find($req->wt_id);
+      if ($write_test->is_document_answer) {
+        if(file_exists('document/test/'.$write_test->explan))
+            {
+              unlink('document/test/'.$write_test->explan);
+            }
+      }
+      $nameDoc=time().".".$req->document_explan->getClientOriginalExtension();
+      $req->document_explan->move('document/test/', $nameDoc);
+      $write_test->explan=$nameDoc;
+      $write_test->is_document_answer=1;
+      $write_test->save();
+      return $write_test;
+    }
 }

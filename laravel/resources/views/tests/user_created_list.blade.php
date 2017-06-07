@@ -8,7 +8,7 @@
 		</nav>
 		@if($listTests)
 			<ul class="list-group pmd-z-depth pmd-list pmd-card-list" style="box-shadow: none;">
-				@foreach ($listTests as $test)
+				@foreach ($listTests->sortByDesc('id') as $test)
 				<li class="list-group-item" style="padding-bottom: 0px; padding-top: 0px;">
 					<a href="{{url('tests/user/created/show/'.$test->id)}}" class="list-group-item list-group-item-action">
 						<p class="hoc2h-list-heading">{{$test->title}}</p>

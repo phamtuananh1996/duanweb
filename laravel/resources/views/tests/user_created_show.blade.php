@@ -1,6 +1,16 @@
 {{-- created by tran.nham on 01.06.2017 --}}
 @extends('tests.layout')
 @section('test_content')
+	
+<script src="{{ asset('plugins/jquery.validate.js') }}"></script>
+<style type="text/css">
+   .error{
+        font-size: 13px !important;
+        color: red !important;
+    }
+ </style>
+	
+
 	<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
 	<div class="col-md-10 col-md-offset-1 main-content" style="margin-bottom: 100px;">
 		<div class="row">
@@ -138,12 +148,17 @@
 				@if($test->test_type == 1)
 					<div id="content" class="col-md-12" style="background: #fff; border-left: solid 2px green;  border-right: solid 2px green;margin-top: 20px; padding-bottom: 20px;">
 						<h2 style="color:green;"><strong><u>Đề bài</u></strong></h2>
+						<div id = "test-content">
 						@if($test->writingTest->is_document)
+						<div class="row">
+							<iframe src="http://docs.google.com/gview?url=http://diendankienthuc.com/dieuchinhgiaodien.xlsx&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>
+						</div>
 						@else
-							<div id = "test-content">
+							
 							<p>{!!$test->writingTest->content!!}</p>
-							</div>
+							
 						@endif
+						</div>
 						<button data-target="#edit-content-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa đề bài</button >
 						<div tabindex="-1" class="modal fade" id="edit-content-dialog" style="display: none;" aria-hidden="true">
 							<div class="modal-dialog">
@@ -159,7 +174,14 @@
 											<h3 style="margin-top: 20px;">Đề bài</h3>
 											<div class="form-group pmd-textfield">
 												<label id="answer-error" style="display: none" class="error" for="Small"></label>
-												<textarea class="form-control" id="content_field">{!!$test->writingTest->content!!}</textarea>
+												<textarea class="form-control" id="content_field">
+												@if ($test->writingTest->is_document)
+													
+												@else
+													{!!$test->writingTest->content!!}
+												@endif
+													
+												</textarea>
 											</div>
 											<script>
 												CKEDITOR.replace('content_field');
@@ -173,16 +195,42 @@
 								</div>
 							</div>
 						</div>
-						<button data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"><span class="glyphicon glyphicon-open"></span> Tải lên</button >
+						<div tabindex="-1" class="modal fade" id="upload-dialog" style="display: none;" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header pmd-modal-bordered">
+									<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+									<h2 class="pmd-card-title-text text-center">Sửa Đề</h2>
+								</div>
+								<div class="modal-body">
+									
+										<form id="upload_qt" enctype="multipart/form-data" class="form-horizontal
+										">
+											<input type="hidden" value="{{$test->writingTest->id}}" name="wt_id" id="wt_id">
+											<input type="file" required accept=".docx,.doc,.pdf" id="document_qt" name="document_qt" class="form-group">
+										</form>
+
+										<button class="btn pmd-ripple-effect btn-primary pull-right" id="save_upload_qt">Lưu thay đổi</button>
+										<button data-dismiss="modal" class="btn pmd-ripple-effect btn-default" type="button">Huỷ bỏ</button>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+						<button data-target="#upload-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"><span class="glyphicon glyphicon-open"></span> Tải lên</button >
 					</div>
 					<div id = "explan" class="col-md-12" style="background: #fff; border-left: solid 2px green;border-right: solid 2px green;margin-top: 20px; padding-bottom: 20px;">
 						<h2 style="color:green;"><strong><u>Gợi ý/Đáp án</u></strong></h2>
-						@if($test->writingTest->is_document)
-						@else
+						<div id="explan-content">
 							@if($test->writingTest->explan)
-								<div id="explan-content">
-									<p>{!!$test->writingTest->explan!!}</p>
-								</div>
+								@if ($test->writingTest->is_document_answer)
+									<iframe src="http://docs.google.com/gview?url={{url('')}}/document/test/{{$test->writingTest->explan}}"  frameborder="0" class="col-md-12" height="500px"></iframe>
+								@else
+									
+										<p>{!!$test->writingTest->explan!!}</p>
+									
+								@endif
+						</div>
 								<button data-target="#edit-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa đáp án</button >
 							@else
 								<p>chưa có gợi ý và đáp án...!</p>
@@ -200,7 +248,13 @@
 											{{csrf_field()}}
 											<div class="form-group pmd-textfield">
 												<label id="answer-error" style="display: none" class="error" for="Small"></label>
-												<textarea class="form-control" id="explan_field" >{!!$test->writingTest->explan!!}</textarea>
+												<textarea class="form-control" id="explan_field" >
+													@if ($test->writingTest->is_document_answer)
+													@else
+													{!!$test->writingTest->explan!!}
+													@endif
+													
+												</textarea>
 											</div>
 											<script>
 												CKEDITOR.replace('explan_field');
@@ -214,8 +268,29 @@
 								</div>
 							</div>
 						</div>
-						@endif
-						<button data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"> <span class="glyphicon glyphicon-open"></span> Tải lên</button >
+						<div tabindex="-1" class="modal fade" id="upload-explan-dialog" style="display: none;" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header pmd-modal-bordered">
+									<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+									<h2 class="pmd-card-title-text text-center">Sửa gợi ý/đáp án</h2>
+								</div>
+								<div class="modal-body">
+									
+										<form id="upload_explan" enctype="multipart/form-data" class="form-horizontal
+										">
+											<input type="hidden" value="{{$test->writingTest->id}}" name="wt_id" id="wt_id">
+											<input type="file" accept=".docx,.doc,.pdf" id="document_explan" name="document_explan" class="form-group">
+										</form>
+
+										<button class="btn pmd-ripple-effect btn-primary pull-right" id="save_upload_explan">Lưu thay đổi</button>
+										<button data-dismiss="modal" class="btn pmd-ripple-effect btn-default" type="button">Huỷ bỏ</button>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+						<button data-target="#upload-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"> <span class="glyphicon glyphicon-open"></span> Tải lên</button >
 						<input type="hidden" id="wtest_id" value="{{$test->writingTest->id}}">
 					</div>
 				@else 
@@ -242,8 +317,12 @@
 			@endif
 		</div>		
 	</div>
+	
 	<script type="text/javascript">
 	$(document).ready(function(event) {
+		$.validator.addMethod('filesize', function(value, element, param) {
+    		return this.optional(element) || (element.files[0].size <= param) 
+		});
 
 		//update content
 		$('#content').on('click','#content-submit',function(event){
@@ -254,10 +333,11 @@
 				//return false
 			} else {
 				$.post('{{url('tests/writingTest/edit')}}',{wtest_id:wtest_id,content:content},function(data,textStatus,xhr) {
-					sucsecc:{
+					success:{
+
 						$('#edit-content-dialog').modal('hide');
 						$('#test-content').html('<p>'+(data.content)+'</p>')
-						$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+						
 					}
 				});
 			}
@@ -271,7 +351,7 @@
 				//return false
 			} else {
 				$.post('{{url('tests/writingTest/edit/explan')}}',{wtest_id:wtest_id,explan:explan},function(data,textStatus,xhr) {
-					sucsecc:{
+					success:{
 						$('#edit-explan-dialog').modal('hide');
 						$('#explan-content').html('<p>'+(data.explan)+'</p>')
 						$("html, body").animate({ scrollTop: $(document).height() }, "slow");
@@ -280,6 +360,81 @@
 			}
 		});
 	});
+
+	//upload document content
+	$('#save_upload_qt').click(function() {
+
+		$('#upload_qt').validate({
+
+			rules: {	
+				document_qt: {
+					required: true,	
+					filesize:4097152 
+				},	
+			},
+			messages: {
+				document_qt: {
+					required: "Không được để trống trường này",
+					filesize: "Kích thước ảnh phải nhỏ hơn 2MB!"
+				}
+			}
+		})
+		var formData = new FormData();
+            formData.append('document_qt', $('#document_qt')[0].files[0]);
+            formData.append('wt_id',$('#wt_id').val());
+		if ($('#upload_qt').valid()) 
+			{
+				$.ajax({
+					url: '{{url('tests/writingTest/edit/upload')}}',
+					type: 'POST',
+					processData: false,
+					contentType: false,
+					data: formData,
+					success: function(result){
+						$('#document_qt').val('');
+						$('#upload-dialog').modal('hide');
+						$('#explan-content').html('<iframe src="http://docs.google.com/gview?url=http://diendankienthuc.com/dieuchinhgiaodien.xlsx&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>')
+					}
+				});
+			}
+	});
+
+	$('#save_upload_explan').click(function() {
+		$('#upload_explan').validate({
+
+			rules: {	
+				document_explan: {
+					required: true,	
+					filesize:4097152 
+				},	
+			},
+			messages: {
+				document_explan: {
+					required: "Không được để trống trường này",
+					filesize: "Kích thước ảnh phải nhỏ hơn 2MB!"
+				}
+			}
+		})
+		var formData = new FormData();
+            formData.append('document_explan', $('#document_explan')[0].files[0]);
+            formData.append('wt_id',$('#wt_id').val());
+		if ($('#upload_explan').valid()) {
+				$.ajax({
+					url: '{{url('tests/writingTest/edit/upload/explan')}}',
+					type: 'POST',
+					processData: false,
+					contentType: false,
+					data: formData,
+					success: function(result){
+						$('#document_explan').val('');
+						$('#upload-explan-dialog').modal('hide');
+						$('#explan-content').html('<iframe src="http://docs.google.com/gview?url=http://diendankienthuc.com/dieuchinhgiaodien.xlsx&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>')
+					}
+				});
+			}
+	});
+
+	
 	function escapeHtml(unsafe) {
     	return unsafe
          .replace(/&/g, "&amp;")
