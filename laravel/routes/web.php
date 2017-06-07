@@ -66,6 +66,8 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	
 	Route::post('savetest', 'WritingTestController@store')->name('save_write_test');
 	Route::post('writingTest/edit','WritingTestController@update');
+	Route::post('writingTest/edit/upload','WritingTestController@updateUpload');
+	Route::post('writingTest/edit/upload/explan','WritingTestController@updateUploadExplan');
 	Route::post('writingTest/edit/explan','WritingTestController@updateExplan');
 	
 	Route::get('user/created',function(){
