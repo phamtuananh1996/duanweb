@@ -1,14 +1,14 @@
 {{-- created by tran.nham on 26.05.2017 --}}
 @extends('layouts.app')
 @section('extend_header')
-	 <link href="{{ asset('css/qa.css') }}" rel="stylesheet">
-	 <link href="{{asset('pmd/components/textfield/css/textfield.css')}}" type="text/css" rel="stylesheet"/>
+	<link href="{{asset('pmd/components/textfield/css/textfield.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/checkbox/css/checkbox.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/select2/css/select2.min.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/select2/css/select2-bootstrap.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/select2/css/pmd-select2.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/radio/css/radio.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{ asset('pmd/components/badge/css/badge.css') }}" type="text/css" rel="stylesheet">
+	<link href="{{ asset('css/qa.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')

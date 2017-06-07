@@ -1,17 +1,45 @@
-.qa-card {
-  margin-top: 20px;
-  box-shadow: none;
-  border-bottom: solid 1px #81c784;
+.slider-header{
+	height:300px;
+	background: #0099CC;
 }
-.qa-card:hover {
-  background: #fafafa;
+.question-user {
+	padding: 10px;
+	margin:10px 0px 20px 0px;
 }
-.post-header {
-	margin:10px 0px 10px 20px;
+.question-list {
+	padding:10px;
+	border-bottom: solid 1px #eee;
 }
-.qa-show {	
-  margin-top: 20px;
-  box-shadow: none;
-  border: solid 1px #81c784;
+.question-header {
+	padding: 10px;
+}
+.question-content{
+	background:#eceff1; margin-top: 20px;
+}
+.name-text{
+	font-size:16px;
+	color: #007E33;
+	font-weight: bold;
+}
+.sub-text {
+	color: #9e9e9e;
+	font-size:13px;
+}
+.question-title {
+	font-size: 20px;
+	color: #337ab7;
+}
+.question-sub-info {
+	color:#00695c; 
+	font-size: 11px;
+	margin:5px 0px 5px 5px;
+}
+.answer-list {
+	box-shadow: none;background:#f7f7f7;
+}
+.comment-list-item{
+	margin-left:50px;
+	padding-top: 10px;
+	border-bottom: solid 1px #eee;
 }
 

@@ -4,7 +4,7 @@
 @section('qa_content')	
 	<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	<script src="{{ asset('plugins/jquery.validate.js') }}"></script>
-	<div class="col-md-8 col-md-offset-1" style="background: #fff;">	<!--main content-->
+	<div class="col-md-8 col-md-offset-1" style="background: #fff; margin-top:70px; margin-bottom: 30px;">	<!--main content-->
 		@include('qaviews.content_header')
 		@foreach ($questions as $question)
 			@include('qaviews.card')
