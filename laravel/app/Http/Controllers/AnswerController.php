@@ -7,6 +7,7 @@ use App\Answer;
 use App\Question;
 use App\Categories;
 use Auth;
+use Carbon;
 class AnswerController extends Controller
 {
      public function store(Request $rq)
@@ -16,6 +17,9 @@ class AnswerController extends Controller
     	$answer->question_id = $rq->question_id;
     	$answer->content = $rq->content;
     	$answer->save();
+    	
+    	//$answer->created_at=Carbon::parse($answer->created_at)->diffForHumans();
+    	
         return response()->json($answer);
     }
 }

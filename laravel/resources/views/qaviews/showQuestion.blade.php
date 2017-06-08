@@ -15,7 +15,7 @@
 	<!--question detail-->
 	<div class="pmd-card pmd-card-media-inline pmd-card-default pmd-z-depth question-content" >
 		<!--Question header-->
-		<div class="question-header">
+		<div class="question-header" >
 			<div class="media-left">
 				@if ($question->user->avatar)
                     <img class="img-avt" src="{{ asset('') }}/images/users/{{$question->user->avatar}}" width="40" height="40" alt="avatar">
@@ -164,7 +164,7 @@
 	</div><!--question detail-->
 
 	<!--Answers list-->
-	@if($question->answers->count())
+	
 	<div class="answer-list">
 		<ul class="list-group" id="list_cmt">
 			@foreach ($question->answers as $answer)
@@ -179,7 +179,7 @@
 					<span class="list-group-item-text sub-text"><i><strong>Học {{$answer->user->class}}</strong> đã trả lời {{$answer->created_at->diffForHumans()}}</i></span>
 
 					<p id="answer-content">{!!$answer->content!!}</p>
-
+					<input type="hidden" name="answer_id" id="answer_id" value="{{$answer->id}}">
 					<p class="question-sub-info">
 						<span id="count_vote_answer">{{$answer->voteAnswer->count()}}</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;
 						<span id="answer_comment_count">{{$answer->comments->count()}}</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>
@@ -251,7 +251,7 @@
 			@endforeach
 		</ul>
 	</div> <!--Answers list-->
-	@endif
+	
 </div><!--Main content-->
 @include('qaviews.sidebar')
 
@@ -287,6 +287,7 @@
 
 			//ấn follows
 			$('#qa').on('click', '#follows', function(event) {
+
 				var question_id=$('#question_id').val();
 				
 				$.post('{{url('qa/ajax/follows')}}', {question_id: question_id}, function(data, textStatus, xhr) {
@@ -322,7 +323,7 @@
 						{
 							CKEDITOR.instances.answer_field.setData('');
 							$('#answer_count').html(answer_count+1);
-							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body"> <p class="list-group-item-heading name-text">{{Auth::user()->user_name}}</p> <p class="list-group-item-text sub-text"><i>Đã trả lời '+data.created_at+'</i></p><p class="question-content">'+data.content+'</p> <p class"question-sub-info"> <span id="count_vote_answer">0 </span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;<span id="answer_comment_count">0 </span> &nbsp;<span class="glyphicon glyphicon-comment"></span><button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button> </p> <hr style="border-bottom: solid 1px #bdbdbd ;"> <div id="group_comments"> </div> <div id="commentfield"> <form method="POST" action="{{url('/qa/answer/comment')}}" class="form-group" id="addCommentForm"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Viết Trả lời</label> <textarea style="background: #fff;" rows="2" name="comment_content" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </form> </div> </div> </li>');
+							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <span class="list-group-item-text sub-text"><i><strong>Học {{Auth::user()->class}}</strong> đã trả lời '+data.created_at+'</i></span> <p id="answer-content">'+data.content+'</p> <input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button> </p> </div> <div id="group_comments"> <div id="commentfield" style="margin:10px 0px 30px 55px;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 40px;" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </div> </div> </li>');
 
 							$('#answer-dialog').modal('hide');
 							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
@@ -354,10 +355,12 @@
 						success:{
 
 							add_answer_comment_count.html(answer_comment_count+1);
-							add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <p class="list-group-item-text sub-text"><i>Đã bình luận '+data.created_at+'</i></p> <p class"question_content">'+escapeHtml(data.content)+'</p><p class="question-sub-info"><span id="count_like">0 </span> <span class="glyphicon glyphicon-thumbs-up"></span><button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button></p> </div> <hr style="border-bottom: solid 1px #e0e0e0; margin-top:-10px;"> </div>');
-
-							comment_content.val("");
-							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <p class="list-group-item-text sub-text"><i>Đã bình luận '+data.created_at+'</i></p> <p class"question_content">'+escapeHtml(data.content)+'</p><p class="question-sub-info"><span id="count_like">0 </span> <span class="glyphicon glyphicon-thumbs-up"></span><button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button></p> </div> <hr style="border-bottom: solid 1px #e0e0e0; margin-top:-10px;"> </div>'
+							).find('div:last').offset().top;
+							
+								 $('html,body').animate({scrollTop:top}, 'slow'); 
+								 comment_content.val("");
+							
 						}
 					});
 					
@@ -373,19 +376,20 @@
 
 			//ấn vote comment
 			$('#list_cmt').on('click', '#vote_answer', function(event) {
+				
 				var answer_id=$(this).parent().parent().find('#answer_id').val();
 				var count_vote=parseInt($(this).parent().find('#count_vote_answer').html());
 
 				var count_vote_answer=$(this).parent().find('#count_vote_answer');
-
+				count_vote_answer.html(count_vote+1);
 				$(this).attr('id', 'un_vote_answer');
 				$(this).html('Bỏ vote');
 				$.post('{{url('qa/voteanswer')}}', {answer_id: answer_id}, function(data, textStatus, xhr) {
 
 					success:
 					{
-						count_vote_answer.html(count_vote+1);
-
+						
+						
 					}
 				});
 
@@ -393,18 +397,20 @@
 			});
 
 			$('#list_cmt').on('click', '#un_vote_answer', function(event) {
+				
 				var answer_id=$(this).parent().parent().find('#answer_id').val();
 				var count_vote=parseInt($(this).parent().find('#count_vote_answer').html());
 
 				var count_vote_answer=$(this).parent().find('#count_vote_answer');
-
+				count_vote_answer.html(count_vote-1);
 				$(this).attr('id', 'vote_answer');
 				$(this).html('Vote');
 				$.post('{{url('qa/unvoteanswer')}}', {answer_id: answer_id}, function(data, textStatus, xhr) {
 
 					success:
 					{
-						count_vote_answer.html(count_vote-1);
+						
+						
 
 					}
 					
@@ -414,16 +420,17 @@
 			});
 
 			//ấn like
-			$('#group_comments').on('click', '#like', function(event) {
+			$('#list_cmt').on('click', '#like', function(event) {
 				var count_like=parseInt($(this).parent().find('#count_like').html());
 				var answer_comment_id=$(this).data('answer_comment_id');
 				var count=$(this).parent().find('#count_like');
+				count.html(count_like+1);
 				$(this).attr('id', 'dislike');
 				$(this).html('Bỏ vote');
 				$.post('{{url('qa/ajax/like')}}', {answer_comment_id:answer_comment_id}, function(data, textStatus, xhr) {
 					success:
 					{
-						count.html(count_like+1);
+						
 
 					}
 				});
@@ -433,16 +440,17 @@
 
 			//ấn dislike
 
-			$('#group_comments').on('click', '#dislike', function(event) {
+			$('#list_cmt').on('click', '#dislike', function(event) {
 				var count_like=parseInt($(this).parent().find('#count_like').html());
 				var answer_comment_id=$(this).data('answer_comment_id');
 				var count=$(this).parent().find('#count_like');
+				count.html(count_like-1);
 				$(this).attr('id', 'like');
 				$(this).html('Vote');
 				$.post('{{url('qa/ajax/dislike')}}', {answer_comment_id:answer_comment_id}, function(data, textStatus, xhr) {
 					success:
 					{
-						count.html(count_like-1);
+						
 
 					}
 				});
@@ -507,4 +515,4 @@
 	</script>
 @endsection
 
-
+ 
