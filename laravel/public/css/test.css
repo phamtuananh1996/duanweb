@@ -1,0 +1,10 @@
+.main-content{ background: #fff;padding:0px;}
+.section {border:solid 1px #4caf50;}
+.main-title {color: #eee; font-size:20px; width: 100%; padding:10px;background:#4caf50}
+.test-title {font-size: 18px;}
+.test-sidebar{padding:0px; background: #fff;}
+
+.test-info {border:dotted 1px #007E33; padding: 20px;background: #fafafa;}
+.comments-list {
+	padding:10px;
+}

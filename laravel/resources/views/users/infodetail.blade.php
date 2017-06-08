@@ -1,17 +1,30 @@
 @extends('users.info')
 @section('info_content')
-	<div class="bs-callout bs-callout-danger">
-		<h4>Giới thiệu về bản thân</h4>
-		<p>{!!$user->description!!}</p>
-		
-	</div>
-	<div class="bs-callout bs-callout-danger">
-		<h4>Trình độ</h4>
-		<p>Toán</p>
-		<div class="progress-rounded progress pmd-progress"><div class="progress-bar progress-bar-success" style="width: 34%;"></div></div>
-		<p>Lý</p>
-		<div class="progress-rounded progress pmd-progress"><div class="progress-bar progress-bar-success" style="width: 50%;"></div></div>
-		<p>Hoá</p>
-		<div class="progress-rounded progress pmd-progress"><div class="progress-bar progress-bar-success" style="width:45%;"></div></div>
+	<div class="row info_content">
+		<div class="col-md-12 info-section">
+			<p class="info-title">{{$user->user_name}}</p>
+			<p>{!!$user->description!!}</p>
+		</div>
+		<div class="col-md-12 info-section">
+			<p class="info-title">Hoạt động</p>
+			<div class="time-line">
+				<p class="time-line-header"><span>Tháng 6 năm 2017</span></p>
+				<p>{!!$user->description!!}</p>
+				<p>{!!$user->description!!}</p>
+				<p>{!!$user->description!!}</p>
+			</div>
+			<div class="time-line">
+				<p class="time-line-header"><span>Tháng 5 năm 2017</span></p>
+				<p>{!!$user->description!!}</p>
+			</div>
+			<div class="time-line">
+				<p class="time-line-header"><span>Tháng 4 năm 2017</span></p>
+				<p>{!!$user->description!!}</p>
+			</div>
+			<div class="time-line">
+				<p class="time-line-header"><span>Tháng 3 năm 2017</span></p>
+				<p>{!!$user->description!!}</p>
+			</div>
+		</div>
 	</div>
 @endsection

@@ -11,7 +11,7 @@
     }
     
 </style>
-<form class="form-horizontal role="form" method="POST" action="{{url('/users/infoEdit')}}" enctype="multipart/form-data" id="form_edit" style="padding:30px; border:solid 1px #bdbdbd; margin-right: 15px; margin-top: 30px; background: white;">
+<form class="form-horizontal role="form" method="POST" action="{{url('/users/infoEdit')}}" enctype="multipart/form-data" id="form_edit" style="padding:30px; border:solid 1px #bdbdbd; margin-top: 30px; background: white;">
 	{{csrf_field()}}
 	<div class="row">
 		<div class="col-md-6">

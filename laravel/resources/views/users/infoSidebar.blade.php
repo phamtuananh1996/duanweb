@@ -1,4 +1,4 @@
-<div class="col-md-3" style="margin-top: 20px;"><!--SideBar-->
+<div class="col-md-3"><!--SideBar-->
 	<div class="list-group">
 		<a href="#" class="list-group-item active">
 			Trang Cá Nhân

@@ -1,0 +1,18 @@
+.info_content {
+	background: #fff;padding: 10px;margin-top: 20px;
+}
+.info-section { border-left:solid 3px #ff4444;border-bottom:dotted 1px #ff4444; margin-bottom:20px; }
+.info-title {font-size: 20px; color: #007E33;font-weight: bold;}
+.time-line { margin-bottom: 30px; }
+.time-line-header { width: 100%; 
+   text-align: center; 
+   border-bottom: 1px solid green; 
+   line-height: 0.1em;
+   margin: 10px 0 20px; 
+}
+.time-line-header>span{ 
+    background:#fff; 
+    padding:0 10px; 
+    font-size: 15px;
+    color: blue;
+}

@@ -9,16 +9,17 @@
 	<link href="{{asset('pmd/components/select2/css/select2-bootstrap.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/select2/css/pmd-select2.css')}}" type="text/css" rel="stylesheet"/>
 	<link href="{{asset('pmd/components/radio/css/radio.css')}}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/user.css') }}" rel="stylesheet">
 	<script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
 @endsection
 
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1" style="margin-top: 50px; height: 800px;"> 
+		<div class="col-md-12 " style="margin-top: 80px; height: 800px;"> 
 			<div class="row">
 				@include('users.infoSidebar')
-				<div class="col-md-9" style=" height: 700px; margin-top:-5px;"> {{-- main content --}}
+				<div class="col-md-9"> {{-- main content --}}
 					@include('users.info_header')
 	                @yield('info_content')
 				</div>

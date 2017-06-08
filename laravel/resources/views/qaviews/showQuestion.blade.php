@@ -3,7 +3,7 @@
 <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <script src="{{ asset('plugins/jquery.validate.js') }}"></script>
 <!--main content-->
-<div class="col-md-8 col-md-offset-1" style="margin-bottom: 50px;background: white;">	
+<div class="col-md-10" style="margin-bottom: 50px;background: white;">	
 	@include('qaviews.content_header')
 	<!--qestion tags-->
 	<div class="pmd-chip pmd-chip-no-icon">Toan 11 <a class="pmd-chip-action" href="javascript:void(0);">
