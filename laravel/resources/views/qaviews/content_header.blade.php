@@ -9,7 +9,7 @@
 		<div class="media-body media-middle">
 			<a class="name-text" href="#">{{Auth::user()->user_name}}</a><br>
 		</div>
-		<button style="margin-left:-10px;margin-top: 10px; font-size: 18px;" data-target="#form-dialog" data-toggle="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-link" type="button">Đặt câu hỏi của bạn</button>
+		<button style="margin-left: 40px; font-size: 16px;" data-target="#form-dialog" data-toggle="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-link" type="button">Bạn muốn hỏi gì?</button>
 		<div tabindex="-1" class="modal fade" id="form-dialog" style="display: none;" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">

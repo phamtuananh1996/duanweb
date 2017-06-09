@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AnswerComment;
 use Auth;
+use Carbon\Carbon;
 class AnswerCommentController extends Controller
 {
     public function store(Request $rq)
@@ -14,7 +15,7 @@ class AnswerCommentController extends Controller
     	$comment->answer_id = $rq->answer_id;
     	$comment->content = $rq->comment_content;
     	$comment->save();
-    	//$comment->created_at=$comment->created_at->diffForHumans();
+    	$comment->created_at=$comment->created_at->diffForHumans();
     	return response()->json($comment);
     }
 }

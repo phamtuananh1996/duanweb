@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Question;
 use App\Categories;
 use Auth;
+use Carbon\Carbon;
 class QuestionController extends Controller
 {
     public function index()
@@ -36,13 +37,16 @@ class QuestionController extends Controller
         //     $question->as_anonymously = false;
         // }
         $question->save();
-
+         
         $categories =Categories::all();
         return redirect('qa/show/'.$question->id);
     }
 
     public function show($id) {
+       
         $question = Question::find($id);
+        $question->view_count++;
+        $question->save();
         $categories =Categories::all();
         return view('qaviews.showQuestion',compact('question','categories'));
     }
@@ -56,7 +60,7 @@ class QuestionController extends Controller
         } else {
             $question->is_resolved = true;
         }
-        $question->save();
+        $question->save(); 
         return response()->json($question);
     }
     
@@ -69,5 +73,13 @@ class QuestionController extends Controller
        return response()->json($question);
     }
 
+    public function delete(Request $rq)
+    {
+        $question = Question::find($rq->question_id);
+        $question->delete();
+        $categories = Categories::all();
+        $questions = Question::all()->sortByDesc('id');
+        return view('qaviews.index',compact('questions','categories'));
+    }
     
 }

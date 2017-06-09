@@ -5,11 +5,13 @@
 .question-user {
 	padding: 10px;
 	margin:10px 0px 20px 0px;
+	background:#2BBBAD;
 }
 .question-list {
 	padding:10px;
 	border-bottom: solid 1px #eee;
 }
+.question-list:hover{background:#e8f5e9;}
 .question-header {
 	padding: 10px;
 }
@@ -32,11 +34,17 @@
 .question-sub-info {
 	color:#00695c; 
 	font-size: 11px;
-	margin:5px 0px 5px 5px;
+	argin-top: 0.6em; margin-bottom: 0em;
+	padding: 0px;
+}
+.answer-content{
+	color: black;
 }
 .answer-list {
-	box-shadow: none;background:#f7f7f7;
+	box-shadow: none;
+	background:#fcfcfc;
 }
+.list-group-item {background:#fcfcfc; }
 .comment-list-item{
 	margin-left:50px;
 	padding-top: 10px;

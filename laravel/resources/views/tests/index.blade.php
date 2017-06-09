@@ -13,7 +13,7 @@
 								<i class="material-icons media-left media-middle">insert_drive_file</i> 
 								<div class="media-body" style="border-bottom: dotted 1px green; padding-bottom:5px;">
 									<a class="list-group-item-heading test-title" href="{{url('/tests/show/'.$test->id)}}">{{$test->title}}</a>
-									<span class="list-group-item-text test-subtext">Đăng bởi {{$test->user->name}}  | {{$test->category->title}} | {{$test->created_at->diffForHumans()}}</span>
+									<span class="list-group-item-text test-subtext">Đăng bởi <span style="color:green;">{{$test->user->user_name}}</span>  | <span style="color:#FF8800;">{{$test->category->title}}</span> | {{$test->created_at->diffForHumans()}}</span>
 								</div>
 							</li>
 						@endif

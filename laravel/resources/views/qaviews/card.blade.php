@@ -7,7 +7,7 @@
 		</div>
 		<div class="media-body media-middle">
 			<p class="list-group-item-heading name-text">{{$question->user->user_name}}</p>
-			<p class="sub-text">Đăng {{$question->created_at->diffForHumans()}} ....tại <span style="color: #e65100 ;"> {{$question->category->title}}</span></p>
+			<p class="sub-text">Đăng {{$question->created_at->diffForHumans()}} tại <span style="color: #e65100 ;"> {{$question->category->title}}</span></p>
 		</div>
 	</div>
 	<a class="question-title" href="{{ url('/qa/show/'.$question->id) }}">{{$question->question_title}}
