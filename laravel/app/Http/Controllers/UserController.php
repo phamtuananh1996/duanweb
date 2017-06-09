@@ -53,10 +53,7 @@ class UserController extends Controller
                 {
                 	unlink('images/users/'.$user->avatar);
                 }
-
-                $user->avatar=$nameImage;
-                
-               
+                $user->avatar=$nameImage; 
              }
 
            $user->save();

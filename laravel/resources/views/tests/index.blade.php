@@ -7,7 +7,7 @@
 			<div class="section">
 				<p class="main-title"><span class="glyphicon glyphicon-folder-open"></span> &nbsp;Đề thi nổi bật</p>
 				<ul class="list-group pmd-z-depth pmd-list pmd-card-list" style="box-shadow: none;">
-					@foreach($tests as $test)
+					@foreach($tests->sortByDesc('id') as $test)
 						@if($test->state == 1)
 							<li class="list-group-item">
 								<i class="material-icons media-left media-middle">insert_drive_file</i> 

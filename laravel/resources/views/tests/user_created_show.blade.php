@@ -48,7 +48,7 @@
 										<h2 class="pmd-card-title-text text-center">Sửa Đề</h2>
 									</div>
 									<div class="modal-body">
-										<form class="form-horizontal" method="POST" action="{{url('tests/edit')}}">
+										<form id="submit_edit" class="form-horizontal" method="POST" action="{{url('tests/edit')}}">
 											{{csrf_field()}}
 											<input type="hidden" name="test_id" value="{{$test->id}}" >
 											<div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
@@ -114,7 +114,7 @@
 													</select>
 												</div>
 											</div>
-											<button   class="btn pmd-ripple-effect btn-primary pull-right" type="submit">Lưu thay đổi</button>
+											<button  class="btn pmd-ripple-effect btn-primary pull-right" type="submit">Lưu thay đổi</button>
 											<button data-dismiss="modal" class="btn pmd-ripple-effect btn-default" type="button">Huỷ bỏ</button>
 										</form>
 									</div>
@@ -295,7 +295,11 @@
 						</div>
 					@else 
 						<div class="col-md-12" style="background: #fff; border-left: solid 2px green; margin:20px 0px;">
-							<h2 style="padding:10px; margin-bottom: 20px; background: #00C851; width: 10%;">Đề Thi</h2>
+						<div class="row">
+							
+							<a href="{{url('tests/edit/test')}}/{{$test->id}}" class="col-md-2" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"></span> Sửa</a>
+
+						</div>
 							@foreach($test->multiChoiceTests as $question)
 							<div class="row">
 								<div class="col-md-12">
@@ -319,6 +323,45 @@
 	</div>
 	<script type="text/javascript">
 	$(document).ready(function(event) {
+
+		 jQuery.validator.addMethod("check_type", function(value, element) {
+        	return value!='Chọn Thể Loại';
+   			});
+
+		$('#submit_edit').validate(
+			{
+				rules:{
+					category:{
+						check_type:true
+					},
+				},
+				messages:
+				{
+					category:
+					{
+						check_type:" Chọn 1 thể loại ",
+					},
+
+					title:
+					{
+						required:"Tiêu đề không được để trống!",
+					},
+
+					total_time:{
+						required:"Tổng thời gian không được để trống!",
+						min:"Tổng thời gian phải lớn hơn 0"
+					},
+
+					number_of_questions:{
+						required:"Số câu hỏi không được để trống!",
+						min:"Số câu hỏi phải lớn hơn 0"
+					},
+
+
+				}
+			});
+
+
 		$.validator.addMethod('filesize', function(value, element, param) {
     		return this.optional(element) || (element.files[0].size <= param) 
 		});

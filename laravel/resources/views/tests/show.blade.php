@@ -2,6 +2,14 @@
 @extends('tests.layout')
 @section('test_content')
 <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
+<script src="{{ asset('plugins/jquery.validate.js') }}"></script>
+<style type="text/css">
+  	.error{
+        font-size: 13px !important;
+        color: red !important;
+    	}
+    
+</style>
 <div class="row">
 	<div class="col-md-9 main-content">
 		<div class="test-info">
@@ -27,7 +35,7 @@
 		</div>
 		<div class="row">
 			<button style="margin-top: 20px;" data-target="#list-test-options-dialog" data-toggle="modal" type="button" class="btn btn-primary col-md-2 col-md-offset-5"> Vào làm bài </button >
-				<form method="POST" action="{{url('/tests/usertest')}}">
+				<form method="POST" action="{{url('/tests/usertest')}}" id="submit_edit">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="test_id" value="{{$test->id}}">
 					<div tabindex="-1" class="modal fade" id="list-test-options-dialog" style="display: none;" aria-hidden="true">
@@ -98,6 +106,10 @@
 	<script type="text/javascript">
 
 		$(document).ready(function() {
+			$('#submit_edit').validate({
+
+			});
 		});
+
 	</script>
 	@endsection
