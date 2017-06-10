@@ -15,7 +15,8 @@ class CreateUserWritingTestAnswersTable extends Migration
     {
         Schema::create('user_writing_test_answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_test_id');
+            $table->integer('user_test_id')->unsigned();
+            $table->foreign('user_test_id')->references('id')->on('user_tests')->onDelete('cascade');
             $table->text('result_content');
             $table->boolean('is_checked')->default(false);
             $table->timestamps();

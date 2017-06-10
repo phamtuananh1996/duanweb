@@ -15,7 +15,8 @@ class CreateMultiChoiceTestChoicesTable extends Migration
     {
         Schema::create('multi_choice_test_choices', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('multi_choice_test_id');
+            $table->integer('multi_choice_test_id')->unsigned();
+            $table->foreign('multi_choice_test_id')->references('id')->on('multi_choice_tests')->onDelete('cascade');
             $table->string('title');
             $table->boolean('is_answer')->default(0);
             $table->timestamps();

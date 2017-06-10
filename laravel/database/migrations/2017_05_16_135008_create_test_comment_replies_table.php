@@ -15,7 +15,8 @@ class CreateTestCommentRepliesTable extends Migration
     {
         Schema::create('test_comment_replies', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('test_comment_id');
+            $table->integer('test_comment_id')->unsigned();
+            $table->foreign('test_comment_id')->references('id')->on('test_comments')->onDelete('cascade');
             $table->integer('user_id');
             $table->text('content');
             $table->timestamps();

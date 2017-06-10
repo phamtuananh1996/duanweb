@@ -16,7 +16,8 @@ class CreateTableVoteAnswers extends Migration
         Schema::create('vote_answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('answer_id');
+            $table->integer('answer_id')->unsigned();
+            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
             $table->timestamps();
         });
     }

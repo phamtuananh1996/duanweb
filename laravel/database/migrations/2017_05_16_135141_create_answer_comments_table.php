@@ -16,7 +16,8 @@ class CreateAnswerCommentsTable extends Migration
         Schema::create('answer_comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('answer_id');
+            $table->integer('answer_id')->unsigned();
+            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
             $table->text('content');
             $table->integer('vote_count')->default(0);
             $table->timestamps();

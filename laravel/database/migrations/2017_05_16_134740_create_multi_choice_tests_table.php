@@ -15,7 +15,8 @@ class CreateMultiChoiceTestsTable extends Migration
     {
         Schema::create('multi_choice_tests', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('test_id');
+            $table->integer('test_id')->unsigned();
+            $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->string('title');
             $table->float('max_point')->nullable();
             $table->float('question_time')->nullable();

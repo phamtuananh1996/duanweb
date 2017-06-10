@@ -25,10 +25,11 @@ class Answer extends Model
       return $this->hasMany('App\voteAnswer','answer_id','id');
    }
 
-   public function delete()
-   {
-     $this->comments()->delete();
-     $this->voteAnswer()->delete();
-     parent::delete();
-   }
+  
+   // public function delete()
+   // {
+   //   $this->comments()->delete();
+   //   $this->voteAnswer()->delete();
+   //   parent::delete();
+   // }
 }

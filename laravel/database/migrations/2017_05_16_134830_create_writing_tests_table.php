@@ -15,7 +15,8 @@ class CreateWritingTestsTable extends Migration
     {
         Schema::create('writing_tests', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('test_id');
+            $table->integer('test_id')->unsigned();
+            $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->text('content');
             $table->text('explan')->nullable();
             $table->timestamps();

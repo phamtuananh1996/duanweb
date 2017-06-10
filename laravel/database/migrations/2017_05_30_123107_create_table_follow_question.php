@@ -16,7 +16,8 @@ class CreateTableFollowQuestion extends Migration
         Schema::create('follow_questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('question_id');
+            $table->integer('question_id')->unsigned();
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->timestamps();
         });
     }
