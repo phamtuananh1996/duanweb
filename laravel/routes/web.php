@@ -39,7 +39,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'ajax'], function() {
 	Route::post('checkemail', 'Auth\RegisterController@ajaxCheckEmail');
 	Route::post('checkusername', 'Auth\RegisterController@ajaxCheckUserName');
-	Route::post('savetest','MultiChoiceTestController@ajaxSaveTest');
+	Route::post('savetests','MultiChoiceTestController@ajaxSaveTest');
 });
 
 Route::group(['prefix' => 'users'],function(){

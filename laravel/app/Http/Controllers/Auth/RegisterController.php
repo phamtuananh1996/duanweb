@@ -133,7 +133,7 @@ class RegisterController extends Controller
         //gửi mail
 
         $data=$req->toArray();
-        $data['link']=$_SERVER['REDIRECT_URL'].'/comfirm?code='. $user->code.'&email='.$req->email;
+        $data['link']=env('APP_URL').'register/comfirm?code='. $user->code.'&email='.$req->email;
         Mail::send('email.register_comfirm',$data, function ($message) use ($data){
             $message->from('phamtuananh1110@gmail.com', 'Hoc2H');
           

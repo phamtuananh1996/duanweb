@@ -49,7 +49,7 @@ class UserController extends Controller
                 $nameImage=time().".".$req->avatar->getClientOriginalExtension();
                 $req->avatar->move('images/users/', $nameImage);
                 //nếu ảnh đã tồn tại thì xóa ảnh cũ thay bằng ảnh mới
-                if(file_exists('images/users/'.$user->avatar)&&$user->avatar!='profile.jqg')
+                if(file_exists('images/users/'.$user->avatar)&&$user->avatar!='profile.png')
                 {
                 	unlink('images/users/'.$user->avatar);
                 }

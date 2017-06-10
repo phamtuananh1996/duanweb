@@ -61,7 +61,7 @@ class LoginController extends Controller
         }
         if(Auth::attempt(['email' => $req->email, 'password' => $req->password,'status'=>1],$remember) or Auth::attempt(['user_name' => $req->email, 'password' => $req->password,'status'=>1],$remember))
         {
-            return redirect('home');
+            return redirect('/');
         }
         else
         {

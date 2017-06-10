@@ -139,9 +139,10 @@
 			
 			
 			
-			if($(this).parent().parent().parent().find('#is_correct').is(":checked"))
+			if($(this).parent().parent().parent().find('input:last').is(":checked"))
 			{
-				$(this).parent().parent().parent().parent().find('#is_correct').prop({
+				
+				$(this).parent().parent().parent().parent().parent().find("input:eq(1)").prop({
 					'checked': 'checked',	
 				});
 			}

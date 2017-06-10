@@ -151,7 +151,7 @@
 							<div id = "test-content">
 							@if($test->writingTest->is_document)
 							<div class="row">
-								<iframe src="http://docs.google.com/gview?url=http://diendankienthuc.com/dieuchinhgiaodien.xlsx&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>
+								<iframe src="http://docs.google.com/gview?url={{env('APP_URL')}}/{{$test->writingTest->content}}&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>
 							</div>
 							@else
 								
@@ -224,7 +224,7 @@
 							<div id="explan-content">
 								@if($test->writingTest->explan)
 									@if ($test->writingTest->is_document_answer)
-										<iframe src="http://docs.google.com/gview?url={{url('')}}/document/test/{{$test->writingTest->explan}}"  frameborder="0" class="col-md-12" height="500px"></iframe>
+										<iframe src="http://docs.google.com/gview?url={{env('APP_URL')}}/{{$test->writingTest->explan}}&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>
 									@else
 										
 											<p>{!!$test->writingTest->explan!!}</p>
@@ -435,7 +435,7 @@
 					success: function(result){
 						$('#document_qt').val('');
 						$('#upload-dialog').modal('hide');
-						$('#explan-content').html('<iframe src="http://docs.google.com/gview?url=http://diendankienthuc.com/dieuchinhgiaodien.xlsx&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>')
+						$('#test-content').html('<iframe src="http://docs.google.com/gview?url={{env('APP_URL')}}/'+result.content+'&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>')
 					}
 				});
 			}
@@ -470,7 +470,7 @@
 					success: function(result){
 						$('#document_explan').val('');
 						$('#upload-explan-dialog').modal('hide');
-						$('#explan-content').html('<iframe src="http://docs.google.com/gview?url=http://diendankienthuc.com/dieuchinhgiaodien.xlsx&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>')
+						$('#explan-content').html('<iframe src="<iframe src="http://docs.google.com/gview?url={{env('APP_URL')}}/'+result.explan+'&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>')
 					}
 				});
 			}

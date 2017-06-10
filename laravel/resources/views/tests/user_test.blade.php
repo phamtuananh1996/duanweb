@@ -1,4 +1,4 @@
-{{-- created by tran.nham on 24.05.2017 --}}
+ {{-- created by tran.nham on 24.05.2017 --}}
 @extends('tests.layout')
 @section('test_content')
 	<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
@@ -29,6 +29,7 @@
 				<div class="col-md-12" style="background: #fff; border:solid 2px green; margin-top: 20px; padding: 40px;">
 					<h2 style=" background: #00C851; padding: 10px 0px 10px 10px; width: 8%;"><strong>Đề bài</strong></h2>
 					@if($test->writingTest->is_document)
+						<iframe src="http://docs.google.com/gview?url={{env('APP_URL')}}/{{$test->writingTest->content}}&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>
 					@else
 						<p>{!!$test->writingTest->content!!}</p>
 					@endif

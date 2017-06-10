@@ -12,13 +12,13 @@ class AnswerController extends Controller
 {
      public function store(Request $rq)
     {
+        $answer=Answer::find(1);
+
     	$answer = new Answer;
     	$answer->user_id = Auth::user()->id;
     	$answer->question_id = $rq->question_id;
     	$answer->content = $rq->content;
     	$answer->save();
-    	
-    	$answer->created_at=Carbon::parse($answer->created_at)->diffForHumans();
         return response()->json($answer);
     }
 }

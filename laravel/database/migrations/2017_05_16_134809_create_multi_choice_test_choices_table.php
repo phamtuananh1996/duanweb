@@ -17,7 +17,7 @@ class CreateMultiChoiceTestChoicesTable extends Migration
             $table->increments('id');
             $table->integer('multi_choice_test_id');
             $table->string('title');
-            $table->boolean('is_answer');
+            $table->boolean('is_answer')->default(0);
             $table->timestamps();
         });
     }
