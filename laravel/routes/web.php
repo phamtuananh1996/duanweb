@@ -40,6 +40,8 @@ Route::group(['prefix' => 'ajax'], function() {
 	Route::post('checkemail', 'Auth\RegisterController@ajaxCheckEmail');
 	Route::post('checkusername', 'Auth\RegisterController@ajaxCheckUserName');
 	Route::post('savetests','MultiChoiceTestController@ajaxSaveTest');
+	Route::post('deletechoicetest','MultiChoiceTestController@ajaxDeleteChoiceTest');
+	Route::post('savechoicetests','MultiChoiceTestController@ajaxSaveChoiceTest');
 });
 
 Route::group(['prefix' => 'users'],function(){

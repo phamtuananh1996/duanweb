@@ -130,7 +130,7 @@
 		<div class="col-md-6">
 			<div class="form-group pmd-textfield">
 				<label for="Small">ảnh đại diện</label>
-				<input type="file" accept="image/*" max="" name="avatar" id="avatar" >
+				<input type="file" accept="image/*" name="avatar" id="avatar" >
 			</div>	
 		</div>
 		<div class="col-md-12" style="margin-top: 15px;">
@@ -178,7 +178,7 @@
 			rules:{
 				avatar:
 				{
-					filesize:4097152 
+					filesize:2000000, 
 				}
 			},
 			messages:{

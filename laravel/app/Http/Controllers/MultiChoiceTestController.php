@@ -23,7 +23,8 @@ class MultiChoiceTestController extends Controller
        $multiChoiceTest->max_point = $req->max_point;
         $multiChoiceTest->save();
        foreach ($req->answer as $key => $value) {
-
+          if(trim($value)!='')
+          {
            $MultiChoiceTestChoice=new MultiChoiceTestChoice;
            $MultiChoiceTestChoice->multi_choice_test_id=$multiChoiceTest->id;
            $MultiChoiceTestChoice->title=$value;
@@ -39,6 +40,50 @@ class MultiChoiceTestController extends Controller
             }
 
             $MultiChoiceTestChoice->save();
+          }
+            
+       }
+       $multiChoiceTest->save();
+       //added by nham on 1.06.2017 -- update test state to release this test on index page
+       $test = Test::find($req->test_id);
+       $test->state = 1;
+       $test->save();
+    }
+
+    public function ajaxDeleteChoiceTest(Request $req)
+    {
+      $MultiChoiceTest=Test::find($req->test_id)->multiChoiceTests();
+      $MultiChoiceTest->delete();
+
+    }
+
+     public function ajaxSaveChoiceTest(Request $req)
+    {
+      
+       $multiChoiceTest = new MultiChoiceTest;
+       $multiChoiceTest->test_id = $req->test_id;
+       $multiChoiceTest->title = $req->title;
+       $multiChoiceTest->max_point = $req->max_point;
+        $multiChoiceTest->save();
+       foreach ($req->answer as $key => $value) {
+          if(trim($value)!='')
+          {
+           $MultiChoiceTestChoice=new MultiChoiceTestChoice;
+           $MultiChoiceTestChoice->multi_choice_test_id=$multiChoiceTest->id;
+           $MultiChoiceTestChoice->title=$value;
+           $MultiChoiceTestChoice->save();
+            if($req->is_correct==$key)
+            {
+                 $MultiChoiceTestChoice->is_answer=1;
+                 $multiChoiceTest->id_MultiChoiceTestChoice_correct=$MultiChoiceTestChoice->id;
+            }
+            else
+            {
+                $MultiChoiceTestChoice->is_answer=0;
+            }
+
+            $MultiChoiceTestChoice->save();
+          }
             
        }
        $multiChoiceTest->save();

@@ -27,7 +27,7 @@
 		<h4><strong>Thời Gian:</strong>{{$test->total_time}} phút</h4>
 		<hr style="border-bottom: solid 1px #9e9e9e;">
 		
-		
+		<input type="hidden" name="test_id" id="test_id" value="{{$test->id}}">
 		<div class="col-md-12" style="margin-top: 20px; margin-bottom: 30px;" id="doc">
 			<div class="col-md-12">
 				<form id="form">
@@ -55,27 +55,32 @@
 								</div>
 								<div id="group_answer">	
 								<div class="row" id="answer">
+								
 								@foreach ($multiChoiceTests->answers as $answers)
 											
-										
 									
 										<div class="row">
 											<div class="col-md-7 col-md-offset-1" >
 												<div class="form-group pmd-textfield">
 													<label for="Small">Đáp Án :</label>
-													<input type="text" name="answer[1]" required class="form-control" value="{{$answers->title}}">
+													<input type="text" name="answer[{{$loop->iteration}}]" required class="form-control" value="{{$answers->title}}">
 												</div>	
 											</div>
 
-											<div class="col-md-3" style="margin-top:15px;">
+											<div class="col-md-4" style="margin-top:15px;">
 												<div class="checkbox pmd-default-theme">
 													<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 5px;">
 														<input type="radio" @if ($answers->is_answer)
 															checked 
-														@endif  name="is_correct" value="1">
+														@endif name="is_correct" value="{{$loop->iteration}}">
 
 														<span for="is_correct">đáp án đúng</span>
 													</label>
+													@if ($loop->index>1)
+														 <a class="btn btn-danger" id="delete_answer"> Xóa </a>
+													@endif
+													
+
 												</div>
 											</div>
 										</div>
@@ -87,7 +92,7 @@
 								</div>
 								<div class="row" style="margin-bottom: 50px">
 									<div class="col-md-4 col-md-offset-1">
-										<a class="btn pmd-ripple-effect btn-default" id="addAnswer" data-id=''>
+										<a class="btn pmd-ripple-effect btn-default" id="addAnswer" data-id='{{$loop->iteration}}'>
 											Thêm câu trả lời
 										</a>
 									</div>
@@ -171,9 +176,19 @@
 				showLoaderOnConfirm: true,
 			},
 			function(){
+
+				$.ajax({
+					url: '{{url('ajax/deletechoicetest')}}',
+					method:'post',
+					data: {test_id:$('#test_id').val()}, 
+					async: false, 
+
+				});
+
+
 				$('form').each(function(index, el) {
 				$.ajax({
-					url: 'ajax/savetests',
+					url: '{{url('ajax/savechoicetests')}}',
 					method:'post',
 					data: $(this).serialize(), 
 					async: false, 
@@ -190,7 +205,7 @@
  							closeOnConfirm: false
 				 		},
 				 		function(){
-  							window.location.href='../tests';
+  							window.location.href='{{url('tests/user/created')}}';
 							});
 
 				 	}, 2000);

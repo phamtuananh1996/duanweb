@@ -249,8 +249,11 @@
 									<button data-answer_comment_id={{$comment->id}} class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="dislike" style="margin-bottom:5px;">Bỏ Vote</button>
 								@endif
 								@if(Auth::user()->id == $comment->user->id)
-									<a data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
-									<a data-toggle="tooltip" data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a>
+
+									<a data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
+
+									<a data-toggle="tooltip" data-placement="top" title="Xoá" style="margin-left:10px;" href=""><span class="material-icons md-dark pmd-xs ">delete</span></a>
+
 								@endif
 							</p>
 						</div>
@@ -269,6 +272,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('[data-toggle="tooltip"]').tooltip(); 
+
 
 			//ấn vote
 			$('#qa').on('click', '#vote', function(event) {
