@@ -159,8 +159,6 @@
 									<button id="delete-question" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="submit">Vẫn xoá</button>
 									<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Thôi</button>
 								</form>
-							
-								
 							</div>
 						</div>
 					</div>
@@ -182,8 +180,9 @@
 				</div>
 				<div class="media-body" style="border-bottom: solid 1px #eee;">
 					<h3 class="list-group-item-heading name-text">{{$answer->user->user_name}}</h3>
-					<span class="list-group-item-text" style="color: black;">{!!$answer->content!!}</span>
-					<input type="hidden" name="answer_id" id="answer_id" value="{{$answer->id}}">
+					<span class="list-group-item-text" id="answer_content" style="color: black;">{!!$answer->content!!}</span>
+					<input type="hidden" id="answer_id_input_{{$answer->id}}" value="{{$answer->id}}">
+					<input type="hidden" id="answer_content_input" value="{{$answer->content}}">
 					<p class="question-sub-info">
 						<span id="count_vote_answer">{{$answer->voteAnswer->count()}}</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;
 						<span id="answer_comment_count">{{$answer->comments->count()}}</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
@@ -194,32 +193,27 @@
 							<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="un_vote_answer" style="margin-bottom: 5px;"> Bỏ vote</button>
 						@endif
 						@if(Auth::user()->id == $answer->user->id)
-							<a data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
+							<a id="show-edit_answer" data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
 							<a data-toggle="tooltip" data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a>
 						@endif
-					</p>					
-					<!--edit answer modal-->
-					<div tabindex="-1" class="modal fade" id="answer-edit-dialog-{{$answer->id}}" style="display: none;" aria-hidden="true">
-						<div class="modal-dialog">
+					</p>
+					<div tabindex="-1" class="modal fade" id="edit-answer-dialog" style="display: none;" aria-hidden="true">
+						<div class="modal-dialog" >
 							<div class="modal-content">
-								<div class="modal-header">
-									<h2 class="pmd-card-title-text">Sửa trả lời</h2>
-								</div>
 								<div class="modal-body">
-									<input type="hidden" name="answer_id" value="{{$answer->id}}">
-									<p>Nội dung</p>
-									<textarea id="answer_content_edit_{{$answer->id}}" required class="form-control">{{$answer->content}}</textarea>
+									<p>Sửa câu trả lời</p>
+									<textarea id="edit_answer_field" name="content" required class="form-control"></textarea>
 									<script>
-										CKEDITOR.replace( 'answer_content_edit_{{$answer->id}}');
+										CKEDITOR.replace( 'edit_answer_field');
 									</script>	
-									<div class="pmd-modal-action pmd-modal-bordered text-right">
-										<button id="edit_answer" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Lưu lại</button>
-										<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Huỷ bỏ</button>
-									</div>
+								</div>
+								<div class="pmd-modal-action pmd-modal-bordered text-right">
+									<button data-answer-id = "{{$answer->id}}" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" id="submit-edit-answer" type="button">Lưu lại</button>
+									<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Huỷ</button>
 								</div>
 							</div>
 						</div>
-					</div> <!--end modal edit-->
+					</div><!--answer alert-->					
 				</div>		
 				<div id="group_comments">
 					<div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;">
@@ -271,10 +265,11 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+
 			$('[data-toggle="tooltip"]').tooltip(); 
 
 
-			//ấn vote
+			// question vote
 			$('#qa').on('click', '#vote', function(event) {
 				var vote_count=parseInt($('#vote_count').html());
 				var question_id=$('#question_id').val();
@@ -286,7 +281,7 @@
 				});
 			});
 
-			//ấn bỏ vote
+			//question un_vote
 			$('#qa').on('click', '#dis_vote', function(event) {
 				var vote_count=parseInt($('#vote_count').html());
 				var question_id=$('#question_id').val();
@@ -298,9 +293,7 @@
 				});
 			});
 
-
-
-			//ấn follows
+			//question follows
 			$('#qa').on('click', '#follows', function(event) {
 
 				var question_id=$('#question_id').val();
@@ -311,7 +304,7 @@
 					}
 				});
 			});
-			//ấn bỏ theo dõi
+			//question unfollow
 			$('#qa').on('click', '#dis_follows', function(event) {
 				var question_id=$('#question_id').val();
 				
@@ -320,157 +313,6 @@
 						$('#dis_follows').html('<span class="glyphicon glyphicon-eye-open"></span> Theo dõi ').attr('id', 'follows');;
 					}
 				});
-			});
-
-			//ấn cmt
-
-			$('#bt_cmt').click(function(event) {
-				var answer_count=parseInt($('#answer_count').html());
-				var content=CKEDITOR.instances.answer_field.getData();
-				if(content=='')
-				{
-					
-				}
-				else
-				{
-					$.post('{{url('qa/answer')}}',{content:content,question_id:$('#question_id').val()}, function(data, textStatus, xhr) {
-						success:
-						{
-							CKEDITOR.instances.answer_field.setData('');
-							$('#answer_count').html(answer_count+1);
-							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <span class="list-group-item-text sub-text"style="color: black";>'+data.content+'</span><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button> </p> </div> <div id="group_comments"> <div id="commentfield" style="margin:10px 0px 30px 55px;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 40px;" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </div> </div> </li>');
-
-							$('#answer-dialog').modal('hide');
-
-							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
-
-
-						}
-					});
-					
-
-				}
-			});
-
-
-			//ấn answer_cmt
-
-			$('#list_cmt').on('click', '#answer_cmt', function(event) {
-				var answer_id=$(this).parent().find('#answer_id').val();
-				var comment_content=$(this).parent().find('#answer_comment_content');
-				var answer_comment_count=parseInt($(this).parent().parent().parent().find('#answer_comment_count').html());
-				if(comment_content=='')
-				{
-
-				}
-				else
-				{
-					var add_answer=$(this).parent().parent().parent().find('#group_comments');
-					var add_answer_comment_count=$(this).parent().parent().parent().find('#answer_comment_count');
-					$.post('{{url('qa/answer/comment')}}', {answer_id: answer_id,comment_content:comment_content.val()}, function(data, textStatus, xhr) {
-						success:{
-
-							add_answer_comment_count.html(answer_comment_count+1);
-							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <p class="list-group-item-text sub-text" style"color:black;"">'+escapeHtml(data.content)+'</p><p class="question-sub-info"><span id="count_like">0 </span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span><button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button></p> </div> <hr style="border-bottom: solid 1px #e0e0e0; margin-top:-10px;"> </div>'
-							).find('div:last').offset().top-100;
-							
-								 $('html,body').animate({scrollTop:top}, 'slow'); 
-								 comment_content.val("");
-							
-						}
-					});
-					
-				 }
-			});
-
-			//edit answer
-			$('#list_cmt').on('click','#edit_answer',function(event) {
-				alert('click');
-				var answer_id = $(this).parent().parent().find('#answer_id').val();
-				alert(answer_id);
-			});
-
-			//ấn vote comment
-			$('#list_cmt').on('click', '#vote_answer', function(event) {
-				
-				var answer_id=$(this).parent().parent().find('#answer_id').val();
-				var count_vote=parseInt($(this).parent().find('#count_vote_answer').html());
-
-				var count_vote_answer=$(this).parent().find('#count_vote_answer');
-				count_vote_answer.html(count_vote+1);
-				$(this).attr('id', 'un_vote_answer');
-				$(this).html('Bỏ vote');
-				$.post('{{url('qa/voteanswer')}}', {answer_id: answer_id}, function(data, textStatus, xhr) {
-
-					success:
-					{
-						
-						
-					}
-				});
-
-
-			});
-
-			$('#list_cmt').on('click', '#un_vote_answer', function(event) {
-				
-				var answer_id=$(this).parent().parent().find('#answer_id').val();
-				var count_vote=parseInt($(this).parent().find('#count_vote_answer').html());
-
-				var count_vote_answer=$(this).parent().find('#count_vote_answer');
-				count_vote_answer.html(count_vote-1);
-				$(this).attr('id', 'vote_answer');
-				$(this).html('Vote');
-				$.post('{{url('qa/unvoteanswer')}}', {answer_id: answer_id}, function(data, textStatus, xhr) {
-
-					success:
-					{
-						
-						
-
-					}
-					
-				});
-
-
-			});
-
-			//ấn like
-			$('#list_cmt').on('click', '#like', function(event) {
-				var count_like=parseInt($(this).parent().find('#count_like').html());
-				var answer_comment_id=$(this).data('answer_comment_id');
-				var count=$(this).parent().find('#count_like');
-				count.html(count_like+1);
-				$(this).attr('id', 'dislike');
-				$(this).html('Bỏ vote');
-				$.post('{{url('qa/ajax/like')}}', {answer_comment_id:answer_comment_id}, function(data, textStatus, xhr) {
-					success:
-					{
-						
-
-					}
-				});
-
-			});
-
-
-			//ấn dislike
-
-			$('#list_cmt').on('click', '#dislike', function(event) {
-				var count_like=parseInt($(this).parent().find('#count_like').html());
-				var answer_comment_id=$(this).data('answer_comment_id');
-				var count=$(this).parent().find('#count_like');
-				count.html(count_like-1);
-				$(this).attr('id', 'like');
-				$(this).html('Vote');
-				$.post('{{url('qa/ajax/dislike')}}', {answer_comment_id:answer_comment_id}, function(data, textStatus, xhr) {
-					success:
-					{
-						
-
-					}
-				});
-
 			});
 
 			//edit question
@@ -501,7 +343,7 @@
 					success:{
 						if (data.is_resolved == true) {
 							$('#resolve').html('Chưa được trả lời');
-							$('#question-title').html(data.question_title +' <span style"color:green;" class="glyphicon glyphicon-ok-sign"></span>');
+							$('#question-title').html(data.question_title +' <span style="color:green;" class="glyphicon glyphicon-ok-sign"></span>');
 						} else {
 							$('#resolve').html('Đã được trả lời');
 							$('#question-title').html(data.question_title +' <span style="color: red;" class="glyphicon glyphicon-question-sign"></span>');
@@ -509,6 +351,7 @@
 					}
 				});
 			});
+			
 			//delete question
 			$("delete-question").on('click',function(event){
 				var question_id = $('#question_id').val();
@@ -520,14 +363,158 @@
 				});
 			});
 
-			<!-- Selectbox with search -->
-				$(".select-with-search").select2({
-					theme: "bootstrap"
+			
+			//answer submit
+			$('#bt_cmt').click(function(event) {
+				var answer_count=parseInt($('#answer_count').html());
+				var content=CKEDITOR.instances.answer_field.getData();
+				if(content=='')
+				{
+					
+				}
+				else
+				{
+					$.post('{{url('qa/answer')}}',{content:content,question_id:$('#question_id').val()}, function(data, textStatus, xhr) {
+						success:
+						{
+							CKEDITOR.instances.answer_field.setData('');
+							$('#answer_count').html(answer_count+1);
+							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <span class="list-group-item-text sub-text"style="color: black";>'+data.content+'</span><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button> </p> </div> <div id="group_comments"> <div id="commentfield" style="margin:10px 0px 30px 55px;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 40px;" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </div> </div> </li>');
+
+							$('#answer-dialog').modal('hide');
+
+							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+
+
+						}
+					});
+					
+
+				}
+			});
+						//answer vote
+			$('#list_cmt').on('click', '#vote_answer', function(event) {
+				
+				var answer_id=$(this).parent().parent().find('#answer_id').val();
+				var count_vote=parseInt($(this).parent().find('#count_vote_answer').html());
+
+				var count_vote_answer=$(this).parent().find('#count_vote_answer');
+				count_vote_answer.html(count_vote+1);
+				$(this).attr('id', 'un_vote_answer');
+				$(this).html('Bỏ vote');
+				$.post('{{url('qa/voteanswer')}}', {answer_id: answer_id}, function(data, textStatus, xhr) {
+					success:{}
+				});
+			});
+
+			//answer un_vote
+			$('#list_cmt').on('click', '#un_vote_answer', function(event) {
+				
+				var answer_id=$(this).parent().parent().find('#answer_id').val();
+				var count_vote=parseInt($(this).parent().find('#count_vote_answer').html());
+
+				var count_vote_answer=$(this).parent().find('#count_vote_answer');
+				count_vote_answer.html(count_vote-1);
+				$(this).attr('id', 'vote_answer');
+				$(this).html('Vote');
+				$.post('{{url('qa/unvoteanswer')}}', {answer_id: answer_id}, function(data, textStatus, xhr) {
+					success:{}					
+				});
+			});
+
+			//show edit answer
+			$('#list_cmt').on('click','#show-edit_answer',function(event) {
+				var answer_content = $(this).parent().parent().find('#answer_content_input').val();
+				CKEDITOR.instances.edit_answer_field.setData(answer_content);
+				$('#edit-answer-dialog').modal('show');
+			});
+
+			//submit edit answer
+			$('#list_cmt').on('click','#submit-edit-answer',function(event){
+				var answer_id = $(this).data('answer-id');
+				alert(answer_id);
+				var answer_content=CKEDITOR.instances.edit_answer_field.getData();
+				$.post('{{ url('qa/ajax/answer/edit') }}',{answer_id:answer_id,answer_content:answer_content},function(data,textStatus,xhr) {
+					success: {
+						$('#edit-answer-dialog').modal('hide');
+						
+					}
+				});
+			});
+
+			//ANSWER-COMMENTS
+			$('#list_cmt').on('click', '#answer_cmt', function(event) {
+				var answer_id=$(this).parent().find('#answer_id').val();
+				var comment_content=$(this).parent().find('#answer_comment_content');
+				var answer_comment_count=parseInt($(this).parent().parent().parent().find('#answer_comment_count').html());
+				if(comment_content=='')
+				{
+
+				}
+				else
+				{
+					var add_answer=$(this).parent().parent().parent().find('#group_comments');
+					var add_answer_comment_count=$(this).parent().parent().parent().find('#answer_comment_count');
+					$.post('{{url('qa/answer/comment')}}', {answer_id: answer_id,comment_content:comment_content.val()}, function(data, textStatus, xhr) {
+						success:{
+
+							add_answer_comment_count.html(answer_comment_count+1);
+							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <p class="list-group-item-text sub-text" style="color:black;"">'+escapeHtml(data.content)+'</p><p class="question-sub-info"><span id="count_like">0 </span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span><button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button></p> </div> <hr style="border-bottom: solid 1px #e0e0e0; margin-top:-10px;"> </div>'
+							).find('div:last').offset().top-100;
+							
+								 $('html,body').animate({scrollTop:top}, 'slow'); 
+								 comment_content.val("");
+							
+						}
+					});
+					
+				 }
+			});
+
+			//answer-comment like
+			$('#list_cmt').on('click', '#like', function(event) {
+				var count_like=parseInt($(this).parent().find('#count_like').html());
+				var answer_comment_id=$(this).data('answer_comment_id');
+				var count=$(this).parent().find('#count_like');
+				count.html(count_like+1);
+				$(this).attr('id', 'dislike');
+				$(this).html('Bỏ vote');
+				$.post('{{url('qa/ajax/like')}}', {answer_comment_id:answer_comment_id}, function(data, textStatus, xhr) {
+					success:
+					{
+						
+
+					}
 				});
 
-				jQuery.validator.addMethod("check_type", function(value, element) {
-					return value!='Chọn Thể Loại';
-				});	
+			});
+
+			//answer-comment un_like
+			$('#list_cmt').on('click', '#dislike', function(event) {
+				var count_like=parseInt($(this).parent().find('#count_like').html());
+				var answer_comment_id=$(this).data('answer_comment_id');
+				var count=$(this).parent().find('#count_like');
+				count.html(count_like-1);
+				$(this).attr('id', 'like');
+				$(this).html('Vote');
+				$.post('{{url('qa/ajax/dislike')}}', {answer_comment_id:answer_comment_id}, function(data, textStatus, xhr) {
+					success:
+					{
+						
+
+					}
+				});
+
+			});
+
+
+		<!-- Selectbox with search -->
+		$(".select-with-search").select2({
+			theme: "bootstrap"
+		});
+		jQuery.validator.addMethod("check_type", function(value, element) {
+			return value!='Chọn Thể Loại';
+		});	
 
 
 	function escapeHtml(unsafe) {

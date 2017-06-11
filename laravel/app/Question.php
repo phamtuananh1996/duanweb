@@ -25,11 +25,4 @@ class Question extends Model
     {
          return $this->hasMany('App\VoteQuestion','question_id','id');
     }
-    
-    // public function delete()
-    // {
-    //    $this->answers()->delete();
-    //    $this->voteQuestion()->delete();
-    //    parent::delete();
-    // }
 }

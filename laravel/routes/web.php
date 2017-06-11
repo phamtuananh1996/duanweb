@@ -113,5 +113,6 @@ Route::group(['prefix' => 'qa'],function(){
 		Route::post('dis_vote','VoteQuestionController@ajaxDisVote');
 		Route::post('like','LikeAnswerCommentController@like');
 		Route::post('dislike','LikeAnswerCommentController@dislike');
+		Route::post('answer/edit','AnswerController@edit');
 	});
 });
