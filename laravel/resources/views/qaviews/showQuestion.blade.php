@@ -167,6 +167,91 @@
 		</div><!--question body-->
 	</div><!--question detail-->
 
+
+
+	{{-- model  edit answer --}}
+	<div tabindex="-1" class="modal fade" id="edit-answer-dialog" style="display: none;" aria-hidden="true">
+						<div class="modal-dialog" >
+							<div class="modal-content">
+								<div class="modal-body">
+									<p>Sửa câu trả lời</p>
+									<textarea id="edit_answer_field" name="content" required class="form-control"></textarea>
+									<script>
+										CKEDITOR.replace( 'edit_answer_field');
+									</script>	
+								</div>
+								<div class="pmd-modal-action pmd-modal-bordered text-right">
+									<button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" id="submit-edit-answer" type="button">Lưu lại</button>
+									<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Huỷ</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--answer alert-->
+
+					{{-- model delete --}}
+					<div tabindex="-1" class="modal fade" id="answer-delete-dialog" style="display: none;" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2 class="pmd-card-title-text"><i class="material-icons md-dark pmd-md" style="color: red;">warning</i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu trả lời này!</span></h2>
+							</div>
+							<div class="modal-body">
+							<p style="color:red;"> Lưu ý rằng khi bạn xoá câu trả lời, các câu trả lời và bình luận liên quan cũng sẽ bị xoá.</p>
+							</div>	
+							<div class="pmd-modal-action pmd-modal-bordered text-right">
+								
+									<input type="hidden" name="question_id" value="{{$question->id}}">
+									<button id="submit-delete-answer" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="submit">Vẫn xoá</button>
+
+									<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Thôi</button>
+								
+							</div>
+						</div>
+					</div>
+					</div>
+
+					{{-- model edit answer_comment--}}
+					<div tabindex="-1" class="modal fade" id="edit-answer-comment-dialog" style="display: none;" aria-hidden="true">
+						<div class="modal-dialog" >
+							<div class="modal-content">
+								<div class="modal-body">
+									<p>Sửa câu trả lời</p>
+									<textarea id="edit_answer_comment_field" name="content" required class="form-control"></textarea>
+									
+								</div>
+								<div class="pmd-modal-action pmd-modal-bordered text-right">
+									<button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" id="submit-edit-answer-comment" type="button">Lưu lại</button>
+									<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Huỷ</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					{{-- model delete answer_comment --}}
+					<div tabindex="-1" class="modal fade" id="answer-comment-delete-dialog" style="display: none;" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h2 class="pmd-card-title-text"><i class="material-icons md-dark pmd-md" style="color: red;">warning</i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu trả lời này!</span></h2>
+							</div>
+							<div class="modal-body">
+							<p style="color:red;"> Lưu ý rằng khi bạn xoá câu trả lời, các câu trả lời và bình luận liên quan cũng sẽ bị xoá.</p>
+							</div>	
+							<div class="pmd-modal-action pmd-modal-bordered text-right">
+								
+									<input type="hidden" name="question_id" value="{{$question->id}}">
+									<button id="submit-delete-answer-comment" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="submit">Vẫn xoá</button>
+
+									<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Thôi</button>
+								
+							</div>
+						</div>
+					</div>
+					</div>
+
+
+
 	<!--Answers list-->
 	
 	<div class="answer-list">
@@ -181,8 +266,7 @@
 				<div class="media-body" style="border-bottom: solid 1px #eee;">
 					<h3 class="list-group-item-heading name-text">{{$answer->user->user_name}}</h3>
 					<span class="list-group-item-text" id="answer_content" style="color: black;">{!!$answer->content!!}</span>
-					<input type="hidden" id="answer_id_input_{{$answer->id}}" value="{{$answer->id}}">
-					<input type="hidden" id="answer_content_input" value="{{$answer->content}}">
+					<input type="hidden" name="answer_id_input_{{$answer->id}}" value="{{$answer->id}}">
 					<p class="question-sub-info">
 						<span id="count_vote_answer">{{$answer->voteAnswer->count()}}</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;
 						<span id="answer_comment_count">{{$answer->comments->count()}}</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
@@ -193,27 +277,12 @@
 							<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="un_vote_answer" style="margin-bottom: 5px;"> Bỏ vote</button>
 						@endif
 						@if(Auth::user()->id == $answer->user->id)
-							<a id="show-edit_answer" data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
-							<a data-toggle="tooltip" data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a>
+							<a id="show-edit_answer" data-answer_id='{{$answer->id}}' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
+							<a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='{{$answer->id}}' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a>
 						@endif
 					</p>
-					<div tabindex="-1" class="modal fade" id="edit-answer-dialog" style="display: none;" aria-hidden="true">
-						<div class="modal-dialog" >
-							<div class="modal-content">
-								<div class="modal-body">
-									<p>Sửa câu trả lời</p>
-									<textarea id="edit_answer_field" name="content" required class="form-control"></textarea>
-									<script>
-										CKEDITOR.replace( 'edit_answer_field');
-									</script>	
-								</div>
-								<div class="pmd-modal-action pmd-modal-bordered text-right">
-									<button data-answer-id = "{{$answer->id}}" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" id="submit-edit-answer" type="button">Lưu lại</button>
-									<button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default">Huỷ</button>
-								</div>
-							</div>
-						</div>
-					</div><!--answer alert-->					
+					
+								
 				</div>		
 				<div id="group_comments">
 					<div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;">
@@ -244,9 +313,9 @@
 								@endif
 								@if(Auth::user()->id == $comment->user->id)
 
-									<a data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
+									<a data-answer_comment_id='{{$comment->id}}' data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
 
-									<a data-toggle="tooltip" data-placement="top" title="Xoá" style="margin-left:10px;" href=""><span class="material-icons md-dark pmd-xs ">delete</span></a>
+									<a data-answer_comment_id='{{$comment->id}}' data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a>
 
 								@endif
 							</p>
@@ -254,8 +323,9 @@
 					</div>
 					@endforeach
 				</div>
+				<hr style="border-bottom: solid 1px green;">
 			</li>
-			<hr style="border-bottom: solid 1px green;">
+			
 			@endforeach
 		</ul>
 	</div> <!--Answers list-->
@@ -379,9 +449,7 @@
 						{
 							CKEDITOR.instances.answer_field.setData('');
 							$('#answer_count').html(answer_count+1);
-							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <span class="list-group-item-text sub-text"style="color: black";>'+data.content+'</span><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button> </p> </div> <div id="group_comments"> <div id="commentfield" style="margin:10px 0px 30px 55px;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 40px;" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </div> </div> </li>');
-
-							$('#answer-dialog').modal('hide');
+							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text"style="color: black" id="answer_content";>'+data.content+'</span><input type="hidden" name="answer_id_input_'+data.id+'" value="'+data.id+'"><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>	<a id="show-edit_answer" data-answer_id='+data.id+' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='+data.id+' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div> <div id="group_comments"> <div id="commentfield" style="margin:10px 0px 30px 55px;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 40px;" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </div> </div> <hr style="border-bottom: solid 1px green;"></li>'); $('#answer-dialog').modal('hide');
 
 							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
@@ -422,21 +490,111 @@
 				});
 			});
 
+
+			//show delete answer
+
+			$('#list_cmt').on('click', '#show-delete-answer', function(event) {
+				$('#submit-delete-answer').data('answer_id', $(this).data('answer_id'));
+				$('#answer-delete-dialog').modal('show');
+
+			});
+
+
+			//submit delete answer
+			$('body').on('click','#submit-delete-answer',function(event){
+				var answer_id = $(this).data('answer_id');
+				$.post('{{ url('qa/ajax/answer/delete') }}',{answer_id:answer_id},function(data,textStatus,xhr) {
+					success: {
+						$('#answer-delete-dialog').modal('hide');
+						var content=$('body').find("input[name='answer_id_input_"+answer_id+"']").parent().parent();
+							$('html,body').animate({scrollTop:content.offset().top}, 'slow');
+							content.fadeOut(1000);
+							//content.remove();
+						
+					}
+				});
+			});
+
+
 			//show edit answer
-			$('#list_cmt').on('click','#show-edit_answer',function(event) {
-				var answer_content = $(this).parent().parent().find('#answer_content_input').val();
+			$('body').on('click','#show-edit_answer',function(event) {
+
+
+				var answer_content = $(this).parent().parent().find('#answer_content p').html();
+
+				$('#submit-edit-answer').data('answer_id', $(this).data('answer_id'));
+
 				CKEDITOR.instances.edit_answer_field.setData(answer_content);
 				$('#edit-answer-dialog').modal('show');
 			});
 
 			//submit edit answer
-			$('#list_cmt').on('click','#submit-edit-answer',function(event){
-				var answer_id = $(this).data('answer-id');
-				alert(answer_id);
+			$('body').on('click','#submit-edit-answer',function(event){
+				var answer_id = $(this).data('answer_id');
 				var answer_content=CKEDITOR.instances.edit_answer_field.getData();
+				var content=$('body').find("input[name='answer_id_input_"+answer_id+"']").parent().find('#answer_content p');
+				
 				$.post('{{ url('qa/ajax/answer/edit') }}',{answer_id:answer_id,answer_content:answer_content},function(data,textStatus,xhr) {
 					success: {
 						$('#edit-answer-dialog').modal('hide');
+						var top=content.html(data.content).offset().top-150;
+						$('html,body').animate({scrollTop:top}, 'slow'); 
+						
+					}
+				});
+			});
+
+
+			//show edit comment answer
+
+			$('body').on('click', '#edit-answer-comment', function(event) {
+				var answer_comment_content = $(this).parent().parent().find('span:first').text();
+
+				$('#submit-edit-answer-comment').data('answer_comment_id', $(this).data('answer_comment_id'));
+
+				$('#edit_answer_comment_field').val(answer_comment_content);
+
+				$('#edit-answer-comment-dialog').modal('show');
+
+			});
+
+
+			//submit edit answer
+			$('body').on('click','#submit-edit-answer-comment',function(event){
+				var answer_comment_id = $(this).data('answer_comment_id');
+				var answer_comment_content=$('#edit_answer_comment_field').val();
+				var content=$('body').find("a[data-answer_comment_id='"+answer_comment_id+"']").parent().parent().find('span:first');
+				
+				$.post('{{ url('qa/ajax/answercomment/edit') }}',{answer_comment_id:answer_comment_id,answer_comment_content:answer_comment_content},function(data,textStatus,xhr) {
+					success: {
+						$('#edit-answer-comment-dialog').modal('hide');
+						var top=content.text(data.content).offset().top-150;
+						$('html,body').animate({scrollTop:top}, 'slow'); 
+						
+					}
+				});
+			});
+
+
+			//show delete answer_comment
+
+			$('#list_cmt').on('click', '#show-delete-answer-comment', function(event) {
+				$('#submit-delete-answer-comment').data('answer_comment_id', $(this).data('answer_comment_id'));
+				$('#answer-comment-delete-dialog').modal('show');
+
+			});
+
+
+			//submit delete answer_comment
+			$('body').on('click','#submit-delete-answer-comment',function(event){
+				var answer_comment_id = $(this).data('answer_comment_id');
+				$.post('{{ url('qa/ajax/answercomment/delete') }}',{answer_comment_id:answer_comment_id},function(data,textStatus,xhr) {
+					success: {
+						$('#answer-comment-delete-dialog').modal('hide');
+						var content=$('body').find("a[data-answer_comment_id='"+answer_comment_id+"']").parent().parent().parent();
+							$('html,body').animate({scrollTop:content.offset().top-200}, 'slow');
+							content.fadeOut(1000);
+							//content.remove();
 						
 					}
 				});
@@ -459,8 +617,7 @@
 						success:{
 
 							add_answer_comment_count.html(answer_comment_count+1);
-							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->name}}</h3> <p class="list-group-item-text sub-text" style="color:black;"">'+escapeHtml(data.content)+'</p><p class="question-sub-info"><span id="count_like">0 </span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span><button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button></p> </div> <hr style="border-bottom: solid 1px #e0e0e0; margin-top:-10px;"> </div>'
-							).find('div:last').offset().top-100;
+							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text" style="color: black;">'+escapeHtml(data.content)+'</span> <p class="question-sub-info"> <span id="count_like">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span class="created-time">5 phút trước</span> <button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="" style="margin-left: 10px;" href="#" data-original-title="Sửa"><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="" style="margin-left:10px;" href="#" data-original-title="Xoá"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div> <hr style="border-bottom: solid 1px #e0e0e0; margin-top:-10px;"> </div>').find('div:last').offset().top-100;
 							
 								 $('html,body').animate({scrollTop:top}, 'slow'); 
 								 comment_content.val("");
@@ -529,4 +686,3 @@
 	</script>
 @endsection
 
- 

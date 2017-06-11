@@ -18,4 +18,21 @@ class AnswerCommentController extends Controller
     	//$comment->created_at=$comment->created_at->diffForHumans();
     	return response()->json($comment);
     }
+
+    public function edit(Request $rq)
+    {
+
+        $AnswerComment = AnswerComment::find($rq->answer_comment_id);
+        $AnswerComment->content = $rq->answer_comment_content;
+        $AnswerComment->save();
+
+        return response()->json($AnswerComment);   
+    }
+
+       public function delete(Request $rq)
+    {
+        $AnswerComment = AnswerComment::find($rq->answer_comment_id);
+        $AnswerComment->delete();
+        return response()->json($AnswerComment);   
+    }
 }

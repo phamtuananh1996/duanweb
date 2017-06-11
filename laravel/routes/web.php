@@ -114,5 +114,8 @@ Route::group(['prefix' => 'qa'],function(){
 		Route::post('like','LikeAnswerCommentController@like');
 		Route::post('dislike','LikeAnswerCommentController@dislike');
 		Route::post('answer/edit','AnswerController@edit');
+		Route::post('answercomment/edit','AnswerCommentController@edit');
+		Route::post('answer/delete','AnswerController@delete');
+		Route::post('answercomment/delete','AnswerCommentController@delete');
 	});
 });

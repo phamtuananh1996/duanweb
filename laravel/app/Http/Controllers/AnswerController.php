@@ -28,4 +28,11 @@ class AnswerController extends Controller
 
         return response()->json($answer);   
     }
+      public function delete(Request $rq)
+    {
+        $answer = Answer::find($rq->answer_id);
+        $answer->delete();
+        return response()->json($answer);   
+    }
+
 }
