@@ -51,7 +51,9 @@
 											<input type="number" name="max_point"  class="form-control" value="">
 										</div>	
 									</div>		
-									<div class="col-md-2"> <a class="btn btn-danger" id="delete"> Xóa </a> </div>	
+									@if ($loop->index>0)
+									<div class="col-md-2"> <a class="btn btn-danger" id="delete"> Xóa </a> </div>
+									@endif	
 								</div>
 								<div id="group_answer">	
 								<div class="row" id="answer">

@@ -66,4 +66,9 @@ class User extends Authenticatable
    {
        return $this->hasMany('App\LikeAnswerComment','user_id','id');
    }
+
+   public function follow_question()
+   {
+       return $this->belongsToMany('App\Question','Follow_Questions','user_id','question_id');
+   }
 }
