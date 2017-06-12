@@ -7,7 +7,7 @@
 					<li class="v-menu-item"><a href="#"><span class="glyphicon glyphicon-comment"></span> Câu trả lời của tôi</a></li>
 					<li class="v-menu-item"><a href="{{url('qa/myfollowing')}}"><span class="glyphicon glyphicon-eye-open"></span> Đang theo dõi</a></li>
 				</ul>
-				<hr style="border-top: solid 1px black;>
+				<hr style="border-top: solid 1px black;">
 				<ul class="v-menu-list">
 					<li class="v-menu-item"><a href="#"><span class="glyphicon glyphicon-triangle-left"></span>Kiến thức THPT </a></li>
 					<li class="v-menu-item"><a href="#"><span class="glyphicon glyphicon-triangle-left"></span>Kiến thức THCS </a></li>
