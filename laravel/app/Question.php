@@ -1,9 +1,8 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class Question extends Model
 {
     public function answers()
@@ -24,5 +23,10 @@ class Question extends Model
     public function voteQuestion()
     {
          return $this->hasMany('App\VoteQuestion','question_id','id');
+    }
+
+    public function followQuestion()
+    {
+      
     }
 }

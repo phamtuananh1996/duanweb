@@ -38,7 +38,18 @@ class User extends Authenticatable
 
    public function followQuestion()
    {
-      return $this->hasMany('App\FollowQuestion','user_id','id');
+     return $this->hasMany('App\FollowQuestion','user_id','id');
+   }
+
+   public function listFollowingQuestions() {
+
+      // $followings = $this->hasMany('App\FollowQuestion','user_id','id')->get();
+      // $questions = new \Illuminate\Database\Eloquent\Collection;
+      // foreach ($followings as $following ) {
+      //  $question = Question::find($following->question_id);
+      //  $questions->add($question);
+      // }
+     return $this->belongsToMany('App\Question','follow_questions','user_id','question_id');
    }
 
     public function voteQuestion()

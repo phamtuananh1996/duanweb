@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Categories;
+use App\FollowQuestion;
 use Auth;
 use Carbon\Carbon;
+use DB;
 class QuestionController extends Controller
 {
     public function index()
@@ -49,6 +51,19 @@ class QuestionController extends Controller
         $question->save();
         $categories =Categories::all();
         return view('qaviews.showQuestion',compact('question','categories'));
+    }
+
+    public function showMyQuestion() {
+        $questions = Question::where('user_id',Auth::user()->id)->get();
+        $categories = Categories::all();
+        return view('qaviews.index',compact('questions','categories'));
+    }
+
+    public function showMyFollowing(){
+       
+        $questions = Auth::user()->listFollowingQuestions()->get();
+        $categories = Categories::all();
+        return view('qaviews.index',compact('questions','categories'));
     }
 
     public function resolve(Request $rq)

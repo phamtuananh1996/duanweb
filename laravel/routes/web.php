@@ -100,6 +100,8 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::get('/show/{id}','QuestionController@show');
 	Route::post('/answer','AnswerController@store');
 	Route::post('/answer/comment','AnswerCommentController@store');
+	Route::get('/myquestion','QuestionController@showMyQuestion');
+	Route::get('/myfollowing','QuestionController@showMyFollowing');
 
 	Route::post('/voteanswer','VoteAnswerController@voteAnswer');
 	Route::post('/unvoteanswer','VoteAnswerController@disVoteAnswer');
