@@ -436,7 +436,9 @@
 						success:
 						{
 							CKEDITOR.instances.answer_field.setData('');
+
 							$('#answer_count').html(answer_count+1);
+
 							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text"style="color: black" id="answer_content";>'+data.content+'</span><input type="hidden" name="answer_id_input_'+data.id+'" value="'+data.id+'"><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>	<a id="show-edit_answer" data-answer_id='+data.id+' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='+data.id+' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div> <div id="group_comments"> <div id="commentfield" style="margin:10px 0px 30px 55px;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group pmd-textfield"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 40px;" id="answer_comment_content" required class="form-control"></textarea> </div> <a id="answer_cmt" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary">Trả lời</a> </div> </div> <hr style="border-bottom: solid 1px green;"></li>'); $('#answer-dialog').modal('hide');
 
 							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
@@ -490,6 +492,7 @@
 
 			//submit delete answer
 			$('body').on('click','#submit-delete-answer',function(event){
+				$('#answer_count').html(parseInt($('#answer_count').html())-1);
 				var answer_id = $(this).data('answer_id');
 				$.post('{{ url('qa/ajax/answer/delete') }}',{answer_id:answer_id},function(data,textStatus,xhr) {
 					success: {
@@ -634,6 +637,7 @@
 
 			//submit delete answer_comment
 			$('body').on('click','#submit-delete-answer-comment',function(event){
+				
 				var answer_comment_id = $(this).data('answer_comment_id');
 				$.post('{{ url('qa/ajax/answercomment/delete') }}',{answer_comment_id:answer_comment_id},function(data,textStatus,xhr) {
 					success: {
