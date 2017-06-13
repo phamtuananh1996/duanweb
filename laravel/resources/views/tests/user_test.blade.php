@@ -83,6 +83,9 @@
 				@endif
 				<div class="col-md-12" style="background: #fff; border: solid 2px green; margin:20px 0px; padding-left: 30px;">
 					<h2 style="padding:10px; margin-bottom: 20px; background: #00C851; width: 10%;">Đề Thi</h2>
+					<form method="post" action="{{url('/tests/usertest/submittestchoice')}}" id="form_testchoice">
+					<input type="hidden" name="test_id" value="{{$test->id}}">
+					{{csrf_field()}}
 					@foreach($test->multiChoiceTests as $question)
 						<div class="row">
 							<div class="col-md-12">
@@ -91,14 +94,29 @@
 							@foreach($question->answers as $answer)
 								<div class="col-md-12" style="margin-left: 20px;">
 									<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 10px;">
-										<input type="radio" name="test_type{{$question->id}}" checked id="inlineRadio1" value="0">
+										<input type="radio" name="{{$question->id}}" checked id="inlineRadio1" value="{{$answer->id}}">
 										<span for="inlineRadio1">{{$answer->title}}</span>
 									</label>
 								</div>
 							@endforeach
 						</div>
 						<hr style="border-top:solid 1px #e0e0e0;">
+
 					@endforeach
+					</form>
+					<button data-target="#submit-dialog" data-toggle="modal" style="margin-bottom: 20px" type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-success"><span class="glyphicon glyphicon-send"></span> Nộp bài</button>
+					<div tabindex="-1" class="modal fade" id="submit-dialog" style="display: none;" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body">Bạn thật sự muốn nộp bài!</div>
+								<div class="pmd-modal-action text-right">
+									<button id="submit_testchoice" class="btn pmd-ripple-effect btn-primary pmd-btn-flat" type="submit"><span class="glyphicon glyphicon-send"></span> Nộp bài</button>
+									<button data-dismiss="modal"  class="btn pmd-ripple-effect btn-default pmd-btn-flat" type="button"><span class="glyphicon glyphicon-pencil"></span> Xem lại</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button style="margin-bottom:20px; margin-left: 20px;" type="button" class="btn pmd-btn-raised pmd-ripple-effect btn-warning" data-target="#cancel-dialog" data-toggle="modal"><span class="glyphicon glyphicon-remove-circle"></span> Hủy bỏ </button >
 				</div>
 			@endif
 		</div>		
@@ -126,6 +144,14 @@
 		    var totalMinutes = 60 * {{$test->total_time}},
 		        display = document.querySelector('#time-count');
 		    startTimer(totalMinutes, display);
+
+		    $('#submit_testchoice').click(function(event) {
+		    	$('#form_testchoice').submit();
+		    });
+
+
+
+
 		});
 		$(window).on('beforeunload', function(){
     		alert('bạn muốn làm lại ');

@@ -17,7 +17,7 @@ class CreateUserTestChoicedsTable extends Migration
             $table->increments('id');
             $table->integer('user_test_id')->unsigned();
             $table->foreign('user_test_id')->references('id')->on('user_tests')->onDelete('cascade');
-            $table->integer('multi-choice_test_id');
+            $table->integer('multi_choice_test_id');
             $table->integer('user_test_choiced')->default(0);
             $table->timestamps();
         });
