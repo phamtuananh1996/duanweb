@@ -13,7 +13,7 @@
 
 	<script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1 main-content">
+		<div class="col-md-12 main-content">
 				<div class="test-info">
 					<h1 style="color:green;">{{$test->title}}</h1>
 					<hr style=" border-bottom: solid 1px #007E33;">
@@ -37,7 +37,7 @@
 					<p><strong>Số lần đã làm: </strong>{{$test->userTests->count()}}</p>
 					@if($test->state == 0)
 						<p style="color:#ff4444; font-size: 18px;"> Đề thi này chưa có nội dung...<a href="{{url('tests/createst2/'.$test->id)}}"><u>bổ sung</u></a></p>
-						@endif
+					@endif
 					<div class="pull-left" >
 						<button style="text-align: left;" data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa </button >
 						<div tabindex="-1" class="modal fade" id="edit-dialog" style="display: none;" aria-hidden="true">
@@ -146,18 +146,16 @@
 				</div>
 				@if($test->state == 1)
 					@if($test->test_type == 1)
-						<div id="content" class="col-md-12" style="background: #fff; border-left: solid 2px green;  border-right: solid 2px green;margin-top: 20px; padding-bottom: 20px;">
+						<div id="content" class="col-md-12" style="background: #fff; border: solid 1px green;margin-top: 20px; padding-bottom: 50px;">
 							<h2 style="color:green;"><strong><u>Đề bài</u></strong></h2>
 							<div id = "test-content">
-							@if($test->writingTest->is_document)
-							<div class="row">
-								<iframe src="http://docs.google.com/gview?url={{env('APP_URL')}}/{{$test->writingTest->content}}&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>
-							</div>
-							@else
-								
-								<p>{!!$test->writingTest->content!!}</p>
-								
-							@endif
+								@if($test->writingTest->is_document)
+									<div class="row">
+										<iframe src="http://docs.google.com/gview?url={{env('APP_URL')}}/{{$test->writingTest->content}}&embedded=true"  frameborder="0" class="col-md-12" height="500px"></iframe>
+									</div>
+								@else
+									<p>{!!$test->writingTest->content!!}</p>
+								@endif
 							</div>
 							<button data-target="#edit-content-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa đề bài</button >
 							<div tabindex="-1" class="modal fade" id="edit-content-dialog" style="display: none;" aria-hidden="true">
@@ -219,7 +217,7 @@
 						</div>
 							<button data-target="#upload-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"><span class="glyphicon glyphicon-open"></span> Tải lên</button >
 						</div>
-						<div id = "explan" class="col-md-12" style="background: #fff; border-left: solid 2px green;border-right: solid 2px green;margin-top: 20px; padding-bottom: 20px;">
+						<div id = "explan" class="col-md-12" style="background: #fff; border: solid 1px green;margin-top: 20px; padding-bottom: 20px;">
 							<h2 style="color:green;"><strong><u>Gợi ý/Đáp án</u></strong></h2>
 							<div id="explan-content">
 								@if($test->writingTest->explan)
@@ -294,14 +292,9 @@
 							<input type="hidden" id="wtest_id" value="{{$test->writingTest->id}}">
 						</div>
 					@else 
-						<div class="col-md-12" style="background: #fff; border-left: solid 2px green; margin:20px 0px;">
-						<div class="row">
-							
-							<a href="{{url('tests/edit/test')}}/{{$test->id}}" class="col-md-2" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"></span> Sửa</a>
-
-						</div>
+						<div class="col-md-12" style="background: #fff; border: solid 1px green; margin:20px 0px; padding: 20px;">
 							@foreach($test->multiChoiceTests as $question)
-							<div class="row">
+							<div class="row" style="border-bottom:solid 1px #e0e0e0; margin-bottom: 20px;">
 								<div class="col-md-12">
 									<p style="color:green; font-size: 18px; ">{{$question->title}}</p>
 								</div>
@@ -314,8 +307,10 @@
 									</div>
 								@endforeach
 							</div>
-							<hr style="border-top:solid 1px #e0e0e0;">
 							@endforeach
+						</div>
+						<div class="pull-left">
+							<a href="{{url('tests/edit/test/'.$test->id)}}" class="btn pmd-btn-flat pmd-ripple-effect btn-success"><span class="glyphicon glyphicon-pencil"></span>  Sửa Đề</a>
 						</div>
 					@endif
 				@endif	

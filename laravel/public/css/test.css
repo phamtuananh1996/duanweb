@@ -1,9 +1,9 @@
-.main-content{ background: #fff;padding:0px;}
+.main-content{ background: #fff;padding:20px 20px 50px 20px;}
 .section {border:solid 1px #4caf50;}
 .main-title {color: #eee; font-size:20px; width: 100%; padding:10px;background:#4caf50}
 .test-title {font-size: 18px;}
-
-.test-info {border:dotted 1px #007E33; padding: 20px;background: #fafafa;}
+a.test-title:hover{text-decoration: underline;}
+.test-info {border:solid 1px #007E33; padding: 50px;background: #fafafa;}
 .comments-list {
 	padding:10px;
 }

@@ -13,6 +13,7 @@
 </style>
 <form class="form-horizontal role="form" method="POST" action="{{url('/users/infoEdit')}}" enctype="multipart/form-data" id="form_edit" style="padding:30px; border:solid 1px #bdbdbd; margin-top: 30px; background: white;">
 	{{csrf_field()}}
+	<input type="hidden" name="user_id" value="{{$user->id}}">
 	<div class="row">
 		<div class="col-md-6">
 			<div class="form-group pmd-textfield">
@@ -161,8 +162,8 @@
 		</div>
 		
 		<div class ="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
-                    <button type="submit" id="submit_form" class="btn btn-success">Lưu Lại</button >
-                </div>
+            <button type="submit" id="submit_form" class="btn btn-success">Lưu Lại</button >
+        </div>
 	</div>
 </form>
 
