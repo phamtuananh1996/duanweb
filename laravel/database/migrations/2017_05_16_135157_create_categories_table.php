@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('super_category_id')->default(0);
             $table->string('title');
             $table->text('description')->nullable();
-            $table->integer('oder_display')->nullable();
+            $table->integer('order_display')->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        $superCategories = Categories::where('super_category_id',0)->orderBy('oder_display')->get();
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
     	$questions = Question::all()->sortByDesc('id');
     	return view('qaviews.index',compact('questions','categories','superCategories'));
     }
@@ -49,7 +49,7 @@ class QuestionController extends Controller
         $question = Question::find($id);
         $question->view_count++;
         $question->save();
-        $superCategories = Categories::where('super_category_id',0)->orderBy('oder_display')->get();
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
         return view('qaviews.showQuestion',compact('question','superCategories'));
     }
 
@@ -62,13 +62,13 @@ class QuestionController extends Controller
     public function showMyFollowing(){
        
         $questions = Auth::user()->listFollowingQuestions()->get();
-       $superCategories = Categories::where('super_category_id',0)->orderBy('oder_display')->get();
+       $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
         return view('qaviews.index',compact('questions','superCategories'));
     }
 
     public function showAllResolved() {
         $questions = Question::where('is_resolved',true)->get();
-        $superCategories = Categories::where('super_category_id',0)->orderBy('oder_display')->get();
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
         return view('qaviews.index',compact('questions','superCategories'));
     }
     public function resolve(Request $rq)
@@ -97,7 +97,7 @@ class QuestionController extends Controller
     {
         $question = Question::find($rq->question_id);
         $question->delete();
-        $superCategories = Categories::where('super_category_id',0)->orderBy('oder_display')->get();
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
         $questions = Question::all()->sortByDesc('id');
         return view('qaviews.index',compact('questions','superCategories'));
     }
