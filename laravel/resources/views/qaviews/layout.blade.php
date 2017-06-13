@@ -14,8 +14,7 @@
 @section('content')
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 slider-header" style="height:300px;margin-top:50px; background:gray;">
-			</div>
+			<div class="col-md-12"></div>
 			@yield('qa_content')
 		</div>
 	</div>

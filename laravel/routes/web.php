@@ -103,7 +103,8 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::post('/answer/comment','AnswerCommentController@store');
 	Route::get('/myquestion','QuestionController@showMyQuestion');
 	Route::get('/myfollowing','QuestionController@showMyFollowing');
-
+	Route::get('/resolved','QuestionController@showAllResolved');
+	
 	Route::post('/voteanswer','VoteAnswerController@voteAnswer');
 	Route::post('/unvoteanswer','VoteAnswerController@disVoteAnswer');
 	Route::post('delete','QuestionController@delete');

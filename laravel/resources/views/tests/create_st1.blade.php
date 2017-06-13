@@ -20,15 +20,7 @@
 				{{csrf_field()}}
 				
 					<div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
-						<div class="form-group pmd-textfield pmd-textfield-floating-label">
-							<label>Chọn Mục/Thể Loại</label>
-							<select class="select-with-search form-control pmd-select2" name="category">
-							<option>Chọn Thể Loại</option>
-								@foreach ($categories as $cat)
-									<option value="{{$cat->id}}">{{$cat->title}}</option>
-								@endforeach
-							</select>
-						</div>
+						@include('layouts.categories_selector')
 					</div>
 					<div class="col-md-12">
 						<hr style="border-bottom: solid 1px #9e9e9e;">

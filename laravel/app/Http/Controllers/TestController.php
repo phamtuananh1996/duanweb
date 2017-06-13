@@ -21,9 +21,10 @@ class TestController extends Controller
         return view('tests.show',compact('test'));
     }
     public function create()
-    {
+    {   
+        $superCategories = Categories::where('super_category_id',0)->orderBy('oder_display')->get();
         $categories=categories::all();
-    	return view('tests.create_st1',compact('categories'));
+    	return view('tests.create_st1',compact('categories','superCategories'));
     }
 
     public function store(Request $req)

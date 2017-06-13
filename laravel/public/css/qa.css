@@ -1,8 +1,5 @@
 
-li .v-menu{
-	
-}
-
+.main-content {background: #fff; margin-top:80px; margin-bottom: 30px;}
 .slider-header{
 	height:300px;
 	background: #0099CC;
@@ -14,9 +11,9 @@ li .v-menu{
 }
 .question-list {
 	padding:10px;
-	border-bottom: solid 1px #eee;
+	
 }
-.question-list:hover{background:#e8f5e9;}
+/*.question-list:hover{background:#eceff1;}*/
 .question-header {
 	padding: 10px;
 }
@@ -36,6 +33,7 @@ li .v-menu{
 	font-size: 20px;
 	color: #337ab7;
 }
+a.question-title:hover {text-decoration: underline;}
 .question-sub-info {
 	color:#00695c; 
 	font-size: 11px;

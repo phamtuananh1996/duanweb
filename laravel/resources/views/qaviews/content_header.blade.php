@@ -1,7 +1,7 @@
 @if(Route::has('login'))
 	@if(Auth::check())
 	<div class="col-md-12 pmd-z-depth question-user">
-		<div class="media-left" style="margin-top: 10px;">
+		<div class="media-left" style="margin-top: 5px;">
 			@if (Auth::user()->avatar)
 				<img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="30" height="30" alt="avatar">
 			@endif
@@ -20,14 +20,7 @@
 					<form class="form-horizontal" method="POST" action="{{url('/qa/create')}}">
 						<div class="modal-body">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<div class="form-group pmd-textfield pmd-textfield-floating-label">
-								<label>Chọn Mục/Thể Loại</label>
-								<select class="select-with-search form-control pmd-select2" name="category">
-									@foreach ($categories as $category)
-									<option value="{{$category->id}}"> {{$category->title}}</option>
-									@endforeach
-								</select>
-							</div>
+							@include('layouts.categories_selector')
 							<div class="form-group pmd-textfield pmd-textfield-floating-label">
 								<label for="title">Tiêu đề</label>
 								<input name="title" type="text" class="mat-input form-control" id="mobil" value="">

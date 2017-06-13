@@ -3,7 +3,7 @@
 <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <script src="{{ asset('plugins/jquery.validate.js') }}"></script>
 <!--main content-->
-<div class="col-md-10" style="margin-bottom: 50px;background: white;">	
+<div class="col-md-9 main-content">	
 	@include('qaviews.content_header')
 	<!--qestion tags-->
 	<div class="pmd-chip pmd-chip-no-icon">Toan 11 <a class="pmd-chip-action" href="javascript:void(0);">
@@ -23,7 +23,7 @@
 			</div>
 			<div class="media-body media-middle">
 				<h3 class="list-group-item-heading name-text">{{$question->user->user_name}}</h3>
-				<span class="list-group-item-text">Đăng {{$question->created_at->diffForHumans()}} tại {{$question->category->title}}</span>
+				<span class="list-group-item-text">Đăng {{$question->created_at->diffInDays()}} tại {{$question->category->title}}</span>
 			</div>
 		</div><!--Question header-->
 		<!--Question body-->
@@ -647,10 +647,6 @@
 					});
 			});
 
-			<!-- Selectbox with search -->
-			$(".select-with-search").select2({
-				theme: "bootstrap"
-			});
 			jQuery.validator.addMethod("check_type", function(value, element) {
 				return value!='Chọn Thể Loại';
 			});	

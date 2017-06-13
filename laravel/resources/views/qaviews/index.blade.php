@@ -4,7 +4,7 @@
 @section('qa_content')	
 	<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	<script src="{{ asset('plugins/jquery.validate.js') }}"></script>
-	<div class="col-md-10" style="background: #fff; margin-top:20px; margin-bottom: 30px;">	<!--main content-->
+	<div class="col-md-9 main-content">	<!--main content-->
 		@include('qaviews.content_header')
 		@foreach ($questions as $question)
 			@include('qaviews.card')
@@ -14,11 +14,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
-		<!-- Selectbox with search -->
-		$(".select-with-search").select2({
-			theme: "bootstrap"
-		});
 
 		 jQuery.validator.addMethod("check_type", function(value, element) {
         	return value!='Chọn Thể Loại';

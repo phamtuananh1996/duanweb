@@ -1,18 +1,15 @@
 	
 <div class="col-md-3" > {{-- sidebar --}}
 	<div class="row">
-		<div class="col-md-11 col-md-offset-1 test-sidebar">
-			<p class="main-title">Danh Mục Đề Thi<p>
-			<div class="list-group ">
-				<a href="#" class="list-group-item list-group-item-action">Trung Học Phổ Thông</a>
-				<a href="#" class="list-group-item list-group-item-action">Trung Học Cơ Sở</a>
-				<a href="#" class="list-group-item list-group-item-action">Tiểu Học</a>
-				<a href="#" class="list-group-item list-group-item-action">Đại Học</a>
-				<a href="#" class="list-group-item list-group-item-action">Chuyên Ngành<span class="arrow"></span></a>
-			</div>
-			<nav class="navbar navbar-light section-title" style="margin-top:30px;">
-				<h3>Cập Nhật Nhanh</h3>
-			</nav>
+		<div class="col-md-11 col-md-offset-1 v-sidebar">
+			<p class="v-menu-header">Thống Kê Nhanh<p>
+			<ul class="v-menu-list">
+				<li class="v-menu-item"><a href="{{url('qa')}}"><samp class="glyphicon glyphicon-globe"></samp>&nbsp; Tất cả câu hỏi</a></li>
+				<li class="v-menu-item"><a href="{{url('qa')}}"><samp class="glyphicon glyphicon-ok"></samp>&nbsp;&nbsp; Đã được trả lời</a></li>
+				<li class="v-menu-item"><a href="{{url('qa/myquestion')}}"><span class="glyphicon glyphicon-user"></span>&nbsp; Câu hỏi của tôi</a></li>					<li class="v-menu-item"><a href="#"><span class="glyphicon glyphicon-comment"></span>&nbsp; Câu trả lời của tôi</a></li>
+				<li class="v-menu-item"><a href="{{url('qa/myfollowing')}}"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;  Đang theo dõi</a></li>
+			</ul>
+			<p class="v-menu-header">Cập nhật<p>
 			<div class="component-box" > <!--quick log scrollbar-->
 				<div class="pmd-card pmd-z-depth pmd-card-custom-form">
 					<div class="pmd-card-body" > 
