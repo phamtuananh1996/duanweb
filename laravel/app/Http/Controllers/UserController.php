@@ -15,6 +15,7 @@ class UserController extends Controller
 {
   public function index(){
     $user = User::all();
+    //dd($user);
     return view('admin.business.user.index',compact('user'));
   }
   public function getCreate(){

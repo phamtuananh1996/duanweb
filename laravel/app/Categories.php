@@ -13,4 +13,10 @@ class Categories extends Model
     {
     	return $this->hasMany('App\Categories','super_category_id','id');
     }
+
+    public static function superCategories () {
+    	return static::where('super_category_id',0)
+    								->orderBy('order_display')
+    								->get();
+    }
 }

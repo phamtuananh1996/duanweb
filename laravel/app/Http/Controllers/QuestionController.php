@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
-use App\Categories;
 use App\FollowQuestion;
 use Auth;
 use Carbon\Carbon;
@@ -13,9 +12,8 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
     	$questions = Question::all()->sortByDesc('id');
-    	return view('qaviews.index',compact('questions','categories','superCategories'));
+    	return view('qaviews.index',compact('questions'));
     }
 
     public function create() {
@@ -49,27 +47,23 @@ class QuestionController extends Controller
         $question = Question::find($id);
         $question->view_count++;
         $question->save();
-        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
-        return view('qaviews.showQuestion',compact('question','superCategories'));
+        return view('qaviews.showQuestion',compact('question'));
     }
 
     public function showMyQuestion() {
         $questions = Question::where('user_id',Auth::user()->id)->get();
-        $superCategories = Categories::where('super_category_id',0)->get();
-        return view('qaviews.index',compact('questions','superCategories'));
+        return view('qaviews.index',compact('questions'));
     }
 
     public function showMyFollowing(){
        
         $questions = Auth::user()->listFollowingQuestions()->get();
-       $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
-        return view('qaviews.index',compact('questions','superCategories'));
+        return view('qaviews.index',compact('questions'));
     }
 
     public function showAllResolved() {
         $questions = Question::where('is_resolved',true)->get();
-        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
-        return view('qaviews.index',compact('questions','superCategories'));
+        return view('qaviews.index',compact('questions'));
     }
     public function resolve(Request $rq)
     {
@@ -97,9 +91,8 @@ class QuestionController extends Controller
     {
         $question = Question::find($rq->question_id);
         $question->delete();
-        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
         $questions = Question::all()->sortByDesc('id');
-        return view('qaviews.index',compact('questions','superCategories'));
+        return view('qaviews.index',compact('questions'));
     }
     
 }
