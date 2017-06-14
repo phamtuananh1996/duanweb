@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use App\Categories;
 use Illuminate\Http\Request;
 class LoginController extends Controller
 {
@@ -40,13 +41,14 @@ class LoginController extends Controller
 
     public function getLogin()
     {
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
         if(Auth::check())
         {
-            return redirect('home');
+            return redirect('home'.compact('superCategories'));
         }
         else
         {
-            return view('auth.login');
+            return view('auth.login',compact('superCategories'));
         }
     }
 

@@ -44,7 +44,7 @@
                     @endif
                 @endif
             </div> 
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav menu">
             <li><a href="{{ url('/') }}" style="color:white;" class="pmd-ripple-effect" href="javascript:void(0);">Home <span class="sr-only">(current)</span></a></li>
             <li class="dropdown pmd-dropdown">
                 <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">Đề Thi <span class="caret"></span></a>
@@ -63,17 +63,13 @@
                     @endif
                 </ul>
             </li>
+            <li><a style="color:white;" href="{{url('/qa')}}">Hỏi Đáp</a></li>
             <li class="dropdown pmd-dropdown">
-                <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">Hỏi Đáp <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    @if(Auth::check())
-                        @if(Auth::user()->role_id == 4 || Auth::user()->role_id == 2)
-                            <li><a class="pmd-ripple-effect" href="{{url('/qa')}}">Index</a></li>
-                            <li><a class="pmd-ripple-effect" href="{{url('/qa/create')}}">Tạo câu hỏi</a></li>
-                        @endif
-                     @else
-                        <li><a class="pmd-ripple-effect" href="{{url('/qa')}}">Index</a></li>
-                    @endif
+                <a style="color:white;" data-toggle="dropdown" class="pmd-ripple-effect dropdown-toggle" data-sidebar="true" href="#">Danh Mục <span class="caret"></span></a>
+                <ul class="dropdown-menu" id="nav">
+                    @foreach($superCategories as $superCategory)
+                         @include('layouts.recursive_menu', $superCategory)
+                    @endforeach
                 </ul>
             </li>
             <li class="dropdown pmd-dropdown">
@@ -92,3 +88,10 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </div>
+<script type="text/javascript">
+     $(document).ready(function(){   
+        $('#nav li').hover(function(){
+            $(this).find('ul:first').css({visibility: "visible",display: "none"}).show(800);
+        });
+    });
+</script>

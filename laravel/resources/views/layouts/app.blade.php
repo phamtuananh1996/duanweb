@@ -39,7 +39,6 @@
         @include('layouts.header')
         @yield('content')
         {{-- @include('layouts.footer') --}}
-        
         <!-- Bootstrap js -->
         <script type="text/javascript" src="{{asset('bootstrap.3.3.7/js/bootstrap.min.js')}}"></script>
 

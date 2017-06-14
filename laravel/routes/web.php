@@ -24,7 +24,8 @@ Route::group(['prefix'=>'admin'],function(){
 
 
 Route::get('/', function () {
-	return view('/home');
+	$superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
+	return view('/home',compact('superCategories'));
 });
 
 Route::get('login','Auth\LoginController@getLogin');
