@@ -21,6 +21,7 @@ class MultiChoiceTestController extends Controller
        $multiChoiceTest->test_id = $req->test_id;
        $multiChoiceTest->title = $req->title;
        $multiChoiceTest->max_point = $req->max_point;
+        $multiChoiceTest->explan = $req->explan;
         $multiChoiceTest->save();
        foreach ($req->answer as $key => $value) {
           if(trim($value)!='')
@@ -64,6 +65,7 @@ class MultiChoiceTestController extends Controller
        $multiChoiceTest->test_id = $req->test_id;
        $multiChoiceTest->title = $req->title;
        $multiChoiceTest->max_point = $req->max_point;
+       $multiChoiceTest->explan = $req->explan;
         $multiChoiceTest->save();
        foreach ($req->answer as $key => $value) {
           if(trim($value)!='')
