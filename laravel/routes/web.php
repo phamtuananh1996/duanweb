@@ -20,6 +20,13 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::get('category/show/{category}',array('as'=>'showCategory','uses'=>'CategoryController@Show'));
 	Route::post('category/show/{category}',array('as'=>'updateCategory','uses'=>'CategoryController@update'));
 	Route::get('category/{id}',array('as'=>'destroyCategory','uses'=>'CategoryController@destroy'));
+
+	Route::get('user',array('as'=>'indexUser','uses'=>'UserController@index'));
+	Route::get('user/create',array('as'=>'getcreateUser','uses'=>'UserController@getCreate'));
+	Route::post('user/create',array('as'=>'postcreateUser','uses'=>'UserController@postCreate'));
+	Route::get('user/show/{user}',array('as'=>'showUser','uses'=>'UserController@Show'));
+	Route::post('user/show/{user}',array('as'=>'updateUser','uses'=>'UserController@update'));
+	Route::get('user/{id}',array('as'=>'destroyUser','uses'=>'UserController@destroy'));
 });
 
 
