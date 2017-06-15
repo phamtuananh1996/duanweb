@@ -633,6 +633,7 @@
 			});
 
 			//show delete answer_comment
+
 			$('#list_cmt').on('click', '#show-delete-answer-comment', function(event) {
 				$('#submit-delete-answer-comment').data('answer_comment_id', $(this).data('answer_comment_id'));
 				$('#answer-comment-delete-dialog').modal('show');
@@ -640,6 +641,7 @@
 			});
 
 			//submit delete answer_comment
+
 			$('body').on('click','#submit-delete-answer-comment',function(event){
 				
 				var answer_comment_id = $(this).data('answer_comment_id');
