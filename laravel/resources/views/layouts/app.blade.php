@@ -17,6 +17,7 @@
         <link href="{{asset('pmd/components/dropdown/css/dropdown.css')}}" type="text/css" rel="stylesheet"/>
         <!-- Propeller navbar -->
         <link href="{{asset('pmd/components/navbar/css/navbar.css')}}" type="text/css" rel="stylesheet"/>
+        <link href="{{asset('pmd/components/button/css/sidebar.css')}}" type="text/css" rel="stylesheet"/>
         <!-- Propeller button  -->
         <link href="{{asset('pmd/components/button/css/button.css')}}" type="text/css" rel="stylesheet"/>
          <!-- Google Icon Font -->

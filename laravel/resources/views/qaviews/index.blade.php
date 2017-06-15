@@ -6,9 +6,11 @@
 	<script src="{{ asset('plugins/jquery.validate.js') }}"></script>
 	<div class="col-md-9 main-content">	<!--main content-->
 		@include('qaviews.content_header')
-		@foreach ($questions as $question)
-			@include('qaviews.card')
-		@endforeach
+		<div class="question-list">
+			@foreach ($questions as $question)
+				@include('qaviews.card')
+			@endforeach
+		</div>
 	</div><!--end main content-->
 	@include('qaviews.sidebar')
 

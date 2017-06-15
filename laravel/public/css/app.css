@@ -1,25 +1,15 @@
 body {
-   font-family:Arial, Helvetica, sans-serif;
+  background: url("shay.jpg") 0 0 no-repeat;
+  background-clip: padding-box;
+  background-origin: border-box;
+  color: #333333;
+font-family: Arial, Helvetica, sans-serif;
 }
-.img-avt { border-radius: 50%; width: 40px; height: 40px;}
+.img-avt { border-radius: 50%; width: 30px; height: 30px;}
 .btn { font-size: 13px;}
-.v-sidebar{padding:0px; background: #fff;}
-.v-menu-header {color: #eee; font-size:15px; width: 100%; padding:6px;background:#4caf50; text-align: center;}
-.v-menu-list {margin-top: 5px; list-style-type: none; padding:0px;font-size: 13px;line-height:25px; }
+.v-sidebar{padding:0px; background: #fff; border:solid 1px #00695c;}
+.v-menu-header {color: #eee; font-size:15px; width: 100%; padding:6px;background:#00695c; text-align: center;}
+.v-menu-list {margin-top: 5px; list-style-type: none; padding:0px;font-size: 13px;line-height:25px;}
 .v-menu-item { padding: 5px 0px 5px 20px; margin-left:0px; }
-.v-menu-item:hover{background:#e8f5e9; }
+.v-menu-item:hover{background:#e0f2f1; }
 .v-sub-menu-list {margin-top: 5px; list-style-type: none; padding:5px 0px;}
-#nav{position:relative;
-}
-#nav ul {
-    left: 100%;
-    top: 0;
-    position: absolute;
-}
-
-#nav li:hover ul ul, #nav li:hover ul ul ul, #nav li:hover ul ul ul ul{
-display:none;
-}
-#nav li:hover ul, #nav li li:hover ul, #nav li li li:hover ul, #nav li li li li:hover ul{
-display:block;
-}

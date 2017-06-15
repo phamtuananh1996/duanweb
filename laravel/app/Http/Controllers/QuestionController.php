@@ -37,8 +37,6 @@ class QuestionController extends Controller
         //     $question->as_anonymously = false;
         // }
         $question->save();
-         
-        $categories =Categories::all();
         return redirect('qa/show/'.$question->id);
     }
 

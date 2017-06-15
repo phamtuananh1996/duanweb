@@ -1,6 +1,6 @@
 .main-content{ background: #fff;padding:20px 20px 50px 20px;}
 .section {border:solid 1px #4caf50;}
-.main-title {color: #eee; font-size:20px; width: 100%; padding:10px;background:#4caf50}
+.main-title {color: #eee; font-size:20px; width: 100%; padding:5px;background:#00695c}
 .test-title {font-size: 18px;}
 a.test-title:hover{text-decoration: underline;}
 .test-info {border:solid 1px #007E33; padding: 50px;background: #fafafa;}
