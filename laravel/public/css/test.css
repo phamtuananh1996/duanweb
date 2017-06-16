@@ -4,7 +4,7 @@
 .main-title {color: #eee; font-size:20px; width: 100%; padding:5px;background:#00695c}
 .test-title {font-size: 18px;}
 a.test-title:hover{text-decoration: underline;}
-.test-info {border:solid 1px #007E33; padding: 50px;background: #fafafa;}
+.test-info {border:solid 1px #2BBBAD; padding: 50px;background: #fafafa;}
 .comments-list {
 	padding:10px;
 }

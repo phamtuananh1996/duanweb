@@ -7,7 +7,7 @@
 					<p style="color: #00695c; font-size:25px">Chúc mừng bạn đã hoàn thành bài thi...!</p>
 					<p style="font-size: 18px;">Bạn đã làm đúng <span class="red-text"> {{$countIsCorrect}}/{{$test->number_of_questions}}</span>  câu, số điểm tạm tính là 
 					@php
-						$point = $countIsCorrect/$test->number_of_questions*10;
+						$point = number_format($countIsCorrect/$test->number_of_questions*10,1);
 						echo "<span class='red-text'>$point</span>";
 					@endphp
 					điểm.

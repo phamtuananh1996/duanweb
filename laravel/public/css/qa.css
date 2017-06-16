@@ -18,7 +18,7 @@
 	border-bottom: solid 1px #4db6ac;
 	margin-top: 10px;
 }
-
+#answer-comment-list{border-left: solid 1px green;}
 /*.question-list:hover{background:#eceff1;}*/
 #question-header {padding: 20px; }
 .question-content{

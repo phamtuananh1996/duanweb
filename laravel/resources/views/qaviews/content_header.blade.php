@@ -28,7 +28,9 @@
 								<p>Nội dung</p>
 								<textarea id="question-field" name="content" required class="form-control"></textarea>
 								<script>
-									CKEDITOR.replace( 'question-field' );
+									CKEDITOR.replace( 'question-field',{
+									    filebrowserUploadUrl: "upload/upload.php" 
+									});
 								</script>
 							</div>
 							<label class="checkbox-inline pmd-checkbox pmd-checkbox-ripple-effect">

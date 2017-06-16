@@ -37,7 +37,7 @@
 			<p><strong>Số người đã làm: </strong>{{$test->userTests->count()}}</p>
 		</div>
 		<div class="row">
-			<button style="margin-top: 20px;" data-target="#list-test-options-dialog" data-toggle="modal" type="button" class="btn btn-primary col-md-2 col-md-offset-5"> Vào làm bài </button >
+			<button style="margin-top: 20px;" data-target="#list-test-options-dialog" data-toggle="modal" type="button" class="btn btn-primary col-md-2 col-md-offset-5"><span class="glyphicon glyphicon-triangle-right"></span> Vào làm bài </button >
 				<form method="POST" action="{{url('/tests/usertest')}}" id="submit_edit">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="test_id" value="{{$test->id}}">
@@ -72,7 +72,6 @@
 			</div>
 
 
-
 			<div class="comments-list" style="width: 100%;"> 
 			{{-- model đánh giá --}}
 				<div tabindex="-1" class="modal fade" id="rate-dialog" style="display: none;" aria-hidden="true">
@@ -102,7 +101,6 @@
 						</div>
 					</div>
 				{{-- end model --}}
-				<h2> Đánh giá :</h2>
 				<div class="acidjs-rating-stars acidjs-rating-disabled">
 					<form id="rate">
         				<input type="radio" name="group-1" id="group-1-0" value="5" /><label for="group-1-0"></label><!--
@@ -113,30 +111,29 @@
 					</form>
 				</div>
 			</div>
-				<button type="button" data-target="#rate-dialog" data-toggle="modal" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" style="margin-top:10px; margin-bottom: 30px;">Đánh giá</button>
-				<hr style=" border-bottom: solid 1px #bdbdbd ; ">		
+			<button type="button" data-target="#rate-dialog" data-toggle="modal" class="btn pmd-btn-raised pmd-ripple-effect btn-info" style="margin:20px 0 10px 10px;">Đánh giá</button>
 
-			<div class="comments-list" style="width: 100%;"> 
+			<div class="comments-list"> 
 				<h2>Bình luận</h2>
 				<hr style=" border-bottom: solid 1px #bdbdbd ; ">		
-
-				<div id="commentField" class="form-group pmd-textfield">
-					<form>
-						<label class="control-label"></label>
-						<textarea style="height:50px;" id="comment-field" name="content" required class="form-control"></textarea>
-						<button type="button" class="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" style="margin-top:10px; margin-bottom: 30px;">Gửi</button>
-					</form>	
+				<div id="commentField" class="form-group comment-form">
+					<textarea style="height:80px; background: " id="comment-field" name="content" required class="form-control comment-box" placeholder="viết bình luận...">
+					</textarea>
+					<div class=" comment-form-action "> 
+						<button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary" >Gửi</button>
+					</div>
 				</div>
-
+				@if($test->comments->count())
 				<div class="answer-list">
 					<ul class="list-group" id="list_cmt">
+					@foreach($test-comments as $comment)
 						<li class="list-group-item">
 							<div class="media-left">
 								<img class="img-avt" src="http://localhost/duanweb/laravel/public//images/users/1497546017.jpg" alt="avatar">
 							</div>
 							<div class="media-body" style="border-bottom: solid 1px #eee;">
-								<h3 class="list-group-item-heading name-text">phamtuananh</h3>
-								<span class="list-group-item-text" id="answer_content" style="color: black;"><p>sdsssds</p></span>
+								<h3 class="list-group-item-heading name-text">{{$comment->user->user_name}}</h3>
+								<span class="list-group-item-text" id="answer_content" style="color: black;"><p>{{$comment->content}}</p></span>
 								<input type="hidden" name="answer_id_input_7" value="7">
 								<p class="question-sub-info">
 									<span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;
@@ -147,42 +144,11 @@
 									<a data-toggle="tooltip" id="show-delete-answer" data-answer_id="7" data-placement="top" title="" style="margin-left:10px;" href="#" data-original-title="Xoá"><span class="material-icons md-dark pmd-xs ">delete</span></a>
 								</p>
 							</div>	
-
-							<div id="group_comments">
-								<div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;">
-									<input type="hidden" id="answer_id" name="answer_id" value="7">
-									<div class="form-group pmd-textfield"> 
-										<label class="control-label">Bình luận</label> 
-										<textarea style="background: #fff; height: 40px;" id="answer_comment_content" required="" class="form-control"></textarea><span class="pmd-textfield-focused"></span>
-									</div>
-									<button id="answer_cmt" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gửi</button>
-								</div>
-								<div class="comment-list-item" style="display: none;">
-									<div class="media-left">
-										<img class="img-avt" src="http://localhost/duanweb/laravel/public//images/users/1497546017.jpg" width="40" height="40" alt="avatar">
-									</div>
-									<div class="media-body" style="margin-top:10px;">
-										<h3 class="list-group-item-heading name-text">phamtuananh</h3>
-										<span class="list-group-item-text sub-text" style="color: black;">g</span>	
-										<p class="question-sub-info">
-											<span id="count_like">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;
-											<span class="created-time">2 phút trước</span>
-											<button data-answer_comment_id="14" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button>
-
-											<a data-answer_comment_id="14" data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="" style="margin-left: 10px;" href="#" data-original-title="Sửa"><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
-
-											<a data-answer_comment_id="14" data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="" style="margin-left:10px;" href="#" data-original-title="Xoá"><span class="material-icons md-dark pmd-xs ">delete</span></a>
-										</p>
-									</div>
-								</div>
-
-
-								
-							</div>
 						</li>
+						@endforeach
 					</ul>
 				</div>
-				
+				@endif
 			</div>
 		</div>
 		@include('tests.sidebar')

@@ -13,4 +13,6 @@ font-family: Arial, Helvetica, sans-serif;
 .v-menu-item { padding: 5px 0px 5px 20px; margin-left:0px; }
 .v-menu-item:hover{background:#e0f2f1; }
 .v-sub-menu-list {margin-top: 5px; list-style-type: none; padding:5px 0px;}
-
+.comment-form{display: inline;}
+.comment-box:focus { outline: none !important;border:1px solid #2BBBAD;box-shadow:none;}
+.comment-form-action{margin-top: 20px;}
