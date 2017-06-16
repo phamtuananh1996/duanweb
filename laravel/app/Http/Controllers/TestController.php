@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Test;
 use Auth;
 use App\WritingTest;
+
 class TestController extends Controller
 {
     public function index()
     {
+
         $tests = Test::all();
     	return view('tests.index',compact('tests'));
     }
@@ -17,7 +19,9 @@ class TestController extends Controller
     public function show($id)
     {
         $test = Test::find($id);
-        return view('tests.show',compact('test'));
+        $rateAvg=round($test->rate->avg('rate'));
+        $countStarUserRate=$test->rate->where('user_id',Auth::user()->id)->first();
+        return view('tests.show',compact('test','rateAvg','countStarUserRate'));
     }
     public function create()
     {   

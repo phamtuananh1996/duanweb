@@ -1,5 +1,6 @@
 @extends('qaviews.layout')
 @section('qa_content')	
+
 <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 <script src="{{ asset('plugins/jquery.validate.js') }}"></script>
 <!--main content-->

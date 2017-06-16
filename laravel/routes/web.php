@@ -100,6 +100,10 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	   return view('tests.edit_test',compact('test'));
 	});
 
+	Route::group(['prefix' => 'ajax'], function() {
+	    Route::Post('rate', 'RateTestController@store');
+	});
+
 });
 
 //question-answer 
