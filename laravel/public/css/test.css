@@ -8,3 +8,10 @@ a.test-title:hover{text-decoration: underline;}
 .comments-list {
 	padding:10px;
 }
+.red-text{color: #ff4444;}
+#test-result-content {border:solid 1px #2BBBAD; padding: 10px;}
+#result-detail{display: none;}
+#test-info{margin-top:10px; background:rgba(0, 150, 136, 0.05); padding:10px;}
+.test-detail{color: #FF8800;}
+#result-table {box-shadow: none; border-top:solid 1px #2BBBAD ;}
+.explan-table {}

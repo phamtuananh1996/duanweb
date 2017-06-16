@@ -13,6 +13,9 @@ class MultiChoiceTest extends Model
 
 	public function answers() {
 		return  $this->hasMany('App\MultiChoiceTestChoice','multi_choice_test_id','id');
-		
+	}
+
+	public function correctAnswer() {
+		return  $this->belongsTo('App\MultiChoiceTestChoice','id_MultiChoiceTestChoice_correct','id');
 	}
 }

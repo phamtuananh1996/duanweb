@@ -12,9 +12,9 @@
 	margin-bottom: 10px;
 	background: #e0f2f1;
 }
-.question-list{padding:10px; margin-top:10px; background: rgba(0, 150, 136, 0.01)}
+.question-list{padding:10px 0 0 10px; margin-top:10px; background: rgba(0, 150, 136, 0.01)}
 .question-list-item {
-	padding:10px;
+	padding-top: 10px;
 	border-bottom: solid 1px #4db6ac;
 	margin-top: 10px;
 }

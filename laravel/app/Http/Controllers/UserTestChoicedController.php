@@ -30,8 +30,7 @@ class UserTestChoicedController extends Controller
     			$UserTestChoiced->user_test_choiced=$value;
     			$UserTestChoiced->save();
     		}
-
     	}
-    	return 'bài thi đã được gưi đi.làm đúng '.$countIsCorrect.' câu';
+        return redirect('tests/userest/result/'.$userTest->id.'/'.$countIsCorrect);
     }
 }

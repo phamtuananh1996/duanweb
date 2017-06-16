@@ -94,7 +94,7 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::post('usertest/submit','UserTestController@store');
 	Route::post('usertest/submittestchoice','UserTestChoicedController@store');
 	Route::get('usertest','UserTestController@store');
-
+	Route::get('userest/result/{usertest_id}/{countIsCorrect}','UserTestController@result');
 	Route::get('edit/test/{id}', function($test_id) {
 		$test = Test::find($test_id);
 	   return view('tests.edit_test',compact('test'));

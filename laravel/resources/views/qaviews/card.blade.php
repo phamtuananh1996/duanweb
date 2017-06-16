@@ -5,7 +5,7 @@
 		</div>
 		<div class="media-body media-middle">
 			<p class="list-group-item-heading name-text">{{$question->user->user_name}}</p>
-			<p class="sub-text">Đăng {{$question->created_at->diffForHumans()}} tại <span style="color:#e65100;"> 
+			<p class="sub-text">{{$question->created_at->diffForHumans()}} tại <span style="color:#e65100;"> 
 			{{$question->category->title}}</span> | 
 			<span class="question-sub-info">
 			<span id="answer_count">{{$question->answers->count()}}</span>&nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;

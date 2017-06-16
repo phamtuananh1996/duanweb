@@ -2,6 +2,7 @@
 @extends('tests.layout')
 
 @section('test_content')
+	<a data-toggle="tooltip" data-placement="top" title="Tạo đề" href="{{url('tests/createst1')}}" style="position: fixed; bottom: 50px; right: 50px; background: #00695c; color: #fff;" class="btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-default" type="button"><i class="material-icons pmd-sm">add</i></a>
 	<div class="row">
 		<div class="col-md-9 main-content">
 			<div class="section">
@@ -27,6 +28,7 @@
 	<script>
 		(function($){
 			$(window).load(function(){
+				$('[data-toggle="tooltip"]').tooltip();   
 				$(".content").mCustomScrollbar({
 					theme:"minimal"
 				});
