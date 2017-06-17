@@ -98,6 +98,7 @@
 										<span for="inlineRadio1">{{$answer->title}}</span>
 									</label>
 								</div>
+								<input type="radio" style="display: none" name="{{$question->id}}" id="inlineRadio1" checked value="-1">
 							@endforeach
 						</div>
 						<hr style="border-top:solid 1px #e0e0e0;">

@@ -51,14 +51,14 @@
 					                   	<td data-title=""><i class="material-icons md-dark pmd-xs" style="color:#ff4444">clear</i></td>
 					                  @endif
 					                  <td>
-					                  	<a id="{{$answer->id}}" data-toggle="tooltip" data-placement="top" title="Xem đáp/hướng dẫn" href="#nothing">
+					                  	<a id="showexplan" data-answer_id={{$answer->id}} data-toggle="tooltip" data-placement="top" title="Xem đáp/hướng dẫn" href="#nothing">
 					                  		<i class="material-icons md-dark pmd-xs" style="color:#FF8800">note</i>
 					                  	</a>
-					                  	<div class="" id="{{$answer->id}}">
-											<tr class="explan-table">
+					                  	<div class="" >
+											<tr id="explan_{{$answer->id}}" class="explan-table" style="display: none">
 												<td colspan="10" style="border:none;"><table class="table pmd-table table-sm">
 													<thead>
-														<tr >
+														<tr>
 															<th style="border:none;" colspan="5">Đáp án và hướng dẫn</th>
 														</tr>
 													</thead>
@@ -102,6 +102,11 @@
 				$('#result-detail').slideToggle('nomarl');
 			})
 			
+			$('body').on('click', '#showexplan', function(event) {
+
+				$(this).parent().parent().parent().find('#explan_'+$(this).data('answer_id')).slideToggle();
+
+			});
 		});
 	</script>
 @endsection

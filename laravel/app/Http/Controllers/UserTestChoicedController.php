@@ -11,6 +11,7 @@ class UserTestChoicedController extends Controller
 {
     public function store(Request $req)
     {
+        //dd($req);
     	$userTest = new UserTest;
     	$userTest->test_id = $req->test_id;
     	$userTest->user_id = Auth::user()->id;
