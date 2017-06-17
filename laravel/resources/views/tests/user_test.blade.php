@@ -135,7 +135,7 @@
 		        display.textContent =minutes + ":" + seconds;
 
 		        if (--timer < 0) {
-		            timer = duration;
+		           $('#form_testchoice').submit();
 		        }
 		    }, 1000);
 		}
@@ -143,11 +143,12 @@
 		$(document).ready(function () {
 		    var totalMinutes = 60 * {{$test->total_time}},
 		        display = document.querySelector('#time-count');
-		    startTimer(totalMinutes, display);
 
-		    $('#submit_testchoice').click(function(event) {
-		    	$('#form_testchoice').submit();
-		    });
+		    	startTimer(totalMinutes, display);
+
+		    	$('#submit_testchoice').click(function(event) {
+		    		$('#form_testchoice').submit();
+		    	});
 
 
 

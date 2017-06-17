@@ -247,9 +247,10 @@
 	</div>
 	<p style="padding-top: 10px; font-size: 18px; font-weight:300; margin-top: 20px; border-bottom:solid 1px #000;">{{$question->answers->count()}} Trả lời</p>
 	<!--Answers list-->
-	@if($question->answers->count())
 	<div class="answer-list">
 		<ul class="list-group" id="list_cmt">
+	@if($question->answers->count())
+	
 				@foreach ($question->answers as $answer)
 				<li class="list-group-item">
 					<div class="media-left">
@@ -321,9 +322,10 @@
 					</div>
 				</li>
 			@endforeach
-		</ul>
-	</div> <!--Answers list-->
+		 <!--Answers list-->
 	@endif
+	</ul>
+	</div>
 </div><!--Main content-->
 @include('qaviews.sidebar')
 
@@ -548,8 +550,8 @@
 			// });
 
 			$('#list_cmt').on('click', '#answer_cmt', function(event) {
-				var answer_id=$(this).parent().find('#answer_id').val();
-				var comment_content=$(this).parent().find('#answer_comment_content');
+				var answer_id=$(this).parent().parent().find('#answer_id').val();
+				var comment_content=$(this).parent().parent().find('#answer_comment_content');
 				var answer_comment_count=parseInt($(this).parent().parent().parent().find('#answer_comment_count').html());
 				if(comment_content=='')
 				{
@@ -557,13 +559,13 @@
 				}
 				else
 				{
-					var add_answer=$(this).parent().parent().parent().find('#group_comments');
-					var add_answer_comment_count=$(this).parent().parent().parent().find('#answer_comment_count');
+					var add_answer=$(this).parent().parent().parent();
+					var add_answer_comment_count=$(this).parent().parent().parent().parent().find('#answer_comment_count');
 					$.post('{{url('qa/answer/comment')}}', {answer_id: answer_id,comment_content:comment_content.val()}, function(data, textStatus, xhr) {
 						success:{
 
 							add_answer_comment_count.html(answer_comment_count+1);
-							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text" style="color: black;">'+escapeHtml(data.content)+'</span> <p class="question-sub-info"> <span id="count_like">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span class="created-time">5 phút trước</span> <button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="" style="margin-left: 10px;" href="#" data-original-title="Sửa"><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="" style="margin-left:10px;" href="#" data-original-title="Xoá"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div></div>').find('div:last').offset().top-100;
+							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text" style="color: black;">'+escapeHtml(data.content)+'</span> <p class="question-sub-info"> <span id="count_like">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span class="created-time">Vừa xong</span> <button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="" style="margin-left: 10px;" href="#" data-original-title="Sửa"><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="" style="margin-left:10px;" href="#" data-original-title="Xoá"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div></div>').find('div:last').offset().top-100;
 							
 							$('html,body').animate({scrollTop:top}, 'slow'); 
 							comment_content.val("");

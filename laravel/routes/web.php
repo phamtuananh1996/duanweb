@@ -102,6 +102,7 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 
 	Route::group(['prefix' => 'ajax'], function() {
 	    Route::Post('rate', 'RateTestController@store');
+	    Route::Post('comment', 'TestCommentController@store');
 	});
 
 });

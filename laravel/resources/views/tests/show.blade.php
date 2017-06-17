@@ -117,19 +117,20 @@
 				<h2>Bình luận</h2>
 				<hr style=" border-bottom: solid 1px #bdbdbd ; ">		
 				<div id="commentField" class="form-group comment-form">
-					<textarea style="height:80px; background: " id="comment-field" name="content" required class="form-control comment-box" placeholder="viết bình luận...">
+					<textarea style="height:80px" id="comment-field" name="content" class="form-control comment-box" placeholder="viết bình luận...">
 					</textarea>
 					<div class=" comment-form-action "> 
-						<button type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary" >Gửi</button>
+						<button id="submit_comment" type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary" >Gửi</button>
 					</div>
+					<input type="hidden" id="test_id" value="{{$test->id}}">
 				</div>
-				@if($test->comments->count())
+				
 				<div class="answer-list">
 					<ul class="list-group" id="list_cmt">
-					@foreach($test-comments as $comment)
+					@foreach($test->comments as $comment)
 						<li class="list-group-item">
 							<div class="media-left">
-								<img class="img-avt" src="http://localhost/duanweb/laravel/public//images/users/1497546017.jpg" alt="avatar">
+								<img class="img-avt" src="{{ asset('') }}/images/users/{{$comment->user->avatar}}" alt="avatar">
 							</div>
 							<div class="media-body" style="border-bottom: solid 1px #eee;">
 								<h3 class="list-group-item-heading name-text">{{$comment->user->user_name}}</h3>
@@ -137,18 +138,35 @@
 								<input type="hidden" name="answer_id_input_7" value="7">
 								<p class="question-sub-info">
 									<span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;
-									<span id="answer_comment_count">1</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
-									<span class="created-time">2 ngày trước</span>
+									<span id="answer_comment_count">{{$comment->commentReplies->count()}}</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
+									<span class="created-time">{{$comment->created_at->diffForHumans()}}</span>
 									<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>
+
+								
+
+									@if(Auth::user()->id == $comment->user->id)
 									<a id="show-edit_answer" data-answer_id="7" data-toggle="tooltip" data-placement="top" title="" style="margin-left: 10px;" href="#" data-original-title="Sửa"><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
 									<a data-toggle="tooltip" id="show-delete-answer" data-answer_id="7" data-placement="top" title="" style="margin-left:10px;" href="#" data-original-title="Xoá"><span class="material-icons md-dark pmd-xs ">delete</span></a>
+									@endif
 								</p>
+								</div> 
+								<div id="group_comments"> 
+									<div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;">
+										 <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> 
+										 <div class="form-group comment-form">
+										 	<label class="control-label">Trả lời</label> 
+										 	<textarea style="background: #fff; height: 60px;" id="answer_comment_content" required class="form-control comment-box"></textarea>
+										  </div> 
+										  <div class=" comment-form-action "> <button id="answer_cmt" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gửi</button>
+										  </div> 
+									</div>
+									
 							</div>	
 						</li>
 						@endforeach
 					</ul>
 				</div>
-				@endif
+				
 			</div>
 		</div>
 		@include('tests.sidebar')
@@ -156,7 +174,7 @@
 	<script type="text/javascript">
 
 		$(document).ready(function() {
-
+			$('#comment-field').val('');
 			$("#rate [value='{{$rateAvg}}']").attr('checked', 'true');
 
 			@if ($countStarUserRate)
@@ -190,6 +208,28 @@
 			$('#submit_edit').validate({
 
 			});
+
+			//show field answer 
+
+			
+
+
+
+			//comment
+			$('#submit_comment').click(function(event) {
+				var content=$('#comment-field').val();
+				$.post('{{url('tests/ajax/comment')}}',{content:content,test_id:$('#test_id').val()}, function(data, textStatus, xhr) {
+				success:
+						{
+
+				$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text"style="color: black" id="answer_content";>'+data.content+'</span><input type="hidden" name="answer_id_input_'+data.id+'" value="'+data.id+'"><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>	<a id="show-edit_answer" data-answer_id='+data.id+' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='+data.id+' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div> <div id="group_comments"> <div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group comment-form"> <label class="control-label">Trả lời</label> <textarea style="background: #fff; height: 60px;" id="answer_comment_content" required class="form-control comment-box"></textarea> </div> <div class=" comment-form-action "> <button id="answer_cmt" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gửi</button></div> </div> </div></li>');
+					$('#comment-field').val('');
+					$("html, body").animate({ scrollTop: $(document).height() }, "slow");
+				}
+			});
+
+
+		});
 		});
 
 	</script>
