@@ -1,7 +1,7 @@
-.main-content{ background: #fff; padding:0px;}
+.main-content{ background: #fff; padding:10px;}
 .section {border:solid 1px #00695c;}
-.list-group-item {border-bottom: solid 1px #b2dfdb;}
-.main-title {color: #eee; font-size:20px; width: 100%; padding:5px;background:#00695c}
+.list-group-item {border-bottom: solid 1px #b2dfdb; padding-left:10px;}
+.main-title {color: #eee; font-size:20px; width: 100%;background:#00695c; padding-left:20px;}
 .test-title {font-size: 18px;}
 a.test-title:hover{text-decoration: underline;}
 .test-info {border:solid 1px #2BBBAD; padding: 50px;background: #fafafa;}

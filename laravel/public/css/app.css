@@ -2,8 +2,8 @@ body {
   background: url("shay.jpg") 0 0 no-repeat;
   background-clip: padding-box;
   background-origin: border-box;
-  color: #333333;
-font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  font-family: 'Roboto','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 .img-avt { width: 40px; height: 40px; border:solid 2px #80cbc4; border-radius:2px;}
 .btn { font-size: 13px;}

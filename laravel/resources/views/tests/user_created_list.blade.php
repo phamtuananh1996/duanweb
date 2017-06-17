@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-9 main-content">
 			<div class="section">
-				<p class="main-title"><span class="glyphicon glyphicon-folder-open"></span> &nbsp;Danh đề đã tạo</p>
+				<p class="main-title"> <span class="glyphicon glyphicon-folder-open"></span> &nbsp;Danh đề đã tạo</p>
 				@if($listTests)
 					<ul class="list-group pmd-z-depth pmd-list pmd-card-list" style="box-shadow: none;">
 						@foreach ($listTests->sortByDesc('id') as $test)

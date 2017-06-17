@@ -11,8 +11,8 @@
     }
     
 	</style>
-	<div class="col-md-10 col-md-offset-1 main-content" style="border: solid 1px green; background: white;">
-		<h1 class="text-center" style="color:green;">Tạo Đề Thi</h1>
+	<div class="col-md-10 col-md-offset-1 main-content">
+		<h1 class="text-center" style="color:#00695c;">Tạo Đề Thi Trắc Nghiệm</h1>
 		<hr style="border: solid 1px #9e9e9e;">
 		<h4><strong>Tiêu đề: </strong>{{$test->title}}</h4>
 		<h4><strong>Danh mục/Thể loại:</strong>{{$test->category->title}} </h4>
@@ -28,7 +28,7 @@
 		<hr style="border-bottom: solid 1px #9e9e9e;">
 		
 		
-		<div class="col-md-12" style="margin-top: 20px; margin-bottom: 30px;" id="doc">
+		<div class="col-md-12" style="margin-top: 20px; margin-bottom: 30px; border: solid 1px #2BBBAD; padding: 10px;" id="doc">
 			<div class="col-md-12">
 				<form id="form">
 					<div class="row" id="document">
@@ -122,11 +122,11 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<a class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="addQuestion">		
+					<a class="btn pmd-btn-outline pmd-ripple-effect btn-info" id="addQuestion">		
 						<span class="glyphicon glyphicon-plus"></span>	Thêm câu hỏi
 					</a>
 
-					<button class="btn pmd-btn-raised pmd-ripple-effect btn-primary pull-right" id="submit">		
+					<button class="btn pmd-btn-outline pmd-ripple-effect btn-primary pull-right" id="submit">		
 						<span class="glyphicon glyphicon-floppy-save"></span>	Hoàn Thành
 					</button>
 				</div>	

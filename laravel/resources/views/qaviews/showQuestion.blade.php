@@ -550,8 +550,14 @@
 			// });
 
 			$('#list_cmt').on('click', '#answer_cmt', function(event) {
+<<<<<<< Updated upstream
 				var answer_id=$(this).parent().parent().find('#answer_id').val();
 				var comment_content=$(this).parent().parent().find('#answer_comment_content');
+=======
+				var answer_id=$(this).parent().find('#answer_id').val();
+				alert(answer_id);
+				var comment_content=$(this).parent().find('#answer_comment_content');
+>>>>>>> Stashed changes
 				var answer_comment_count=parseInt($(this).parent().parent().parent().find('#answer_comment_count').html());
 				if(comment_content=='')
 				{

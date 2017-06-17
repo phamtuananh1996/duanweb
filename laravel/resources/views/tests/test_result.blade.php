@@ -1,7 +1,7 @@
 @extends('tests.layout')
 @section('test_content')
 	<div class="row">
-		<div class="col-md-9" id="test-result-content">
+		<div class="col-md-10 col-md-offset-1" id="test-result-content">
 			<div class="row">
 				<div class="col-md-12 text-center">
 					<p style="color: #00695c; font-size:25px">Chúc mừng bạn đã hoàn thành bài thi...!</p>
@@ -51,10 +51,10 @@
 					                   	<td data-title=""><i class="material-icons md-dark pmd-xs" style="color:#ff4444">clear</i></td>
 					                  @endif
 					                  <td>
-					                  	<a data-toggle="collapse" data-target="#{{$answer->id}}" href="#nothing">
+					                  	<a id="{{$answer->id}}" data-toggle="tooltip" data-placement="top" title="Xem đáp/hướng dẫn" href="#nothing">
 					                  		<i class="material-icons md-dark pmd-xs" style="color:#FF8800">note</i>
 					                  	</a>
-					                  	{{-- <div class="collapse" id="{{$answer->id}}">
+					                  	<div class="" id="{{$answer->id}}">
 											<tr class="explan-table">
 												<td colspan="10" style="border:none;"><table class="table pmd-table table-sm">
 													<thead>
@@ -78,7 +78,7 @@
 												</table>
 												</td>
 											</tr>
-										</div> --}}
+										</div>
 					                  </td>
 					                </tr>
 					                @endforeach
@@ -88,12 +88,16 @@
 					</div>
 				</div>
 			</div>
+		</div>	
+		<div class="col-md-4 col-md-offset-4" style="margin-top: 20px; margin-bottom: 20px;">
+			<a href="{{ url('tests/show/'.$test->id) }}"  class="btn pmd-btn-outline pmd-ripple-effect btn-danger pull-left" type="button"><span class="glyphicon glyphicon-repeat"></span> Làm lại</a>
+			<a " class="btn pmd-btn-outline pmd-ripple-effect btn-primary pull-right" type="button"><span class="glyphicon glyphicon-share-alt"></span> Chia sẻ</a>
 		</div>
 	</div>
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
-
+			 $('[data-toggle="tooltip"]').tooltip()
 			$('#show-detail-btn').on('click',function(event){
 				$('#result-detail').slideToggle('nomarl');
 			})
