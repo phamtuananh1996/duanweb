@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 use Auth;
 use Closure;
-
+use Illuminate\Support\Facades\Route;
 class check_login
 {
     /**
@@ -16,10 +16,14 @@ class check_login
     public function handle($request, Closure $next)
     {
         if(Auth::check())
+        {
+           
             return $next($request);
+        }
         else
         {
-            return redirect('login');
+            $currentPath= Route::getFacadeRoot()->current()->uri(); 
+            return redirect('login')->with(['url_back'=>$currentPath]);
         }
     }
 }
