@@ -1,5 +1,5 @@
 <style type="text/css"> 
-#main-nav {background: #00695c; color: #fff; padding:5px;}
+/*#main-nav {background: #00695c; color: #fff; padding:5px;}
 .menu-item { padding: 10px; display: inline-block; }
 .menu-item-link{color: #fafafa; white-space:nowrap;}
 .menu-item-link:hover {color: #bdbdbd ;}
@@ -11,12 +11,48 @@
 #nav ul {display:none; position: absolute;top: 0px; list-style-type: none; left: 100%;}
 .menu-item:hover > #nav{display:block;visibility:visible}
 #user-action {display: none; position: absolute; top:53px; list-style-type: none; background:#3F729B; padding:10px;margin-left: -10px;}
-#user-info:hover >#user-action{display: block;visibility: visible;}
+#user-info:hover >#user-action{display: block;visibility: visible;}*/
 </style>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <ul class ="navbar navbar-fixed-top" id="main-nav">
+             <nav class="navbar navbar-material-blue navbar-fixed-top" role="navigation">
+                 <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-animations">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                        <a href="index.html" class="navbar-brand">Hoc2H</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-animations" data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
+                        <ul class="nav navbar-nav">
+                            <li><a class="menu-item-link" href="#nothong">Lớp</a></li>
+                            <li><a class="menu-item-link" href="{{url('/tests')}}">Đề Thi</a></li>
+                            <li><a class="menu-item-link" href="{{url('/qa')}}">Hỏi Đáp</a></li>
+                            <li><a class="menu-item-link" href="#nothong">Tài Liệu</a></li>
+                            <li class="dropdown">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Danh Mục <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                  @foreach($superCategories as $superCategory)
+                                    <li><a href="#">{{$superCategory->title}}</a></li>
+                                  @endforeach
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+{{-- <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <nav class="navbar-fixed-top">
+            <ul class ="navbar" id="main-nav">
                 <div class="pull-left">
                     <li class="menu-item" id="logo"><a class="menu-item-link" href="{{url('/')}}">Hoc2H</a></li>
                     <li class="menu-item"><a class="menu-item-link" href="#nothong">Lớp</a></li>
@@ -57,9 +93,10 @@
                     @endif
                 </div>
             </ul>
+            </nav>
         </div>
     </div>
-</div>
+</div> --}}
 
 <script type="text/javascript">
     $(document).ready(function(){

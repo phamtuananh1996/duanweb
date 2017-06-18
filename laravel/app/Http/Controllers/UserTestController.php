@@ -35,4 +35,9 @@ class UserTestController extends Controller
             return view('tests.test_result',compact('userTest','user','test','userTestAnswer'));
         }
     }
+
+    public function testedList() {
+
+        return view('tests.user_tested_list');
+    }
 }

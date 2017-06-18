@@ -15,7 +15,7 @@ class UserTestChoicedController extends Controller
     	$userTest = new UserTest;
     	$userTest->test_id = $req->test_id;
     	$userTest->user_id = Auth::user()->id;
-    	$userTest->save();
+        $userTest->save();
         $countIsCorrect=0;
     	foreach ($req->all() as $key => $value) {
     		if($key!='test_id' &&  $key!='_token')
@@ -32,6 +32,6 @@ class UserTestChoicedController extends Controller
     			$UserTestChoiced->save();
     		}
     	}
-        return redirect('tests/userest/result/'.$userTest->id.'/'.$countIsCorrect);
+        return redirect('tests/usetest/result/'.$userTest->id.'/'.$countIsCorrect);
     }
 }
