@@ -7,8 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap --> 
         <link href="{{asset('bootstrap.3.3.7/css/bootstrap.css')}}" type="text/css" rel="stylesheet" /> 
-        <link href="{{asset('bootstrap.3.3.7/css/animate.min.css')}}" rel="stylesheet">
-        <link href="{{asset('bootstrap.3.3.7/css/bootstrap-dropdownhover.min.css')}}" rel="stylesheet">
+        <link href="{{asset('bootstrap.3.3.7/css/animate.css')}}" rel="stylesheet">
+        <link href="{{asset('bootstrap.3.3.7/css/bootstrap-dropdownhover.css')}}" rel="stylesheet">
 
         <!-- Propeller card (CSS for helping component example file) -->
         <link href="{{asset('pmd/dist/css/propeller.css')}}" rel="stylesheet" type="text/css">
@@ -31,7 +31,7 @@
         <!--App CSS -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/test.css') }}" rel="stylesheet">
-        
+        <link href="{{ asset('css/qa.css') }}" rel="stylesheet">
         <!-- Jquery js -->
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
        
@@ -46,7 +46,7 @@
         {{-- @include('layouts.footer') --}}
         <!-- Bootstrap js -->
         <script type="text/javascript" src="{{asset('bootstrap.3.3.7/js/bootstrap.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('bootstrap.3.3.7/js/bootstrap-dropdownhover.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('bootstrap.3.3.7/js/bootstrap-dropdownhover.js')}}"></script>
         <!-- Propeller Sidebar js -->
         <script type="text/javascript" src="{{asset('pmd/components/sidebar/js/sidebar.js')}}"></script>
         <!-- Propeller Dropdown js -->

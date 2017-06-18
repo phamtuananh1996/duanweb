@@ -1,8 +1,5 @@
 {{-- created by tran.nham on 19.05.2017 --}}
 @extends('layouts.app')
-@section('extend_header')
-	
-@endsection
 
 @section('content')
 <div class="container">

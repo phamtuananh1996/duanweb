@@ -8,7 +8,7 @@
 				<li class="v-menu-item"><a href="{{url('qa')}}"><samp class="glyphicon glyphicon-ok"></samp>&nbsp;&nbsp; Đề thi nổi bật</a></li>
 				<li class="v-menu-item"><a href="{{url('tests/user/created')}}"><span class="glyphicon glyphicon-user"></span>&nbsp;  Đề thi đã tạo</a></li>
 				<li class="v-menu-item"><a href="{{ url('tests/usetest/testedlist') }}"><span class="glyphicon glyphicon-comment"></span>&nbsp;  Đề thi đã làm</a></li>
-				<li class="v-menu-item"><a href="{{url('qa/myfollowing')}}"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;  Đang theo dõi</a></li>
+				<li class="v-menu-item"><a href="#nothing"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;  Đang theo dõi</a></li>
 			</ul>
 			<p class="v-menu-header">Cập nhật<p>
 			<div class="component-box" > <!--quick log scrollbar-->

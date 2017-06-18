@@ -2,11 +2,40 @@
 @extends('tests.layout')
 @section('test_content')
 	<div class="row">
-		<div class="col-md-9 main-content">
-			<div class="section">
-				<p class="main-title"> <span class="glyphicon glyphicon-folder-open"></span> &nbsp;Danh đề đã tạo</p>
-				
+		<div class="col-md-9">
+			<div class="panel panel-default widget">
+			<div class="panel-heading">
+				<span class="glyphicon glyphicon-th-list"></span>
+				<h3 class="panel-title">Đề Thi Đã Tạo</h3>
+				<span class="label label-info">80</span>
 			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+					{{-- @foreach($listTests->sortByDesc('id') as $test) --}}
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-xs-10 col-md-11">
+								<div>
+									<a class="list-title" href="#nothing">Đề thi thử THPT Quốc gia chuẩn cấu trúc Bộ Giáo dục (1)</a>
+									<div class="mic-info">
+										<div class="pull-left">
+											<span class="pull-left">02 | làm lần cuối 2 ngày trước</span>&nbsp;| điểm cao nhất: 
+											<span class="red-text ">7.5</span>
+										</div>
+										<div class="pull-right">
+											<a href=""><span class="glyphicon glyphicon-repeat"> </span> Làm lại</a>
+										</div>
+										
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</li>
+					{{-- @endforeach --}}
+				</ul>
+			</div>
+		</div>
 		</div>	
 		@include('tests.sidebar')
 	</div>
