@@ -14,9 +14,6 @@
         <link href="{{asset('pmd/dist/css/propeller.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('pmd/components/card/css/card.css')}}" type="text/css" rel="stylesheet" />
         <link href="{{asset('pmd/components/typography/css/typography.css')}}" type="text/css" rel="stylesheet"/>
-        <link href="{{asset('pmd/components/dropdown/css/dropdown.css')}}" type="text/css" rel="stylesheet"/>
-        <link href="{{asset('pmd/components/navbar/css/navbar.css')}}" type="text/css" rel="stylesheet"/>
-        <link href="{{asset('pmd/components/button/css/sidebar.css')}}" type="text/css" rel="stylesheet"/>
         <link href="{{asset('pmd/components/button/css/button.css')}}" type="text/css" rel="stylesheet"/>
         <link href="{{asset('pmd/components/custom-scrollbar/css/jquery.mCustomScrollbar.css')}}" type="text/css" rel="stylesheet" />
         <link href="{{asset('pmd/components/custom-scrollbar/css/pmd-scrollbar.css')}}" rel="stylesheet" type="text/css"/>
@@ -49,7 +46,7 @@
         {{-- @include('layouts.footer') --}}
         <!-- Bootstrap js -->
         <script type="text/javascript" src="{{asset('bootstrap.3.3.7/js/bootstrap.min.js')}}"></script>
-       
+        <script type="text/javascript" src="{{asset('bootstrap.3.3.7/js/bootstrap-dropdownhover.min.js')}}"></script>
         <!-- Propeller Sidebar js -->
         <script type="text/javascript" src="{{asset('pmd/components/sidebar/js/sidebar.js')}}"></script>
         <!-- Propeller Dropdown js -->

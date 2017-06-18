@@ -1,12 +1,12 @@
-<li class="sub-menu-item">
+<li class="dropdown">
 	@if ($superCategory->children->count())
-		<a href="#nothing" class="menu-item-link"> {{$superCategory->title}} <span class="glyphicon glyphicon-menu-right"></span></a>
-		<ul class="sub-nav">
+		<a href="#nothing"> {{$superCategory->title}} <span class="caret"></a>
+		<ul class="dropdown-menu main-nav">
 			@foreach($superCategory->children as $superCategory)
 				@include('layouts.recursive_menu', $superCategory)
 			@endforeach
 		</ul>
 	@else 
-		<a href="#nothing" class="menu-item-link"> {{$superCategory->title}}</a>
+		<a href="#nothing"> {{$superCategory->title}}</a>
 	@endif
 </li>
