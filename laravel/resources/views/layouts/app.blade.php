@@ -43,7 +43,7 @@
              @yield('content')
         </div>
        
-        {{-- @include('layouts.footer') --}}
+       {{--  @include('layouts.footer') --}}
         <!-- Bootstrap js -->
         <script type="text/javascript" src="{{asset('bootstrap.3.3.7/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('bootstrap.3.3.7/js/bootstrap-dropdownhover.js')}}"></script>

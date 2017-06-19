@@ -28,7 +28,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		sidemenu();
+	
 		jQuery.validator.addMethod("check_type", function(value, element) {
         	return value!='Chọn Thể Loại';
    			});

@@ -7,11 +7,15 @@ use App\Categories;
 class Categories extends Model
 {
     protected $table = "categories";
-    protected $fillable = ['supartialsgory_id','title','description','oder_display'];
+    protected $fillable = ['super_category_id','title','description','oder_display'];
 
     public function children()
     {
     	return $this->hasMany('App\Categories','super_category_id','id');
+    }
+
+    public function superCategory() {
+        return $this->belongsTo('App\Categories','super_category_id','id');
     }
 
     public static function superCategories () {
@@ -19,4 +23,8 @@ class Categories extends Model
     								->orderBy('order_display')
     								->get();
     }
+    public function questions() {
+        return $this->hasMany('App\Question','categories_id','id');
+    }
+    
 }

@@ -6,15 +6,27 @@
 <!--main content-->
 <div class="col-md-9 main-content">	
 	@include('qaviews.content_header')
-	<!--qestion tags-->
-	<div class="pmd-chip pmd-chip-no-icon">Toan 11 <a class="pmd-chip-action" href="javascript:void(0);">
-		<i class="material-icons">close</i></a>
-	</div>
-	<div class="pmd-chip pmd-chip-no-icon">kiến thức lớp 11 <a class="pmd-chip-action" href="javascript:void(0);">
-		<i class="material-icons">close</i></a>
-	</div>
+	<!--categories breadcrumbs-->
+	<ol class="breadcrumb">
+		@php
+			if ($question->category->superCategory) {
+				$super = $question->category->superCategory;
+				$list_super = array($super);
+				while ($super->id > 1) {
+					if($super->superCategory) {
+						$super = $super->superCategory;
+						array_push($list_super,$super);
+					}
+				}
+				for ($i = count($list_super) - 1; $i >= 0; $i--) {
+					echo ('<li><a href="#">'.$list_super[$i]->title.'</a></li>');
+				}
+			} 
+			echo ('<li><a href="#">'.$question->category->title.'</a></li>');
+		@endphp
+	</ol>
 	<!--question detail-->
-	<div class="question-content" >
+	<div class="question-content" style="background: #fff;" >
 		<!--Question header-->
 		<div class="question-header" >
 			<div class="media-left">
@@ -24,7 +36,15 @@
 			</div>
 			<div class="media-body media-middle">
 				<h3 class="list-group-item-heading name-text">{{$question->user->user_name}}</h3>
-				<span class="list-group-item-text">Đăng {{$question->created_at->diffInDays()}} tại {{$question->category->title}}</span>
+				<span class="list-group-item-text">
+				@php
+					Carbon\Carbon::setLocale('vi');
+					if($question->created_at->diffInDays(Carbon\Carbon::now()) > 1)
+					 echo $question->created_at->format('j M Y - g:ia');
+					else 
+					 echo  $question->created_at->diffForHumans();
+				@endphp
+				</span>
 			</div>
 		</div><!--Question header-->
 		<!--Question body-->
