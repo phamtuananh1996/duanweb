@@ -9,7 +9,7 @@
 		    </ul>
 	    </div>
 	@else
-		<a href="#nothing" ><span class="glyphicon glyphicon-file"></span>&nbsp;{{$superCategory->title}} </a>
+		<a href="{{url('qa/categories/'.$superCategory->id)}}" ><span class="glyphicon glyphicon-file"></span>&nbsp;{{$superCategory->title}} </a>
 	@endif
 </li>
 	

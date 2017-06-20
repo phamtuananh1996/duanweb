@@ -2,7 +2,7 @@
     .navbar-material-blue{background:#20B2AA;}
     li.h-menu-item:hover{background:#20B2AA;}
     .nav-link {color: #000;}
-    .main-nav {background:#20B2AA; box-shadow:none; border:none; border-radius:0; width: 100px;}
+    .main-nav {background:#fff; box-shadow:none; border:none; border-radius:0; width: 100px;}
     .dropdown-menu{  min-width:190px;}
 </style>
 <div class="container">

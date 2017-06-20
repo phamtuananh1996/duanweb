@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Categories;
 use App\Question;
 use App\FollowQuestion;
 use Auth;
@@ -63,6 +64,16 @@ class QuestionController extends Controller
         $questions = Question::where('is_resolved',true)->get();
         return view('qaviews.index',compact('questions'));
     }
+
+    public function showCategory($category_id)
+    {
+        $questions = Question::where('categories_id',$category_id)->get();
+
+        $category = Categories::find($category_id);
+        return view('qaviews.categories_show',compact('questions','category'));
+
+    }
+
     public function resolve(Request $rq)
     {
         $question = Question::find($rq->question_id);

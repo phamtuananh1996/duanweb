@@ -119,6 +119,7 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::get('/myquestion','QuestionController@showMyQuestion');
 	Route::get('/myfollowing','QuestionController@showMyFollowing');
 	Route::get('/resolved','QuestionController@showAllResolved');
+	Route::get('/categories/{category_id}','QuestionController@showCategory');
 	
 	Route::post('/voteanswer','VoteAnswerController@voteAnswer');
 	Route::post('/unvoteanswer','VoteAnswerController@disVoteAnswer');
