@@ -150,7 +150,7 @@
 									@endif
 								</p>
 								</div> 
-								<div id="group_comments"> 
+								<div id="group_comments" style="display: none"> 
 									<div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;">
 										 <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> 
 										 <div class="form-group comment-form">

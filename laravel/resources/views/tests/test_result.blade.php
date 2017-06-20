@@ -104,7 +104,7 @@
 			
 			$('body').on('click', '#showexplan', function(event) {
 
-				$(this).parent().parent().parent().find('#explan_'+$(this).data('answer_id')).slideToggle();
+				$(this).parent().parent().parent().find('#explan_'+$(this).data('answer_id')).toggle('slow');
 
 			});
 		});

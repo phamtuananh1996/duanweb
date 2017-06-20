@@ -245,13 +245,13 @@
 			</div>
 		</div>
 	</div>
-	<p style="padding-top: 10px; font-size: 18px; font-weight:300; margin-top: 20px; border-bottom:solid 1px #000;">{{$question->answers->count()}} Trả lời</p>
+	<p style="padding-top: 10px; font-size: 18px; font-weight:300; margin-top: 20px; border-bottom:solid 1px #000;"><span id="qa_count">{{$question->answers->count()}}</span> Trả lời</p>
 	<!--Answers list-->
 	<div class="answer-list">
-		<ul class="list-group" id="list_cmt">
+		<ul class="list-group" id="list_cmt" >
 	@if($question->answers->count())
 	
-				@foreach ($question->answers as $answer)
+				@foreach ($question->answers->forPage(0,5) as $answer)
 				<li class="list-group-item">
 					<div class="media-left">
 						@if ($answer->user->avatar)
@@ -266,6 +266,7 @@
 							<span id="count_vote_answer">{{$answer->voteAnswer->count()}}</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;
 							<span id="answer_comment_count">{{$answer->comments->count()}}</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;
 							<span class="created-time">{{$answer->created_at->diffForHumans()}}</span>
+							<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="show_answer" data-answer_id={{$answer->id}} style="margin-bottom:5px;"> Trả lời</button>
 							@if (Auth::user()->voteAnswer->where('answer_id',$answer->id)->count()==0)
 								<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>
 							@else
@@ -278,7 +279,7 @@
 						</p>
 					</div>	
 
-					<div id="group_comments">
+					<div id="group_comments_{{$answer->id}}" style="display: none">
 						<div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;">
 							<input type="hidden" id="answer_id" name="answer_id" value="{{ $answer->id}}">
 							<div class="form-group comment-form"> 
@@ -291,7 +292,7 @@
 						</div>
 						@if($answer->comments->count())
 							@foreach($answer->comments as $comment)
-							<div class="comment-list-item">
+							<div class="comment-list-item" >
 								<div class="media-left">
 									@if ($comment->user->avatar)
 										<img class="img-avt" src="{{ asset('') }}/images/users/{{$comment->user->avatar}}" width="40" height="40" alt="avatar">
@@ -447,8 +448,9 @@
 							CKEDITOR.instances.answer_field.setData('');
 
 							$('#answer_count').html(answer_count+1);
+							$('#qa_count').html(answer_count+1);
 
-							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text"style="color: black" id="answer_content";>'+data.content+'</span><input type="hidden" name="answer_id_input_'+data.id+'" value="'+data.id+'"><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>	<a id="show-edit_answer" data-answer_id='+data.id+' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='+data.id+' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div> <div id="group_comments"> <div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group comment-form"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 60px;" id="answer_comment_content" required class="form-control comment-box"></textarea> </div> <div class=" comment-form-action "> <button id="answer_cmt" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gửi</button></div> </div> </div></li>'); $('#answer-dialog').modal('hide');
+							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text"style="color: black" id="answer_content";>'+data.content+'</span><input type="hidden" name="answer_id_input_'+data.id+'" value="'+data.id+'"><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="show_answer" data-answer_id='+data.id+' style="margin-bottom:5px;"> Trả lời</button><button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>	<a id="show-edit_answer" data-answer_id='+data.id+' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='+data.id+' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div> <div id="group_comments_'+data.id+'" style="display:none"> <div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group comment-form"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 60px;" id="answer_comment_content" required class="form-control comment-box"></textarea> </div> <div class=" comment-form-action "> <button id="answer_cmt" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gửi</button></div> </div> </div></li>'); $('#answer-dialog').modal('hide');
 
 							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
@@ -501,7 +503,9 @@
 
 			//submit delete answer
 			$('body').on('click','#submit-delete-answer',function(event){
+				var qa_count=parseInt($('#answer_count').html());
 				$('#answer_count').html(parseInt($('#answer_count').html())-1);
+				$('#qa_count').html(qa_count-1);
 				var answer_id = $(this).data('answer_id');
 				$.post('{{ url('qa/ajax/answer/delete') }}',{answer_id:answer_id},function(data,textStatus,xhr) {
 					success: {
@@ -674,6 +678,15 @@
 			});	
 
 
+
+
+			//show answer
+			$('body').on('click', '#show_answer', function(event) {
+				var id=$(this).data('answer_id');
+				$('#group_comments_'+id).toggle('slow');
+			});
+
+
 			function escapeHtml(unsafe) {
 				return unsafe
 				.replace(/&/g, "&amp;")
@@ -683,6 +696,22 @@
 				.replace(/'/g, "&#039;");
 			}
 		});
+
+
+		// var page=1;
+  //      $(window).scroll(function() {
+  //       if($(window).scrollTop() + $(window).height() == $(document).height()){
+  //             page=page + 1;
+  //             alert('ok');
+              
+  //            $.get('{{url('tests/ajax/answer')}}?page='+page,{question_id:{{$question->id}} }, function(data) {
+  //               $('#list_cmt').append(data);
+  //            });
+
+              
+  //          }
+  //     });
+
 	</script>
 	@endsection
 
