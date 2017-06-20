@@ -13,8 +13,9 @@ class QuestionController extends Controller
 {
     public function index()
     {
-    	$questions = Question::all()->sortByDesc('id');
-    	return view('qaviews.index',compact('questions'));
+    	$questions = Question::orderby('id','desc')->paginate(10);
+        $question_count=Question::all()->count();
+    	return view('qaviews.index',compact('questions','question_count'));
     }
 
     public function create() {
@@ -104,4 +105,10 @@ class QuestionController extends Controller
         return view('qaviews.index',compact('questions'));
     }
     
+
+    public function ajaxGetData()
+    {
+       $questions = Question::orderby('id','desc')->paginate(10);
+        return view('ajax.question',compact('questions'));
+    }
 }

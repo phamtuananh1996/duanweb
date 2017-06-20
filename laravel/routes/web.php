@@ -125,6 +125,7 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::post('/unvoteanswer','VoteAnswerController@disVoteAnswer');
 	Route::post('delete','QuestionController@delete');
 	Route::group(['prefix' => 'ajax'],function(){
+		Route::get('getdata','QuestionController@ajaxGetData');
 		Route::post('edit','QuestionController@edit');
 		Route::post('resolve','QuestionController@resolve');
 		Route::post('follows','FollowQuestionController@ajaxFollow');

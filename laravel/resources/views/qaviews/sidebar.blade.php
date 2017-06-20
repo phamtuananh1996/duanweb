@@ -13,7 +13,7 @@
 				</ul>
 				<p class="v-menu-header">Danh Mục<p>
 				<ul class="v-menu-list">
-					@foreach($superCategories as $superCategory)
+					@foreach($superCategories->forPage(0,20) as $superCategory)
 						 @include('qaviews.recursive_partials', $superCategory)
 					@endforeach
 				</ul>
