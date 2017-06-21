@@ -37,14 +37,14 @@
 			<p><strong>Số người đã làm: </strong>{{$test->userTests->count()}}</p>
 		</div>
 		<div class="row">
-			<button style="margin-top: 20px;" data-target="#list-test-options-dialog" data-toggle="modal" type="button" class="btn btn-primary col-md-2 col-md-offset-5"><span class="glyphicon glyphicon-triangle-right"></span> Vào làm bài </button >
+			<button style="margin-top: 20px;" data-target="#list-test-options-dialog" data-toggle="modal" type="button" class="btn pmd-ripple-effect btn-primary col-md-2 col-md-offset-5" id="attend-test"><span class="glyphicon glyphicon-triangle-right"></span> Vào làm bài </button >
 				<form method="POST" action="{{url('/tests/usertest')}}" id="submit_edit">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="hidden" name="test_id" value="{{$test->id}}">
 					<div tabindex="-1" class="modal fade" id="list-test-options-dialog" style="display: none;" aria-hidden="true">
-						<div class="modal-dialog">
+						<div class="modal-dialog" style="width: 300px;">
 							<div class="modal-content">
-								<div class="modal-header pmd-modal-bordered"> 
+								<div class="modal-header pmd-modal-bordered text-center"> 
 									<h3 class="pmd-card-title-text">Chọn cách thức thi</h3>
 								</div>
 								<div class="modal-body">
@@ -62,8 +62,8 @@
 									</div>
 								</div>
 								<div class="pmd-modal-action pmd-modal-bordered text-right">
-									<button  class="btn pmd-ripple-effect btn-primary pmd-btn-flat" type="submit">Vào thi</button>
-									<button data-dismiss="modal"  class="btn pmd-ripple-effect btn-default pmd-btn-flat" type="button">Lúc khác</button>
+									<button data-dismiss="modal"  class="btn pmd-btn-outline pmd-ripple-effect btn-default" type="button">Thôi</button>
+									<button  class="btn pmd-btn-outline pmd-ripple-effect btn-info" type="submit">Vào thi</button>
 								</div>
 							</div>
 						</div>
@@ -149,16 +149,10 @@
 										<a class="action-link" id="vote_answer" style="margin-bottom:5px;"> &#8226; Sửa</a>
 										<a class="action-link" id="vote_answer" style="margin-bottom:5px;"> &#8226; Xoá</a>
 									@endif
-<<<<<<< HEAD
-								</p>
-								</div> 
-								<div id="group_comments" style="display: none"> 
-=======
 								</div>
 							</div> 
 							<div class="collapse" id="{{$comment->id}}" style="height: 0px;">
 								<div id="group_comments"> 
->>>>>>> origin/Edit
 									<div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;">
 										<input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> 
 										<div class="form-group comment-form">
@@ -183,6 +177,7 @@
 	<script type="text/javascript">
 
 		$(document).ready(function() {
+
 			$('#comment-field').val('');
 			$("#rate [value='{{$rateAvg}}']").attr('checked', 'true');
 

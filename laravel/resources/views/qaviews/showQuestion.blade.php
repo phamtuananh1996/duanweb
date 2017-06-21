@@ -38,9 +38,9 @@
 				<h3 class="list-group-item-heading name-text">{{$question->user->user_name}}</h3>
 				<span class="list-group-item-text">
 				@php
-					Carbon\Carbon::setLocale('vi');
-					if($question->created_at->diffInDays(Carbon\Carbon::now()) > 1)
-					 echo $question->created_at->format('j M Y - g:ia');
+					if($question->created_at->diffInDays(Carbon\Carbon::now()) > 1){
+					 	echo "Đăng ngày ".$question->created_at->format('d/m/Y');    
+					}
 					else 
 					 echo  $question->created_at->diffForHumans();
 				@endphp
