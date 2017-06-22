@@ -87,7 +87,7 @@ public function update(updateUserRequest $request,User $user){
  public function info($id)
  {
    $user = User::find($id);
-   return view('users.infodetail', compact('user'));
+   return view('users.timeline', compact('user'));
  }
 
  public function infoEdit()

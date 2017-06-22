@@ -1,19 +1,20 @@
-<div class="col-md-3"><!--SideBar-->
-	<div class="list-group">
-		<a href="#" class="list-group-item active">
-			Trang Cá Nhân
-		</a>
-		<a href="#" class="list-group-item list-group-item-action">Chi tiết thông tin cá nhân</a>
-		<a href="#" class="list-group-item list-group-item-action">Tin nhắn</a>
-		<a href="#" class="list-group-item list-group-item-action">bạn bè</a>
-		<a href="#" class="list-group-item list-group-item-action">Lịch sử làm bài</a>
-	</div>
-	<div class="list-group" style="margin-top: 20px;">
-		<a href="#" class="list-group-item active">
-			Cài Đặt
-		</a>
-		<a href="#" class="list-group-item list-group-item-action">Cài đặt tài khoản</a>
-		<a href="#" class="list-group-item list-group-item-action">Bảo mật</a>
-		<a href="#" class="list-group-item list-group-item-action">Cài đặt khác</a>
-	</div>
-</div><!--end sidebar-->
+<div class="col-md-3"> <!--side bar-->
+		<div class="row">
+			<div class="col-md-11 col-md-offset-1 v-sidebar">
+				<p class="v-menu-header">Tài Khoản<p>
+				<ul class="v-menu-list">
+					<li class="v-menu-item"><a href="#nothing"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp; Trang cá nhân</a></li>
+					<li class="v-menu-item"><a href="#nothing"><i class="fa fa-info-circle"></i>&nbsp; Thông tin chi tiết</a></li>
+					<li class="v-menu-item"><a href="#nothing"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Bạn bè</a></li>
+					<li class="v-menu-item"><a href="#nothing"><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp; Tin nhắn</a></li>
+					<li class="v-menu-item"><a href="#nothing"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp; Cài đặt</a></li>
+				</ul>
+			</div>
+		</div>
+	</div><!--end sidebar-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+		});
+	</script>

@@ -1,20 +1,18 @@
-<div class="row" style="background: #fff; padding:10px; border:solid 1px green;">
-	<div class="col-md-4">
+<div class="row" style="background:#fff; padding:10px; border:solid 1px #2BBBAD; border-radius: 5px;">
+	<div class="col-md-12 text-center">
 		@if ($user->avatar)
-		<img style="border-radius:50%;"  alt="" src="{{ asset('') }}/images/users/{{$user->avatar}}" width="200" height="200">
+		<img style="border-radius:50%;"  alt="" src="{{ asset('') }}/images/users/{{$user->avatar}}" width="150" height="150">
 		@endif
 	</div>
-	<div class="col-md-8" style="text-align: left; margin-top: 10px; color:#00695c;">
-		@if($user->name)
-		<p style="font-size: 20px; color:#0d47a1;"><STRONG>{{$user->name}}</STRONG></p>
-		@else
-		<p style="font-size: 20px;"><STRONG>{{$user->user_name}}</STRONG></p>
-		@endif
-		<p><span class="glyphicon glyphicon-education"></span> {{$user->class}}</p>
-		<p><span class="glyphicon glyphicon-map-marker"></span> {{$user->local}}</p>
-		<p><span class="glyphicon glyphicon-envelope"></span> {{$user->email}}</p>
-		<p><span class="glyphicon glyphicon-earphone"></span> 0{{$user->phone}}</p> 
-		<div class="pull-left">
+	<div class="col-md-12" style="text-align: left; margin-top: 10px; color:#00695c;">
+		<p style="font-size: 20px; color:#0d47a1; text-align: center;"><STRONG>
+			@if($user->name)
+				{{$user->name}}
+			@else
+				{{$user->user_name}}
+			@endif
+		</STRONG></p>
+		<div class="text-center">
 			 <ul class="list-inline stats">
                <li>
                  <span style="color: #ff4444;">275</span>
@@ -36,10 +34,10 @@
 		</div>
 		<div class="pull-right"> 
 			@if ($user->id==Auth::user()->id)
-				<a data-toggle="tooltip" data-placement="top" title="Sửa thông tin cá nhân" href="{{url('/users/infoEdit')}}"><span class="material-icons md-dark pmd-xs">mode_edit</span> </a>
+				<a data-toggle="tooltip" data-placement="top" title="Sửa thông tin cá nhân" href="{{url('/users/infoEdit')}}"><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a>
 			@endif
-			<a data-toggle="tooltip" data-placement="top" title="Gửi tin nhắn" style="margin-left: 10px;" href=""><span class="material-icons md-dark pmd-xs">message</span></a>
-			<a data-toggle="tooltip" data-placement="top" title="Kết bạn" style="margin-left: 10px;" href=""><span class="material-icons md-dark pmd-xs">person_add</span></a>
+			<a data-toggle="tooltip" data-placement="top" title="Gửi tin nhắn" style="margin-left: 10px;" href=""><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></a>
+			<a data-toggle="tooltip" data-placement="top" title="Kết bạn" style="margin-left: 10px;" href=""><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i></a>
 		</div>
 	</div>
 </div>

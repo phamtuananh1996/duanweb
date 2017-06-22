@@ -1,6 +1,8 @@
 .info_content {
 	background: #fff;padding: 10px;margin-top: 20px;
 }
+.section {display: block; padding: 10px; background: #fff;border-radius: 5px;}
+.section .user-header {}
 .info-section { border-left:solid 3px #ff4444;border-bottom:dotted 1px #ff4444; margin-bottom:20px; }
 .info-title {font-size: 20px; color: #007E33;font-weight: bold;}
 .time-line { margin-bottom: 30px; }
