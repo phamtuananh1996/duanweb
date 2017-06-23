@@ -1,4 +1,4 @@
-{{-- created by tran.nham on 24.05.2017 --}}
+{{-- created by tran.nham on 24.05.2017 --}} 
 @extends('tests.layout')
 @section('test_content')
 <link rel="stylesheet" type="text/css" href="{{asset('css/rate.css')}}">
