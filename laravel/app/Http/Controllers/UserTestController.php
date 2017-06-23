@@ -20,7 +20,7 @@ class UserTestController extends Controller
     	$userTestAnswer->user_test_id = $userTest->id;
     	$userTestAnswer->result_content = $rq->user_test_answer;
     	$userTestAnswer->save();
-    	return redirect('tests/');
+    	return redirect('tests/usetest/result/'.$userTest->id.'/0');
     }
 
     public function result($usertest_id, $countIsCorrect) {
@@ -31,7 +31,8 @@ class UserTestController extends Controller
             $multiChoiceTestAnswers = $userTest->multiChoiceTestAnswers;
             return view('tests.test_result',compact('userTest','user','test','multiChoiceTestAnswers','countIsCorrect'));
         }else {
-            $userTestAnswer = $userTest->writingTestAnswer;
+            $userTestAnswers = UserWritingTestAnswer::where('user_test_id',$userTest->id)->get();
+            $userTestAnswer = $userTestAnswers[0];
             return view('tests.test_result',compact('userTest','user','test','userTestAnswer'));
         }
     }

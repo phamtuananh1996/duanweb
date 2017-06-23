@@ -31,7 +31,7 @@
 .pmd-tabs .nav > li > a:focus { background-color: transparent; border-color: transparent;}
 .pmd-tabs .nav > li > a { padding: 18px 24px 17px; font-size:14px;}
 .nav-tabs > li > a { opacity:0.54; color:#000; font-weight:500;}
-.pmd-tabs-bg{ background-color:#4285f4; color:#fff;}
+.pmd-tabs-bg{ background-color:#2BBBAD; color:#fff;}
 .pmd-tabs-bg li .dropdown-menu a {color:#333;}
 .pmd-tabs-bg li a {color:#fff;}
 .pmd-tabs-bg .pmd-tabs-scroll-right, .pmd-tabs-bg .pmd-tabs-scroll-left, 

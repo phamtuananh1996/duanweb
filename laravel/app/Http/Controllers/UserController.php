@@ -18,10 +18,12 @@ class UserController extends Controller
     //dd($user);
     return view('admin.business.user.index',compact('user'));
   }
+
   public function getCreate(){
     $role = Role::all();
     return view('admin.business.user.create',compact('role'));
   }
+
   public function postCreate(UserRequest $request,User $user){
 
     $user = new User();
@@ -34,31 +36,18 @@ class UserController extends Controller
     $user->gender=$request->gender;
     $user->birthday=$request->birthday;
     if($request->hasFile('avatar')){
-            $path = 'images/user/';
-            $file = $request->file('avatar');
-            $name = $file->getClientOriginalName();
-            do{
-                $filename = str_random(4)."_".$name;
-            }while(file_exists("images/user/".$filename));
-            $file->move($path,$filename);
-            $user->avatar = $filename;    
-        }
-        else {
-            $user->avatar="";
-        }
-    // if($request->hasFile('avatar')){
-    //   $path = 'images/user/';
-    //   $file = $request->file('avatar');
-    //   $name = $file->getClientOriginalName();
-    //   do{
-    //     $avatar = str_random(4)."_".$name;
-    //   }while(file_exists("images/users/".$avatar));
-    //   $file->move($path,$avatar);
-    //   $user->avatar = $avatar;    
-    // }
-    // else {
-    //   $user->avatar="";
-    // }
+      $path = 'images/user/';
+      $file = $request->file('avatar');
+      $name = $file->getClientOriginalName();
+      do{
+        $filename = str_random(4)."_".$name;
+      }while(file_exists("images/user/".$filename));
+      $file->move($path,$filename);
+      $user->avatar = $filename;    
+    }
+    else {
+      $user->avatar="";
+    }
     $user->local=$request->local;
     $user->coin=$request->coin;
     $user->status=$request->status;
@@ -69,27 +58,38 @@ class UserController extends Controller
     $user->save();
     return redirect('admin/user');
   }
+
   public function destroy($id){
     $User = User::find($id);
     $User->delete();
     \Session::flash('notify','Xóa thành công');
     return redirect()->route('indexUser');
   }
+
   public function Show($id){
     $user = User::find($id);
-   $role = Role::all();
-   return view('admin.business.user.show',compact('user','role'));
- }
+    $role = Role::all();
+    return view('admin.business.user.show',compact('user','role'));
+  }
 
-public function update(updateUserRequest $request,User $user){
+  public function update(updateUserRequest $request,User $user){
 
-}
- public function info($id)
- {
+  }
+  public function timeLine($id)
+  {
    $user = User::find($id);
-   return view('users.infodetail', compact('user'));
+   return view('users.timeline', compact('user'));
  }
 
+  public function infoDetail($id) {
+    $user = User::find($id);
+    return view('users.infodetail',compact('user'));
+  }
+  public function friends($id)
+  {
+    $user = User::find($id);
+    return view('users.friends',compact('user'));
+  }
  public function infoEdit()
  {  if (Auth::check()) {
 

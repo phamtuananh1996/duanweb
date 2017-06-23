@@ -1,6 +1,6 @@
 <div class="col-md-3"> <!--side bar-->
 		<div class="row">
-			<div class="col-md-11 col-md-offset-1 v-sidebar">
+			<div class="col-md-11 v-sidebar">
 				<p class="v-menu-header">Thống Kê<p>
 				<ul class="v-menu-list">
 					<li class="v-menu-item"><a href="{{url('qa')}}"><samp class="glyphicon glyphicon-globe"></samp>&nbsp; Tất cả câu hỏi</a></li>

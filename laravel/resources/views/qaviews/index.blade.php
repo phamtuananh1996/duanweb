@@ -13,7 +13,7 @@
 				<div class="panel-heading">
 					<span class="glyphicon glyphicon-th-list"></span>
 					<h3 class="panel-title">Tất Cả Câu Hỏi</h3>
-					<span class="label label-info">{{$question_count}}</span>
+					<span class="label label-info">{{$questions->count()}}</span>
 				</div>
 				<div class="panel-body" id="it">
 					<ul class="list-group" id="list_qa">

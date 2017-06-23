@@ -38,9 +38,9 @@
 				<h3 class="list-group-item-heading name-text">{{$question->user->user_name}}</h3>
 				<span class="list-group-item-text">
 				@php
-					Carbon\Carbon::setLocale('vi');
-					if($question->created_at->diffInDays(Carbon\Carbon::now()) > 1)
-					 echo $question->created_at->format('j M Y - g:ia');
+					if($question->created_at->diffInDays(Carbon\Carbon::now()) > 1){
+					 	echo "Đăng ngày ".$question->created_at->format('d/m/Y');    
+					}
 					else 
 					 echo  $question->created_at->diffForHumans();
 				@endphp
@@ -119,7 +119,7 @@
 					<div id="user-option" class="pull-right" style="margin-bottom: 20px;">
 						<input type="hidden" id="question_id" value="{{$question->id}}">
 						<span class="dropdown pmd-dropdown dropup clearfix">
-							<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="dropdownMenuTopLeft" data-toggle="dropdown" aria-expanded="true"><i class="material-icons pmd-sm">more_vert</i></button>
+							<button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button" id="dropdownMenuTopLeft" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></button>
 							<ul aria-labelledby="dropdownMenu3" role="menu" class="dropdown-menu pmd-dropdown-menu-top-left">
 								<li role="presentation"><button  data-target="#move-dialog" data-toggle="modal" type="button" class="btn pmd-ripple-effect btn-link">Di chuyển chủ đề </button ></li>
 								<li role="presentation"><button  data-target="#question-delete-dialog" data-toggle="modal" type="button" class="btn pmd-ripple-effect btn-link"> Xoá câu hỏi </button ></li>
@@ -165,7 +165,7 @@
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h2 class="pmd-card-title-text"><i class="material-icons md-dark pmd-md" style="color: red;">warning</i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu hỏi này!</span></h2>
+								<h2 class="pmd-card-title-text"><i class="fa fa-warning " style="color: red;"></i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu hỏi này!</span></h2>
 							</div>
 							<div class="modal-body">
 								<p style="color:red;"> Lưu ý rằng khi bạn xoá câu hỏi, các câu trả lời và bình luận liên quan cũng sẽ bị xoá.</p>
@@ -210,7 +210,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2 class="pmd-card-title-text"><i class="material-icons md-dark pmd-md" style="color: red;">warning</i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu trả lời này!</span></h2>
+					<h2 class="pmd-card-title-text"><i class="fa fa-warning " style="color: red;"></i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu trả lời này!</span></h2>
 				</div>
 				<div class="modal-body">
 					<p style="color:red;"> Lưu ý rằng khi bạn xoá câu trả lời, các câu trả lời và bình luận liên quan cũng sẽ bị xoá.</p>
@@ -249,7 +249,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2 class="pmd-card-title-text"><i class="material-icons md-dark pmd-md" style="color: red;">warning</i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu trả lời này!</span></h2>
+					<h2 class="pmd-card-title-text"><i class="fa fa-warning " style="color: red;"></i><span style="margin-bottom: 30px;"> Bạn thất sự muốn xoá câu trả lời này!</span></h2>
 				</div>
 				<div class="modal-body">
 					<p style="color:red;"> Lưu ý rằng khi bạn xoá câu trả lời, các câu trả lời và bình luận liên quan cũng sẽ bị xoá.</p>
@@ -293,8 +293,8 @@
 								<button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="un_vote_answer" style="margin-bottom: 5px;"> Bỏ vote</button>
 							@endif
 							@if(Auth::user()->id == $answer->user->id)
-								<a id="show-edit_answer" data-answer_id='{{$answer->id}}' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
-								<a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='{{$answer->id}}' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a>
+								<a id="show-edit_answer" data-answer_id='{{$answer->id}}' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a>
+								<a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='{{$answer->id}}' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
 							@endif
 						</p>
 					</div>	
@@ -331,9 +331,9 @@
 										@endif
 
 										@if(Auth::user()->id == $comment->user->id)
-											<a data-answer_comment_id='{{$comment->id}}' data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a>
+											<a data-answer_comment_id='{{$comment->id}}' data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a>
 
-											<a data-answer_comment_id='{{$comment->id}}' data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a>
+											<a data-answer_comment_id='{{$comment->id}}' data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
 										@endif
 									</p>
 								</div>
@@ -470,7 +470,7 @@
 							$('#answer_count').html(answer_count+1);
 							$('#qa_count').html(answer_count+1);
 
-							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text"style="color: black" id="answer_content";>'+data.content+'</span><input type="hidden" name="answer_id_input_'+data.id+'" value="'+data.id+'"><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="show_answer" data-answer_id='+data.id+' style="margin-bottom:5px;"> Trả lời</button><button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>	<a id="show-edit_answer" data-answer_id='+data.id+' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='+data.id+' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div> <div id="group_comments_'+data.id+'" style="display:none"> <div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group comment-form"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 60px;" id="answer_comment_content" required class="form-control comment-box"></textarea> </div> <div class=" comment-form-action "> <button id="answer_cmt" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gửi</button></div> </div> </div></li>'); $('#answer-dialog').modal('hide');
+							$('#list_cmt').append('<li class="list-group-item"> <div class="media-left"> <img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"> </div> <div class="media-body" style="border-bottom: solid 1px #eee;"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text"style="color: black" id="answer_content";>'+data.content+'</span><input type="hidden" name="answer_id_input_'+data.id+'" value="'+data.id+'"><input type="hidden" name="answer_id" id="answer_id" value="'+data.id+'"> <p class="question-sub-info"> <span id="count_vote_answer">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span id="answer_comment_count">0</span> &nbsp;<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<span class="created-time">Vừa xong</span></span> <button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="show_answer" data-answer_id='+data.id+' style="margin-bottom:5px;"> Trả lời</button><button class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="vote_answer" style="margin-bottom:5px;"> Vote</button>	<a id="show-edit_answer" data-answer_id='+data.id+' data-toggle="tooltip" data-placement="top" title="Sửa" style="margin-left: 10px;" href="#" ><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a> <a data-toggle="tooltip" id="show-delete-answer"  data-answer_id='+data.id+' data-placement="top" title="Xoá" style="margin-left:10px;" href="#"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a> </p> </div> <div id="group_comments_'+data.id+'" style="display:none"> <div id="commentfield" style="margin:10px 0px 30px 55px; width: 70%;"> <input type="hidden" id="answer_id" name="answer_id" value="'+data.id+'"> <div class="form-group comment-form"> <label class="control-label">Bình luận</label> <textarea style="background: #fff; height: 60px;" id="answer_comment_content" required class="form-control comment-box"></textarea> </div> <div class=" comment-form-action "> <button id="answer_cmt" class="btn pmd-btn-outline pmd-ripple-effect btn-primary">Gửi</button></div> </div> </div></li>'); $('#answer-dialog').modal('hide');
 
 							$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 
@@ -592,7 +592,7 @@
 						success:{
 
 							add_answer_comment_count.html(answer_comment_count+1);
-							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text" style="color: black;">'+escapeHtml(data.content)+'</span> <p class="question-sub-info"> <span id="count_like">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span class="created-time">Vừa xong</span> <button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="" style="margin-left: 10px;" href="#" data-original-title="Sửa"><span class="material-icons md-dark pmd-xs ">mode_edit</span></a> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="" style="margin-left:10px;" href="#" data-original-title="Xoá"><span class="material-icons md-dark pmd-xs ">delete</span></a> </p> </div></div>').find('div:last').offset().top-100;
+							var top=add_answer.append('<div class="comment-list-item"> <div class="media-left"><img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="40" height="40" alt="avatar"></div> <div class="media-body"> <h3 class="list-group-item-heading name-text">{{Auth::user()->user_name}}</h3> <span class="list-group-item-text sub-text" style="color: black;">'+escapeHtml(data.content)+'</span> <p class="question-sub-info"> <span id="count_like">0</span> <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp; <span class="created-time">Vừa xong</span> <button data-answer_comment_id="'+data.id+'" class="btn pmd-btn-flat pmd-ripple-effect btn-success" type="button" id="like" style="margin-bottom:5px;"> Vote</button> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="edit-answer-comment" data-placement="top" title="" style="margin-left: 10px;" href="#" data-original-title="Sửa"><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a> <a data-answer_comment_id="'+data.id+'" data-toggle="tooltip" id="show-delete-answer-comment" data-placement="top" title="" style="margin-left:10px;" href="#" data-original-title="Xoá"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a> </p> </div></div>').find('div:last').offset().top-100;
 							
 							$('html,body').animate({scrollTop:top}, 'slow'); 
 							comment_content.val("");
