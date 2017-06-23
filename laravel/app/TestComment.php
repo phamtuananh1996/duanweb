@@ -14,4 +14,9 @@ class TestComment extends Model
     {
     	return $this->hasMany('App\TestCommentReply','test_comment_id','id');
     }
+
+      public function voteCommentTest()
+   {
+      return $this->hasMany('App\voteCommentTest','comment_tests_id','id');
+   }
 }

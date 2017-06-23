@@ -104,6 +104,15 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::group(['prefix' => 'ajax'], function() {
 	    Route::Post('rate', 'RateTestController@store');
 	    Route::Post('comment', 'TestCommentController@store');
+	    Route::Post('vote_comment', 'VoteTestCommentController@vote');
+	    Route::Post('dis_vote_comment', 'VoteTestCommentController@unVote');
+	    Route::Post('comment/edit', 'TestCommentController@edit');
+	    Route::Post('comment/delete', 'TestCommentController@delete');
+	    Route::Post('answer/comment', 'TestCommentReplyController@store');
+	    Route::Post('like', 'VoteAnswerCommentTestController@store');
+	    Route::Post('dislike', 'VoteAnswerCommentTestController@disLike');
+	    Route::Post('answercomment/edit', 'TestCommentReplyController@edit');
+	    Route::Post('answercomment/delete', 'TestCommentReplyController@delete');
 	});
 
 });

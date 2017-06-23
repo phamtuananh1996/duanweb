@@ -16,4 +16,16 @@ class TestCommentController extends Controller
 		$TestComment->save();
 		return $TestComment;
 	}
+	public function edit(Request $req)
+	{
+	   $TestComment = TestComment::find($req->id_comment);
+       $TestComment->content = $req->comment_content;
+       $TestComment->save();
+       return response()->json($TestComment);
+	}
+	public function delete(Request $req)
+	{
+		 $TestComment = TestComment::find($req->id_comment);
+		 $TestComment->delete();
+	}
 }

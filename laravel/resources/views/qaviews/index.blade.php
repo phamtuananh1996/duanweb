@@ -5,6 +5,7 @@
 	 <link rel="stylesheet" href="{{ asset('css/animate.min.css') }} ">
 	<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 	<script src="{{ asset('plugins/jquery.validate.js') }}"></script>
+	<script src="{{ asset('js/waypoints.min.js') }}"></script>
 	<div class="col-md-9">	<!--main content-->
 		@include('qaviews.content_header')
 		<div >
@@ -14,7 +15,7 @@
 					<h3 class="panel-title">Tất Cả Câu Hỏi</h3>
 					<span class="label label-info">{{$question_count}}</span>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" id="it">
 					<ul class="list-group" id="list_qa">
 						@foreach ($questions as $question)
 							@include('qaviews.card')
@@ -44,8 +45,13 @@
 
 
 
+
+ 
 	$(document).ready(function() {
-	
+
+	 
+
+
 		jQuery.validator.addMethod("check_type", function(value, element) {
         	return value!='Chọn Thể Loại';
    			});
