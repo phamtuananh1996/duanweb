@@ -54,7 +54,9 @@ Route::group(['prefix' => 'ajax'], function() {
 });
 
 Route::group(['prefix' => 'users'],function(){
-	Route::get('infodetail/{id}','UserController@info');
+	Route::get('timeline/{id}','UserController@timeLine');
+	Route::get('infodetail/{id}','UserController@infoDetail');
+	Route::get('friends/{id}','UserController@friends');
 	Route::get('infoEdit','UserController@infoEdit');
 	Route::post('infoEdit','UserController@editUser');
 });

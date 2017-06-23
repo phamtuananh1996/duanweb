@@ -10,6 +10,7 @@ body {
 .red-text {color: #ff4444;}
 .white-text {color: #fff;}
 .black-text {color: #000;}
+.gray-text {color: #616161;}
 .blue-text {color:#0099CC;}
 .green-text {color: #007E33;}
 .dark-text {color: #00695c;}
@@ -24,7 +25,7 @@ body {
 .breadcrumb {border: solid 1px #2BBBAD; border-radius:0;}
 .action-link {font-size:13px; color: #3F729B; padding: 5px;}
 .action-link:hover {text-decoration: underline;  cursor: pointer; cursor: hand; }
-
+.pmd-textfield {margin-bottom: 20px;}
 .v-sidebar{padding:0px; background: #fff;}
 .v-menu-header {color: #eee; font-size:15px; width: 100%; padding:6px;background:#2BBBAD; text-align: center;}
 .v-menu-list {margin-top: 5px; list-style-type: none; padding:0px;font-size: 15px;line-height:25px;}
@@ -51,3 +52,14 @@ body {
 .widget .action { margin-top:5px; }
 .widget .comment-text { font-size: 12px; }
 .widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+
+.user-info-section{margin-left:10px;background: #fff;}
+.friends-list-item { margin:10px;}
+
+
+
+
+
+
+
+

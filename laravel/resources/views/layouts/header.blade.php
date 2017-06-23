@@ -43,7 +43,7 @@
                                                    {{ csrf_field() }}
                                                </form>
                                            </li>
-                                           <li><a class="nav-link" href="{{ url('users/infodetail/'.Auth::user()->id) }}"> <span class="glyphicon glyphicon-info-sign"></span> Thông tin chi tiết</a></li>
+                                           <li><a class="nav-link" href="{{ url('users/timeline/'.Auth::user()->id) }}"> <span class="glyphicon glyphicon-info-sign"></span> Thông tin chi tiết</a></li>
                                        </ul>
                                     </li>
                                 @else

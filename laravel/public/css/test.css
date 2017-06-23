@@ -9,6 +9,6 @@ a.test-title:hover{text-decoration: underline;}
 #test-result-content {border:solid 1px #2BBBAD; padding: 10px;}
 #result-detail{display: none;}
 #test-info{margin-top:10px; background:#4db6ac ; padding:10px;}
-.test-detail{color: #FF8800;}
+#test-info > span {color: white;}
 #result-table {box-shadow: none; border-top:solid 1px #2BBBAD ;}
 .explan-table {}

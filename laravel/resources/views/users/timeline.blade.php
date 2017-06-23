@@ -1,19 +1,19 @@
 @extends('users.info')
 @section('info_content')
 	<div class="row" style="padding-left: 20px;">
-		<div class="col-md-10 section" style="background:#fff; padding: 10px; border-radius: 3px;">
+		<div class="col-md-12 section" style="background:#fff; padding: 10px; border-radius: 3px;">
 			<div id="commentField" class="form-group comment-form">
 				<textarea  class="form-control comment-box" placeholder="Bạn đang nghĩ gì...?"></textarea>
 				<div class=" comment-form-action "> 
 					<button id="submit_comment" type="button" class=" my-btn pull-right" >Đăng</button>
 					<div class="pull-left">
-						<i class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
-						<i style="margin-left: 10px;" class="fa fa-meh-o fa-lg" aria-hidden="true"></i>
+						<a href="#nothing"><i class="fa fa-picture-o fa-lg" aria-hidden="true"></i></a>
+						<a href="#nothing"><i style="margin-left: 10px;" class="fa fa-meh-o fa-lg" aria-hidden="true"></i></a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-10 section" style="margin-top: 20px; padding:10px; background: #fff; border-radius: 3px;">
+		<div class="col-md-12 section" style="margin-top: 20px; padding:10px; background: #fff; border-radius: 3px;">
 			<div class="pmd-card pmd-card-default pmd-z-depth" style="box-shadow: none;">
 				<!-- Card header -->
 			    <div class="pmd-card-title">
