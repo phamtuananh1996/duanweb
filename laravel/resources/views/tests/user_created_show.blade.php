@@ -38,8 +38,8 @@
 					@if($test->state == 0)
 						<p style="color:#ff4444; font-size: 18px;"> Đề thi này chưa có nội dung...<a href="{{url('tests/createst2/'.$test->id)}}"><u>bổ sung</u></a></p>
 					@endif
-					<div class="pull-right" >
-						<button style="text-align: left;" data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-info"><span class="glyphicon glyphicon-pencil"></span> Sửa </button >
+					<div class="pull-left" >
+						<button style="text-align: left;" data-target="#edit-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa </button >
 						<div tabindex="-1" class="modal fade" id="edit-dialog" style="display: none;" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -122,7 +122,7 @@
 							</div>
 						</div>
 						@if($test->userTests->count() == 0)
-							<button data-target="#delete-dialog" data-toggle="modal" style="text-align: left;" type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-danger"><span class="glyphicon glyphicon-remove"></span> Xoá </button >
+							<button data-target="#delete-dialog" data-toggle="modal" style="text-align: left;" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-danger"><span class="glyphicon glyphicon-remove"></span> Xoá </button >
 							<div tabindex="-1" class="modal fade" id="delete-dialog" style="display: none;" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -157,7 +157,7 @@
 									<p>{!!$test->writingTest->content!!}</p>
 								@endif
 							</div>
-							<button data-target="#edit-content-dialog" data-toggle="modal" type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-info"><span class="glyphicon glyphicon-pencil"></span> Sửa đề bài</button >
+							<button data-target="#edit-content-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa đề bài</button >
 							<div tabindex="-1" class="modal fade" id="edit-content-dialog" style="display: none;" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
@@ -215,8 +215,7 @@
 								</div>
 							</div>
 						</div>
-							<button data-target="#upload-dialog" data-toggle="modal" type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-open"></span> Tải lên</button >
-							<a href="{{ url('tests/user/created') }}" class="btn pmd-btn-outline pmd-ripple-effect btn-success"><span class="glyphicon glyphicon-th-list"></span> Về danh sách</a>
+							<button data-target="#upload-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"><span class="glyphicon glyphicon-open"></span> Tải lên</button >
 						</div>
 						<div id = "explan" class="col-md-12" style="background: #fff; border: solid 1px green;margin-top: 20px; padding-bottom: 20px;">
 							<h2 style="color:green;"><strong><u>Gợi ý/Đáp án</u></strong></h2>
@@ -230,7 +229,7 @@
 										
 									@endif
 							</div>
-									<button data-target="#edit-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-info"><span class="glyphicon glyphicon-pencil"></span> Sửa đáp án</button >
+									<button data-target="#edit-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span> Sửa đáp án</button >
 								@else
 									<p>chưa có gợi ý và đáp án...!</p>
 									<button data-target="#edit-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary">Bổ sung</button >
@@ -289,8 +288,7 @@
 								</div>
 							</div>
 						</div>
-							<button data-target="#upload-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-outline pmd-ripple-effect btn-primary"> <span class="glyphicon glyphicon-open"></span> Tải lên</button >
-							<a href="{{ url('tests/user/created') }}" class="btn pmd-btn-outline pmd-ripple-effect btn-success"><span class="glyphicon glyphicon-th-list"></span> Về danh sách</a>
+							<button data-target="#upload-explan-dialog" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-info"> <span class="glyphicon glyphicon-open"></span> Tải lên</button >
 							<input type="hidden" id="wtest_id" value="{{$test->writingTest->id}}">
 						</div>
 					@else 
@@ -311,9 +309,8 @@
 							</div>
 							@endforeach
 						</div>
-						<div class="pull-right" style="margin-bottom: 30px;">
-							<a href="{{url('tests/edit/test/'.$test->id)}}" class="btn pmd-btn-outline pmd-ripple-effect btn-primary"><span class="glyphicon glyphicon-pencil"></span>  Sửa Đề</a>
-							<a href="{{ url('tests/user/created') }}" class="btn pmd-btn-outline pmd-ripple-effect btn-success"><span class="glyphicon glyphicon-th-list"></span> Về danh sách</a>
+						<div class="pull-left">
+							<a href="{{url('tests/edit/test/'.$test->id)}}" class="btn pmd-btn-flat pmd-ripple-effect btn-success"><span class="glyphicon glyphicon-pencil"></span>  Sửa Đề</a>
 						</div>
 					@endif
 				@endif	

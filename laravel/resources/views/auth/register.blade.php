@@ -18,10 +18,10 @@
 </style>
 <div class="container" style="margin-top: 100px;">
     <div class="row ">
-        <div class="col-md-6 col-md-offset-3" style="margin-top: 30px; border: solid 1px #2BBBAD; background: white; border-radius:5px;"> 
+        <div class="col-md-6 col-md-offset-3" style="margin-top: 30px; border: solid 1px #c8e6c9; background: white;"> 
             <form style="padding-bottom:30px;" class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                 {{ csrf_field()}}
-                <h3 class="text-center" style="padding-top:10px;">ĐĂNG KÝ THÀNH VIÊN</h3><hr style="border: 2px solid #2BBBAD;"><br>
+                <h3 style="padding-top:10px;">Đăng Ký Thành Viên</h3><hr style="border: 2px solid  #00C851;"><br>
                 
                 <div class="row">
                     <div class="col-md-6">
@@ -115,8 +115,8 @@
                         </label>
                     </div>
                 </div>
-                <div class ="col-md-4 col-md-offset-4" style="margin-top: 20px; margin-bottom: 20px;">
-                    <button style="width:100%;" type="submit" id="submit_form" class="btn pmd-ripple-effect btn-info"> Đăng Ký Ngay </button>
+                <div class ="col-md-8 col-md-offset-4" style="margin-top: 20px; margin-bottom: 20px;">
+                    <button type="submit" id="submit_form" class="btn btn-success"> Đăng Ký Ngay </button>
                 </div>
              </form>
             </div>

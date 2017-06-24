@@ -1,14 +1,15 @@
 @if(Route::has('login'))
 	@if(Auth::check())
-	<div class="question-user">
+	<div class="col-md-12 pmd-z-depth question-user">
 		<div class="media-left" style="margin-top: 5px;">
 			@if (Auth::user()->avatar)
 				<img class="img-avt" src="{{ asset('') }}/images/users/{{Auth::user()->avatar}}" width="30" height="30" alt="avatar">
 			@endif
 		</div>
 		<div class="media-body media-middle">
-			<button style="font-size: 16px;" data-target="#form-dialog" data-toggle="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-link" type="button">Bạn muốn hỏi gì?</button>
+			<a class="name-text" href="#">{{Auth::user()->user_name}}</a><br>
 		</div>
+		<button style="margin-left: 40px; font-size: 16px;" data-target="#form-dialog" data-toggle="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-link" type="button">Bạn muốn hỏi gì?</button>
 		<div tabindex="-1" class="modal fade" id="form-dialog" style="display: none;" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -28,9 +29,7 @@
 								<p>Nội dung</p>
 								<textarea id="question-field" name="content" required class="form-control"></textarea>
 								<script>
-									CKEDITOR.replace( 'question-field',{
-									    filebrowserUploadUrl: "upload/upload.php" 
-									});
+									CKEDITOR.replace( 'question-field' );
 								</script>
 							</div>
 							<label class="checkbox-inline pmd-checkbox pmd-checkbox-ripple-effect">
