@@ -16,7 +16,7 @@
     <div class="box">
       <div class="panel-body">
         <div class="form">
-          <form class="form-validate form-horizontal" action="{{ route('showUser',$user->id) }}" method="post" enctype="multipart/form-data">
+          <form class="form-validate form-horizontal" action="{{ route('showUser',$user->id) }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group ">
               <label class="control-label col-lg-2">Role *</label>
@@ -80,9 +80,9 @@
               </div>
             </div>
             <div class="form-group ">
-              <label class="control-label col-lg-2">Avatar </label>
+              <label class="control-label col-lg-2">Gender/Birthday </label>
               <div class="col-lg-8">
-                <p><img width="200px" height="100px" src="{{asset('images/users/'.$user->avatar)}}"></p>
+                <p><img width="200px" height="100px" src="{{url('/image/'.$user->avatar)}}"></p>
                 <input type="file" name="avatar" class="form-control">
                 @if($errors->has('avatar'))<p style="color: red;">{{$errors->first('avatar')}}</p>@endif
               </div>

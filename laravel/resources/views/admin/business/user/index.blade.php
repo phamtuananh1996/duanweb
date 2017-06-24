@@ -40,8 +40,8 @@
               <th>Class</th>
               <th>Gender</th>
               <th>Status</th>
-              <th>Birthday</th>
-              <th>Avatar</th>
+              <th></th>
+              <th></th>
               <th>Action</th>
             </tr>
           </thead>
@@ -67,10 +67,8 @@
                   Không kích hoạt
                   @endif
                 </td>
-                <td>{{$u->birthday}}</td>
-                <td>
-                  <img width="120px" height="80px" src="{{asset('images/users/'.$u->avatar)}}">
-                </td>
+                <td>{{$u->created_at}}</td>
+                <td>{{$u->updated_at}}</td>
                 <td>
                   <div class="btn-group">
                     <a href="{{ asset('admin/user/show/'.$u->id) }}"><i class="fa fa-fw fa-cog"></i></a>

@@ -16,7 +16,7 @@
     <div class="box">
       <div class="panel-body">
         <div class="form">
-          <form class="form-validate form-horizontal" action="{{ route('getcreateUser') }}" method="post" enctype="multipart/form-data">
+          <form class="form-validate form-horizontal" action="{{ route('getcreateUser') }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group ">
               <label class="control-label col-lg-2">Role *</label>

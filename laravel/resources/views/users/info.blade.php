@@ -16,11 +16,11 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-12 " style="margin-top: 80px; height: 800px;"> 
-			<div class="row">
+		<div class="col-md-12 " > 
+			{{-- @include('users.info_header') --}}
+			<div class="row" style="margin-top: 20px;">
 				@include('users.infoSidebar')
-				<div class="col-md-9"> {{-- main content --}}
-					@include('users.info_header')
+				<div class="col-md-7"> {{-- main content --}}
 	                @yield('info_content')
 				</div>
 			</div>

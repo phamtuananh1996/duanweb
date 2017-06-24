@@ -11,8 +11,8 @@
     }
     
 	</style>
-	<div class="col-md-10 col-md-offset-1 main-content" style="border: solid 1px green; background: white;">
-		<h1 class="text-center" style="color:green;">Tạo Đề Thi</h1>
+	<div class="col-md-10 col-md-offset-1 main-content">
+		<h1 class="text-center" style="color:#00695c;">Tạo Đề Thi Trắc Nghiệm</h1>
 		<hr style="border: solid 1px #9e9e9e;">
 		<h4><strong>Tiêu đề: </strong>{{$test->title}}</h4>
 		<h4><strong>Danh mục/Thể loại:</strong>{{$test->category->title}} </h4>
@@ -28,7 +28,7 @@
 		<hr style="border-bottom: solid 1px #9e9e9e;">
 		
 		
-		<div class="col-md-12" style="margin-top: 20px; margin-bottom: 30px;" id="doc">
+		<div class="col-md-12" style="margin-top: 20px; margin-bottom: 30px; border: solid 1px #2BBBAD; padding: 10px;" id="doc">
 			<div class="col-md-12">
 				<form id="form">
 					<div class="row" id="document">
@@ -43,6 +43,7 @@
 											<input type="text" required name="title"  class="form-control" value="">
 										</div>	
 									</div>
+
 									
 									<div class="col-md-2">
 										<div class="form-group pmd-textfield">
@@ -51,6 +52,16 @@
 										</div>	
 									</div>			
 								</div>
+
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group pmd-textfield">
+											<label for="Small">Hướng dẫn :</label>
+											<input type="text" required name="explan"  class="form-control" value="">
+										</div>	
+									</div>
+								</div>
+
 								<div id="group_answer">			
 									<div class="row" id="answer">
 										<div class="row">
@@ -111,11 +122,11 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<a class="btn pmd-btn-raised pmd-ripple-effect btn-info" id="addQuestion">		
+					<a class="btn pmd-btn-outline pmd-ripple-effect btn-info" id="addQuestion">		
 						<span class="glyphicon glyphicon-plus"></span>	Thêm câu hỏi
 					</a>
 
-					<button class="btn pmd-btn-raised pmd-ripple-effect btn-primary pull-right" id="submit">		
+					<button class="btn pmd-btn-outline pmd-ripple-effect btn-primary pull-right" id="submit">		
 						<span class="glyphicon glyphicon-floppy-save"></span>	Hoàn Thành
 					</button>
 				</div>	
@@ -217,8 +228,7 @@
 
 			});
 	function addQuestion(count) {
-		$('#document').append('<form action="" method="post"> <input type="hidden" name="test_id" value="{{$test->id}}"><div class="col-md-12"> <div class="row"> <div class="col-md-8"> <div class="form-group pmd-textfield"> <label for="Small">Câu Hỏi :</label> <input type="text" required name="title"  class="form-control" value=""> </div> </div> <div class="col-md-2"> <div class="form-group pmd-textfield"> <label for="Small">Điểm :</label> <input type="number" name="max_point" class="form-control" value=""> </div> </div><a href="#nothing" style="margin-left: 20px;"  id="delete"><span class="glyphicon glyphicon-remove"></span> Xóa </a>	 </div> <div id="group_answer"> <div class="row" id="answer"> <div class="row"> <div class="col-md-7 col-md-offset-1" > <div class="form-group pmd-textfield"> <label for="Small">Đáp Án :</label> <input type="text" required name="answer[1]" class="form-control" value=""> </div> </div> <div class="col-md-3" style="margin-top:15px;"> <div class="checkbox pmd-default-theme"> <label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 5px;"> <input type="radio" checked  name="is_correct" value="1" id="first"><span class="pmd-radio-label">&nbsp;</span> <span for="is_correct">đáp án đúng</span> </label> </div> </div> </div> <div class="row"> <div class="col-md-7 col-md-offset-1" > <div class="form-group pmd-textfield"> <label for="Small">Đáp Án :</label> <input type="text" required name="answer[2]" class="form-control" value=""> </div> </div> <div class="col-md-4" style="margin-top:15px;"> <div class="checkbox pmd-default-theme"> <label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 5px;"> <input type="radio" value="2" name="is_correct" ><span class="pmd-radio-label">&nbsp;</span> <span for="is_correct">đáp án đúng</span> </label> </div> </div> </div> </div> </div> <div class="row" style="margin-bottom: 50px"> <div class="col-md-4 col-md-offset-1"> <a class="btn pmd-ripple-effect btn-default" id="addAnswer" data-id='+count+'> Thêm câu trả lời </a> </div> </div> </div> </form>'); $("html, body").animate({ scrollTop: $(document).height() }, "slow"); }
-
+		$('#document').append('<form action="" method="post"> <input type="hidden" name="test_id" value="{{$test->id}}"><div class="col-md-12"> <div class="row"> <div class="col-md-8"> <div class="form-group pmd-textfield"> <label for="Small">Câu Hỏi :</label> <input type="text" required name="title"  class="form-control" value=""> </div> </div> <div class="col-md-2"> <div class="form-group pmd-textfield"> <label for="Small">Điểm :</label> <input type="number" name="max_point" class="form-control" value=""> </div></div><a href="#nothing" style="margin-left: 20px;"  id="delete"><span class="glyphicon glyphicon-remove"></span> Xóa </a>	 </div><div class="row"> <div class="col-md-8"> <div class="form-group pmd-textfield"> <label for="Small">Hướng dẫn :</label> <input type="text" required name="explan"  class="form-control" value=""> </div> </div> </div> <div id="group_answer"> <div class="row" id="answer"> <div class="row"> <div class="col-md-7 col-md-offset-1" > <div class="form-group pmd-textfield"> <label for="Small">Đáp Án :</label> <input type="text" required name="answer[1]" class="form-control" value=""> </div> </div> <div class="col-md-3" style="margin-top:15px;"> <div class="checkbox pmd-default-theme"> <label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 5px;"> <input type="radio" checked  name="is_correct" value="1" id="first"><span class="pmd-radio-label">&nbsp;</span> <span for="is_correct">đáp án đúng</span> </label> </div> </div> </div> <div class="row"> <div class="col-md-7 col-md-offset-1" > <div class="form-group pmd-textfield"> <label for="Small">Đáp Án :</label> <input type="text" required name="answer[2]" class="form-control" value=""> </div> </div> <div class="col-md-4" style="margin-top:15px;"> <div class="checkbox pmd-default-theme"> <label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 5px;"> <input type="radio" value="2" name="is_correct" ><span class="pmd-radio-label">&nbsp;</span> <span for="is_correct">đáp án đúng</span> </label> </div> </div> </div> </div> </div> <div class="row" style="margin-bottom: 50px"> <div class="col-md-4 col-md-offset-1"> <a class="btn pmd-ripple-effect btn-default" id="addAnswer" data-id='+count+'> Thêm câu trả lời </a> </div> </div> </div> </form>'); $("html, body").animate({ scrollTop: $(document).height() }, "slow"); }
 
 	function addAnswer(tag,count,number) {
 

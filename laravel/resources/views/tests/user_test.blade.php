@@ -94,10 +94,11 @@
 							@foreach($question->answers as $answer)
 								<div class="col-md-12" style="margin-left: 20px;">
 									<label class="radio-inline pmd-radio pmd-radio-ripple-effect" style="margin-bottom: 10px;">
-										<input type="radio" name="{{$question->id}}" checked id="inlineRadio1" value="{{$answer->id}}">
+										<input type="radio" name="{{$question->id}}" id="inlineRadio1" value="{{$answer->id}}">
 										<span for="inlineRadio1">{{$answer->title}}</span>
 									</label>
 								</div>
+								<input type="radio" style="display: none" name="{{$question->id}}" id="inlineRadio1" checked value="-1">
 							@endforeach
 						</div>
 						<hr style="border-top:solid 1px #e0e0e0;">
@@ -135,7 +136,7 @@
 		        display.textContent =minutes + ":" + seconds;
 
 		        if (--timer < 0) {
-		            timer = duration;
+		           $('#form_testchoice').submit();
 		        }
 		    }, 1000);
 		}
@@ -143,11 +144,12 @@
 		$(document).ready(function () {
 		    var totalMinutes = 60 * {{$test->total_time}},
 		        display = document.querySelector('#time-count');
-		    startTimer(totalMinutes, display);
 
-		    $('#submit_testchoice').click(function(event) {
-		    	$('#form_testchoice').submit();
-		    });
+		    	startTimer(totalMinutes, display);
+
+		    	$('#submit_testchoice').click(function(event) {
+		    		$('#form_testchoice').submit();
+		    	});
 
 
 

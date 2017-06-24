@@ -13,41 +13,26 @@ use App\Categories;
 |
 */
 /*Route manager category*/
-Route::get('admin',array('as'=>'admin',function(){
-	return view('admin.layouts.master');
-}));
-Route::get('admin/login',array('as'=>'getlogin','uses'=>'LoginController@index'));
-Route::post('admin/login',array('as'=>'postlogin','uses'=>'LoginController@login'));
-Route::get('signout',array('as'=>'signout','uses'=>'LoginController@signout'));
+Route::group(['prefix'=>'admin'],function(){
+	Route::get('category',array('as'=>'indexCategory','uses'=>'CategoryController@index'));
+	Route::get('category/create',array('as'=>'getcreateCategory','uses'=>'CategoryController@getCreate'));
+	Route::post('category/create',array('as'=>'postcreateCategory','uses'=>'CategoryController@postCreate'));
+	Route::get('category/show/{category}',array('as'=>'showCategory','uses'=>'CategoryController@Show'));
+	Route::post('category/show/{category}',array('as'=>'updateCategory','uses'=>'CategoryController@update'));
+	Route::get('category/{id}',array('as'=>'destroyCategory','uses'=>'CategoryController@destroy'));
 
-Route::group(['middleware'=>['login']],function(){
-	Route::group(['prefix'=>'admin'],function(){
-		Route::get('category',array('as'=>'indexCategory','uses'=>'CategoryController@index'));
-		Route::get('category/create',array('as'=>'getcreateCategory','uses'=>'CategoryController@getCreate'));
-		Route::post('category/create',array('as'=>'postcreateCategory','uses'=>'CategoryController@postCreate'));
-		Route::get('category/show/{category}',array('as'=>'showCategory','uses'=>'CategoryController@Show'));
-		Route::post('category/show/{category}',array('as'=>'updateCategory','uses'=>'CategoryController@update'));
-		Route::get('category/{id}',array('as'=>'destroyCategory','uses'=>'CategoryController@destroy'));
-
-		Route::get('user',array('as'=>'indexUser','uses'=>'UserController@index'));
-		Route::get('user/create',array('as'=>'getcreateUser','uses'=>'UserController@getCreate'));
-		Route::post('user/create',array('as'=>'postcreateUser','uses'=>'UserController@postCreate'));
-		Route::get('user/show/{user}',array('as'=>'showUser','uses'=>'UserController@Show'));
-		Route::post('user/show/{user}',array('as'=>'updateUser','uses'=>'UserController@update'));
-		Route::get('user/{id}',array('as'=>'destroyUser','uses'=>'UserController@destroy'));
-
-		Route::get('role',array('as'=>'indexRole','uses'=>'RoleController@index'));
-		Route::get('role/create',array('as'=>'getcreateRole','uses'=>'RoleController@getCreate'));
-		Route::post('role/create',array('as'=>'postcreateRole','uses'=>'RoleController@postCreate'));
-		Route::get('role/show/{role}',array('as'=>'showRole','uses'=>'RoleController@Show'));
-		Route::post('role/show/{role}',array('as'=>'updateRole','uses'=>'RoleController@update'));
-		Route::get('role/{id}',array('as'=>'destroyRole','uses'=>'RoleController@destroy'));
-	});
+	Route::get('user',array('as'=>'indexUser','uses'=>'UserController@index'));
+	Route::get('user/create',array('as'=>'getcreateUser','uses'=>'UserController@getCreate'));
+	Route::post('user/create',array('as'=>'postcreateUser','uses'=>'UserController@postCreate'));
+	Route::get('user/show/{user}',array('as'=>'showUser','uses'=>'UserController@Show'));
+	Route::post('user/show/{user}',array('as'=>'updateUser','uses'=>'UserController@update'));
+	Route::get('user/{id}',array('as'=>'destroyUser','uses'=>'UserController@destroy'));
 });
 
 
 Route::get('/', function () {
-	return view('/home');
+	$superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
+	return view('/home',compact('superCategories'));
 });
 
 Route::get('login','Auth\LoginController@getLogin');
@@ -69,7 +54,9 @@ Route::group(['prefix' => 'ajax'], function() {
 });
 
 Route::group(['prefix' => 'users'],function(){
-	Route::get('infodetail/{id}','UserController@info');
+	Route::get('timeline/{id}','UserController@timeLine');
+	Route::get('infodetail/{id}','UserController@infoDetail');
+	Route::get('friends/{id}','UserController@friends');
 	Route::get('infoEdit','UserController@infoEdit');
 	Route::post('infoEdit','UserController@editUser');
 });
@@ -77,8 +64,8 @@ Route::group(['prefix' => 'users'],function(){
 Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 
 	Route::get('/','TestController@index');
-	Route::get('test/admin', function() {
-		return view('test');
+	Route::get('test', function() {
+	    return view('test');
 	});
 	Route::get('createst1','TestController@create');
 	Route::post('createst1','TestController@store');
@@ -109,10 +96,25 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::post('usertest/submit','UserTestController@store');
 	Route::post('usertest/submittestchoice','UserTestChoicedController@store');
 	Route::get('usertest','UserTestController@store');
-
+	Route::get('usetest/result/{usertest_id}/{countIsCorrect}','UserTestController@result');
+	Route::get('usetest/testedlist','UserTestController@testedlist');
 	Route::get('edit/test/{id}', function($test_id) {
 		$test = Test::find($test_id);
-		return view('tests.edit_test',compact('test'));
+	   return view('tests.edit_test',compact('test'));
+	});
+
+	Route::group(['prefix' => 'ajax'], function() {
+	    Route::Post('rate', 'RateTestController@store');
+	    Route::Post('comment', 'TestCommentController@store');
+	    Route::Post('vote_comment', 'VoteTestCommentController@vote');
+	    Route::Post('dis_vote_comment', 'VoteTestCommentController@unVote');
+	    Route::Post('comment/edit', 'TestCommentController@edit');
+	    Route::Post('comment/delete', 'TestCommentController@delete');
+	    Route::Post('answer/comment', 'TestCommentReplyController@store');
+	    Route::Post('like', 'VoteAnswerCommentTestController@store');
+	    Route::Post('dislike', 'VoteAnswerCommentTestController@disLike');
+	    Route::Post('answercomment/edit', 'TestCommentReplyController@edit');
+	    Route::Post('answercomment/delete', 'TestCommentReplyController@delete');
 	});
 
 });
@@ -128,11 +130,13 @@ Route::group(['prefix' => 'qa'],function(){
 	Route::get('/myquestion','QuestionController@showMyQuestion');
 	Route::get('/myfollowing','QuestionController@showMyFollowing');
 	Route::get('/resolved','QuestionController@showAllResolved');
+	Route::get('/categories/{category_id}','QuestionController@showCategory');
 	
 	Route::post('/voteanswer','VoteAnswerController@voteAnswer');
 	Route::post('/unvoteanswer','VoteAnswerController@disVoteAnswer');
 	Route::post('delete','QuestionController@delete');
 	Route::group(['prefix' => 'ajax'],function(){
+		Route::get('getdata','QuestionController@ajaxGetData');
 		Route::post('edit','QuestionController@edit');
 		Route::post('resolve','QuestionController@resolve');
 		Route::post('follows','FollowQuestionController@ajaxFollow');
