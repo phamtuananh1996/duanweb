@@ -11,12 +11,15 @@
 			</div>
 			<div class="panel-body">
 				<ul class="list-group">
-					{{-- @foreach($listTests->sortByDesc('id') as $test) --}}
+					@foreach($UserTest as $test) 
+						
+							
+						
 					<li class="list-group-item">
 						<div class="row">
 							<div class="col-xs-10 col-md-11">
 								<div>
-									<a class="list-title" href="#nothing">Đề thi thử THPT Quốc gia chuẩn cấu trúc Bộ Giáo dục (1)</a>
+									<a class="list-title" href="#nothing">{{$test->test->title}}</a>
 									<div class="mic-info">
 										<div class="pull-left">
 											<span class="pull-left">02 | làm lần cuối 2 ngày trước</span>&nbsp;| điểm cao nhất: 
@@ -32,7 +35,8 @@
 							</div>
 						</div>
 					</li>
-					{{-- @endforeach --}}
+					
+				 @endforeach 
 				</ul>
 			</div>
 		</div>

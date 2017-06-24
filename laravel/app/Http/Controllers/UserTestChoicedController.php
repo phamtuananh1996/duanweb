@@ -32,6 +32,8 @@ class UserTestChoicedController extends Controller
     			$UserTestChoiced->save();
     		}
     	}
+        $userTest->test_point=($countIsCorrect/$userTest->test->number_of_questions)*10;
+        $userTest->save();
         return redirect('tests/usetest/result/'.$userTest->id.'/'.$countIsCorrect);
     }
 }
