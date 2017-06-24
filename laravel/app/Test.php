@@ -37,9 +37,4 @@ class Test extends Model
     public function userTests() {
     	return $this->hasMany('App\UserTest','test_id','id');
     }
-
-    public function rate()
-    {
-        return $this->hasMany('App\RateTest','test_id','id');
-    }
 }

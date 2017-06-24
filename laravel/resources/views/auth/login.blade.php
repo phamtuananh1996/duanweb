@@ -41,7 +41,6 @@
                                     </label>
                                 </div>
                             </div>
-                            <input type="hidden" name="back_url" value="{{session('url_back')}}">
                             <div class="col-md-5">
                                 <a style="font-size:14px;" href="#"><u>Quên mật khẩu</u></a>
                             </div>

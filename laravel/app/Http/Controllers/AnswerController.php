@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Answer;
 use App\Question;
+use App\Categories;
 use Auth;
 use Carbon\Carbon;
 class AnswerController extends Controller

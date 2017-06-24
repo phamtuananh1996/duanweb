@@ -15,7 +15,6 @@ class UserController extends Controller
 {
   public function index(){
     $user = User::all();
-    //dd($user);
     return view('admin.business.user.index',compact('user'));
   }
   public function getCreate(){
@@ -23,7 +22,7 @@ class UserController extends Controller
     return view('admin.business.user.create',compact('role'));
   }
   public function postCreate(UserRequest $request,User $user){
-
+    // return $request->avatar;
     $user = new User();
     $user->name=$request->name;
     $user->user_name=$request->user_name;
@@ -34,38 +33,24 @@ class UserController extends Controller
     $user->gender=$request->gender;
     $user->birthday=$request->birthday;
     if($request->hasFile('avatar')){
-            $path = 'images/user/';
-            $file = $request->file('avatar');
-            $name = $file->getClientOriginalName();
-            do{
-                $filename = str_random(4)."_".$name;
-            }while(file_exists("images/user/".$filename));
-            $file->move($path,$filename);
-            $user->avatar = $filename;    
-        }
-        else {
-            $user->avatar="";
-        }
-    // if($request->hasFile('avatar')){
-    //   $path = 'images/user/';
-    //   $file = $request->file('avatar');
-    //   $name = $file->getClientOriginalName();
-    //   do{
-    //     $avatar = str_random(4)."_".$name;
-    //   }while(file_exists("images/users/".$avatar));
-    //   $file->move($path,$avatar);
-    //   $user->avatar = $avatar;    
-    // }
-    // else {
-    //   $user->avatar="";
-    // }
+      $path = 'images/users/';
+      $file = $request->file('avatar');
+      $name = $file->getClientOriginalName();
+      do{
+        $filename = str_random(4)."_".$name;
+      }while(file_exists("images/users/".$filename));
+      $file->move($path,$filename);
+      $user->avatar = $filename;    
+    }
+    else {
+      $user->avatar="";
+    }
     $user->local=$request->local;
     $user->coin=$request->coin;
     $user->status=$request->status;
     $user->description=$request->description;
     $user->password=Hash::make($request->password);
     $user->code=$request->code;
-    return $user;
     $user->save();
     return redirect('admin/user');
   }
@@ -77,15 +62,43 @@ class UserController extends Controller
   }
   public function Show($id){
     $user = User::find($id);
-   $role = Role::all();
-   return view('admin.business.user.show',compact('user','role'));
- }
+    $role = Role::all();
+    return view('admin.business.user.show',compact('user','role'));
+  }
 
-public function update(updateUserRequest $request,User $user){
-
-}
- public function info($id)
- {
+  public function update(updateUserRequest $request,User $user){
+     $user = User::find($user->id);
+    $user->name=$request->name;
+    $user->user_name=$request->user_name;
+    $user->email=$request->email;
+    $user->role_id=$request->role;
+    $user->phone=$request->phone;
+    $user->class=$request->class;
+    $user->gender=$request->gender;
+    $user->birthday=$request->birthday;
+    if($request->hasFile('avatar')){
+      $path = 'images/users/';
+      $file = $request->file('avatar');
+      $name = $file->getClientOriginalName();
+      do{
+        $filename = str_random(4)."_".$name;
+      }while(file_exists("images/users/".$filename));
+      $file->move($path,$filename);
+      $user->avatar = $filename;    
+    }
+    else {
+      $user->avatar=$user->avatar;
+    }
+    $user->local=$request->local;
+    $user->coin=$request->coin;
+    $user->status=$request->status;
+    $user->description=$request->description;
+    $user->code=$request->code;
+    $user->save();
+    return redirect('admin/user');
+  }
+  public function info($id)
+  {
    $user = User::find($id);
    return view('users.infodetail', compact('user'));
  }
@@ -109,7 +122,6 @@ public function editUser(Request $req)
 {   
  if (Auth::check()) {
    $user=User::find(Auth::user()->id);
-
    $user->name=trim($req->name);
    $user->phone=$req->phone;
    $user->class=$req->class;
@@ -117,9 +129,7 @@ public function editUser(Request $req)
    $user->birthday=$req->birthday;
    $user->local=$req->local;
    $user->description=$req->description;
-
       //upload avatar
-
    if($req->avatar)
    {
 

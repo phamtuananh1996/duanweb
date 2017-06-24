@@ -14,24 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        
         \Carbon\Carbon::setLocale(config('app.locale'));
-
-        view()->composer('layouts.categories_selector',function($view){
-            $view->with('superCategories',\App\Categories::superCategories());
-        });
-         
-        view()->composer('layouts.app',function($view){
-            $view->with('superCategories',\App\Categories::superCategories());
-        });
-        
-        view()->composer('qaviews.sidebar',function($view){
-            $view->with('superCategories',\App\Categories::superCategories());
-        });
-        
-        view()->composer('tests.sidebar',function($view){
-            $view->with('superCategories',\App\Categories::superCategories());
-        });
     }
 
     /**

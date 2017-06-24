@@ -22,22 +22,4 @@ class UserTestController extends Controller
     	$userTestAnswer->save();
     	return redirect('tests/');
     }
-
-    public function result($usertest_id, $countIsCorrect) {
-        $userTest = UserTest::find($usertest_id);
-        $user = $userTest->user;
-        $test = $userTest->test;
-        if ($test->test_type == 0) {
-            $multiChoiceTestAnswers = $userTest->multiChoiceTestAnswers;
-            return view('tests.test_result',compact('userTest','user','test','multiChoiceTestAnswers','countIsCorrect'));
-        }else {
-            $userTestAnswer = $userTest->writingTestAnswer;
-            return view('tests.test_result',compact('userTest','user','test','userTestAnswer'));
-        }
-    }
-
-    public function testedList() {
-
-        return view('tests.user_tested_list');
-    }
 }

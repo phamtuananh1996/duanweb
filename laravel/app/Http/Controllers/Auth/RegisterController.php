@@ -164,7 +164,7 @@ class RegisterController extends Controller
             $users=User::where(['email'=>$req->email,'status'=>0]);
             $users->delete();
 
-            return redirect('login');
+            return redirect('login')->with(['sucsecc'=>'Xác nhận thành công hãy đăng nhập']);
         }
         else
         {

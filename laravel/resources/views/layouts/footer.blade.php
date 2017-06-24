@@ -1,5 +1,5 @@
 <!--Footer-->
-<footer class="page-footer green center-on-small-only" style="position:fixed; bottom:0; ">
+<footer class="page-footer green center-on-small-only">
     <!--Footer Links-->
     <div class="container-fluid">
         <div class="row">

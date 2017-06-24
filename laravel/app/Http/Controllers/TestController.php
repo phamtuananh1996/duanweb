@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Test;
+use App\categories;
 use Auth;
 use App\WritingTest;
-
 class TestController extends Controller
 {
     public function index()
     {
-
         $tests = Test::all();
     	return view('tests.index',compact('tests'));
     }
@@ -19,13 +18,13 @@ class TestController extends Controller
     public function show($id)
     {
         $test = Test::find($id);
-        $rateAvg=round($test->rate->avg('rate'));
-        $countStarUserRate=$test->rate->where('user_id',Auth::user()->id)->first();
-        return view('tests.show',compact('test','rateAvg','countStarUserRate'));
+        return view('tests.show',compact('test'));
     }
     public function create()
     {   
-    	return view('tests.create_st1');
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
+        $categories=categories::all();
+    	return view('tests.create_st1',compact('categories','superCategories'));
     }
 
     public function store(Request $req)

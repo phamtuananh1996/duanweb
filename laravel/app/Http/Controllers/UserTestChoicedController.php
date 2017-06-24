@@ -11,11 +11,10 @@ class UserTestChoicedController extends Controller
 {
     public function store(Request $req)
     {
-        //dd($req);
     	$userTest = new UserTest;
     	$userTest->test_id = $req->test_id;
     	$userTest->user_id = Auth::user()->id;
-        $userTest->save();
+    	$userTest->save();
         $countIsCorrect=0;
     	foreach ($req->all() as $key => $value) {
     		if($key!='test_id' &&  $key!='_token')
@@ -31,7 +30,8 @@ class UserTestChoicedController extends Controller
     			$UserTestChoiced->user_test_choiced=$value;
     			$UserTestChoiced->save();
     		}
+
     	}
-        return redirect('tests/usetest/result/'.$userTest->id.'/'.$countIsCorrect);
+    	return 'bài thi đã được gưi đi.làm đúng '.$countIsCorrect.' câu';
     }
 }

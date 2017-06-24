@@ -15,16 +15,20 @@
  <div class="row">
   <div class="col-sm-12">
     <div class="box">
-      <div class="box-header">
-        <h3 class="box-title">List Category</h3>
+      <div class="box-header col-sm-12">
+        <div class="col-sm-2">
+          <a href="{{url('admin/category/create')}}" class="btn btn-block btn-default">Tạo mới danh mục</a>
+        </div>
       </div>
-      @if(session('notify'))
-          <div class="alert bg-teal disabled color-palette">
-            {{session('notify')}}
-          </div>
-          @endif
+      <div class="col-sm-12">
+        @if(session('notify'))
+        <div class="alert bg-teal disabled color-palette">
+          {{session('notify')}}
+        </div>
+        @endif
+      </div>
       <div class="box-body">
-          @include('admin.business.category.listcategory')
+        @include('admin.business.category.listcategory')
       </div>
     </div>
   </div>

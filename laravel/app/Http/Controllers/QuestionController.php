@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Categories;
 use App\Question;
+use App\Categories;
 use App\FollowQuestion;
 use Auth;
 use Carbon\Carbon;
@@ -13,9 +13,9 @@ class QuestionController extends Controller
 {
     public function index()
     {
-    	$questions = Question::orderby('id','desc')->paginate(10);
-        $question_count=Question::all()->count();
-    	return view('qaviews.index',compact('questions','question_count'));
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
+    	$questions = Question::all()->sortByDesc('id');
+    	return view('qaviews.index',compact('questions','categories','superCategories'));
     }
 
     public function create() {
@@ -39,6 +39,8 @@ class QuestionController extends Controller
         //     $question->as_anonymously = false;
         // }
         $question->save();
+         
+        $categories =Categories::all();
         return redirect('qa/show/'.$question->id);
     }
 
@@ -47,34 +49,28 @@ class QuestionController extends Controller
         $question = Question::find($id);
         $question->view_count++;
         $question->save();
-        return view('qaviews.showQuestion',compact('question'));
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
+        return view('qaviews.showQuestion',compact('question','superCategories'));
     }
 
     public function showMyQuestion() {
         $questions = Question::where('user_id',Auth::user()->id)->get();
-        return view('qaviews.index',compact('questions'));
+        $superCategories = Categories::where('super_category_id',0)->get();
+        return view('qaviews.index',compact('questions','superCategories'));
     }
 
     public function showMyFollowing(){
        
         $questions = Auth::user()->listFollowingQuestions()->get();
-        return view('qaviews.index',compact('questions'));
+       $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
+        return view('qaviews.index',compact('questions','superCategories'));
     }
 
     public function showAllResolved() {
         $questions = Question::where('is_resolved',true)->get();
-        return view('qaviews.index',compact('questions'));
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
+        return view('qaviews.index',compact('questions','superCategories'));
     }
-
-    public function showCategory($category_id)
-    {
-        $questions = Question::where('categories_id',$category_id)->get();
-
-        $category = Categories::find($category_id);
-        return view('qaviews.categories_show',compact('questions','category'));
-
-    }
-
     public function resolve(Request $rq)
     {
         $question = Question::find($rq->question_id);
@@ -101,14 +97,9 @@ class QuestionController extends Controller
     {
         $question = Question::find($rq->question_id);
         $question->delete();
+        $superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
         $questions = Question::all()->sortByDesc('id');
-        return view('qaviews.index',compact('questions'));
+        return view('qaviews.index',compact('questions','superCategories'));
     }
     
-
-    public function ajaxGetData()
-    {
-       $questions = Question::orderby('id','desc')->paginate(10);
-        return view('ajax.question',compact('questions'));
-    }
 }
