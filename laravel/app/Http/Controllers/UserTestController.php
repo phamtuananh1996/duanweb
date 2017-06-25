@@ -38,7 +38,7 @@ class UserTestController extends Controller
     }
 
     public function testedList() {
-        $UserTest=UserTest::where('user_id',Auth::user()->id)->get()->unique('test_id');
+        $UserTest=UserTest::where('user_id',Auth::user()->id)->get()->groupBy('test_id');
         //dd( $UserTest);
         return view('tests.user_tested_list',compact('UserTest'));
     }
