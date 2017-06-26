@@ -24,6 +24,7 @@ class ListCategoryComposer
                 echo '<td><span class="white-text" style="margin-left: '.$em.'em;"><strong>'.$value->title.'</strong></span></td>';
                 echo '<td>';
                     echo '<div class="btn-group">';
+                    echo '<a href="category/create/'.$value->id.'"><i class="fa fa-plus" aria-hidden="true"></i></a>';
                     echo '<a href="category/show/'.$value->id.'"><i class="fa fa-fw fa-cog"></i></a>';
                     echo '<a href="category/'.$value->id.'"><i class="fa fa-fw fa-remove"></i></a>';
                     echo '</div>';
@@ -55,6 +56,7 @@ class ListCategoryComposer
                 echo '<td><span class="white-text" style="margin-left: '.$em.'em;">'.$item->title.'</span></td>';
                 echo '<td>';
                     echo '<div class="btn-group">';
+                    echo '<a href="category/create/'.$item->id.'"><i class="fa fa-plus" aria-hidden="true"></i></a>';
                     echo '<a href="admin/category/show/'.$item->id.'"><i class="fa fa-fw fa-cog"></i></a>';
                     echo '<a href="admin/category/'.$item->id.'"><i class="fa fa-fw fa-remove"></i></a>';
                     echo '</div>';
