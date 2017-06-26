@@ -12,39 +12,51 @@ use App\Categories;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*Route manager category*/
-Route::group(['prefix'=>'admin'],function(){
-	Route::get('category',array('as'=>'indexCategory','uses'=>'CategoryController@index'));
-	Route::get('category/create',array('as'=>'getcreateCategory','uses'=>'CategoryController@getCreate'));
-	Route::post('category/create',array('as'=>'postcreateCategory','uses'=>'CategoryController@postCreate'));
-	Route::get('category/show/{category}',array('as'=>'showCategory','uses'=>'CategoryController@Show'));
-	Route::post('category/show/{category}',array('as'=>'updateCategory','uses'=>'CategoryController@update'));
-	Route::get('category/{id}',array('as'=>'destroyCategory','uses'=>'CategoryController@destroy'));
+//Duy
 
-	Route::get('user',array('as'=>'indexUser','uses'=>'UserController@index'));
-	Route::get('user/create',array('as'=>'getcreateUser','uses'=>'UserController@getCreate'));
-	Route::post('user/create',array('as'=>'postcreateUser','uses'=>'UserController@postCreate'));
-	Route::get('user/show/{user}',array('as'=>'showUser','uses'=>'UserController@Show'));
-	Route::post('user/show/{user}',array('as'=>'updateUser','uses'=>'UserController@update'));
-	Route::get('user/{id}',array('as'=>'destroyUser','uses'=>'UserController@destroy'));
+Route::get('admin/login',array('as'=>'getlogin','uses'=>'LoginController@index'));
+Route::post('admin/login',array('as'=>'postlogin','uses'=>'LoginController@login'));
+Route::get('signout',array('as'=>'signout','uses'=>'LoginController@signout'));
+
+Route::group(['middleware'=>['login']],function(){
+	Route::group(['prefix'=>'admin'],function(){
+		Route::get('',array('as'=>'homeadmin',function(){return view('admin.layouts.master');}));
+		Route::get('category',array('as'=>'indexCategory','uses'=>'CategoryController@index'));
+		Route::get('category/create',array('as'=>'getcreateCategory','uses'=>'CategoryController@getCreate'));
+		Route::post('category/create',array('as'=>'postcreateCategory','uses'=>'CategoryController@postCreate'));
+		Route::get('category/create/{category}',array('as'=>'getcreateCategoryid','uses'=>'CategoryController@getCreateid'));
+		Route::post('category/create/{category}',array('as'=>'postcreateCategoryid','uses'=>'CategoryController@postCreateid'));
+		Route::get('category/show/{category}',array('as'=>'showCategory','uses'=>'CategoryController@Show'));
+		Route::post('category/show/{category}',array('as'=>'updateCategory','uses'=>'CategoryController@update'));
+		Route::get('category/{id}',array('as'=>'destroyCategory','uses'=>'CategoryController@destroy'));
+
+		Route::get('user',array('as'=>'indexUser','uses'=>'UserController@index'));
+		Route::get('user/create',array('as'=>'getcreateUser','uses'=>'UserController@getCreate'));
+		Route::post('user/create',array('as'=>'postcreateUser','uses'=>'UserController@postCreate'));
+		Route::get('user/show/{user}',array('as'=>'showUser','uses'=>'UserController@Show'));
+		Route::post('user/show/{user}',array('as'=>'updateUser','uses'=>'UserController@update'));
+		Route::get('user/{id}',array('as'=>'destroyUser','uses'=>'UserController@destroy'));
+
+		Route::get('role',array('as'=>'indexRole','uses'=>'RoleController@index'));
+		Route::get('role/create',array('as'=>'getcreateRole','uses'=>'RoleController@getCreate'));
+		Route::post('role/create',array('as'=>'postcreateRole','uses'=>'RoleController@postCreate'));
+		Route::get('role/show/{role}',array('as'=>'showRole','uses'=>'RoleController@Show'));
+		Route::post('role/show/{role}',array('as'=>'updateRole','uses'=>'RoleController@update'));
+		Route::get('role/{id}',array('as'=>'destroyRole','uses'=>'RoleController@destroy'));
+	});
 });
-
 
 Route::get('/', function () {
 	$superCategories = Categories::where('super_category_id',0)->orderBy('order_display')->get();
 	return view('/home',compact('superCategories'));
 });
-
 Route::get('login','Auth\LoginController@getLogin');
-
 Route::post('login','Auth\LoginController@postLogin')->name('login');
 Route::post('logout', 'Auth\LoginController@postLogout')->name('logout');
 Route::get('register', 'Auth\LoginController@getRegister');
 Route::post('register', 'Auth\RegisterController@postRegister')->name('register');
 Route::get('register/comfirm', 'Auth\RegisterController@registerComfirm');
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 Route::group(['prefix' => 'ajax'], function() {
 	Route::post('checkemail', 'Auth\RegisterController@ajaxCheckEmail');
 	Route::post('checkusername', 'Auth\RegisterController@ajaxCheckUserName');
@@ -52,7 +64,6 @@ Route::group(['prefix' => 'ajax'], function() {
 	Route::post('deletechoicetest','MultiChoiceTestController@ajaxDeleteChoiceTest');
 	Route::post('savechoicetests','MultiChoiceTestController@ajaxSaveChoiceTest');
 });
-
 Route::group(['prefix' => 'users'],function(){
 	Route::get('timeline/{id}','UserController@timeLine');
 	Route::get('infodetail/{id}','UserController@infoDetail');
@@ -62,7 +73,6 @@ Route::group(['prefix' => 'users'],function(){
 });
 //tests route
 Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
-
 	Route::get('/','TestController@index');
 	Route::get('test', function() {
 	    return view('test');
@@ -73,7 +83,6 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	Route::get('show/{id}','TestController@show');
 	Route::get('cancel/{id}','TestController@deleteTest');
 	Route::post('usertest','TestController@userTest');
-
 	Route::post('multi/savetest','MultiChoiceTestController@store');
 	Route::post('ajax/savetests','MultiChoiceTestController@ajaxSaveTest');
 	
@@ -102,7 +111,6 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 		$test = Test::find($test_id);
 	   return view('tests.edit_test',compact('test'));
 	});
-
 	Route::group(['prefix' => 'ajax'], function() {
 	    Route::Post('rate', 'RateTestController@store');
 	    Route::Post('comment', 'TestCommentController@store');
@@ -116,9 +124,7 @@ Route::group(['prefix' => 'tests','middleware'=>'check_login'], function(){
 	    Route::Post('answercomment/edit', 'TestCommentReplyController@edit');
 	    Route::Post('answercomment/delete', 'TestCommentReplyController@delete');
 	});
-
 });
-
 //question-answer 
 Route::group(['prefix' => 'qa'],function(){
 	Route::get('/','QuestionController@index');
